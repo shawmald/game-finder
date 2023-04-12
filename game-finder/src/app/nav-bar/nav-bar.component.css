@@ -38,8 +38,8 @@ nav {
     position: absolute;
     top: 35px;
     left: -5px;
-    background-color: #003087;
-    border: 1px solid #003087;
+    background-color: lightgrey;
+    border: 1px solid lightgray;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -56,12 +56,12 @@ nav {
     font-family: Roboto, sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 .dropdown-menu li a:hover {
-    background-color: #7BAFD4;
+    background-color: plum;
 }
 
 .dropdown {
