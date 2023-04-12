@@ -21,8 +21,8 @@ const routes: Routes = [
   { path: 'diceroller', component: DiceRollerComponent },
   { path: 'about', component: AboutComponent },
   { path: 'messages', component: MessagesComponent },
-  /*{ path: 'profile', component: ProfileComponent }, */
-  { path: 'profile/:username', component: ProfileComponent }, //might cause issues without login?
+  { path: 'profile', component: ProfileComponent }, //replace when login implemented
+  /*{ path: 'profile/:username', component: ProfileComponent },*/ //might cause issues without login?
   { path: 'settings', component: SettingsComponent },
 
   /*
