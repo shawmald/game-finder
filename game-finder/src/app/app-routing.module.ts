@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'profile', component: ProfileComponent }, //replace when login implemented
-  /*{ path: 'profile/:username', component: ProfileComponent },*/ //might cause issues without login?
+  /*{ path: 'profile/:username', component: ProfileComponent },*/ //causes issues without login
   { path: 'settings', component: SettingsComponent },
 
   /*

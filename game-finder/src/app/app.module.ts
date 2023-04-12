@@ -28,7 +28,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MessagesComponent,
     ProfileComponent,
     SettingsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent   //always keep at end
   ],
   imports: [
     BrowserModule,
