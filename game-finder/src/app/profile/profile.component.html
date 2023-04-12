@@ -4,14 +4,39 @@
         row display
     -->
     <div>
-        <!-- profile picture -->
-        <img [src]="getPFP()" alt="profile picture">
+        <!-- pfp & display name -->
+        <div>
+            <!-- profile picture -->
+            <img [src]="getPFP()" alt="profile picture"><br>
 
-        <!-- edit symbol -->
-        <svg *ngIf="this.username == this.currentUser" style="float:right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-        </svg>
+            <!-- display name, if editing replace with input box preloaded with current display name -->
+            <h2 *ngIf="editing == false">{{ displayName }}</h2>
+            <input *ngIf="editing == true" placeholder="{{ displayName }}">
+        </div>
+
+        <div style="float:right">
+            <!-- 
+            edit symbol
+            click to enter editing mode
+            only show if not currently editing AND on own page
+            -->
+            <svg 
+              (click)="edit()"
+              *ngIf="(this.username == this.currentUser) && (editing == false)"
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" height="16" fill="currentColor" 
+              class="bi bi-pencil-square" 
+              viewBox="0 0 16 16"
+            >
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+
+            <!-- if editing replace edit symbol with save and cancel buttons -->
+            <button *ngIf="editing == true" (click)="save()" type="button" >save</button>
+            <button *ngIf="editing == true" (click)="cancel()" type="button" >cancel</button>
+        </div>
+        
 
     </div>
 
@@ -23,12 +48,22 @@
     <div class="flex-row">
         <!-- name, email, location, status, & tags -->
         <div class="half-col">
-            <h2>{{displayName}}</h2>
-            <!-- TODO hide based on privacy settings -->
-            <a href="mailto: {{contactInformation}}"> {{ contactInformation }}</a><br>
-            <p>{{ location }}</p><br>
+            <!-- TODO hide email and location based on privacy settings -->
 
-            Status: {{ status }}<br>
+            <!-- email, if editing replace with input box preloaded with current email -->
+            <a *ngIf="editing == false" href="mailto: {{ email }}"> {{ email }}</a><br>
+            <input *ngIf="editing == true" type="email" placeholder="{{ email }}">
+
+            <!-- location, if editing replace with input box preloaded with current location -->
+            <p *ngIf="editing == false">{{ location }}</p>
+            <input *ngIf="editing == true" placeholder="{{ location }}">
+
+            <!-- status, if editing replace with dropdown -->
+            <p *ngIf="editing == false">Status: {{ status }}</p>
+            <select *ngIf="editing == true" name="status">
+                <option value="Currently in a Campaign">Currently in a Campaign</option>
+                <option value="Looking for a Campaign">Looking for a Campaign</option>
+            </select><br>
 
             Tags
 
@@ -43,11 +78,15 @@
 
         <!-- biography & availability -->
         <div class="half-col">
-            <p>
-                {{ bio }}
-            </p>
+            <!-- profile biography, if editing replace with input box preloaded with current biography -->
+            <p *ngIf="editing == false">{{ bio }}</p>
+            <input *ngIf="editing == true" placeholder="{{ bio }}"><br>
 
-            {{ timezone }}
+            <!-- timezone, if editing replace with dropdown -->
+            <p *ngIf="editing == false">{{ timezone }}</p>
+            <select *ngIf="editing == true" name="timezone">
+                <option value=""></option>
+            </select>
 
             <!-- question circle (TODO display inline )-->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
