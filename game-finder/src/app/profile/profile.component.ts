@@ -6,20 +6,55 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  currentUser: string = "test";
-  username: string = "test";
+  currentUser: string = "";
+  username: string = "";
+  sameUser: boolean = (this.currentUser == this.username );
+
+  editing: boolean = false;
 
   pfp: string = "";
-  displayName: string = "test";
-  contactInformation: string = "test@gmail.com";
-  location: string = "Sarasota, FL";
+  displayName: string = "display name";
+
+  email: string = "example@gmail.com";
+  emailVis: string = "Private";                //email visibility: Public, Friends Only, or Private
+
+  location: string = "City, ST";
+  locationVis: string = "Friends Only";        //location visibility: Public, Friends Only, or Private
+
   status: string = "Looking for Campaign";
   /*tags: ?? = ??;*/
-  bio: string = "laksjdflaslkhnvlaskjflaksjdiehgalkdjflkajdfladksjglkaghlksjfleihaglkdnvlajeoiajf";
+  bio: string = "about me";
   timezone: string = "EDT(UTC-4)";
   /*availability: ?? = ??;*/
 
   /*characters: Character[] = [];*/
+
+  /* TODO insert oninit stuff when login & backend is implemented */
+
+  /**
+   * switch to editing mode,
+   * changes editing to true
+   */
+  edit() {
+    this.editing = true;
+  }
+
+  /**
+   * stop editing, values remain unchanged
+   */
+  cancel() {
+    /* TODO reset values if necessary */
+    this.editing = false;
+  }
+
+  /**
+   * stop editing, save new values and update in database
+   */
+  save() {
+    /* TODO save new values, update in database */
+    this.editing = false;
+  }
+
 
   getPFP(): string {
     var dataURI = "";
