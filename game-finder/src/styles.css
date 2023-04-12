@@ -7,6 +7,12 @@ body{
     margin-left: auto;
 }
 
+/* 
+---------------------------------------------------------------------------------------
+icon and image formatting
+---------------------------------------------------------------------------------------
+*/
+
 .icon{
     width: 25px; 
     height: 25px;
@@ -15,6 +21,7 @@ body{
     padding-right: 5px;
 }
 
+/* help icon (circle with a question mark) */
 .help{
     display: inline;
     width: 12px;
