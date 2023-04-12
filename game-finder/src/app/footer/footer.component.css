@@ -2,19 +2,12 @@ footer{
     background-color: lightgray;
     color: black;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap;  /* overwrite from flex-row class */
 
     margin-top: 2%;
 
     justify-content: space-between;
     align-content: space-between;
-}
-
-.col{
-    padding: 10px;
-    margin: 0% 5% 0% 5%; /* top right bottom left */
 }
 
 @media only screen and (max-width: 800px){
