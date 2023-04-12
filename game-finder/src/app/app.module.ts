@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 //import {MatTooltipModule} from '@angular/material/tooltip';
+//import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,7 +35,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //MatTooltipModule
+    //MatTooltipModule,
+    //MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
