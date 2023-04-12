@@ -12,12 +12,12 @@ export class ProfileComponent {
   editing: boolean = false;
 
   pfp: string = "";
-  displayName: string = "test";
-  email: string = "test@gmail.com";
-  location: string = "Sarasota, FL";
+  displayName: string = "display name";
+  email: string = "example@gmail.com";
+  location: string = "City, ST";
   status: string = "Looking for Campaign";
   /*tags: ?? = ??;*/
-  bio: string = "laksjdflaslkhnvlaskjflaksjdiehgalkdjflkajdfladksjglkaghlksjfleihaglkdnvlajeoiajf";
+  bio: string = "about me";
   timezone: string = "EDT(UTC-4)";
   /*availability: ?? = ??;*/
 
