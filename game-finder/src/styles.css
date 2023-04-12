@@ -14,11 +14,8 @@ icon and image formatting
 */
 
 .icon{
-    width: 25px; 
-    height: 25px;
-    
-    padding-left: 5px;
-    padding-right: 5px;
+    width: 16px; 
+    height: 16px;
 }
 
 /* help icon (circle with a question mark) */
