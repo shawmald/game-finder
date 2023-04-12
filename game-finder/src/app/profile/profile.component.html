@@ -10,8 +10,8 @@
             <img [src]="getPFP()" alt="profile picture">
 
             <!-- display name, if editing replace with input box preloaded with current display name -->
-            <h2 *ngIf="editing == false">{{ displayName }}</h2>
-            <input *ngIf="editing == true" class="block-input" placeholder="{{ displayName }}">
+            <h2 *ngIf="!editing">{{ displayName }}</h2>
+            <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}">
         </div>
 
         <div style="float:right">
@@ -22,7 +22,7 @@
             -->
             <svg 
               (click)="edit()"
-              *ngIf="(this.username == this.currentUser) && (editing == false)"
+              *ngIf="sameUser && !editing"
               xmlns="http://www.w3.org/2000/svg" 
               width="16" height="16" fill="currentColor" 
               class="bi bi-pencil-square" 
@@ -33,8 +33,8 @@
             </svg>
 
             <!-- if editing replace edit symbol with save and cancel buttons -->
-            <button *ngIf="editing == true" (click)="save()" type="button" >save</button>
-            <button *ngIf="editing == true" (click)="cancel()" type="button" >cancel</button>
+            <button *ngIf="editing" (click)="save()" type="button" >save</button>
+            <button *ngIf="editing" (click)="cancel()" type="button" >cancel</button>
         </div>
         
 
@@ -50,17 +50,20 @@
         <div class="half-col">
             <!-- TODO hide email and location based on privacy settings -->
 
-            <!-- email, if editing replace with input box preloaded with current email -->
-            <a *ngIf="editing == false" href="mailto: {{ email }}"> {{ email }}</a>
+            <!-- 
+                email, if editing replace with input box preloaded with current email
+                always visible if on own page
+            -->
+            <a *ngIf="(sameUser && !editing)" href="mailto: {{ email }}"> {{ email }}</a>
             <input *ngIf="editing == true" class="block-input" type="email" placeholder="{{ email }}">
 
             <!-- location, if editing replace with input box preloaded with current location -->
-            <p *ngIf="editing == false">{{ location }}</p>
+            <p *ngIf="(sameUser && !editing)">{{ location }}</p>
             <input *ngIf="editing == true" class="block-input" placeholder="{{ location }}">
 
             <!-- status, if editing replace with dropdown -->
-            <p *ngIf="editing == false">Status: {{ status }}</p>
-            <select *ngIf="editing == true" name="status">
+            <p *ngIf="!editing">Status: {{ status }}</p>
+            <select *ngIf="editing" name="status">
                 <option value="Currently in a Campaign">Currently in a Campaign</option>
                 <option value="Looking for a Campaign">Looking for a Campaign</option>
             </select><br>
@@ -81,7 +84,7 @@
         <!-- biography & availability -->
         <div class="half-col">
             <!-- profile biography, if editing replace with input box preloaded with current biography -->
-            <p *ngIf="editing == false">{{ bio }}</p>
+            <p *ngIf="!editing">{{ bio }}</p>
             <input *ngIf="editing == true" class="block-input" placeholder="{{ bio }}">
 
             <!-- timezone, change in settings -->

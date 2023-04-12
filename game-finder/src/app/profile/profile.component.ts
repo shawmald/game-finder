@@ -6,15 +6,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  currentUser: string = "test";
-  username: string = "test";
+  currentUser: string = "";
+  username: string = "";
+  sameUser: boolean = (this.currentUser == this.username );
 
   editing: boolean = false;
 
   pfp: string = "";
   displayName: string = "display name";
+
   email: string = "example@gmail.com";
+  emailVis: string = "Public";                //email visibility: Public, Friends Only, or Private
+
   location: string = "City, ST";
+  locationVis: string = "Public";             //location visibility: Public, Friends Only, or Private
+
   status: string = "Looking for Campaign";
   /*tags: ?? = ??;*/
   bio: string = "about me";
