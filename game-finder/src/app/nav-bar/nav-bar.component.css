@@ -1,0 +1,88 @@
+/* copied from project2 edit as necessary*/
+
+nav {
+    background-color: var(--blue);
+  
+    /* sticky navbar */
+    position: fixed;
+    top: 0%;
+    width: 90%;
+    z-index: 10;
+}
+  
+.nav-item {
+    display: inline-block;
+    padding: 2px;
+    margin-right: 20px;
+}
+  
+.nav-item a {
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-item a:hover {
+    text-decoration: underline;
+    color:#ccc; 
+    cursor: pointer;
+}
+
+.dropdown-toggle::after {
+    content: " ▼";
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 35px;
+    left: -5px;
+    background-color: #003087;
+    border: 1px solid #003087;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 9;
+}
+
+.dropdown-menu li {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #7BAFD4;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.show .dropdown-menu {
+    display: block;
+}
+
+/* highlight current link/page */
+.selected{
+    background-color: var(--lightblue); /* test color change later*/
+}
+
+@media only screen and (max-width: 800px){
+    /* if browser window <= 800px then change navbar to dropdown */
+
+}
+  
