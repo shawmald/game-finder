@@ -78,7 +78,7 @@ nav {
 
 /* highlight current link/page */
 .selected{
-    background-color: var(--lightblue); /* test color change later*/
+    background-color: pink; /* test color change later*/
 }
 
 @media only screen and (max-width: 800px){
