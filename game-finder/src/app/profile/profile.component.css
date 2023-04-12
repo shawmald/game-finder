@@ -7,6 +7,28 @@
     align-items: flex-start;
 }
 
-.block-input{
+/* float button container on the right, add margins of the left and right */
+#button-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+    float: right;
+
+    margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
+}
+
+/* add margins to left and right */
+.button{
+    margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
+}
+
+/* add margins to the top, right, and bottom */
+input, select{
+    margin: 2.5% 2.5% 2.5% 0%;
+}
+
+/* make input display as a block (appears in own line) */
+.block-display{
     display: block;
 }
