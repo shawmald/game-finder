@@ -16,10 +16,10 @@ export class ProfileComponent {
   displayName: string = "display name";
 
   email: string = "example@gmail.com";
-  emailVis: string = "Public";                //email visibility: Public, Friends Only, or Private
+  emailVis: string = "Private";                //email visibility: Public, Friends Only, or Private
 
   location: string = "City, ST";
-  locationVis: string = "Public";             //location visibility: Public, Friends Only, or Private
+  locationVis: string = "Friends Only";        //location visibility: Public, Friends Only, or Private
 
   status: string = "Looking for Campaign";
   /*tags: ?? = ??;*/
