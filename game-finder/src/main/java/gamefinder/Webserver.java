@@ -17,15 +17,17 @@ public class Webserver {
     private int port;
     private HttpServer server;
     public static MongoClient mongoClient = null;
-    //private UserList users = null;
+    private ProfilesManagement profiles = null;
 
     public Webserver(int port, MongoClient mongoClient) throws IOException{
         Webserver.mongoClient = mongoClient;
         this.port = port;
         this.server = HttpServer.create( new InetSocketAddress(this.port), 0);
-        //this.users = new UserList(mongoClient);
+        this.profiles = new ProfilesManagement(mongoClient);   //Need for this to take in mongoclient as a parameter
 
         this.server.createContext("/PingCheck", new IndexHandler() );
+        this.server.createContext("/SignUp", new SignUp(profiles) );
+        this.server.createContext("/Login", new Login(profiles) );
 
         this.server.start();
     }
@@ -54,6 +56,8 @@ public class Webserver {
     }
 }
 
+
+
 class IndexHandler implements HttpHandler {
     public void handle(HttpExchange t) throws IOException {
         String response = "Response!";
@@ -61,4 +65,62 @@ class IndexHandler implements HttpHandler {
         t.getResponseBody().write(response.getBytes());
         t.getResponseBody().close();
     }
-  }
+}
+
+class GetUserNames implements HttpHandler { 
+
+    public void handle(HttpExchange t) throws IOException {
+        String response = "Response!";
+        t.sendResponseHeaders(200, response.length());
+        t.getResponseBody().write(response.getBytes());
+        t.getResponseBody().close();
+    }
+}
+
+
+class SignUp implements HttpHandler {
+
+    private ProfilesManagement profiles;
+
+    public SignUp(ProfilesManagement setProfiles){
+        this.profiles = setProfiles;
+    }
+
+    public void handle(HttpExchange t) throws IOException {
+
+        Map<String, String> params = Webserver.queryToMap(t.getRequestURI().getQuery());
+        String displayName = params.get("DisplayName");
+        String username = params.get("Username");
+        String password = params.get("Password");
+
+        String response = profiles.signUp(displayName, username, password);
+        t.sendResponseHeaders(200, response.length());
+        t.getResponseBody().write(response.getBytes());
+        t.getResponseBody().close();
+    }
+}
+
+
+class Login implements HttpHandler {
+
+    private ProfilesManagement profiles;
+
+    public Login(ProfilesManagement setProfiles){
+        this.profiles = setProfiles;
+    }
+
+    public void handle(HttpExchange t) throws IOException {
+
+        Map<String, String> params = Webserver.queryToMap(t.getRequestURI().getQuery());
+        String username = params.get("Username");
+        String password = params.get("Password");
+
+
+        String response = profiles.login(username, password);
+        t.sendResponseHeaders(200, response.length());
+        t.getResponseBody().write(response.getBytes());
+        t.getResponseBody().close();
+    }
+}
+
+
