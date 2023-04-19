@@ -1,6 +1,6 @@
 /* offset content to accommodate sticky header */
 #content{
-    padding-top: 70px;
+    padding-top: 50px;
 }
 
 @media only screen and (max-width: 800px){
