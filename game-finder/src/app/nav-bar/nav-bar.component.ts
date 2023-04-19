@@ -1,3 +1,5 @@
+/* navbar typescript */
+
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -7,6 +9,9 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./nav-bar.component.css']
 })
 
+/**
+ * navbar
+ */
 export class NavBarComponent implements OnInit {
   activeLink: string = '';    //displayed in mobile view, shows the user what page they're on
   showDropdown: boolean = false;
