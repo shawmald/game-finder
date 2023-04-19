@@ -6,15 +6,14 @@
 
       <!-- Tools dropdown: GM Screen, Dice Roller-->
       <li class="nav-item">
-        <div class="dropdown" [class.show]="showDropdown" (click)="toggleDropdown()">
-          <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Tools</a>
-          <ul class="dropdown-menu">
-            <li><a routerLink="/gmscreen" routerLinkActive="selected">GM Screen</a></li>
-            <li><a routerLink="/diceroller" routerLinkActive="selected">Dice Roller</a></li>
-          </ul>
-        </div>
-      </li>
+        <a [matMenuTriggerFor]="toolsMenu">Tools</a>
 
+        <mat-menu #toolsMenu="matMenu" xPosition="after">
+          <button mat-menu-item><a routerLink="/gmscreen" routerLinkActive="selected">GM Screen</a></button>
+          <button mat-menu-item><a routerLink="/diceroller" routerLinkActive="selected">Dice Roller</a></button>
+        </mat-menu>
+      </li>
+      
       <li class="nav-item"><a routerLink="/about" routerLinkActive="selected">About</a></li>
 
       <!-- messages & profile icons, float right-->
@@ -29,26 +28,25 @@
         <!-- 
           profile dropdown: profile, settings, logout
           only viewable if logged in
-        -->
+        -->        
         <li class="nav-item">
-          <div class="dropdown" [class.show]="showDropdown" (click)="toggleDropdown()">
-
-            <!-- profile icon -->
-            <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-              </svg>
-            </a>
-
-            <ul class="dropdown-menu">
-              <li><a routerLink="/profile" routerLinkActive="selected">Profile</a></li>
-              <!-- <li><a routerLink="'/profile/' + currentUser" routerLinkActive="selected">Profile</a></li> -->
-              <li><a routerLink="/settings" routerLinkActive="selected">Settings</a></li>
-              <li><a routerLink="/logout" routerLinkActive="logout">Logout</a></li>
-            </ul>
-          </div>
+          <!-- profile icon -->
+          <a [matMenuTriggerFor]="profileMenu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+          </a>
+         
+          <mat-menu #profileMenu="matMenu" xPosition="before">
+            <button mat-menu-item><a routerLink="/profile" routerLinkActive="selected">Profile</a></button>
+            <!-- <button mat-menu-item><a routerLink="'/profile/' + currentUser" routerLinkActive="selected">Profile</a></button> -->
+            <button mat-menu-item><a routerLink="/settings" routerLinkActive="selected">Settings</a></button>
+            <button mat-menu-item><a routerLink="/logout" routerLinkActive="logout">Logout</a></button>
+          </mat-menu>
         </li>
+        
+      
       </div>
 
       <!--
