@@ -20,15 +20,13 @@ icon and image formatting
 */
 
 .icon{
-    width: 16px; 
-    height: 16px;
+    font-size: 20px;
 }
 
 /* help icon (circle with a question mark) */
 .help{
     display: inline;
-    width: 12px;
-    height: 12px;
+    font-size: 18px;
 }
 
 
