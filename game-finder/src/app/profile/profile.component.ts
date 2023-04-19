@@ -1,3 +1,5 @@
+/* profile component typescript */
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,6 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
+/**
+ * profile
+ */
 export class ProfileComponent {
   currentUser: string = "";
   username: string = "";
