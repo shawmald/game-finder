@@ -28,7 +28,22 @@ export class ProfileComponent {
   locationVis: string = "Friends Only";        //location visibility: Public, Friends Only, or Private
 
   status: string = "Looking for Campaign";
-  /*tags: ?? = ??;*/
+
+  //hard coded tags for testing, edit later
+  tags: Map<string,boolean> = new Map<string,boolean>([
+    ["in-person", true],
+    ["online", true],
+    ["beginner player", false],
+    ["experienced player", true],
+    ["beginner GM", true],
+    ["experienced GM", false],
+    ["short", true],
+    ["long", true],
+    ["sustained", true],
+    ["episodic", true],
+
+  ]);
+
   bio: string = "about me";
   timezone: string = "EDT(UTC-4)";
   /*availability: ?? = ??;*/
@@ -86,6 +101,23 @@ export class ProfileComponent {
     }
   
     return dataURI;
+  }
+
+  /**
+   * 
+   * @param map (Map<string,boolean)  
+   * @returns (string[])
+   */
+  filterTags( map: Map<string,boolean>): string[] {
+    let filtered = [];
+
+    for( let tag of map.keys() ){     //for each tag:
+      if( map.get( tag ) ){           //if tag is true:
+        filtered.push( tag );         //add tag to list
+      }
+    }
+
+    return filtered;
   }
 
 }
