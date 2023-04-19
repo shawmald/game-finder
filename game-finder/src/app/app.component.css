@@ -2,10 +2,3 @@
 #content{
     padding-top: 50px;
 }
-
-@media only screen and (max-width: 800px){
-    /* if browser window <= 800px then change navbar to dropdown */
-    #content{
-        padding-top: 100px
-    }
-}
