@@ -6,9 +6,9 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-/* copied from project2, edit as necessary */
+
 export class NavBarComponent implements OnInit {
-  activeLink: string = '';
+  activeLink: string = '';    //displayed in mobile view, shows the user what page they're on
   showDropdown: boolean = false;
   currentUser = sessionStorage.getItem('currentUser');
   isLoggedIn: boolean = false;
@@ -19,6 +19,10 @@ export class NavBarComponent implements OnInit {
     this.isLoggedIn = (sessionStorage.getItem('isLoggedIn') == 'true')
   }
 
+  /**
+   * Sets activeLink to value provided.
+   * @param activeLink (string)
+   */
   setActiveLink( activeLink: string ){
     this.activeLink = activeLink;
   }
