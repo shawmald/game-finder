@@ -1,6 +1,9 @@
 #diceframe{
-    height: 80%;
+    display: block;
+
+    height: 60%;
     width: 80%;
+    margin: 2.5% auto 2.5% auto;
 
     border: none;
 }
