@@ -1,22 +1,49 @@
-/* copied from project2 edit as necessary*/
+/*
+    navbar CSS
+
+    refs:
+        flexbox         https://www.w3schools.com/css/css3_flexbox_container.asp
+        media queries   https://www.w3schools.com/css/css3_mediaqueries.asp
+        
+*/
 
 nav {
     background-color: lightgray;
+    width: 95%;
+    height: 45px;
+
+    /* 
+        display items in a row, do not wrap around
+        add space inbetween (main contents left justified, messages & profile justified right)
+        vertically center items
+    */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
   
     /* sticky navbar */
     position: fixed;
     top: 0%;
-    width: 95%;
-    z-index: 10;
+    z-index: 10;    /* navbar should always be infront */
 }
   
 .nav-item {
-    display: inline-block;
+    height: 100%;
     padding: 2px;
-    margin-right: 20px;
+    margin: 0px 10px 0px 10px;
 }
-  
-.nav-item a {
+
+/* highlight current link/page */
+.selected{
+    background-color: pink; /* test color change later*/
+}
+
+
+/*
+    link styling for navbar
+*/
+a, button {
     font-family: Roboto, sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -24,12 +51,26 @@ nav {
     text-decoration: none;
 }
 
-.nav-item a:hover {
+a:hover, button:hover{
     text-decoration: underline;
     color: plum; 
     cursor: pointer;
 }
 
+
+/*
+    responsive design
+*/
+#web-view{ display: block; }
+#mobile-view{ display: none; }
+
+@media only screen and (max-width: 500px){
+    /* if browser window <= 500px then change main contents of navbar to dropdown */
+    #web-view{ display: none; }
+    #mobile-view{ display: block; }
+}
+
+/*
 .dropdown-toggle::after {
     content: " ▼";
 }
@@ -53,11 +94,6 @@ nav {
 .dropdown-menu li a {
     display: block;
     padding: 10px;
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: black;
-    text-decoration: none;
 }
 
 .dropdown-menu li a:hover {
@@ -75,14 +111,4 @@ nav {
 .show .dropdown-menu {
     display: block;
 }
-
-/* highlight current link/page */
-.selected{
-    background-color: pink; /* test color change later*/
-}
-
-@media only screen and (max-width: 800px){
-    /* if browser window <= 800px then change navbar to dropdown */
-
-}
-  
+*/

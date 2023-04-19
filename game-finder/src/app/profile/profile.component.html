@@ -1,3 +1,7 @@
+<!--
+    profile component HTML
+-->
+
 <div class="contents">
     <!-- <form id="profile-update" name="profile-update" action="" method="" ></form> -->   <!-- for input?? -->
 
@@ -18,22 +22,19 @@
 
         <div id="button-container">
             <!--
-                edit symbol
-                click to enter editing mode
+                edit symbol, click to enter editing mode
                 only show if not currently editing AND on own page
             -->
-            <svg 
-              (click)="edit()"
-              *ngIf="sameUser && !editing"
-              xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square icon" viewBox="0 0 16 16"
-            >
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-            </svg>
+            <mat-icon class="icon" *ngIf="sameUser && !editing" (click)="edit()">edit</mat-icon>
+            
 
             <!-- if editing replace edit symbol with save and cancel buttons -->
             <button *ngIf="editing" (click)="save()" class="button" type="button" >save</button>
             <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
+
+            <!-- if not the same user: show friend and cancel buttons -->
+            <button *ngIf="!sameUser" (click)="friend()" class="button" type="button" >friend</button>
+            <button *ngIf="!sameUser" (click)="block()" class="button" type="button" >block</button>
         </div>
         
 
@@ -55,10 +56,10 @@
                 always visible if on own page
             -->
             <a *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
-            <div class="block-display">
-                <input *ngIf="editing == true" type="email" placeholder="{{ email }}">
-                <select *ngIf="editing" name="email visibility">
-                    <option value="{{ emailVis }}" selected disabled hidden>{{ emailVis }}</option>
+            <div class="block-display" *ngIf="editing">
+                <input type="email" placeholder="{{ email }}">
+                <select name="email visibility">
+                    <option value="" selected disabled hidden>{{ emailVis }}</option>
                     <option value="Public">Public</option>
                     <option value="Friends Only">Friends Only</option>
                     <option value="Private">Private</option>
@@ -71,10 +72,10 @@
                 always visible if on own page
             -->
             <p *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')">{{ location }}</p>
-            <div class="block-display">
-                <input *ngIf="editing" placeholder="{{ location }}">
-                <select *ngIf="editing" name="location visibility">
-                    <option value="{{ locationVis }}" selected disabled hidden>{{ locationVis }}</option>
+            <div class="block-display" *ngIf="editing">
+                <input placeholder="{{ location }}">
+                <select name="location visibility">
+                    <option value="" selected disabled hidden>{{ locationVis }}</option>
                     <option value="Public">Public</option>
                     <option value="Friends Only">Friends Only</option>
                     <option value="Private">Private</option>
@@ -86,7 +87,7 @@
                 <p style="display: inline;">Status: </p>
                 <p *ngIf="!editing" style="display: inline;">{{ status }}</p>
                 <select *ngIf="editing" name="status" style="display: inline;">
-                    <option value="{{ status }}" selected disabled hidden>{{ status }}</option>
+                    <option value="" selected disabled hidden>{{ status }}</option>
                     <option value="Currently in a Campaign">Currently in a Campaign</option>
                     <option value="Looking for a Campaign">Looking for a Campaign</option>
                 </select>
@@ -94,25 +95,25 @@
 
             Tags
             <!-- question circle, hover for info on tags -->
-            <svg 
-              matTooltip="add tag explanation" matTooltipPosition="after"
-              xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-question-circle help" viewBox="0 0 16 16"
+            <mat-icon 
+                class="help"
+                matTooltip="add tag explanation" 
+                matTooltipPosition="after"
+                matTooltipHideDelay="2000"
             >
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-            </svg>
+                help_outline
+            </mat-icon>
+            
 
             <!-- edit button, click to open popup where you can edit tags -->
-            <svg 
-              *ngIf="editing"
-              xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square icon" viewBox="0 0 16 16"
-            >
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-            </svg>
+            <mat-icon class="icon" *ngIf="editing">edit</mat-icon>
 
-            <div>
-                <!-- TODO insert tags -->
+            <!-- display tags -->
+            <div class="flex-row">
+                <!-- display all true tags -->
+                <div class="tag" *ngFor="let tag of filterTags( this.tags )">
+                    {{ tag }}
+                </div>
             </div>
 
         </div>
@@ -127,13 +128,14 @@
             {{ timezone }}
 
             <!-- question circle, hover for info on time blocks -->
-            <svg 
-              matTooltip="add time block explanation" matTooltipPosition="after"
-              xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-question-circle help" viewBox="0 0 16 16"
+            <mat-icon 
+                class="help"
+                matTooltip="add time block explanation" 
+                matTooltipPosition="after"
+                matTooltipHideDelay="2000"
             >
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-            </svg>
+                help_outline
+            </mat-icon>
 
             <!-- TODO display availability (as table?) -->
         </div>

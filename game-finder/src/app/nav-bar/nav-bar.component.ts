@@ -1,3 +1,5 @@
+/* navbar typescript */
+
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -6,12 +8,15 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-/* copied from project2, edit as necessary */
+
+/**
+ * navbar
+ */
 export class NavBarComponent implements OnInit {
-  activeLink = '';
-  showDropdown = false;
+  activeLink: string = '';    //displayed in mobile view, shows the user what page they're on
+  showDropdown: boolean = false;
   currentUser = sessionStorage.getItem('currentUser');
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
 
   constructor(private elementRef: ElementRef, private router: Router) {}
 
@@ -19,12 +24,23 @@ export class NavBarComponent implements OnInit {
     this.isLoggedIn = (sessionStorage.getItem('isLoggedIn') == 'true')
   }
 
+  /**
+   * Sets activeLink to value provided.
+   * @param activeLink (string)
+   */
+  setActiveLink( activeLink: string ){
+    this.activeLink = activeLink;
+  }
+  
+  // TODO: call on refresh
   updateActiveLink() {
     const path = this.router.url;
     const parts = path.split('/');
     this.activeLink = parts[1];
   }
 
+  /*
+  //  dropdown methods no longer necessary?
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
@@ -39,6 +55,7 @@ export class NavBarComponent implements OnInit {
       this.showDropdown = false;
     }
   }
+  */
 
   @HostListener('window:storage', ['$event'])
   onStorageChange(event: StorageEvent) {

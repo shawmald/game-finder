@@ -1,3 +1,10 @@
+/*
+    profile component CSS
+
+    refs:
+        rounded corners     https://www.w3schools.com/css/css3_borders.asp
+*/
+
 #header-row{
     display: flex;
     flex-direction: row;
@@ -31,4 +38,14 @@ input, select{
 /* make input display as a block (appears in own line) */
 .block-display{
     display: block;
+}
+
+.tag{
+    font-size: small;
+    padding: 5px;
+    margin: 5px 5px 0px 0px;
+
+    border-radius: 25px;
+    background-color: lightgrey;
+    
 }
