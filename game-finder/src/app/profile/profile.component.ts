@@ -1,6 +1,7 @@
 /* profile component typescript */
 
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-profile',
@@ -33,10 +34,12 @@ export class ProfileComponent {
   tags: Map<string,boolean> = new Map<string,boolean>([
     ["in-person", true],
     ["online", true],
+
     ["beginner player", false],
     ["experienced player", true],
     ["beginner GM", true],
     ["experienced GM", false],
+
     ["short", true],
     ["long", true],
     ["sustained", true],
@@ -119,5 +122,38 @@ export class ProfileComponent {
 
     return filtered;
   }
+  /*
+  constructor( public dialog: MatDialog ){}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open( TagEditingDialog, {
+      width: "50%"//,
+      //data: 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log( "The dialog was closed" );
+      //this.?? = result;
+    })
+  }
+  */
+
 
 }
+
+/*
+@Component({
+  selector: 'app-tag-editing-dialog',
+  templateUrl: './tag-editing-dialog.html',
+})
+export class TagEditingDialog {
+  constructor( 
+    public dialogRef: MatDialogRef<TagEditingDialog>, 
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ){}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+*/
