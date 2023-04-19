@@ -8,10 +8,10 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 /* copied from project2, edit as necessary */
 export class NavBarComponent implements OnInit {
-  activeLink = '';
-  showDropdown = false;
+  activeLink: string = '';
+  showDropdown: boolean = false;
   currentUser = sessionStorage.getItem('currentUser');
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
 
   constructor(private elementRef: ElementRef, private router: Router) {}
 
@@ -19,12 +19,19 @@ export class NavBarComponent implements OnInit {
     this.isLoggedIn = (sessionStorage.getItem('isLoggedIn') == 'true')
   }
 
+  setActiveLink( activeLink: string ){
+    this.activeLink = activeLink;
+  }
+  
+  // TODO: call on refresh
   updateActiveLink() {
     const path = this.router.url;
     const parts = path.split('/');
     this.activeLink = parts[1];
   }
 
+  /*
+  //  dropdown methods no longer necessary?
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
@@ -39,6 +46,7 @@ export class NavBarComponent implements OnInit {
       this.showDropdown = false;
     }
   }
+  */
 
   @HostListener('window:storage', ['$event'])
   onStorageChange(event: StorageEvent) {
