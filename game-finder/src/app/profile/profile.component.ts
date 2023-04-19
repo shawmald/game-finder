@@ -55,6 +55,20 @@ export class ProfileComponent {
     this.editing = false;
   }
 
+  /**
+   * sends a friend request to a user
+   */
+  friend() {
+    /* TODO send friend request */
+  }
+
+  /**
+   * blocks a user
+   */
+  block() {
+    /* TODO block user */
+  }
+
 
   getPFP(): string {
     var dataURI = "";

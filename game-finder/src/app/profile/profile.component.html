@@ -34,6 +34,9 @@
             <!-- if editing replace edit symbol with save and cancel buttons -->
             <button *ngIf="editing" (click)="save()" class="button" type="button" >save</button>
             <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
+
+            <button *ngIf="!sameUser" (click)="friend()" class="button" type="button" >friend</button>
+            <button *ngIf="!sameUser" (click)="block()" class="button" type="button" >block</button>
         </div>
         
 
