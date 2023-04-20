@@ -1,9 +1,13 @@
+/*
+    GameFinder global stylesheet
+    CSS
+*/
+
 /* 
     added to make angular materials formt correctly ,
     also added to angular.json file under "styles"
 */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; 
-
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons"); /* import google icons */
 
 /* create margins on left & right, center content */

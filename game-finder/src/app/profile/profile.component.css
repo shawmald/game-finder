@@ -5,11 +5,6 @@
         rounded corners     https://www.w3schools.com/css/css3_borders.asp
 */
 
-/* overwrite style.css, align items at top */
-.nowrap-row{
-    align-items: flex-start;
-}
-
 /* float button container on the right, add margins of the left and right */
 #button-container{
     margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
@@ -51,8 +46,17 @@ textarea{
     margin-bottom: 10px;
 }
 
+/*----------------------------------------------------------------------
+    Overwrite style.css
+----------------------------------------------------------------------*/
+
+/* align items at top */
+.nowrap-row{
+    align-items: flex-start;
+}
+
 @media only screen and (max-width: 800px){
-    /* overwrite style.css, remain a row always */
+    /* remain a row always */
     .flex-row{
         flex-direction: row;
     }
