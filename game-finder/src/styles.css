@@ -37,18 +37,23 @@ row formatting
 ---------------------------------------------------------------------------------------
 */
 
+/* 
+    display items in a row, do not wrap
+    add space inbetween (main contents left justified, messages & profile justified right)
+    vertically center items
+ */
+.nowrap-row{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 /* display items in a row, wrap around if necessary */
 .flex-row{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-/* display items in a row, do not wrap */
-.nowrap-row{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-flow: row wrap;
 }
 
 /* item takes up half of a row */

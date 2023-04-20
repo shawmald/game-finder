@@ -11,13 +11,6 @@ nav {
     background-color: lightgray;
     width: 95%;
     height: 45px;
-
-    /* 
-        add space inbetween (main contents left justified, messages & profile justified right)
-        vertically center items
-    */
-    justify-content: space-between;
-    align-items: center;
   
     /* sticky navbar */
     position: fixed;

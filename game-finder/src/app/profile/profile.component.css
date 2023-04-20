@@ -5,8 +5,8 @@
         rounded corners     https://www.w3schools.com/css/css3_borders.asp
 */
 
-#header-row{
-    justify-content: space-between;
+/* overwrite style.css, align items at top */
+.nowrap-row{
     align-items: flex-start;
 }
 
