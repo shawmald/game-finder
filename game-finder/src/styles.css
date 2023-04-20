@@ -44,6 +44,13 @@ row formatting
     flex-wrap: wrap;
 }
 
+/* display items in a row, do not wrap */
+.nowrap-row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
 /* item takes up half of a row */
 .half-col{
     width: 50%;

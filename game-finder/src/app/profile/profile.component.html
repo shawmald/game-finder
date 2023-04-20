@@ -9,7 +9,7 @@
         contains pfp & (if user's page) edit symbol
         row display
     -->
-    <div id="header-row">
+    <div id="header-row" class="nowrap-row">
         <!-- pfp & display name -->
         <div>
             <!-- profile picture -->
@@ -20,7 +20,7 @@
             <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}">
         </div>
 
-        <div id="button-container">
+        <div id="button-container" class="nowrap-row">
             <!--
                 edit symbol, click to enter editing mode
                 only show if not currently editing AND on own page

@@ -13,12 +13,9 @@ nav {
     height: 45px;
 
     /* 
-        display items in a row, do not wrap around
         add space inbetween (main contents left justified, messages & profile justified right)
         vertically center items
     */
-    display: flex;
-    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
   

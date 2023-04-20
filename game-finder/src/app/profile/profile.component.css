@@ -6,22 +6,12 @@
 */
 
 #header-row{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    
     justify-content: space-between;
     align-items: flex-start;
 }
 
 /* float button container on the right, add margins of the left and right */
 #button-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    
-    float: right;
-
     margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
 }
 
