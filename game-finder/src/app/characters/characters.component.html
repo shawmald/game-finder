@@ -1,1 +1,67 @@
-<p>characters works!</p>
+<!--
+    Characters component HTML
+
+    refs:
+        accordion   https://v5.material.angular.io/components/expansion/overview
+-->
+
+<h1>Characters</h1>
+
+<!-- 
+    external accordion: contains an expansion-panel for each character
+    only let one (character) panel be open at a time
+-->
+<mat-accordion multi="false">
+    
+    <!--
+        Character panel
+    -->
+    <mat-expansion-panel *ngFor="let character of this.characters">
+
+        <!-- name of the panel: get from character's name -->
+        <mat-expansion-panel-header>
+            {{ character.name }}
+        </mat-expansion-panel-header>
+
+        <!-- 
+            internal accordion: contains panels nested inside (character)
+            let multiple be open at once
+        -->
+        <mat-accordion multi="true">
+
+            <!-- panel 1 -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    panel 1
+                </mat-expansion-panel-header>
+            
+                panel 1 content
+            
+            </mat-expansion-panel>
+        
+            <!-- panel 2 -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    panel 2
+                </mat-expansion-panel-header>
+            
+                panel 2 content
+        
+            </mat-expansion-panel>
+
+            <!-- panel 3 -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    panel 3
+                </mat-expansion-panel-header>
+            
+                panel 3 content
+        
+            </mat-expansion-panel>
+
+        </mat-accordion>
+
+    </mat-expansion-panel>
+
+</mat-accordion>
+
