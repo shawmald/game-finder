@@ -35,7 +35,45 @@
                     panel 1
                 </mat-expansion-panel-header>
             
-                panel 1 content
+                    
+                  <div class="container">
+                    <form action="/action_page.php">
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="fname">Full Name</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="text" id="fname" name="name" placeholder="Your name..">
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="class">Class</label>
+                        </div>
+                        <div class="col-75">
+                          <select id="class" name="class">
+                            <option value="australia">Barbarian</option>
+                            <option value="canada">Bard</option>
+                            <option value="usa">Cleric</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="subject">Subject</label>
+                        </div>
+                        <div class="col-75">
+                          <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <input type="submit" value="Submit">
+                      </div>
+                    </form>
+                  </div>
+        
             
             </mat-expansion-panel>
         
