@@ -39,7 +39,7 @@
                   <div class="container">
                     <form action="/action_page.php">
 
-
+                      <!-- Character name enter form -->
                       <div class="row">
                         <div class="col-25">
                           <label for="fname">Full Name</label>
@@ -48,8 +48,18 @@
                           <input type="text" id="fname" name="name" placeholder="Your characters name..">
                         </div>
                       </div>
+
+                      <!-- Character race enter form -->
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="race">Race</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="text" id="race" name="race" placeholder="Your characters race (ex. human)..">
+                        </div>
+                      </div>
                       
-                      
+                      <!-- Class is drop down, no artificers here :/ -->
                       <div class="row">
                         <div class="col-25">
                           <label for="class">Class</label>
@@ -73,7 +83,7 @@
                       </div>
                       
 
-
+                      <!-- Subclass is self entered -->
                       <div class="row">
                         <div class="col-25">
                           <label for="subclass">Subclass</label>
@@ -83,13 +93,14 @@
                         </div>
                       </div>
 
-                      
+                      <!-- enter level, max twenty, min 1 -->
                       <div class="col-25">
                         <label for="level">Level</label>
                       </div>
                       <input type="number" id="level" name="level" min="1" max="20">
 
 
+                      <!-- penter alignment -->
                       <div class="row">
                         <div class="col-25">
                           <label for="alignment">Alignment</label>
@@ -109,7 +120,10 @@
                         </div>
                       </div>
                       
-
+                      <!-- 
+                        Im thinking of also adding a XP thing here that can do 
+                        addition and change the level depending on the status here
+                       -->
 
                      
         
