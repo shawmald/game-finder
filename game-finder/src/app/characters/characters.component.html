@@ -32,18 +32,20 @@
             <!-- panel 1 -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                    panel 1
+                    Basics
                 </mat-expansion-panel-header>
             
                     
                   <div class="container">
                     <form action="/action_page.php">
+
+
                       <div class="row">
                         <div class="col-25">
                           <label for="fname">Full Name</label>
                         </div>
                         <div class="col-75">
-                          <input type="text" id="fname" name="name" placeholder="Your name..">
+                          <input type="text" id="fname" name="name" placeholder="Your characters name..">
                         </div>
                       </div>
                       
@@ -54,26 +56,65 @@
                         </div>
                         <div class="col-75">
                           <select id="class" name="class">
-                            <option value="australia">Barbarian</option>
-                            <option value="canada">Bard</option>
-                            <option value="usa">Cleric</option>
+                            <option value="barbarian">Barbarian</option>
+                            <option value="bard">Bard</option>
+                            <option value="cleric">Cleric</option>
+                            <option value="druid">Druid</option>
+                            <option value="fighter">Fighter</option>
+                            <option value="monk">Monk</option>
+                            <option value="paladin">Paladin</option>
+                            <option value="ranger">Ranger</option>
+                            <option value="rogue">Rogue</option>
+                            <option value="sorcerer">Sorcerer</option>
+                            <option value="warlock">Warlock</option>
+                            <option value="wizard">Wizard</option>
                           </select>
                         </div>
                       </div>
+                      
+
+
                       <div class="row">
                         <div class="col-25">
-                          <label for="subject">Subject</label>
+                          <label for="subclass">Subclass</label>
                         </div>
                         <div class="col-75">
-                          <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                          <input type="text" id="subclass" name="subclass" placeholder="Your subclass..">
                         </div>
                       </div>
-                      <div class="row">
-                        <input type="submit" value="Submit">
+
+                      
+                      <div class="col-25">
+                        <label for="level">Level</label>
                       </div>
+                      <input type="number" id="level" name="level" min="1" max="20">
+
+
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="alignment">Alignment</label>
+                        </div>
+                        <div class="col-75">
+                          <select id="alignment" name="alignment">
+                            <option value="LG">Lawful Good</option>
+                            <option value="TG">True Good</option>
+                            <option value="CG">Chaotic Good</option>
+                            <option value="LN">Lawful Neutral</option>
+                            <option value="TN">True Neutral</option>
+                            <option value="CN">Chaotic Neutral</option>
+                            <option value="LE">Lawful Evil</option>
+                            <option value="TE">True Evil</option>
+                            <option value="CE">Chaotic Evil</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+
+
+                     
+        
                     </form>
                   </div>
-        
             
             </mat-expansion-panel>
         
@@ -90,10 +131,19 @@
             <!-- panel 3 -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                    panel 3
+                    Features
                 </mat-expansion-panel-header>
             
-                panel 3 content
+                 
+                <body>
+                  <form action="/form/submit" method="post">
+                    <label for="text">Class Features:</label>
+                    <br>
+                    <textarea id="text" name="text" rows="12" cols="150"></textarea>
+                    <br/>
+                    <input type="submit" value="Submit">
+                  </form>
+                </body>
         
             </mat-expansion-panel>
 
