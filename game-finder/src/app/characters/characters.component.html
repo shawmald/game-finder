@@ -186,27 +186,6 @@
                         <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha">
                       </div>
 
-                      <!--
-                      
-                      <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier">
-                      <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier">
-                      <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier">
-                      <input type="number" id="WIS" name="wis" min="-5" max="5" placeholder="wis modifier">
-                      <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier">
-                    </div>
-
-
-                    <div class ="container">
-                      
-
-                      
-                      <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex">
-                      <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con">
-                      <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int">
-                      <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis">
-                      <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha">
-                 
-                      --->
 
                   </div>
                 </form>
@@ -306,42 +285,42 @@
 
                   <div class ="container">
                     <!-- Armour Class modifier -->
-                    <div>
-                      <label for="AC">Armour Classr</label>
+                    <div class = "wrapper">
+                      <label for="AC">Armour Class</label>
+                      <input type="number" id="AC" name="ac" min="0" max="60" placeholder="AC">
                     </div>
 
                     <!-- Dex modifier -->
-                    <div>
+                    <div class = "wrapper" >
                       <label for="initiative">Initiative</label>
+                      <input type="number" id="initiative" name="initiative" min="-5" max="10" placeholder="= DEX">
                     </div>
 
                     <!-- speed -->
-                    <div>
+                    <div class = "wrapper">
                       <label for="speed">Speed</label>
+                      <input type="number" id="speed" name="speed" min="0" max="60" placeholder="speed">
                     </div>
 
                     <!-- HP current -->
-                    <div>
+                    <div class = "wrapper">
                       <label for="currentHP">Current Hit Points</label>
+                      <input type="number" id="currentHP" name="currentHP" min="0" max="500" placeholder="Current HP">
                     </div>
 
                     <!-- total hp -->
-                    <div>
+                    <div class = "wrapper">
                       <label for="totalHP">Total Hit Points</label>
+                      <input type="number" id="totalHP" name="totalHP" min="0" max="500" placeholder="total HP">
                     </div>
 
                     <!-- Hit Dice -->
-                    <div>
+                    <div class = "wrapper">
                       <label for="hitDice">Charisma Modifier</label>
+                      <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier">
                     </div>
 
                     <!-- Inputs -->
-                    <input type="number" id="AC" name="ac" min="0" max="60" placeholder="AC">
-                    <input type="number" id="initiative" name="initiative" min="-5" max="10" placeholder="= DEX">
-                    <input type="number" id="speed" name="speed" min="0" max="60" placeholder="speed">
-                    <input type="number" id="currentHP" name="currentHP" min="0" max="500" placeholder="Current HP">
-                    <input type="number" id="totalHP" name="totalHP" min="0" max="500" placeholder="total HP">
-                    <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier">
                   </div>
 
                 </form>

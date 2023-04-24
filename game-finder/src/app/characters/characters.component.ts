@@ -18,6 +18,7 @@ export class CharactersComponent {
     new Character("Character 4"),
     new Character("Character 5"),
   ];
+
   
 }
 
