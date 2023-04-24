@@ -40,7 +40,7 @@ input[type="number"] {
 }
 
 
-
+/* 
 .cool-button {
   display: inline-block;
   padding: 20px 40px;
@@ -54,6 +54,34 @@ input[type="number"] {
 
 .cool-button:hover {
   background-color: #0056b3;
+} */
+
+/* Styling for the expansion panel header */
+.panel-header {
+  background-color: #f2f2f2; /* Set the background color */
+  font-size: 18px; /* Set the font size */
+  font-weight: bold; /* Set the font weight */
+  padding: 12px; /* Add padding */
+}
+
+/* Styling for the expansion panel body */
+.panel-body {
+  padding: 12px; /* Add padding */
+}
+
+/* Styling for the cool buttons */
+.cool-button {
+  display: inline-block; /* Display as inline block */
+  padding: 10px 20px; /* Add padding */
+  background-color: #007bff; /* Set the background color */
+  color: #fff; /* Set the text color */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Set the font size */
+  margin-right: 10px; /* Add margin to the right */
+}
+
+.cool-button:hover {
+  background-color: #0056b3; /* Change background color on hover */
 }
 
 
@@ -68,4 +96,34 @@ input[type="number"] {
   border: 1px solid;
   padding: 10px; 
   width: 100%; 
+}
+
+/* Styling for the mat-accordion */
+mat-accordion {
+  max-width: 600px; /* Set max width for the accordion */
+  margin: 0 auto; /* Center the accordion horizontally */
+}
+
+/* Styling for the mat-expansion-panel */
+.mat-expansion-panel {
+  margin-bottom: 16px; /* Add margin at the bottom of each panel */
+}
+
+/* Styling for the mat-expansion-panel-header */
+.mat-expansion-panel-header {
+  background-color: #f2f2f2; /* Set the background color */
+  font-size: 18px; /* Set the font size */
+  font-weight: bold; /* Set the font weight */
+  padding: 12px; /* Add padding */
+}
+
+/* Styling for the mat-expansion-panel-header when expanded */
+.mat-expansion-panel-header.mat-expanded {
+  background-color: #007bff; /* Set the background color when expanded */
+  color: #fff; /* Set the text color when expanded */
+}
+
+/* Styling for the mat-expansion-panel-body */
+.mat-expansion-panel-body {
+  padding: 12px; /* Add padding */
 }
