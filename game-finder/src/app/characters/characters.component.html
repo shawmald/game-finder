@@ -126,6 +126,7 @@
                        -->
 
                      
+                      <input type="submit" value="Submit">
         
                     </form>
                   </div>
@@ -138,43 +139,55 @@
                     Ability Scores
                 </mat-expansion-panel-header>
             
-                <div class="container">
-                  <form action="/action_page.php">
+                <form action="/action_page.php">
+                  <div class="container">
 
 
-                    <div class ="container">
+                    <!--<div class ="container">-->
                       <!-- Strength modifier -->
-                      <div>
+                      <div class = "wrapper">
                         <label for="STR">Strength Modifier</label>
+                        <input type="number" id="STR" name="str" min="-5" max="5" placeholder="str modifier">
+                        <input type="number" id="STR" name="str" min="-10" max="20" placeholder="str">
                       </div>
 
                       <!-- Dex modifier -->
-                      <div>
+                      <div class = "wrapper">
                         <label for="DEX">Dexterity Modifier</label>
+                        <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier">
+                        <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex">
                       </div>
 
                       <!-- Con modifier -->
-                      <div>
+                      <div class = "wrapper">
                         <label for="CON">Constitution Modifier</label>
+                        <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier">
+                        <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con">
                       </div>
 
                       <!-- Int modifier -->
-                      <div>
+                      <div class = "wrapper">
                         <label for="INT">Intelligence Modifier</label>
+                        <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier">
+                        <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int">
                       </div>
 
                       <!-- Wis modifier -->
-                      <div>
+                      <div class = "wrapper">
                         <label for="WIS">Wisdom Modifier</label>
+                        <input type="number" id="WIS" name="wis" min="-5" max="5" placeholder="wis modifier">
+                        <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis">
                       </div>
 
                       <!-- Cha modifier -->
-                      <div>
+                      <div class = "wrapper">
                         <label for="CHA">Charisma Modifier</label>
+                        <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier">
+                        <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha">
                       </div>
 
-                      <!-- Inputs -->
-                      <input type="number" id="STR" name="str" min="-5" max="5" placeholder="str modifier">
+                      <!--
+                      
                       <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier">
                       <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier">
                       <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier">
@@ -186,18 +199,17 @@
                     <div class ="container">
                       
 
-                      <!-- Inputs -->
-                      <input type="number" id="STR" name="str" min="-10" max="20" placeholder="str">
+                      
                       <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex">
                       <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con">
                       <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int">
                       <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis">
                       <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha">
-                  </div>
+                 
+                      --->
 
-                  </form>
-                </div>
-        
+                  </div>
+                </form>
             </mat-expansion-panel>
 
 
@@ -303,22 +315,22 @@
                       <label for="initiative">Initiative</label>
                     </div>
 
-                    <!-- Con modifier -->
+                    <!-- speed -->
                     <div>
                       <label for="speed">Speed</label>
                     </div>
 
-                    <!-- Int modifier -->
+                    <!-- HP current -->
                     <div>
                       <label for="currentHP">Current Hit Points</label>
                     </div>
 
-                    <!-- Wis modifier -->
+                    <!-- total hp -->
                     <div>
                       <label for="totalHP">Total Hit Points</label>
                     </div>
 
-                    <!-- Cha modifier -->
+                    <!-- Hit Dice -->
                     <div>
                       <label for="hitDice">Charisma Modifier</label>
                     </div>
@@ -339,7 +351,7 @@
         </mat-expansion-panel>
 
 
-        <!-- panel 4 -->
+        <!-- panel 5 -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 Features
@@ -350,13 +362,64 @@
               <form action="/form/submit" method="post">
                 <label for="text">Class Features:</label>
                 <br>
-                <textarea id="text" name="text" rows="12" cols="150"></textarea>
+                <textarea id="text" name="text" rows="20" cols="50"></textarea>
+                <br/>
+                <input type="submit" value="Submit">
+              </form>
+
+              <form action="/form/submit" method="post">
+                <label for="text">Racial and Background Features:</label>
+                <br>
+                <textarea id="text" name="text" rows="10" cols="50"></textarea>
                 <br/>
                 <input type="submit" value="Submit">
               </form>
             </body>
     
         </mat-expansion-panel>
+
+        <!-- panel 6 -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              Equipment and Money
+          </mat-expansion-panel-header>
+      
+            
+          <body>
+
+
+            <!-- money -->
+            <div class="sickly">
+              <div>
+                <label for="gp">Gold</label>
+              </div>
+              <div>
+                <label for="sp">Silver</label>
+              </div>
+              <div>
+                <label for="ep">Electrum</label>
+              </div>
+
+              <!-- get math to calculate total ? -->
+              <input type="number" id="gp" name="gp" min="1" max="99999">
+              <input type="number" id="sp" name="sp" min="1" max="99999">
+              <input type="number" id="ep" name="ep" min="1" max="99999">
+            </div>
+
+
+            <form action="/form/submit" method="post">
+              <label for="text">Equipment:</label>
+              <br>
+              <textarea id="text" name="text" rows="15" cols="50"></textarea>
+              <br/>
+              <input type="submit" value="Submit">
+            </form>
+
+          </body>
+  
+      </mat-expansion-panel>
+
+
 
       </mat-accordion>
 

@@ -1,9 +1,29 @@
-.container {
+/**.container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+} */
+
+.container {
+  display: inline;
+  position: relative;
+  width : 100%
 }
 
-.container2 {
+.wrapper {
+  display: grid;
+  /* position: relative; */
+  height: 100px;
+  margin: 50;
+}
+
+.sickly {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+#text {
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 10px; 
+  width: 100%; 
 }
