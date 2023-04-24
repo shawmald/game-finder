@@ -1,0 +1,19 @@
+.container{
+    width: 90%;
+    margin: 25px auto 0px auto;
+}
+
+.rounded-block{
+    background-color: lightgrey;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 25px;
+    padding: 5px;
+    margin: 5px 5px 5px 5px;
+}
+
+.plus-icon{
+    font-size: xx-large;
+}
