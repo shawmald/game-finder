@@ -41,6 +41,23 @@ input[type="number"] {
 
 
 
+.cool-button {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cool-button:hover {
+  background-color: #0056b3;
+}
+
+
+
 .sickly {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
