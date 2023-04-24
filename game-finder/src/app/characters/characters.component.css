@@ -38,7 +38,7 @@ input[type="number"] {
     margin: 10px;
   }
 }
-
+/*********************/
 
 /* 
 .cool-button {
@@ -55,6 +55,27 @@ input[type="number"] {
 .cool-button:hover {
   background-color: #0056b3;
 } */
+
+
+.sickly {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#text {
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 10px; 
+  width: 100%; 
+}
+
+/**********************************/
+/* Styling for the accordion */
+.my-accordion {
+  border: 1px solid #ccc; /* Set the border */
+  border-radius: 5px; /* Set the border radius */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /* Add a box shadow */
+}
 
 /* Styling for the expansion panel header */
 .panel-header {
@@ -82,48 +103,4 @@ input[type="number"] {
 
 .cool-button:hover {
   background-color: #0056b3; /* Change background color on hover */
-}
-
-
-
-.sickly {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-#text {
-  border-radius: 5px;
-  border: 1px solid;
-  padding: 10px; 
-  width: 100%; 
-}
-
-/* Styling for the mat-accordion */
-mat-accordion {
-  max-width: 600px; /* Set max width for the accordion */
-  margin: 0 auto; /* Center the accordion horizontally */
-}
-
-/* Styling for the mat-expansion-panel */
-.mat-expansion-panel {
-  margin-bottom: 16px; /* Add margin at the bottom of each panel */
-}
-
-/* Styling for the mat-expansion-panel-header */
-.mat-expansion-panel-header {
-  background-color: #f2f2f2; /* Set the background color */
-  font-size: 18px; /* Set the font size */
-  font-weight: bold; /* Set the font weight */
-  padding: 12px; /* Add padding */
-}
-
-/* Styling for the mat-expansion-panel-header when expanded */
-.mat-expansion-panel-header.mat-expanded {
-  background-color: #007bff; /* Set the background color when expanded */
-  color: #fff; /* Set the text color when expanded */
-}
-
-/* Styling for the mat-expansion-panel-body */
-.mat-expansion-panel-body {
-  padding: 12px; /* Add padding */
 }
