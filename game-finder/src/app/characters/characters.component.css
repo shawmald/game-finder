@@ -1,0 +1,106 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  border-radius: 3px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: block;
+  }
+
+  .wrapper {
+    margin: 10px;
+  }
+}
+/*********************/
+
+/* 
+.cool-button {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cool-button:hover {
+  background-color: #0056b3;
+} */
+
+
+.sickly {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#text {
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 10px; 
+  width: 100%; 
+}
+
+/**********************************/
+/* Styling for the accordion */
+.my-accordion {
+  border: 1px solid #ccc; /* Set the border */
+  border-radius: 5px; /* Set the border radius */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /* Add a box shadow */
+}
+
+/* Styling for the expansion panel header */
+.panel-header {
+  background-color: #f2f2f2; /* Set the background color */
+  font-size: 18px; /* Set the font size */
+  font-weight: bold; /* Set the font weight */
+  padding: 12px; /* Add padding */
+}
+
+/* Styling for the expansion panel body */
+.panel-body {
+  padding: 12px; /* Add padding */
+}
+
+/* Styling for the cool buttons */
+.cool-button {
+  display: inline-block; /* Display as inline block */
+  padding: 10px 20px; /* Add padding */
+  background-color: #007bff; /* Set the background color */
+  color: #fff; /* Set the text color */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Set the font size */
+  margin-right: 10px; /* Add margin to the right */
+}
+
+.cool-button:hover {
+  background-color: #0056b3; /* Change background color on hover */
+}

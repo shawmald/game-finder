@@ -1,9 +1,13 @@
+/*
+    GameFinder global stylesheet
+    CSS
+*/
+
 /* 
     added to make angular materials formt correctly ,
     also added to angular.json file under "styles"
 */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; 
-
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons"); /* import google icons */
 
 /* create margins on left & right, center content */
@@ -16,6 +20,7 @@ body{
 /* 
 ---------------------------------------------------------------------------------------
 icon and image formatting
+mat-icons use font-size to change size rather than height and width
 ---------------------------------------------------------------------------------------
 */
 
@@ -36,11 +41,23 @@ row formatting
 ---------------------------------------------------------------------------------------
 */
 
+/* 
+    display items in a row, do not wrap
+    add space inbetween (main contents left justified, messages & profile justified right)
+    vertically center items
+ */
+.nowrap-row{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 /* display items in a row, wrap around if necessary */
 .flex-row{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
 }
 
 /* item takes up half of a row */

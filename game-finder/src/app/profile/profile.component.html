@@ -9,7 +9,7 @@
         contains pfp & (if user's page) edit symbol
         row display
     -->
-    <div id="header-row">
+    <div class="nowrap-row">
         <!-- pfp & display name -->
         <div>
             <!-- profile picture -->
@@ -20,15 +20,17 @@
             <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}">
         </div>
 
-        <div id="button-container">
-            <!--
-                edit symbol, click to enter editing mode
-                only show if not currently editing AND on own page
-            -->
-            <mat-icon class="icon" *ngIf="sameUser && !editing" (click)="edit()">edit</mat-icon>
-            
+        <!--
+                if same user & editing: show edit icon
+            if same user & not editing: show save and cancel buttons
+                     if different user: show friend & block buttons
+        -->
+        <div id="button-container" class="nowrap-row">
 
-            <!-- if editing replace edit symbol with save and cancel buttons -->
+            <!-- edit symbol, click to enter editing mode -->
+            <mat-icon class="icon" *ngIf="sameUser && !editing" (click)="edit()">edit</mat-icon>
+
+            <!-- if editing: replace edit symbol with save and cancel buttons -->
             <button *ngIf="editing" (click)="save()" class="button" type="button" >save</button>
             <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
 
@@ -109,7 +111,7 @@
             <mat-icon class="icon" *ngIf="editing">edit</mat-icon>
 
             <!-- display tags -->
-            <div class="flex-row">
+            <div id="tag-container" class="flex-row">
                 <!-- display all true tags -->
                 <div class="tag" *ngFor="let tag of filterTags( this.tags )">
                     {{ tag }}

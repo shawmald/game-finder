@@ -5,23 +5,8 @@
         rounded corners     https://www.w3schools.com/css/css3_borders.asp
 */
 
-#header-row{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
 /* float button container on the right, add margins of the left and right */
 #button-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    
-    float: right;
-
     margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
 }
 
@@ -32,12 +17,17 @@
 
 /* add margins to the top, right, and bottom */
 input, select{
-    margin: 2.5% 2.5% 2.5% 0%;
+    margin: 2.5% 2.5% 2% 0%;
 }
 
 /* make input display as a block (appears in own line) */
 .block-display{
     display: block;
+}
+
+#tag-container{
+    width: 95%;
+    margin: 0px auto 0px auto;
 }
 
 .tag{
@@ -48,4 +38,26 @@ input, select{
     border-radius: 25px;
     background-color: lightgrey;
     
+}
+
+textarea{
+    width: 95%;
+    height: 75px;
+    margin-bottom: 10px;
+}
+
+/*----------------------------------------------------------------------
+    Overwrite style.css
+----------------------------------------------------------------------*/
+
+/* align items at top */
+.nowrap-row{
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 800px){
+    /* remain a row always */
+    .flex-row{
+        flex-direction: row;
+    }
 }
