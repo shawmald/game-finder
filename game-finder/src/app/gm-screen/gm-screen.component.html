@@ -32,7 +32,7 @@
                 <!-- stats -->
                 <h4>Stats</h4>
                 <table>
-                    
+
                     <!-- stat names -->
                     <tr>
                         <td>Str</td>
@@ -45,22 +45,22 @@
 
                     <!-- stat modifiers -->
                     <tr>
-                        <td>{{ npc.calcMod( npc.stats[0] ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats[1] ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats[2] ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats[3] ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats[4] ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats[5] ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats.get('str') ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats.get('dex') ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats.get('con') ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats.get('int') ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats.get('wis') ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats.get('cha') ) }}</td>
                     </tr>
 
                     <!-- stats -->
                     <tr>
-                        <td>{{ npc.stats[0] }}</td>
-                        <td>{{ npc.stats[1] }}</td>
-                        <td>{{ npc.stats[2] }}</td>
-                        <td>{{ npc.stats[3] }}</td>
-                        <td>{{ npc.stats[4] }}</td>
-                        <td>{{ npc.stats[5] }}</td>
+                        <td>{{ npc.stats.get('str') }}</td>
+                        <td>{{ npc.stats.get('dex') }}</td>
+                        <td>{{ npc.stats.get('con') }}</td>
+                        <td>{{ npc.stats.get('int') }}</td>
+                        <td>{{ npc.stats.get('wis') }}</td>
+                        <td>{{ npc.stats.get('cha') }}</td>
                     </tr>
 
                 </table>

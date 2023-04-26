@@ -26,8 +26,7 @@ export class NPC {
   name: string;
   level: number;
   class: string;
-  stats: number[];
-  //stats: Map<string,number>;
+  stats: Map<string,number>;
   notes: string;
 
   /**
@@ -48,8 +47,7 @@ export class NPC {
     this.name = name;
     this.level = level;
     this.class = job;
-    this.stats = [ str, dex, con, int, wis, cha ];
-    /*
+    
     this.stats = new Map<string,number>();
     this.stats.set("str", str);
     this.stats.set("dex", dex);
@@ -57,17 +55,19 @@ export class NPC {
     this.stats.set("int", int);
     this.stats.set("wis", wis);
     this.stats.set("cha", cha);
-    */
+    
     this.notes = notes;
   }
 
   /**
+   * Calculate a stat's modifier given the stat.
    * 
    * @param stat (number)
    * @returns (number)
    */
+  calcMod( stat: number | undefined ): number;
   calcMod( stat: number ): number {
-    let mod: number = stat;
+    let mod: number = <number>stat;
 
     if( (mod % 2) != 0 ){ mod -= 1; }   //if number is odd: subtract one
     mod = (mod-10)/2;
