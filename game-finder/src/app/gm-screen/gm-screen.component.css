@@ -17,3 +17,13 @@
 .plus-icon{
     font-size: xx-large;
 }
+
+table{
+    width: 90%;
+    margin: 0px auto 0px auto;
+}
+
+td{
+    padding: 0px 1px 0px 1px;
+    text-align: center;
+}

@@ -1,16 +1,22 @@
 <div class="content">
-    <div>
-        <h1 style="display: inline;">Game Master Screen </h1>
+    <div class="nowrap-row">
+        <div>
+            <h1 style="display: inline;">Game Master Screen </h1>
 
-        <!-- question circle, hover for gm screen explanation -->
-        <mat-icon 
-            class="help"
-            matTooltip="add gm screen description" 
-            matTooltipPosition="after"
-            matTooltipHideDelay="2000"
-        >
-            help_outline
-        </mat-icon>
+            <!-- question circle, hover for gm screen explanation -->
+            <mat-icon 
+                class="help"
+                matTooltip="add gm screen description" 
+                matTooltipPosition="after"
+                matTooltipHideDelay="2000"
+            >
+                help_outline
+            </mat-icon>
+        </div>
+
+        <div>
+            <mat-icon (click)="add()">add_circle</mat-icon>
+        </div>
     </div>
 
     <div class="flex-row container">
@@ -21,14 +27,47 @@
     
             <div *ngIf="npc != null" class="rounded-block">
                 <h2>{{ npc.name }}</h2>
-                <h3>{{ npc.class }}</h3>
+                <h3>Lv {{ npc.level }} {{ npc.class }}</h3>
+
+                <!-- stats -->
+                <h3>Stats</h3>
+                <table>
+                    <!-- stat modifiers -->
+                    
+                    <tr>
+                        <td>{{ npc.calcMod( npc.stats[0] ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats[1] ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats[2] ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats[3] ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats[4] ) }}</td>
+                        <td>{{ npc.calcMod( npc.stats[5] ) }}</td>
+                    </tr>
+                    
+
+                    <!-- stats -->
+                    <tr>
+                        <td>{{ npc.stats[0] }}</td>
+                        <td>{{ npc.stats[1] }}</td>
+                        <td>{{ npc.stats[2] }}</td>
+                        <td>{{ npc.stats[3] }}</td>
+                        <td>{{ npc.stats[4] }}</td>
+                        <td>{{ npc.stats[5] }}</td>
+                    </tr>
+
+                    <!-- stat names -->
+                    <tr>
+                        <td>Str</td>
+                        <td>Dex</td>
+                        <td>Con</td>
+                        <td>Int</td>
+                        <td>Wis</td>
+                        <td>Cha</td>
+                    </tr>
+                </table>
+                
     
             </div>
         </div>
     </div>
-
-    <!--<div>
-        {{ this.test_calcMod() }}
-    </div>-->
 
 </div>  
