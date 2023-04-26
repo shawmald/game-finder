@@ -1,0 +1,18 @@
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <div class="container">
+    <h2>GameFinder</h2>
+    <form>
+      <input type="text" id="username" name="username" placeholder="Username" required [(ngModel)]="username">
+      <input type="password" id="password" name="password" placeholder="Password" required [(ngModel)]="password">
+      <button type="submit" (click)="onSubmit()">Login</button>
+    </form>
+      <button class="google-btn">Login with Google</button>
+      <div class="bottom-links">
+        <a href="#">Forgot your password?</a> | <a href="#">Create an account</a>
+      </div>
+  </div>
+</body>
+

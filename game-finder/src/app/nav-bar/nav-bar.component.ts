@@ -31,7 +31,7 @@ export class NavBarComponent implements OnInit {
   setActiveLink( activeLink: string ){
     this.activeLink = activeLink;
   }
-  
+
   // TODO: call on refresh
   updateActiveLink() {
     const path = this.router.url;

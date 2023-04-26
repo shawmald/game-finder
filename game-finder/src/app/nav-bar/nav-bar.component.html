@@ -11,15 +11,15 @@
   <!-- main menu items: gamefinder, characters, tools, about -->
   <div id="web-view">
     <a class="nav-item" routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
-    <a class="nav-item" routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characteres')">Characters</a>
+    <a *ngIf="isLoggedIn" class="nav-item" routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characteres')">Characters</a>
 
     <!-- Tools dropdown: GM Screen, Dice Roller-->
-    <a class="nav-item" [matMenuTriggerFor]="toolsMenu">Tools</a>
+    <a *ngIf="isLoggedIn" class="nav-item" [matMenuTriggerFor]="toolsMenu">Tools</a>
     <mat-menu #toolsMenu="matMenu" xPosition="after">
       <button mat-menu-item routerLink="/gmscreen" routerLinkActive="selected" (click)="setActiveLink('GM Screen')">GM Screen</button>
       <button mat-menu-item routerLink="/diceroller" routerLinkActive="selected" (click)="setActiveLink('Dice Roller')">Dice Roller</button>
     </mat-menu>
-    
+
     <a class="nav-item" routerLink="/about" routerLinkActive="selected" (click)="setActiveLink('About')">About</a>
   </div>
 
@@ -30,7 +30,7 @@
       <mat-icon>menu</mat-icon>
       {{ activeLink }}
     </a>
-    
+
     <!-- main menu items: gamefinder, characters, tools, about -->
     <mat-menu #mainMenu="matMenu" xPosition="after">
       <button mat-menu-item routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</button>
@@ -48,38 +48,39 @@
     </mat-menu>
 
   </div>
-  
+
 
   <!-- messages & profile icons, float right-->
-  <div id="right-container">
+  <div *ngIf="isLoggedIn" id="right-container">
     <!-- messages icon -->
     <a class="nav-item" routerLink="/messages" routerLinkActive="selected" (click)="setActiveLink('Messages')">
       <mat-icon>forum</mat-icon>
     </a>
 
-    <!-- 
+    <!--
       profile dropdown: profile, settings, logout
       only viewable if logged in
-    -->        
+    -->
     <!-- profile icon -->
     <a class="nav-item" [matMenuTriggerFor]="profileMenu">
       <mat-icon>account_circle</mat-icon>
     </a>
-    
+
     <mat-menu #profileMenu="matMenu" xPosition="before">
       <button mat-menu-item routerLink="/profile" routerLinkActive="selected" (click)="setActiveLink('Profile')">Profile</button>
       <!-- <button mat-menu-item routerLink="'/profile/' + currentUser" routerLinkActive="selected" (click)="setActiveLink('Profile')">Profile</button> -->
       <button mat-menu-item routerLink="/settings" routerLinkActive="selected" (click)="setActiveLink('Settings')">Settings</button>
-      <button mat-menu-item routerLink="/logout" routerLinkActive="logout" (click)="setActiveLink('Logout')">Logout</button> <!-- set activelink to 'logout'? routerlinkactive=logout?? -->
+      <button mat-menu-item routerLink="/logout" routerLinkActive="selected" (click)="setActiveLink('Logout')">Logout</button> <!-- set activelink to 'logout'? routerlinkactive=logout?? -->
     </mat-menu>
-    
-    
-  
+
+
+
   </div>
 
   <!--
   <li *ngIf="isLoggedIn != true" class="nav-item"><a routerLink="/register" routerLinkActive="selected" (click)="setActiveLink('Register')">Register</a></li>
-  <li *ngIf="isLoggedIn != true" class="nav-item"><a routerLink="/login" routerLinkActive="selected" (click)="setActiveLink('Login')">Login</a></li>
   -->
-  
+  <a *ngIf="isLoggedIn != true" class="nav-item" routerLink="/login" routerLinkActive="selected" (click)="setActiveLink('Login')">Login</a>
+
+
 </nav>
