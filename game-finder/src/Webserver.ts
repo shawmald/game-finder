@@ -69,10 +69,43 @@ export async function startServer() {
     res.send( JSON.stringify(JSONConversion) );
   } )
 
+
+  /**
+   * DONE
+   */
   server.get('/AddCharacterSheet', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
-    const msg = await profileManagement.accessUser(username);
-    res.send( JSON.stringify(msg) );
+    let profile = await profileManagement.accessUser(username);
+    const charName = req.query.CharacterName as string;
+    const race = req.query.Race as string;
+    const background   = req.query.Background as string;
+    const backstory = req.query.Backstory as string;
+    const lvl = req.query.Lvl as string;
+    const charClass = req.query.CharacterClass as string;
+    const equipment = req.query.Equipment as string;
+    const stats = req.query.Stats as Array<string>; //Change to Array<number>
+    const numStats = stats.map(str => {
+      return parseInt(str, 10);
+    });
+    const statMods = req.query.StatModifiers as Array<string>;  //Change to Array<number>
+    const numStatMods = statMods.map(str => {
+      return parseInt(str, 10);
+    })
+    const combatStats = req.query.CombatStats as Array<string>; //Change to Array<number>
+    const numCBStats = combatStats.map(str => {
+      return parseInt(str, 10);
+    })
+    const money = req.query.Money as Array<string>; //Change to Array<number>
+    const numMoney = money.map(str => {
+      return parseInt(str, 10);
+    })
+    const spells = null as any; //This is to add spells later
+    const skills = req.query.Skills as Array<string>;
+    const pictures = req.query.Pictures as Array<string>;
+    let newCharSheet = profile.createCharSheet(charName, race, background, backstory, lvl, charClass, equipment, numStats, numStatMods,
+    numCBStats, numMoney, spells, skills, pictures);
+
+    res.send( "Character Sheet should be uploaded to profile" );
   } )
 
   //I need to add another spells to the spell Database
@@ -82,15 +115,42 @@ export async function startServer() {
     res.send( JSON.stringify(msg) );
   } )
 
-  //I need to grab the name of the characterSheet
+  /**
+   * DONE
+   */
   server.get('/UpdateCharacterSheet', async (req: Request, res: Response) => {
-    const charName = req.query.CharacterName as string;
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
-    let charSheet = profile.accessCharacterSheet(charName);
+    const charName = req.query.CharacterName as string;
+    const race = req.query.Race as string;
+    const background   = req.query.Background as string;
+    const backstory = req.query.Backstory as string;
+    const lvl = req.query.Lvl as string;
+    const charClass = req.query.CharacterClass as string;
+    const equipment = req.query.Equipment as string;
+    const stats = req.query.Stats as Array<string>; //Change to Array<number>
+    const numStats = stats.map(str => {
+      return parseInt(str, 10);
+    });
+    const statMods = req.query.StatModifiers as Array<string>;  //Change to Array<number>
+    const numStatMods = statMods.map(str => {
+      return parseInt(str, 10);
+    })
+    const combatStats = req.query.CombatStats as Array<string>; //Change to Array<number>
+    const numCBStats = combatStats.map(str => {
+      return parseInt(str, 10);
+    })
+    const money = req.query.Money as Array<string>; //Change to Array<number>
+    const numMoney = money.map(str => {
+      return parseInt(str, 10);
+    })
+    const spells = null as any; //This is to add spells later
+    const skills = req.query.Skills as Array<string>;
+    const pictures = req.query.Pictures as Array<string>;
+    let newCharSheet = profile.updateCharSheet(charName, race, background, backstory, lvl, charClass, equipment, numStats, numStatMods,
+    numCBStats, numMoney, spells, skills, pictures);
 
-
-    res.send( JSON.stringify("Something") );
+    res.send( "Character Sheet should be updated" );
   } )
   
   server.get('/UpdateSpells', async (req: Request, res: Response) => {
@@ -98,7 +158,7 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     let charSheet = profile.accessCharacterSheet(charName);
-    
+
     res.send( JSON.stringify("Something spell") );
   } )
 

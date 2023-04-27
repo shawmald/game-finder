@@ -11,7 +11,6 @@
 import { MongoDB } from "./mongoDB";
 import { CharSheet } from "./CharSheet";
 import {Spell} from "./Spell";
-import { Int32 } from "mongodb";
 //const {MongoClient} = require('mongodb');   //This is needed to get MongoClient to start working for whatever reaso
 
 export class Profile {
