@@ -46,17 +46,6 @@ button[type="submit"]:hover {
   background-color: #45a049;
 }
 
-.google-btn {
-  background-color: #e74b37;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.google-btn:hover {
-  background-color: #dd4b39;
-}
-
 .bottom-links {
   margin-top: 8px;
   font-size: 14px;

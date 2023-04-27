@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';  // keep at end
 import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'gamefinder', pathMatch: 'full'},
@@ -26,12 +27,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent }, //replace when login implemented
   /*{ path: 'profile/:username', component: ProfileComponent },*/ //causes issues without login
   { path: 'settings', component: SettingsComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-
-  /*
-  { path: 'register', component: RegisterPageComponent, canActivate: [LoginGuard] },
-  */
 
   { path: '**', component: PageNotFoundComponent }  //always keep at end
 ];

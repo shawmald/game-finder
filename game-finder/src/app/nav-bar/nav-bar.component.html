@@ -50,10 +50,14 @@
   </div>
 
 
-  <!-- messages & profile icons, float right-->
-  <div *ngIf="isLoggedIn" id="right-container">
+  <!-- login & register | messages & profile icons, float right-->
+  <div id="right-container">
+
+    <a *ngIf="isLoggedIn != true" class="nav-item" routerLink="/register" routerLinkActive="selected" (click)="setActiveLink('Register')">Register</a>
+    <a *ngIf="isLoggedIn != true" class="nav-item" routerLink="/login" routerLinkActive="selected" (click)="setActiveLink('Login')">Login</a>
+
     <!-- messages icon -->
-    <a class="nav-item" routerLink="/messages" routerLinkActive="selected" (click)="setActiveLink('Messages')">
+    <a *ngIf="isLoggedIn" class="nav-item" routerLink="/messages" routerLinkActive="selected" (click)="setActiveLink('Messages')">
       <mat-icon>forum</mat-icon>
     </a>
 
@@ -62,7 +66,7 @@
       only viewable if logged in
     -->
     <!-- profile icon -->
-    <a class="nav-item" [matMenuTriggerFor]="profileMenu">
+    <a *ngIf="isLoggedIn" class="nav-item" [matMenuTriggerFor]="profileMenu">
       <mat-icon>account_circle</mat-icon>
     </a>
 
@@ -76,11 +80,5 @@
 
 
   </div>
-
-  <!--
-  <li *ngIf="isLoggedIn != true" class="nav-item"><a routerLink="/register" routerLinkActive="selected" (click)="setActiveLink('Register')">Register</a></li>
-  -->
-  <a *ngIf="isLoggedIn != true" class="nav-item" routerLink="/login" routerLinkActive="selected" (click)="setActiveLink('Login')">Login</a>
-
 
 </nav>

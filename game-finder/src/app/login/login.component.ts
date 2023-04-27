@@ -1,6 +1,4 @@
 import { SocialAuthService } from '@abacritt/angularx-social-login';
-import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,18 +12,17 @@ export class LoginComponent {
   username!: string;
   password!: string;
   user: any;
-  loggedIn: any;
   errorMessage!: string;
+
+  constructor(private router: Router, private authService: SocialAuthService) {}
 
   ngOnInit() {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.login(this.user.email, this.user.id);
-      console.log(this.user);
+      //console.log(this.user);
     })
   }
-
-  constructor(private router: Router, private authService: SocialAuthService) {}
 
   login(username: string, password: string) {
 
@@ -66,14 +63,6 @@ export class LoginComponent {
 
   loginStandard() {
     this.login(this.username, this.password);
-  }
-
-  loginGoogle() {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-    .then(() => {
-      console.log(this.user)
-      this.login(this.user.email, this.user.id)
-    })
   }
 }
 
