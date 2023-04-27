@@ -1,1 +1,434 @@
-<p>characters works!</p>
+<!--
+    Characters component HTML
+
+    refs:
+        accordion   https://v5.material.angular.io/components/expansion/overview
+-->
+
+<h1>Characters</h1>
+
+<!-- 
+    external accordion: contains an expansion-panel for each character
+    only let one (character) panel be open at a time
+-->
+<mat-accordion multi="false">
+    
+    <!--
+        Character panel
+    -->
+    <mat-expansion-panel *ngFor="let character of this.characters">
+
+        <!-- name of the panel: get from character's name -->
+        <mat-expansion-panel-header>
+            {{ character.name }}
+        </mat-expansion-panel-header>
+
+        <!-- 
+            internal accordion: contains panels nested inside (character)
+            let multiple be open at once
+        -->
+        <mat-accordion multi="true">
+
+            <!-- panel 1 -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    Basics
+                </mat-expansion-panel-header>
+            
+                    
+                  <div class="container">
+                    <form action="/action_page.php">
+
+                      <!-- Character name enter form -->
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="fname">Full Name</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="text" id="fname" name="name" placeholder="Your characters name..">
+                        </div>
+                      </div>
+
+                      <!-- Character race enter form -->
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="race">Race</label>
+                        </div>
+                        <div class="col-75">
+                          <select id="race" name="race">
+                            <option value="dragonborn">Dragonborn</option>
+                            <option value="dwarf">Dwarf</option>
+                            <option value="elf">Elf</option>
+                            <option value="gnome">Gnome</option>
+                            <option value="half-elf">Half-Elf</option>
+                            <option value="halfling">Halfling</option>
+                            <option value="half-orc">Half-Orc</option>
+                            <option value="human">Human</option>
+                            <option value="tiefling">Tiefling</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <!-- Class is drop down, no artificers here :/ -->
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="class">Class</label>
+                        </div>
+                        <div class="col-75">
+                          <select id="class" name="class">
+                            <option value="barbarian">Barbarian</option>
+                            <option value="bard">Bard</option>
+                            <option value="cleric">Cleric</option>
+                            <option value="druid">Druid</option>
+                            <option value="fighter">Fighter</option>
+                            <option value="monk">Monk</option>
+                            <option value="paladin">Paladin</option>
+                            <option value="ranger">Ranger</option>
+                            <option value="rogue">Rogue</option>
+                            <option value="sorcerer">Sorcerer</option>
+                            <option value="warlock">Warlock</option>
+                            <option value="wizard">Wizard</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+
+                      <!-- Subclass is self entered -->
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="subclass">Subclass</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="text" id="subclass" name="subclass" placeholder="Your subclass..">
+                        </div>
+                      </div>
+
+                      <!-- enter level, max twenty, min 1 -->
+                      <div class="col-25">
+                        <label for="level">Level</label>
+                      </div>
+                      <input type="number" id="level" name="level" min="1" max="20">
+
+
+                      <!-- penter alignment -->
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="alignment">Alignment</label>
+                        </div>
+                        <div class="col-75">
+                          <select id="alignment" name="alignment">
+                            <option value="LG">Lawful Good</option>
+                            <option value="TG">True Good</option>
+                            <option value="CG">Chaotic Good</option>
+                            <option value="LN">Lawful Neutral</option>
+                            <option value="TN">True Neutral</option>
+                            <option value="CN">Chaotic Neutral</option>
+                            <option value="LE">Lawful Evil</option>
+                            <option value="TE">True Evil</option>
+                            <option value="CE">Chaotic Evil</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <!-- 
+                        Im thinking of also adding a XP thing here that can do 
+                        addition and change the level depending on the status here
+                       -->
+
+                     
+                      <input type="submit" value="Submit">
+        
+                    </form>
+                  </div>
+            
+            </mat-expansion-panel>
+        
+            <!-- panel 2 -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    Ability Scores
+                </mat-expansion-panel-header>
+            
+                <form action="/action_page.php">
+                  <div class="container">
+
+
+                    <!--<div class ="container">-->
+                      <!-- Strength modifier -->
+                      <div class = "wrapper">
+                        <label for="STR">Strength Modifier</label>
+                        <input type="number" id="STR" name="str" min="-5" max="5" placeholder="str modifier">
+                        <input type="number" id="STR" name="str" min="-10" max="20" placeholder="str">
+                      </div>
+
+                      <!-- Dex modifier -->
+                      <div class = "wrapper">
+                        <label for="DEX">Dexterity Modifier</label>
+                        <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier">
+                        <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex">
+                      </div>
+
+                      <!-- Con modifier -->
+                      <div class = "wrapper">
+                        <label for="CON">Constitution Modifier</label>
+                        <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier">
+                        <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con">
+                      </div>
+
+                      <!-- Int modifier -->
+                      <div class = "wrapper">
+                        <label for="INT">Intelligence Modifier</label>
+                        <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier">
+                        <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int">
+                      </div>
+
+                      <!-- Wis modifier -->
+                      <div class = "wrapper">
+                        <label for="WIS">Wisdom Modifier</label>
+                        <input type="number" id="WIS" name="wis" min="-5" max="5" placeholder="wis modifier">
+                        <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis">
+                      </div>
+
+                      <!-- Cha modifier -->
+                      <div class = "wrapper">
+                        <label for="CHA">Charisma Modifier</label>
+                        <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier">
+                        <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha">
+                      </div>
+
+
+                  </div>
+                </form>
+            </mat-expansion-panel>
+
+
+            <!-- panel 3 -->
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  Proficiencies
+              </mat-expansion-panel-header>
+          
+               
+              <body>
+
+                <!-- enter proficiency bonus, max twenty, min 1 -->
+                <div class="col-25">
+                  <label for="pb">proficiency bonus</label>
+                </div>
+                <input type="number" id="pb" name="pb" min="2" max="6">
+
+
+
+                <!-- check off saving throw proficiencies -->
+                <form action="/action_page.php">
+                  <input type="checkbox" id="savingThrow1" name="savingThrow1" value="STR">
+                  <label for="savingThrow1"> Strength </label><br>
+                  <input type="checkbox" id="savingThrow2" name="savingThrow2" value="DEX">
+                  <label for="savingThrow2"> Dexterity</label><br>
+                  <input type="checkbox" id="savingThrow3" name="savingThrow3" value="CON">
+                  <label for="savingThrow3"> Constitution</label><br>
+                  <input type="checkbox" id="savingThrow4" name="savingThrow4" value="INT">
+                  <label for="savingThrow4"> Intelligence </label><br>
+                  <input type="checkbox" id="savingThrow5" name="savingThrow5" value="WIS">
+                  <label for="savingThrow5"> Wisdom</label><br>
+                  <input type="checkbox" id="savingThrow6" name="savingThrow6" value="CHA">
+                  <label for="savingThrow6"> Charisma</label><br><br>
+                  <input type="submit" value="Submit">
+                </form>
+
+                <form action="/action_page.php">
+                  <p>Skills: </p>
+                  <input type="checkbox" id="acrobatics" name="acrobatics" value="Dex">
+                  <label for="acrobatics"> Acrobatics</label><br>
+                  <input type="checkbox" id="animalHandling" name="animalHandling" value="WIS">
+                  <label for="animalHandling"> Animal Handling</label><br>
+                  <input type="checkbox" id="arcana" name="arcana" value="INT">
+                  <label for="arcana"> Arcana</label><br>
+                  <input type="checkbox" id="athletics" name="athletics" value="STR">
+                  <label for="athletics"> Athletics</label><br>
+                  <input type="checkbox" id="deception" name="deception" value="CHA">
+                  <label for="deception"> Deception</label><br>
+                  <input type="checkbox" id="history" name="history" value="INT">
+                  <label for="history"> History</label><br>
+                  <input type="checkbox" id="insight" name="insight" value="WIS">
+                  <label for="insight"> Insight</label><br>
+                  <input type="checkbox" id="intimidation" name="intimidation" value="CHA">
+                  <label for="intimidation"> Intimidation</label><br>
+                  <input type="checkbox" id="investigation" name="investigation" value="INT">
+                  <label for="investigation"> Investigation</label><br>
+                  <input type="checkbox" id="medicine" name="medicine" value="WIS">
+                  <label for="medicine"> Medicine</label><br>
+                  <input type="checkbox" id="nature" name="nature" value="INT">
+                  <label for="nature"> Nature</label><br>
+                  <input type="checkbox" id="perception" name="perception" value="WIS">
+                  <label for="perception"> Perception</label><br>
+                  <input type="checkbox" id="performance" name="performance" value="CHA">
+                  <label for="performance"> Performance</label><br>
+                  <input type="checkbox" id="persuasion" name="persuasion" value="CHA">
+                  <label for="persuasion"> Persuation</label><br>
+                  <input type="checkbox" id="religion" name="religion" value="INT">
+                  <label for="religion"> Religion</label><br>
+                  <input type="checkbox" id="slightOfHand" name="slightOfHand" value="DEX">
+                  <label for="slightOfHand"> Slieght of Hand</label><br>
+                  <input type="checkbox" id="stealth" name="stealth" value="DEX">
+                  <label for="stealth"> Stealth</label><br>
+                  <input type="checkbox" id="survival" name="survival" value="WIS">
+                  <label for="survival"> Survival</label><br><br>
+                  <input type="submit" value="Submit">
+                </form>
+
+              </body>
+      
+          </mat-expansion-panel>
+
+          <!-- panel 4 -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                Combat Stats
+            </mat-expansion-panel-header>
+        
+             
+            <body>
+              <div class="container">
+                <form action="/action_page.php">
+
+
+                  <div class ="container">
+                    <!-- Armour Class modifier -->
+                    <div class = "wrapper">
+                      <label for="AC">Armour Class</label>
+                      <input type="number" id="AC" name="ac" min="0" max="60" placeholder="AC">
+                    </div>
+
+                    <!-- Dex modifier -->
+                    <div class = "wrapper" >
+                      <label for="initiative">Initiative</label>
+                      <input type="number" id="initiative" name="initiative" min="-5" max="10" placeholder="= DEX">
+                    </div>
+
+                    <!-- speed -->
+                    <div class = "wrapper">
+                      <label for="speed">Speed</label>
+                      <input type="number" id="speed" name="speed" min="0" max="60" placeholder="speed">
+                    </div>
+
+                    <!-- HP current -->
+                    <div class = "wrapper">
+                      <label for="currentHP">Current Hit Points</label>
+                      <input type="number" id="currentHP" name="currentHP" min="0" max="500" placeholder="Current HP">
+                    </div>
+
+                    <!-- total hp -->
+                    <div class = "wrapper">
+                      <label for="totalHP">Total Hit Points</label>
+                      <input type="number" id="totalHP" name="totalHP" min="0" max="500" placeholder="total HP">
+                    </div>
+
+                    <!-- Hit Dice -->
+                   <!-- <div class = "wrapper">
+                      <label for="hitDice">Charisma Modifier</label>
+                      <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier">
+                    </div>-->
+
+                    <!-- Inputs -->
+                  </div>
+
+                </form>
+              </div>
+            </body>
+    
+        </mat-expansion-panel>
+
+
+        <!-- panel 5 -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                Features
+            </mat-expansion-panel-header>
+        
+              
+            <body>
+              <form action="/form/submit" method="post">
+                <label for="text">Class Features:</label>
+                <br>
+                <textarea id="text" name="text" rows="20" cols="50"></textarea>
+                <br/>
+                <input type="submit" value="Submit">
+              </form>
+
+              <form action="/form/submit" method="post">
+                <label for="text">Racial and Background Features:</label>
+                <br>
+                <textarea id="text" name="text" rows="10" cols="50"></textarea>
+                <br/>
+                <input type="submit" value="Submit">
+              </form>
+            </body>
+    
+        </mat-expansion-panel>
+
+        <!-- panel 6 -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              Equipment and Money
+          </mat-expansion-panel-header>
+      
+            
+          <body>
+
+
+            <!-- money -->
+            <div class="sickly">
+              <div>
+                <label for="gp">Gold</label>
+              </div>
+              <div>
+                <label for="sp">Silver</label>
+              </div>
+              <div>
+                <label for="ep">Electrum</label>
+              </div>
+
+              <!-- get math to calculate total ? -->
+              <input type="number" id="gp" name="gp" min="1" max="99999">
+              <input type="number" id="sp" name="sp" min="1" max="99999">
+              <input type="number" id="ep" name="ep" min="1" max="99999">
+            </div>
+
+
+            <form action="/form/submit" method="post">
+              <label for="text">Equipment:</label>
+              <br>
+              <textarea id="text" name="text" rows="15" cols="50"></textarea>
+              <br/>
+              <input type="submit" value="Submit">
+            </form>
+
+          </body>
+  
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            Spells and Pictures
+        </mat-expansion-panel-header>
+          <body>
+
+            <a href="https://www.example.com" class="cool-button">SPELL SHEET</a>
+            <br><br>
+            <a href="https://www.example.com" class="cool-button">Pictures</a>
+
+          </body>
+      </mat-expansion-panel>
+
+
+      </mat-accordion>
+
+    </mat-expansion-panel>
+
+
+    
+
+</mat-accordion>
+

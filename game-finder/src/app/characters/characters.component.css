@@ -1,0 +1,174 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  border-radius: 3px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: block;
+  }
+
+  .wrapper {
+    margin: 10px;
+  }
+}
+/*********************/
+
+/* 
+.cool-button {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cool-button:hover {
+  background-color: #0056b3;
+} */
+
+
+.sickly {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#text {
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 10px; 
+  width: 100%; 
+}
+
+/**********************************/
+/* Styling for the accordion */
+.my-accordion {
+  border: 1px solid #ccc; /* Set the border */
+  border-radius: 5px; /* Set the border radius */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /* Add a box shadow */
+}
+
+/* Styling for the expansion panel header */
+.panel-header {
+  background-color: #f2f2f2; /* Set the background color */
+  font-size: 18px; /* Set the font size */
+  font-weight: bold; /* Set the font weight */
+  padding: 12px; /* Add padding */
+}
+
+/* Styling for the expansion panel body */
+.panel-body {
+  padding: 12px; /* Add padding */
+}
+
+/* Styling for the cool buttons */
+.cool-button {
+  display: inline-block; /* Display as inline block */
+  padding: 10px 20px; /* Add padding */
+  background-color: #007bff; /* Set the background color */
+  color: #fff; /* Set the text color */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Set the font size */
+  margin-right: 10px; /* Add margin to the right */
+}
+
+.cool-button:hover {
+  background-color: #0056b3; /* Change background color on hover */
+}
+/*******/
+/* Style the labels */
+label {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* Style the form inputs */
+input[type=text], select, input[type=number] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #f9649f;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the form container */
+/* .container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50%;
+  margin: 0 auto;
+} */
+
+/* Style the form rows */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the form columns */
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Responsive layout - make the form columns stack on top of each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+

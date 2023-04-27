@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
@@ -60,6 +61,7 @@ import { LogoutComponent } from './logout/logout.component';
     MatTooltipModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatExpansionModule,
     FormsModule,
     SocialLoginModule,
     GoogleSigninButtonModule,
