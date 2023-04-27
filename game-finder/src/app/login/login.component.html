@@ -7,9 +7,9 @@
     <form>
       <input type="text" id="username" name="username" placeholder="Username" required [(ngModel)]="username">
       <input type="password" id="password" name="password" placeholder="Password" required [(ngModel)]="password">
-      <button type="submit" (click)="onSubmit()">Login</button>
+      <button type="submit" (click)="loginStandard()">Login</button>
     </form>
-      <button class="google-btn">Login with Google</button>
+    <asl-google-signin-button></asl-google-signin-button>
       <div class="bottom-links">
         <a href="#">Forgot your password?</a> | <a href="#">Create an account</a>
       </div>

@@ -8,6 +8,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -57,8 +61,28 @@ import { LogoutComponent } from './logout/logout.component';
     MatDialogModule,
     MatCheckboxModule,
     FormsModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '774110471538-alv3m1fu42l95f6314gd52lmi0okenjm.apps.googleusercontent.com'
+            )
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

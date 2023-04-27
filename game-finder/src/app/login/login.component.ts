@@ -1,3 +1,6 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,17 +13,26 @@ export class LoginComponent {
 
   username!: string;
   password!: string;
+  user: any;
+  loggedIn: any;
   errorMessage!: string;
 
-  constructor(private router: Router) {}
+  ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.login(this.user.email, this.user.id);
+      console.log(this.user);
+    })
+  }
 
-  onSubmit() {
+  constructor(private router: Router, private authService: SocialAuthService) {}
+
+  login(username: string, password: string) {
 
     const ip = "http://34.30.183.36:80/"
 
     // Call API to validate login
-    console.log(this.username + ", " + this.password)
-    fetch(ip + "Login?Username=" + this.username + "&Password=" + this.password, {
+    fetch(ip + "Login?Username=" + username + "&Password=" + password, {
         method: "GET",
     })
     .then((response) => {
@@ -35,7 +47,7 @@ export class LoginComponent {
         // Otherwise, display error message
         if (content === "true") {
           // Redirect to dashboard page
-          sessionStorage.setItem('currentUser', this.username);
+          sessionStorage.setItem('currentUser', username);
           sessionStorage.setItem('isLoggedIn', 'true')
           this.router.navigate(['/gamefinder'])
           .then(() => {
@@ -50,6 +62,18 @@ export class LoginComponent {
       console.error('Error:', error);
       this.errorMessage = 'Something went wrong, please try again';
     });
+  }
+
+  loginStandard() {
+    this.login(this.username, this.password);
+  }
+
+  loginGoogle() {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+    .then(() => {
+      console.log(this.user)
+      this.login(this.user.email, this.user.id)
+    })
   }
 }
 
