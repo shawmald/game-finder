@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Edit Tags</h1>
+<div mat-dialog-content>
+
+    <div>
+        <h3>Mode</h3>
+
+        <mat-checkbox [checked]="data.tags.get('in-person')">
+            in-person
+        </mat-checkbox>
+
+        <mat-checkbox [checked]="data.tags.get('online')">
+            online
+        </mat-checkbox>
+    </div>
+
+    <div>
+        <h3>Role</h3>
+
+        <mat-checkbox [checked]="data.tags.get('beginner player')">
+            beginner player
+        </mat-checkbox>
+
+        <mat-checkbox [checked]="data.tags.get('experienced player')">
+            experienced player
+        </mat-checkbox>
+
+        <mat-checkbox [checked]="data.tags.get('beginner GM')">
+            beginner GM
+        </mat-checkbox>
+
+        <mat-checkbox [checked]="data.tags.get('experienced GM')">
+            experienced GM
+        </mat-checkbox>
+
+    </div>
+
+    <div>
+        <h3>Campaign Type</h3>
+
+        <mat-checkbox [checked]="data.tags.get('short')">
+            short
+        </mat-checkbox>
+
+        <mat-checkbox [checked]="data.tags.get('long')">
+            long
+        </mat-checkbox>
+
+        <mat-checkbox [checked]="data.tags.get('episodic')">
+            episodic
+        </mat-checkbox>
+    </div>
+
+    <div>
+        <h3>Genre</h3>
+
+        
+    </div>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="ok()" cdkFocusInitial>Ok</button>
+    <button mat-button (click)="cancel()">Cancel</button>
+</div>

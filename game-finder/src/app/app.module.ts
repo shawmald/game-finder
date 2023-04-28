@@ -21,8 +21,11 @@ import { AboutComponent } from './about/about.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
-
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+import { NpcDialogComponent } from './npc-dialog/npc-dialog.component';
+import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -37,8 +40,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MessagesComponent,
     ProfileComponent,
     SettingsComponent,
+    PageNotFoundComponent,
 
-    PageNotFoundComponent //always keep at end
+    NpcDialogComponent,
+    TagEditDialogComponent
   ],
   imports: [
     BrowserModule,

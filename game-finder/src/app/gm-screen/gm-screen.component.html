@@ -25,7 +25,7 @@
                 <mat-icon class="plus-icon">add</mat-icon>
             </div>
     
-            <div *ngIf="npc != null" class="rounded-block">
+            <div *ngIf="npc != null" class="rounded-block" (click)="openDialog(npc)">
                 <h3>{{ npc.name }}</h3>
                 <h4>Lv {{ npc.level }} {{ npc.class }}</h4>
 
@@ -45,12 +45,12 @@
 
                     <!-- stat modifiers -->
                     <tr>
-                        <td>{{ npc.calcMod( npc.stats.get('str') ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats.get('dex') ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats.get('con') ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats.get('int') ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats.get('wis') ) }}</td>
-                        <td>{{ npc.calcMod( npc.stats.get('cha') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('str') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('dex') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('con') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('int') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('wis') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('cha') ) }}</td>
                     </tr>
 
                     <!-- stats -->
