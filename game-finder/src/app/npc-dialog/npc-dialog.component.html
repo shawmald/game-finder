@@ -1,0 +1,63 @@
+<!-- <h1 mat-dialog-title>{{ data.npc.name }}</h1> -->
+
+<div mat-dialog-content class="content"> 
+    <div class="nowrap-row">
+        <h3 *ngIf="!editing">{{ data.npc.name }}</h3>
+        <input *ngIf="editing" class="block-input" placeholder="{{ data.npc.name }}">
+        
+        <div class="button-container">
+            <mat-icon *ngIf="!editing" (click)="edit()">edit</mat-icon>
+
+            <button mat-button *ngIf="editing" (click)="save()" cdkFocusInitial>Save</button>
+            <button mat-button *ngIf="editing" (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+    
+    <h4 *ngIf="!editing">Lv {{ data.npc.level }} {{ data.npc.class }}</h4>
+    <div *ngIf="editing">
+        Lv
+        <input class="number-input" placeholder="{{ data.npc.level }}">
+        <input placeholder="{{ data.npc.class }}">
+    </div>
+
+    <!-- stats -->
+    <h4>Stats</h4>
+    <table>
+
+        <!-- stat names -->
+        <tr>
+            <td>Str</td>
+            <td>Dex</td>
+            <td>Con</td>
+            <td>Int</td>
+            <td>Wis</td>
+            <td>Cha</td>
+        </tr>
+
+        <!-- stat modifiers -->
+        <tr>
+            <td>{{ statTool.calcMod( data.npc.stats.get('str') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('con') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('int') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('wis') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('cha') ) }}</td>
+        </tr>
+
+        <!-- stats -->
+        <tr>
+            <td>{{ data.npc.stats.get('str') }}</td>
+            <td>{{ data.npc.stats.get('dex') }}</td>
+            <td>{{ data.npc.stats.get('con') }}</td>
+            <td>{{ data.npc.stats.get('int') }}</td>
+            <td>{{ data.npc.stats.get('wis') }}</td>
+            <td>{{ data.npc.stats.get('cha') }}</td>
+        </tr>
+
+    </table>
+
+    <h4>Notes</h4>
+    <p *ngIf="!editing">{{ data.npc.notes }}</p>
+    <textarea *ngIf="editing" class="block-display">{{ data.npc.notes }}</textarea>
+
+</div>
