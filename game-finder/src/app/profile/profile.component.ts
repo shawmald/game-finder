@@ -1,7 +1,8 @@
 /* profile component typescript */
 
-import { Component, Inject } from '@angular/core';
-//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { TagEditDialogComponent } from '../tag-edit-dialog/tag-edit-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -122,13 +123,15 @@ export class ProfileComponent {
 
     return filtered;
   }
-  /*
+  
   constructor( public dialog: MatDialog ){}
 
   openDialog(): void {
-    const dialogRef = this.dialog.open( TagEditingDialog, {
-      width: "50%"//,
-      //data: 
+    const dialogRef = this.dialog.open( TagEditDialogComponent, {
+      width: "350px",
+      data: {
+        tags: this.tags
+      } 
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -136,24 +139,5 @@ export class ProfileComponent {
       //this.?? = result;
     })
   }
-  */
-
-
+  
 }
-
-/*
-@Component({
-  selector: 'app-tag-editing-dialog',
-  templateUrl: './tag-editing-dialog.html',
-})
-export class TagEditingDialog {
-  constructor( 
-    public dialogRef: MatDialogRef<TagEditingDialog>, 
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ){}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
-*/

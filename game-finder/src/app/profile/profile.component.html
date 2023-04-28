@@ -108,7 +108,7 @@
             
 
             <!-- edit button, click to open popup where you can edit tags -->
-            <mat-icon class="icon" *ngIf="editing">edit</mat-icon>
+            <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
 
             <!-- display tags -->
             <div id="tag-container" class="flex-row">
@@ -124,7 +124,7 @@
         <div class="half-col">
             <!-- profile biography, if editing replace with input box preloaded with current biography -->
             <p *ngIf="!editing">{{ bio }}</p>
-            <textarea *ngIf="editing == true" class="block-display">{{ bio }}</textarea>
+            <textarea *ngIf="editing" class="block-display">{{ bio }}</textarea>
 
             <!-- timezone, change in settings -->
             {{ timezone }}
