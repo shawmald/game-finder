@@ -8,6 +8,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+// import { MaterialModule } from './material.module';s
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +26,26 @@ import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+// import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+// import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+
+@NgModule({
+  declarations: [],
+  imports: [
+  ],
+  exports: [
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
+  ]
+})
+export class MaterialModule { }
+
 
 @NgModule({
   declarations: [
@@ -50,7 +73,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatTooltipModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    CommonModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
+  ],
+  exports: [
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
