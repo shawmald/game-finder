@@ -104,3 +104,28 @@ input[type="number"] {
 .cool-button:hover {
   background-color: #0056b3; /* Change background color on hover */
 }
+
+
+/***********/
+.mat-expansion-panel-header {
+  background-color: #f2f2f2;
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  background-color: #f9f9f9;
+}
+
+.mat-expansion-panel-header:focus {
+  outline: none;
+}
+
+.mat-expansion-panel-content {
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}

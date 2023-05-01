@@ -10,18 +10,20 @@
 
   <!-- main menu items: gamefinder, characters, tools, about -->
   <div id="web-view">
-    <a class="nav-item" routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
-    <a class="nav-item" routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characteres')">Characters</a>
-
+    <a mat-button class="nav-item" routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
+    <a mat-button class="nav-item" routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characteres')">Characters</a>
+  
     <!-- Tools dropdown: GM Screen, Dice Roller-->
-    <a class="nav-item" [matMenuTriggerFor]="toolsMenu">Tools</a>
+    <button mat-button class="nav-item" [matMenuTriggerFor]="toolsMenu">Tools</button>
     <mat-menu #toolsMenu="matMenu" xPosition="after">
       <button mat-menu-item routerLink="/gmscreen" routerLinkActive="selected" (click)="setActiveLink('GM Screen')">GM Screen</button>
       <button mat-menu-item routerLink="/diceroller" routerLinkActive="selected" (click)="setActiveLink('Dice Roller')">Dice Roller</button>
     </mat-menu>
-    
-    <a class="nav-item" routerLink="/about" routerLinkActive="selected" (click)="setActiveLink('About')">About</a>
+  
+    <a mat-button class="nav-item" routerLink="/about" routerLinkActive="selected" (click)="setActiveLink('About')">About</a>
   </div>
+  
+
 
   <!-- main menu dropdown version (mobile view) -->
   <div id="mobile-view">
@@ -30,24 +32,24 @@
       <mat-icon>menu</mat-icon>
       {{ activeLink }}
     </a>
-    
+  
     <!-- main menu items: gamefinder, characters, tools, about -->
     <mat-menu #mainMenu="matMenu" xPosition="after">
-      <button mat-menu-item routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</button>
-      <button mat-menu-item routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characters')">Characters</button>
-
+      <a mat-menu-item routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
+      <a mat-menu-item routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characters')">Characters</a>
+      
       <button mat-menu-item [matMenuTriggerFor]="toolsMenu">Tools</button>
-
-      <button mat-menu-item routerLink="/about" routerLinkActive="selected" (click)="setActiveLink('About')">About</button>
+      
+      <a mat-menu-item routerLink="/about" routerLinkActive="selected" (click)="setActiveLink('About')">About</a>
     </mat-menu>
-
+  
     <!-- tools submenu: gm screen, dice roller -->
     <mat-menu #toolsMenu="matMenu">
-      <button mat-menu-item routerLink="/gmscreen" routerLinkActive="selected" (click)="setActiveLink('GM Screen')">GM Screen</button>
-      <button mat-menu-item routerLink="/diceroller" routerLinkActive="selected" (click)="setActiveLink('Dice Roller')">Dice Roller</button>
+      <a mat-menu-item routerLink="/gmscreen" routerLinkActive="selected" (click)="setActiveLink('GM Screen')">GM Screen</a>
+      <a mat-menu-item routerLink="/diceroller" routerLinkActive="selected" (click)="setActiveLink('Dice Roller')">Dice Roller</a>
     </mat-menu>
-
   </div>
+  
   
 
   <!-- messages & profile icons, float right-->
