@@ -1,14 +1,14 @@
-footer{
+/* footer{
     background-color: lightgray;
     color: black;
 
     flex-wrap: nowrap;  /* overwrite from flex-row class */
-
+/* 
     margin-top: 2%;
 
     justify-content: space-between;
     align-content: space-between;
-}
+} */ 
 
 @media only screen and (max-width: 800px){
     /* if browser window <= 800px then change to column view */
@@ -16,3 +16,20 @@ footer{
         flex-direction: column;
     }
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; /* set the height of your footer here */
+    background-color: lightblue;
+    border-top: 1px solid #ddd;
+    flex-wrap: nowrap;
+    padding: 10px;
+    margin-top: 2%;
+    justify-content: space-between;
+    align-content: space-between;
+    margin-top: 80px;
+  }
+  
