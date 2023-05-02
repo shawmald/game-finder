@@ -105,6 +105,10 @@ export class Profile {
         this.availableTime = availableTime;
         this.timezone = timezone;
 
+        this.updateDB();
+    }
+
+    public updateDB() {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Email", this.email);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Password", this.password);

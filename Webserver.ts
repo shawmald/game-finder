@@ -6,6 +6,7 @@
 
 import { ProfileManagement } from "./ProfilesManagement"; 
 import { MongoDB } from "./mongoDB";    //To remove after testing
+import { Profile } from "./Profile";
 
 import express from "express";
 import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunction is needed for this but I'll leave it in for now 
@@ -84,7 +85,8 @@ export async function startServer() {
     const username = req.query.Username as string;
     const reqVar = req.query.ReqVar as string;
     let profile = await profileManagement.accessUser(username);
-    res.send ( profile[reqVar] );
+    const retrievedVar = profile[reqVar];
+    res.send ( retrievedVar );
   } )
 
   /**
@@ -96,6 +98,7 @@ export async function startServer() {
     const newVar = req.query.NewVar as any;
     let profile = await profileManagement.accessUser(username);
     profile[reqVar] = newVar;
+    profile.updateDB();
     res.send( profile[reqVar] );
  } )
 
