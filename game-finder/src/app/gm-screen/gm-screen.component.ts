@@ -1,5 +1,10 @@
+/**
+ * GM Screen Typescript file
+ */
 import { Component } from '@angular/core';
-//import { StatUtil } from 'game-finder/src/app/StatUtil.ts';
+import { MatDialog } from '@angular/material/dialog';
+import { NpcDialogComponent } from '../npc-dialog/npc-dialog.component';
+import { StatUtil } from 'src/backend/StatUtil';
 
 @Component({
   selector: 'app-gm-screen',
@@ -7,6 +12,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./gm-screen.component.css']
 })
 export class GmScreenComponent {
+  statTool: StatUtil = new StatUtil();
   npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );
 
   add( name:string='Name', level:number=1, job:string='Class', str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ): void {
@@ -20,7 +26,25 @@ export class GmScreenComponent {
       delete this.npcs[index];
     }
   }
+
+  constructor( public dialog: MatDialog ){}
+
+  openDialog( npc: NPC ): void {
+    const dialogRef = this.dialog.open( NpcDialogComponent, {
+      width: "550px",
+      data: {
+        npc: npc
+      } 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log( "The dialog was closed" );
+      //this.?? = result;
+    })
+  }
+
 }
+
 
 export class NPC {
   name: string;
@@ -58,37 +82,5 @@ export class NPC {
     
     this.notes = notes;
   }
-
-  /**
-   * Calculate a stat's modifier given the stat.
-   * 
-   * @param stat (number)
-   * @returns (number)
-   */
-  calcMod( stat: number | undefined ): number;
-  calcMod( stat: number ): number {
-    let mod: number = <number>stat;
-
-    if( (mod % 2) != 0 ){ mod -= 1; }   //if number is odd: subtract one
-    mod = (mod-10)/2;
-
-    return mod;
-  }
-
-  /**
-   * Test calcMod() with inputs 1-30
-   * @returns (string)
-   */
-  /*
-  test_calcMod(): string {
-    let output: string = ``;
-
-    for( let i=1; i<31; i++ ){
-      output += `Stat: ${i}\tMod: ${this.calcMod(i)}\n`
-    }
-
-    return output;
-  }
-  */
 
 }

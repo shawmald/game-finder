@@ -25,12 +25,15 @@ import { AboutComponent } from './about/about.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
-
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
+
+import { NpcDialogComponent } from './npc-dialog/npc-dialog.component';
+import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -47,9 +50,12 @@ import { LogoutComponent } from './logout/logout.component';
     SettingsComponent,
     LoginComponent,
     RegisterComponent,
+    LogoutComponent,
+    NpcDialogComponent,
+    TagEditDialogComponent,
 
-      PageNotFoundComponent,
-        LogoutComponent, //always keep at end
+    PageNotFoundComponent //always keep at end
+
   ],
   imports: [
     BrowserModule,
