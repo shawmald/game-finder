@@ -26,7 +26,6 @@ export async function startServer() {
     const username = req.query.Username as string;
     const pw = req.query.Password as string;
     const email = req.query.Email as string;
-    const privacyLvl = req.query.PrivacyLevel as string;
     const msg = await profileManagement.signIn( displayName, email, username, pw);
     res.send(msg);
   } )
@@ -207,7 +206,7 @@ export async function startServer() {
     res.send( "Spell has been updated" );
   } )
 
-  server.listen(80);
+  server.listen(3000);
   
 }
 

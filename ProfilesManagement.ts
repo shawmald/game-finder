@@ -7,7 +7,7 @@
 
 
 import { MongoDB } from "./mongoDB";
-import {Profile} from "./Profile";
+import { Profile } from "./Profile";
 
 export class ProfileManagement {
 

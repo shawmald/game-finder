@@ -10,7 +10,7 @@
 
 import { MongoDB } from "./mongoDB";
 import { CharSheet } from "./CharSheet";
-import {Spell} from "./Spell";
+import { Spell } from "./Spell";
 
 export class Profile {
 
@@ -37,7 +37,7 @@ export class Profile {
 
     constructor(...arr: any[] ) {
 
-        if(arr.length == 4){
+        if(arr.length == 5){
             this.displayName = arr[0];
             this.email = arr[1];
             this.username = arr[2];
@@ -53,8 +53,6 @@ export class Profile {
             this.getUserDBInfo();
         }
     }
-
-
 
 
 
