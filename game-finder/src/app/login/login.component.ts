@@ -17,11 +17,13 @@ export class LoginComponent {
   constructor(private router: Router, private authService: SocialAuthService) {}
 
   ngOnInit() {
+    /**
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.login(this.user.email, this.user.id);
       //console.log(this.user);
     })
+    */
   }
 
   login(username: string, password: string) {
@@ -58,6 +60,7 @@ export class LoginComponent {
     .catch((error) => {
       console.error('Error:', error);
       this.errorMessage = 'Something went wrong, please try again';
+      alert(this.errorMessage);
     });
   }
 
