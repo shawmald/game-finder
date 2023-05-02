@@ -9,8 +9,11 @@ import { AboutComponent } from './about/about.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './login/login.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';  // keep at end
+import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'gamefinder', pathMatch: 'full'},
@@ -24,12 +27,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent }, //replace when login implemented
   /*{ path: 'profile/:username', component: ProfileComponent },*/ //causes issues without login
   { path: 'settings', component: SettingsComponent },
-
-  /*
-  { path: 'login', component: LoginPageComponent, canActivate: [LoginGuard] },
-  { path: 'register', component: RegisterPageComponent, canActivate: [LoginGuard] },
-  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
-  */
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
 
   { path: '**', component: PageNotFoundComponent }  //always keep at end
 ];

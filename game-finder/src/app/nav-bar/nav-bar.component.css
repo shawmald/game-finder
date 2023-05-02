@@ -4,20 +4,20 @@
     refs:
         flexbox         https://www.w3schools.com/css/css3_flexbox_container.asp
         media queries   https://www.w3schools.com/css/css3_mediaqueries.asp
-        
+
 */
 
 nav {
     background-color: lightgray;
     width: 95%;
     height: 45px;
-  
+
     /* sticky navbar */
     position: fixed;
     top: 0%;
     z-index: 10;    /* navbar should always be infront */
 }
-  
+
 .nav-item {
     height: 100%;
     padding: 2px;
@@ -43,10 +43,9 @@ a, button {
 
 a:hover, button:hover{
     text-decoration: underline;
-    color: plum; 
+    color: plum;
     cursor: pointer;
 }
-
 
 /*
     responsive design
