@@ -26,6 +26,7 @@ export class Profile {
     private aboutMe : string = null as any;    
     private pfp : string = null as any;   
     private availableTime : string = null as any;  
+    private timezone : string = null as any;
     private blockedProfiles = new Array();
     private friends = new Array();
     private charSheets : Array<CharSheet> = null as any;
@@ -62,7 +63,7 @@ export class Profile {
         collection.insertOne( {"Username" : this.username, "Password" : this.password, "PrivacyLevel" : this.privacyLvl, 
         "CharacterSheets" : this.charSheets, "DisplayName" : this.displayName, "BlockedProfiles" : this.blockedProfiles,
         "Friends" : this.friends, "Email" : this.email, "Location" : this.location, "Status" : this.status, "Tags" : this.tags,
-        "AboutMe" : this.aboutMe, "PFP" : this.pfp, "AvailableTime" : this.availableTime} );
+        "AboutMe" : this.aboutMe, "PFP" : this.pfp, "AvailableTime" : this.availableTime, "Timezone" : this.timezone} );
     }
 
     /**
@@ -84,12 +85,14 @@ export class Profile {
         this.aboutMe = doc.AboutMe;
         this.pfp = doc.PFP;
         this.availableTime = doc.AvailableTime;
+        this.timezone = doc.Timezone;
     }
 
 
 
     public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, 
-    friends : Array<string>, location : string, status : string, tags : Array<string>, aboutMe : string, pfp : string, availableTime : string) {
+    friends : Array<string>, location : string, status : string, tags : Array<string>, aboutMe : string, pfp : string, availableTime : string,
+    timezone : string) {
         this.displayName = displayName;
         this.email = email;
         this.password = password;
@@ -102,6 +105,7 @@ export class Profile {
         this.aboutMe = aboutMe;
         this.pfp = pfp;
         this.availableTime = availableTime;
+        this.timezone = timezone;
 
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Email", this.email);
@@ -109,11 +113,13 @@ export class Profile {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "PermissionLevel", this.privacyLvl);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "BlockedProfiles", this.blockedProfiles);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Location", this.location);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Status", this.status);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Tags", this.tags);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "AboutMe", this.aboutMe);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PFP", this.pfp);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "AvailableTime", this.availableTime);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Timezone", this.timezone);
     }
 
 

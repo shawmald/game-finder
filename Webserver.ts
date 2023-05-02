@@ -58,7 +58,8 @@ export async function startServer() {
     const aboutMe = req.query.AboutMe as string;
     const pfp = req.query.PFP as string;
     const availableTime = req.query.AvailableTime as string; 
-    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends, location, status, tags, aboutMe, pfp, availableTime);
+    const timezone = req.query.Timezone as string;
+    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends, location, status, tags, aboutMe, pfp, availableTime, timezone);
 
     res.send( "The information has been edited");
   } )
