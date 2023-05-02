@@ -52,10 +52,15 @@ export async function startServer() {
     const privacyLvl = req.query.PrivacyLevel as string;
     const blockedProfiles = req.query.BlockedProfiles as Array<string>;
     const friends = req.query.Friends as Array<string>;
-    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends);
+    const location = req.query.Location as string;
+    const status = req.query.Status as string;
+    const tags = req.query.Tags as Array<string>;
+    const aboutMe = req.query.AboutMe as string;
+    const pfp = req.query.PFP as string;
+    const availableTime = req.query.AvailableTime as string; 
+    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends, location, status, tags, aboutMe, pfp, availableTime);
 
-    const msg = "The information had been edited";
-    res.send(msg);
+    res.send( "The information has been edited");
   } )
 
   /**

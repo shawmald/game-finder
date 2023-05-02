@@ -20,6 +20,12 @@ export class Profile {
     private password;
     private privacyLvl;
     private email;
+    private location : string = null as any;   
+    private status : string = null as any;     
+    private tags : Array<string> = null as any;   
+    private aboutMe : string = null as any;    
+    private pfp : string = null as any;   
+    private availableTime : string = null as any;  
     private blockedProfiles = new Array();
     private friends = new Array();
     private charSheets : Array<CharSheet> = null as any;
@@ -55,7 +61,8 @@ export class Profile {
         let collection = this.db.returnCollection("ProfilesDB", "Profiles");
         collection.insertOne( {"Username" : this.username, "Password" : this.password, "PrivacyLevel" : this.privacyLvl, 
         "CharacterSheets" : this.charSheets, "DisplayName" : this.displayName, "BlockedProfiles" : this.blockedProfiles,
-        "Friends" : this.friends, "Email" : this.email} );
+        "Friends" : this.friends, "Email" : this.email, "Location" : this.location, "Status" : this.status, "Tags" : this.tags,
+        "AboutMe" : this.aboutMe, "PFP" : this.pfp, "AvailableTime" : this.availableTime} );
     }
 
     /**
@@ -71,23 +78,41 @@ export class Profile {
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
         this.email = doc.Email;
+        this.location = doc.Location;
+        this.status = doc.Status;
+        this.tags = doc.Tags;
+        this.aboutMe = doc.AboutMe;
+        this.pfp = doc.PFP;
+        this.availableTime = doc.AvailableTime;
     }
 
 
 
-    public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, friends : Array<string>) {
+    public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, 
+    friends : Array<string>, location : string, status : string, tags : Array<string>, aboutMe : string, pfp : string, availableTime : string) {
         this.displayName = displayName;
         this.email = email;
         this.password = password;
         this.privacyLvl = privacyLvl;
         this.blockedProfiles = blockedProfiles;
         this.friends = friends;
+        this.location = location;
+        this.status = status;
+        this.tags = tags;
+        this.aboutMe = aboutMe;
+        this.pfp = pfp;
+        this.availableTime = availableTime;
 
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Email", this.email);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Password", this.password);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "PermissionLevel", this.privacyLvl);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "BlockedProfiles", this.blockedProfiles);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
     }
 
