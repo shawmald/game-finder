@@ -31,39 +31,67 @@
 
                 <!-- stats -->
                 <h4>Stats</h4>
-                <table>
+                <div>
+                    Current HP
+                    Max HP
+                    Hit Dice
+                </div>
 
-                    <!-- stat names -->
-                    <tr>
-                        <td>Str</td>
-                        <td>Dex</td>
-                        <td>Con</td>
-                        <td>Int</td>
-                        <td>Wis</td>
-                        <td>Cha</td>
-                    </tr>
+                <div>
+                    <div><!-- armor class -->
+                        AC
+                        (insert armor class)
+                    </div>
+                    
+                    <div><!-- initiative (dex modifier) -->
+                        Initiative
+                        {{ npc.calcMod( npc.stats.get('dex') ) }}<!-- dex modifier -->
+                    </div>
 
-                    <!-- stat modifiers -->
-                    <tr>
-                        <td>{{ statTool.calcMod( npc.stats.get('str') ) }}</td>
-                        <td>{{ statTool.calcMod( npc.stats.get('dex') ) }}</td>
-                        <td>{{ statTool.calcMod( npc.stats.get('con') ) }}</td>
-                        <td>{{ statTool.calcMod( npc.stats.get('int') ) }}</td>
-                        <td>{{ statTool.calcMod( npc.stats.get('wis') ) }}</td>
-                        <td>{{ statTool.calcMod( npc.stats.get('cha') ) }}</td>
-                    </tr>
+                    <div><!-- speed -->
+                        Speed
+                        (insert speed)
+                    </div>
+                    
+                </div>
+                
+                <div>
+                    <div><!-- strength -->
+                        Str
+                        {{ statTool.calcMod( data.npc.stats.get('str') ) }}
+                        {{ data.npc.stats.get('str') }}
+                    </div>
 
-                    <!-- stats -->
-                    <tr>
-                        <td>{{ npc.stats.get('str') }}</td>
-                        <td>{{ npc.stats.get('dex') }}</td>
-                        <td>{{ npc.stats.get('con') }}</td>
-                        <td>{{ npc.stats.get('int') }}</td>
-                        <td>{{ npc.stats.get('wis') }}</td>
-                        <td>{{ npc.stats.get('cha') }}</td>
-                    </tr>
+                    <div><!-- dexterity -->
+                        Dex
+                        {{ statTool.calcMod( data.npc.stats.get('dex') ) }}
+                        {{ data.npc.stats.get('dex') }}
+                    </div>
 
-                </table>
+                    <div><!-- constitution -->
+                        Con
+                        {{ statTool.calcMod( data.npc.stats.get('con') ) }}
+                        {{ data.npc.stats.get('con') }}
+                    </div>
+
+                    <div><!-- intelligence -->
+                        Int
+                        {{ statTool.calcMod( data.npc.stats.get('int') ) }}
+                        {{ data.npc.stats.get('int') }}
+                    </div>
+
+                    <div><!-- wisdom -->
+                        Wis
+                        {{ statTool.calcMod( data.npc.stats.get('wis') ) }}
+                        {{ data.npc.stats.get('wis') }}
+                    </div>
+
+                    <div><!-- charisma -->
+                        Cha
+                        {{ statTool.calcMod( data.npc.stats.get('cha') ) }}
+                        {{ data.npc.stats.get('cha') }}
+                    </div>
+                </div>
                 
     
             </div>

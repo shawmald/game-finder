@@ -22,39 +22,44 @@
 
     <!-- stats -->
     <h4>Stats</h4>
-    <table>
+    <div>
+        <div><!-- strength -->
+            Str
+            {{ statTool.calcMod( data.npc.stats.get('str') ) }}
+            {{ data.npc.stats.get('str') }}
+        </div>
 
-        <!-- stat names -->
-        <tr>
-            <td>Str</td>
-            <td>Dex</td>
-            <td>Con</td>
-            <td>Int</td>
-            <td>Wis</td>
-            <td>Cha</td>
-        </tr>
+        <div><!-- dexterity -->
+            Dex
+            {{ statTool.calcMod( data.npc.stats.get('dex') ) }}
+            {{ data.npc.stats.get('dex') }}
+        </div>
 
-        <!-- stat modifiers -->
-        <tr>
-            <td>{{ statTool.calcMod( data.npc.stats.get('str') ) }}</td>
-            <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td>
-            <td>{{ statTool.calcMod( data.npc.stats.get('con') ) }}</td>
-            <td>{{ statTool.calcMod( data.npc.stats.get('int') ) }}</td>
-            <td>{{ statTool.calcMod( data.npc.stats.get('wis') ) }}</td>
-            <td>{{ statTool.calcMod( data.npc.stats.get('cha') ) }}</td>
-        </tr>
+        <div><!-- constitution -->
+            Con
+            {{ statTool.calcMod( data.npc.stats.get('con') ) }}
+            {{ data.npc.stats.get('con') }}
+        </div>
 
-        <!-- stats -->
-        <tr>
-            <td>{{ data.npc.stats.get('str') }}</td>
-            <td>{{ data.npc.stats.get('dex') }}</td>
-            <td>{{ data.npc.stats.get('con') }}</td>
-            <td>{{ data.npc.stats.get('int') }}</td>
-            <td>{{ data.npc.stats.get('wis') }}</td>
-            <td>{{ data.npc.stats.get('cha') }}</td>
-        </tr>
+        <div><!-- intelligence -->
+            Int
+            {{ statTool.calcMod( data.npc.stats.get('int') ) }}
+            {{ data.npc.stats.get('int') }}
+        </div>
 
-    </table>
+        <div><!-- wisdom -->
+            Wis
+            {{ statTool.calcMod( data.npc.stats.get('wis') ) }}
+            {{ data.npc.stats.get('wis') }}
+        </div>
+
+        <div><!-- charisma -->
+            Cha
+            {{ statTool.calcMod( data.npc.stats.get('cha') ) }}
+            {{ data.npc.stats.get('cha') }}
+        </div>
+    </div>
+    
 
     <h4>Notes</h4>
     <p *ngIf="!editing">{{ data.npc.notes }}</p>
