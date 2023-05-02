@@ -1,17 +1,16 @@
 /**
- * 
+ * This is profile where it has two constructors, one for logging in and one for signing in. The signing in constructor
+ * makes a new document in MongoDB and also creates a new object to put into Array<Profile> for ProfilesManagement, and 
+ * logging in just creates a new profile object with all of the stored information in MongoDB.
  * @Author Andrew Skevington-Olivera
  * @Date 19-4-23
  */
 
 
 
-//import mongoDB, { MongoClient } from "mongodb";
-//import * as DB from "./mongoDB";
 import { MongoDB } from "./mongoDB";
 import { CharSheet } from "./CharSheet";
-import {Spell} from "./Spell";
-//const {MongoClient} = require('mongodb');   //This is needed to get MongoClient to start working for whatever reaso
+import { Spell } from "./Spell";
 
 export class Profile {
 
@@ -19,26 +18,32 @@ export class Profile {
     private displayName;
     private username;
     private password;
-    //private permissionLvl;
     private privacyLvl;
     private email;
+    private location : string = null as any;   
+    private status : string = null as any;     
+    private tags : Array<string> = null as any;   
+    private aboutMe : string = null as any;    
+    private pfp : string = null as any;   
+    private availableTime : string = null as any;  
+    private timezone : string = null as any;
     private blockedProfiles = new Array();
     private friends = new Array();
     private charSheets : Array<CharSheet> = null as any;
     private db : MongoDB;
  
-    public constructor(displayName : string, email : string, privacyLvl : number, username : string, password : string, db : MongoDB);  //Constructor for signing up
+    public constructor(displayName : string, email : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
     public constructor(username : string, password : string, db : MongoDB);    //Constructor for logging in
 
     constructor(...arr: any[] ) {
 
-        if(arr.length == 4){
+        if(arr.length == 5){
             this.displayName = arr[0];
             this.email = arr[1];
-            this.privacyLvl = arr[2];
-            this.username = arr[3];
-            this.password = arr[4];
-            this.db = arr[5];
+            this.username = arr[2];
+            this.password = arr[3];
+            this.db = arr[4];
+            this.privacyLvl = "Public";
             this.saveToDB();
         }
         else{
@@ -51,13 +56,12 @@ export class Profile {
 
 
 
-
-
     async saveToDB(){
         let collection = this.db.returnCollection("ProfilesDB", "Profiles");
         collection.insertOne( {"Username" : this.username, "Password" : this.password, "PrivacyLevel" : this.privacyLvl, 
         "CharacterSheets" : this.charSheets, "DisplayName" : this.displayName, "BlockedProfiles" : this.blockedProfiles,
-        "Friends" : this.friends, "Email" : this.email} );
+        "Friends" : this.friends, "Email" : this.email, "Location" : this.location, "Status" : this.status, "Tags" : this.tags,
+        "AboutMe" : this.aboutMe, "PFP" : this.pfp, "AvailableTime" : this.availableTime, "Timezone" : this.timezone} );
     }
 
     /**
@@ -73,24 +77,51 @@ export class Profile {
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
         this.email = doc.Email;
+        this.location = doc.Location;
+        this.status = doc.Status;
+        this.tags = doc.Tags;
+        this.aboutMe = doc.AboutMe;
+        this.pfp = doc.PFP;
+        this.availableTime = doc.AvailableTime;
+        this.timezone = doc.Timezone;
     }
 
 
 
-    public editInformation(displayName : string, email : string, password : string, privacyLvl : number, blockedProfiles : Array<string>, friends : Array<string>) {
+    public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, 
+    friends : Array<string>, location : string, status : string, tags : Array<string>, aboutMe : string, pfp : string, availableTime : string,
+    timezone : string) {
         this.displayName = displayName;
         this.email = email;
         this.password = password;
         this.privacyLvl = privacyLvl;
         this.blockedProfiles = blockedProfiles;
         this.friends = friends;
+        this.location = location;
+        this.status = status;
+        this.tags = tags;
+        this.aboutMe = aboutMe;
+        this.pfp = pfp;
+        this.availableTime = availableTime;
+        this.timezone = timezone;
 
+        this.updateDB();
+    }
+
+    public updateDB() {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Email", this.email);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Password", this.password);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PermissionLevel", this.privacyLvl);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PrivacyLevel", this.privacyLvl);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "BlockedProfiles", this.blockedProfiles);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Location", this.location);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Status", this.status);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Tags", this.tags);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "AboutMe", this.aboutMe);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PFP", this.pfp);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "AvailableTime", this.availableTime);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Timezone", this.timezone);
     }
 
 
@@ -118,18 +149,10 @@ export class Profile {
     }
 
     public accessCharacterSheet(pos : number) {
-
-        /** 
-        for(var i = 0; i < this.charSheets.length; i++){
-            if( charName = this.charSheets[i].charName ) {
-                return this.charSheets[i];
-            }
-        }*/
-
         if(this.charSheets[pos] != null) {
             return this.charSheets[pos];
         }
-        else{
+        else {
             return "The character sheet at this position is null";
         }
     }

@@ -1,11 +1,12 @@
 /**
- * 
+ * This is the webserver where all of the commands that frontend would need can be accessed.
  * @Author Andrew Skevington-Olivera
  * @Date 19-4-23
  */
 
 import { ProfileManagement } from "./ProfilesManagement"; 
 import { MongoDB } from "./mongoDB";    //To remove after testing
+import { Profile } from "./Profile";
 
 import express from "express";
 import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunction is needed for this but I'll leave it in for now 
@@ -26,8 +27,7 @@ export async function startServer() {
     const username = req.query.Username as string;
     const pw = req.query.Password as string;
     const email = req.query.Email as string;
-    const privacyLvl = Number.parseInt( req.query.PrivacyLevel as string);
-    const msg = await profileManagement.signIn( displayName, email, privacyLvl, username, pw);
+    const msg = await profileManagement.signIn( displayName, email, username, pw);
     res.send(msg);
   } )
 
@@ -49,13 +49,19 @@ export async function startServer() {
     const updateProfile = await profileManagement.accessUser(username);
     const displayName = req.query.DisplayName as string;
     const pw = req.query.Password as string;
-    const permissionLevel = req.query.PermissionLevel as string;
+    const privacyLvl = req.query.PrivacyLevel as string;
     const blockedProfiles = req.query.BlockedProfiles as Array<string>;
     const friends = req.query.Friends as Array<string>;
-    updateProfile.editInformation(displayName, pw, permissionLevel, blockedProfiles, friends);
+    const location = req.query.Location as string;
+    const status = req.query.Status as string;
+    const tags = req.query.Tags as Array<string>;
+    const aboutMe = req.query.AboutMe as string;
+    const pfp = req.query.PFP as string;
+    const availableTime = req.query.AvailableTime as string; 
+    const timezone = req.query.Timezone as string;
+    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends, location, status, tags, aboutMe, pfp, availableTime, timezone);
 
-    const msg = "The information had been edited";
-    res.send(msg);
+    res.send( "The information has been edited");
   } )
 
   /**
@@ -79,7 +85,8 @@ export async function startServer() {
     const username = req.query.Username as string;
     const reqVar = req.query.ReqVar as string;
     let profile = await profileManagement.accessUser(username);
-    res.send ( profile[reqVar] );
+    const retrievedVar = profile[reqVar];
+    res.send ( retrievedVar );
   } )
 
   /**
@@ -91,6 +98,7 @@ export async function startServer() {
     const newVar = req.query.NewVar as any;
     let profile = await profileManagement.accessUser(username);
     profile[reqVar] = newVar;
+    profile.updateDB();
     res.send( profile[reqVar] );
  } )
 
@@ -201,15 +209,15 @@ export async function startServer() {
     res.send( "Spell has been updated" );
   } )
 
-  //I need username and charName for a characterSheet to be added and then pulling up the characterSheet and adding a spell to it 
-  //Need to be able to change characterSheet & spell information incase of typos
-  //Need to be able to change profile information
-
   server.listen(80);
-
   
 }
 
+/**
+ * This function converts any Array<string> to an Array<number> because it only takes that for queries 
+ * instead of being able to take Array<number> directly.
+ * @param arrStr 
+ */
 function convertStrToNum(arrStr : Array<string>){
   const numStats = arrStr.map(str => {
     return parseInt(str, 10);

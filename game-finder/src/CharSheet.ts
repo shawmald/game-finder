@@ -133,15 +133,7 @@ export class CharSheet {
     }
 
     public accessSpell(spellPos : number) {
-         
-        /**
-        for(var i = 0; i < this.spells.length; i++){
-            if( spellName == this.spells[i].spellName ) {
-                return this.spells[i];
-            }
-        }*/
-
-        if( this.spells[spellPos] != null){
+        if( this.spells[spellPos] != null) {
             return this.spells[spellPos];
         }
         else {

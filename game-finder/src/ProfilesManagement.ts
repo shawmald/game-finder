@@ -1,14 +1,13 @@
 /**
- * 
+ * This is ProfilesManagement where new profiles can be created and you can login to existing ones. Whenever this is first intialized
+ * it creates profile objects for each of the profile documents in MongoDB. Allows for profile objects to be accessed.
  * @Author Andrew SKevington-Olivera
  * 19-4-23
  */
 
 
 import { MongoDB } from "./mongoDB";
-//import * as DB from "./mongoDB";
-import {Profile} from "./Profile";
-//const {MongoClient} = require('mongodb');   //This is needed to get MongoClient to start working for whatever reason
+import { Profile } from "./Profile";
 
 export class ProfileManagement {
 
@@ -50,13 +49,13 @@ export class ProfileManagement {
      * @param password 
      * @returns 
      */
-    async signIn(displayName : string, email : string, privacyLvl: number, username : string, password : string) {
+    async signIn(displayName : string, email : string, username : string, password : string) {
 
         const collection = this.db.returnCollection("ProfilesDB", "Profiles");
         const doc = await collection.findOne( {Username : username} );
 
         if(doc == null) {    //Username hasn't been chosen yet for the website
-            let newProfile = new Profile(displayName, email, privacyLvl, username, password, this.db);
+            let newProfile = new Profile(displayName, email, username, password, this.db);
             this.addProfile(newProfile);
             console.log("A new profile should be in the process of being created");
             return true;
@@ -90,16 +89,8 @@ export class ProfileManagement {
     public async accessUser(username : string) {
 
         for(var i = 0; i < this.profileList.length; i++) {
-
-            //console.log( "This is the username being looked at " + username);
-            //console.log( "This is the uesrname of profileList[i] " + this.profileList[i].returnUsername() );
-
             if(username == this.profileList[i].returnUsername() ) {
-                //console.log( "access user is getting to this point")
-                let copyProfile = this.profileList[i];
-                //copyProfile.setMongoDB();
-                //return JSON.stringify(copyProfile);
-                //console.log( copyProfile );
+                let copyProfile = this.profileList[i];  //Can probably just return this.profileList[i] later
                 return copyProfile;
             }
         }

@@ -1,5 +1,5 @@
 /**
- * 
+ * This is where the webserver is started up, and is basically main.
  * @Author Andrew Skevington-Olivera
  * @Date 20-4-23
  */
@@ -42,9 +42,10 @@ async function printUsername() {
     else{
         console.log( "The username provided isn't correct. Please try again" );
     }
-    
-
 }
+
+
+//printUsername();
 
 //printUsername();
 console.log( "We've gotten through all of that :D ");
