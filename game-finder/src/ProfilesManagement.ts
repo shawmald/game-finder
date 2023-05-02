@@ -50,13 +50,13 @@ export class ProfileManagement {
      * @param password 
      * @returns 
      */
-    async signIn(displayName : string, username : string, password : string) {
+    async signIn(displayName : string, email : string, privacyLvl: number, username : string, password : string) {
 
         const collection = this.db.returnCollection("ProfilesDB", "Profiles");
         const doc = await collection.findOne( {Username : username} );
 
         if(doc == null) {    //Username hasn't been chosen yet for the website
-            let newProfile = new Profile(displayName, username, password, this.db);
+            let newProfile = new Profile(displayName, email, privacyLvl, username, password, this.db);
             this.addProfile(newProfile);
             console.log("A new profile should be in the process of being created");
             return true;
@@ -87,13 +87,19 @@ export class ProfileManagement {
         this.profileList.push(profile)
     }
 
-    async accessUser(username : string) {
+    public async accessUser(username : string) {
 
         for(var i = 0; i < this.profileList.length; i++) {
+
+            //console.log( "This is the username being looked at " + username);
+            //console.log( "This is the uesrname of profileList[i] " + this.profileList[i].returnUsername() );
+
             if(username == this.profileList[i].returnUsername() ) {
+                //console.log( "access user is getting to this point")
                 let copyProfile = this.profileList[i];
                 //copyProfile.setMongoDB();
                 //return JSON.stringify(copyProfile);
+                //console.log( copyProfile );
                 return copyProfile;
             }
         }

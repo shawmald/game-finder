@@ -8,6 +8,7 @@
 import * as Webserver from "./Webserver";
 import { MongoDB } from "./mongoDB";    //To remove after testing
 import { ProfileManagement } from "./ProfilesManagement";   //This should be removed later after testing
+import { Profile } from "./Profile";
 
 import {Spell} from "./Spell";  //This should be removed later after testing
 //import * as Database from "./mongoDB";
@@ -47,13 +48,22 @@ async function printUsername() {
 
 //printUsername();
 console.log( "We've gotten through all of that :D ");
+let profilesManagement = new ProfileManagement( database );
 
-function test() {
-    let profilesManagement = new ProfileManagement( database );
-    console.log( profilesManagement.signIn( "TestingOne", "TestingOne", "!Testing") );
+async function test()  {
+    console.log("Just checking if this function is even running");
+    //let profilesManagement = new ProfileManagement( database );
+    //console.log( profilesManagement.signIn( "TestingOne", "TestingOne", "!Testing") );
+    const profile = profilesManagement.accessUser("TestingOne");
+    //console.log ( profile );
+    //profile.returnVar( "username" );
+    //const test = profile.returnVar( "username" );
+    //console.log(test);
 }
 
 //test();
+
+
 
 //const testReturnVar = database.getVar( "ProfilesDB", "Profiles", "TestingOne", "Username");
 //console.log( testReturnVar );
@@ -76,6 +86,7 @@ const spellArray = new Array();
 //let newCharSheet = new CharSheet( "Bob", "Human", "Was a builder in a previous life", "Idk something something something", "50", 
 //"Builder", spellArray, null as any, null as any, null as any, null as any, null as any);
 //database.updateDB( "ProfilesDB", "Profiles", "TestingOne", "CharacterSheets", JSON.stringify(newCharSheet) );
+
 
 Webserver.startServer();
 

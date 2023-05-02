@@ -8,7 +8,7 @@
 
 export class Spell { 
 
-    private spellName : string;
+    public spellName : string;
     public castingTime : string;
     public range : string;
     public duration : string;
@@ -17,7 +17,6 @@ export class Spell {
 
     public school : Array<string>;
     public components : Array<string>;
-    //public materialCost : Array<string>;
     public races : Array<string>;
     public reqClasses : Array<string>;
 

@@ -19,24 +19,26 @@ export class Profile {
     private displayName;
     private username;
     private password;
-    private permissionLvl;
-    //private privacyLvl;
+    //private permissionLvl;
+    private privacyLvl;
+    private email;
     private blockedProfiles = new Array();
     private friends = new Array();
     private charSheets : Array<CharSheet> = null as any;
     private db : MongoDB;
  
-    public constructor(displayName : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
+    public constructor(displayName : string, email : string, privacyLvl : number, username : string, password : string, db : MongoDB);  //Constructor for signing up
     public constructor(username : string, password : string, db : MongoDB);    //Constructor for logging in
 
     constructor(...arr: any[] ) {
 
         if(arr.length == 4){
             this.displayName = arr[0];
-            this.username = arr[1];
-            this.password = arr[2];
-            this.db = arr[3];
-            this.permissionLvl = "0";
+            this.email = arr[1];
+            this.privacyLvl = arr[2];
+            this.username = arr[3];
+            this.password = arr[4];
+            this.db = arr[5];
             this.saveToDB();
         }
         else{
@@ -53,37 +55,40 @@ export class Profile {
 
     async saveToDB(){
         let collection = this.db.returnCollection("ProfilesDB", "Profiles");
-        collection.insertOne( {"Username" : this.username, "Password" : this.password, "PermissionLevel" : this.permissionLvl, 
+        collection.insertOne( {"Username" : this.username, "Password" : this.password, "PrivacyLevel" : this.privacyLvl, 
         "CharacterSheets" : this.charSheets, "DisplayName" : this.displayName, "BlockedProfiles" : this.blockedProfiles,
-        "Friends" : this.friends} );
+        "Friends" : this.friends, "Email" : this.email} );
     }
 
     /**
      * 
      */
-    async getUserDBInfo() {
+    public async getUserDBInfo() {
         let collection = this.db.returnCollection("ProfilesDB", "Profiles");
         const doc = await collection.findOne( {Username : this.username} );
 
         this.displayName = doc.DisplayName;
-        this.permissionLvl = doc.PermissionLevel;
+        this.privacyLvl = doc.PrivacyLevel;
         this.charSheets = JSON.parse( doc.CharacterSheets );
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
+        this.email = doc.Email;
     }
 
 
 
-    public editInformation(displayName : string, password : string, permissionLvl : string, blockedProfiles : Array<string>, friends : Array<string>) {
+    public editInformation(displayName : string, email : string, password : string, privacyLvl : number, blockedProfiles : Array<string>, friends : Array<string>) {
         this.displayName = displayName;
+        this.email = email;
         this.password = password;
-        this.permissionLvl = permissionLvl;
+        this.privacyLvl = privacyLvl;
         this.blockedProfiles = blockedProfiles;
         this.friends = friends;
 
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Email", this.email);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Password", this.password);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PermissionLevel", this.permissionLvl);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PermissionLevel", this.privacyLvl);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "BlockedProfiles", this.blockedProfiles);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
     }
@@ -112,12 +117,20 @@ export class Profile {
             skills, pictures);
     }
 
-    public accessCharacterSheet(charName : string) {
+    public accessCharacterSheet(pos : number) {
 
+        /** 
         for(var i = 0; i < this.charSheets.length; i++){
             if( charName = this.charSheets[i].charName ) {
                 return this.charSheets[i];
             }
+        }*/
+
+        if(this.charSheets[pos] != null) {
+            return this.charSheets[pos];
+        }
+        else{
+            return "The character sheet at this position is null";
         }
     }
 

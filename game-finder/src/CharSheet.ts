@@ -114,7 +114,7 @@ export class CharSheet {
      * @param reqClasses 
      */
     public createSpell(spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
-    school : Array<string>, components : Array<string>, materialCost : Array<string>, races : Array<string>, reqClasses : Array<string>) {
+    school : Array<string>, components : Array<string>, races : Array<string>, reqClasses : Array<string>) {
         let newSpell = new Spell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses);
         this.addSpell( newSpell );
     }
@@ -125,6 +125,28 @@ export class CharSheet {
      */
     public addSpell( newSpell : Spell) {
         this.spells.push(newSpell);
+    }
+
+    public updateSpell(spell : Spell, spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
+    school : Array<string>, components : Array<string>, races : Array<string>, reqClasses : Array<string> ) {
+        spell.editInformation( spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses );
+    }
+
+    public accessSpell(spellPos : number) {
+         
+        /**
+        for(var i = 0; i < this.spells.length; i++){
+            if( spellName == this.spells[i].spellName ) {
+                return this.spells[i];
+            }
+        }*/
+
+        if( this.spells[spellPos] != null){
+            return this.spells[spellPos];
+        }
+        else {
+            return "The spell is null and hasn't been created in this position yet"
+        }
     }
 
     //I could either return everything in a giant array or do something else
@@ -141,8 +163,6 @@ export class CharSheet {
         returnArray.push(this.stats);
         returnArray.push(this.spells);
         returnArray.push(this.equipment);
-        //returnArray.push(this.inventory);
-        //returnArray.push(this.languages);
         returnArray.push(this.skills);
 
         return returnArray;
