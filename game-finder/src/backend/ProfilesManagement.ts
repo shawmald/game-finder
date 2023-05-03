@@ -8,11 +8,13 @@
 
 import { MongoDB } from "./mongoDB";
 import { Profile } from "./Profile";
+import { InfoStorage } from "./InfoStorage";
 
 export class ProfileManagement {
 
     private profileList = new Array();
     private db : MongoDB;
+    //private storedInfo : InfoStorage;
 
     /**
      * 
@@ -20,6 +22,7 @@ export class ProfileManagement {
      */
     constructor( db : MongoDB) {
         this.db = db;
+        //this.storedInfo = new InfoStorage(db);
         this.initialize();
     }
 

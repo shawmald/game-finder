@@ -5,7 +5,9 @@
  * @Date 19-4-23
  */
 
-import {Spell} from "./Spell";
+import { Spell } from "./Spell";
+import { MongoDB } from "./mongoDB";
+import { InfoStorage } from "./InfoStorage";
 
 export class CharSheet {
 
@@ -21,7 +23,7 @@ export class CharSheet {
     //Proficiency bonus
     private combatStats = [1, 1, 1, 1, 1, 1];   //[Armour class, initiative, speed, current hit pts, total hit pts, charisma ]
     private money = [0, 0, 0];  //[Gold, Silver, Electrum]
-    private spells : Array<Spell>;
+    private spells : Array<Spell> = [];
     private skills : Array<string>;
     private pictures : Array<string>;   //This just stores a 64string picture
 
@@ -44,7 +46,7 @@ export class CharSheet {
      * @param skills 
      */
     constructor(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
     pictures : Array<string>) {
         this.charName = charName;
         this.race = race;
@@ -57,7 +59,6 @@ export class CharSheet {
         this.statModifier = statMods;
         this.combatStats = combatStats;
         this.money = money;
-        this.spells = spells;
         this.skills = skills; 
         this.pictures = pictures;
 
@@ -80,7 +81,7 @@ export class CharSheet {
      * @param skills 
      */
     public editInformation(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
     pictures : Array<string>) {
         this.charName = charName;
         this.race = race;
@@ -93,11 +94,13 @@ export class CharSheet {
         this.statModifier = statMods;
         this.combatStats = combatStats;
         this.money = money;
-        this.spells = spells;
+        //this.spells = spells;
         this.skills = skills; 
         this.pictures = pictures;
     }
 
+
+    //Need to have mongodb be here for a temp amount of time
     /**
      * Create spell function so that it's easier to add spells to the character sheet instead of doing
      * it in a jankier way.
@@ -114,9 +117,10 @@ export class CharSheet {
      * @param reqClasses 
      */
     public createSpell(spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
-    school : Array<string>, components : Array<string>, races : Array<string>, reqClasses : Array<string>) {
+    school : Array<string>, components : Array<string>, races : Array<string>, reqClasses : Array<string>, db : MongoDB) {
         let newSpell = new Spell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses);
         this.addSpell( newSpell );
+        this.infoAddSpell( newSpell, db );
     }
 
     /**
@@ -124,7 +128,7 @@ export class CharSheet {
      * @param newSpell 
      */
     public addSpell( newSpell : Spell) {
-        this.spells.push(newSpell);
+        this.spells.push(newSpell); 
     }
 
     public updateSpell(spell : Spell, spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
@@ -138,6 +142,26 @@ export class CharSheet {
         }
         else {
             return "The spell is null and hasn't been created in this position yet"
+        }
+    }
+
+    /**
+     * 
+     * @param spell 
+     */
+    public infoAddSpell( spell : Spell, db : MongoDB ) {
+        let storage = new InfoStorage( db );
+        storage.saveSpells( spell );
+    }
+
+    public async spellRecommendation( db : MongoDB) {
+        let spellStorage = new InfoStorage(db);
+        const recSpells = new Array();
+        const allSpells = await spellStorage.returnSpells();
+        for(var i = 0; i < allSpells.length; i++) {
+            if( allSpells[i] == this.race ) {
+                recSpells.push( allSpells[i] );
+            }
         }
     }
 

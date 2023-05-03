@@ -5,7 +5,7 @@
  */
 
 import { ProfileManagement } from "./ProfilesManagement"; 
-import { MongoDB } from "./mongoDB";    //To remove after testing
+import { MongoDB } from "./mongoDB";   
 import { Profile } from "./Profile";
 
 import express from "express";
@@ -116,15 +116,15 @@ export async function startServer() {
     const lvl = req.query.Lvl as string;
     const charClass = req.query.CharacterClass as string;
     const equipment = req.query.Equipment as string;
-    const stats = convertStrToNum( req.query.Stats as Array<string> ); //Change to Array<number>
-    const statMods =  convertStrToNum( req.query.StatModifiers as Array<string> );  //Change to Array<number>
-    const combatStats =  convertStrToNum( req.query.CombatStats as Array<string> ); //Change to Array<number>
-    const money =  convertStrToNum( req.query.Money as Array<string> ); //Change to Array<number>
-    const spells = null as any; //This is to add spells later
+    const stats = convertStrToNum( req.query.Stats as string ); //Change to Array<number>
+    const statMods =  convertStrToNum( req.query.StatModifiers as string );  //Change to Array<number>
+    const combatStats =  convertStrToNum( req.query.CombatStats as string ); //Change to Array<number>
+    const money =  convertStrToNum( req.query.Money as string ); //Change to Array<number>
+    //const spells = null as any; //This is to add spells later
     const skills = req.query.Skills as Array<string>;
     const pictures = req.query.Pictures as Array<string>;
-    let newCharSheet = profile.createCharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods,
-    combatStats, money, spells, skills, pictures);
+    profile.createCharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods,
+    combatStats, money, skills, pictures);
 
     res.send( "Character Sheet should be uploaded to profile" );
   } )
@@ -149,7 +149,7 @@ export async function startServer() {
     const races  = req.query.Races as Array<string>;
     const reqClasses = req.query.ReqClasses as Array<String>;
 
-    charSheet.createSpell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses);
+    charSheet.createSpell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses, db);
 
     res.send( "Spell has been added to character sheet" );
   } )
@@ -169,10 +169,10 @@ export async function startServer() {
     const lvl = req.query.Lvl as string;
     const charClass = req.query.CharacterClass as string;
     const equipment = req.query.Equipment as string;
-    const stats =  convertStrToNum( req.query.Stats as Array<string> ); //Change to Array<number>
-    const statMods =  convertStrToNum( req.query.StatModifiers as Array<string> );  //Change to Array<number>
-    const combatStats =  convertStrToNum( req.query.CombatStats as Array<string> ); //Change to Array<number>
-    const money =  convertStrToNum( req.query.Money as Array<string> ); //Change to Array<number>
+    const stats =  convertStrToNum( req.query.Stats as string ); //Change to Array<number>
+    const statMods =  convertStrToNum( req.query.StatModifiers as string );  //Change to Array<number>
+    const combatStats =  convertStrToNum( req.query.CombatStats as string ); //Change to Array<number>
+    const money =  convertStrToNum( req.query.Money as string ); //Change to Array<number>
     const spells = null as any; //This is to add spells later
     const skills = req.query.Skills as Array<string>;
     const pictures = req.query.Pictures as Array<string>;
@@ -209,6 +209,19 @@ export async function startServer() {
     res.send( "Spell has been updated" );
   } )
 
+  /**
+   * TO-DO
+   */
+  server.get('/RecommendSpells', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const charPos = Number.parseInt( req.query.CharacterName as string );
+    let charSheet = profile.accessCharacterSheet(charPos);
+    let recSpells = charSheet.spellRecommendation();
+    
+    res.send ( JSON.stringify(recSpells) );
+  } )
+
   server.listen(80);
   
 }
@@ -218,18 +231,9 @@ export async function startServer() {
  * instead of being able to take Array<number> directly.
  * @param arrStr 
  */
-function convertStrToNum(arrStr : Array<string>){
-  const numStats = arrStr.map(str => {
-    return parseInt(str, 10);
+function convertStrToNum(arrStr : string){
+  const parse = JSON.parse(arrStr).map((str: string) => {
+    return parseInt(str);
   });
+  return parse;
 }
-
-
-/**
- * I need the requests of  
- * -Logging in  -DONE
- * -Signing in  -DONE
- * -Creating Character Sheets -TODO, this should be based on the characterSheet token or charName -DONE
- * -Creating Spells -TODO, -should be based on the characterSheet token / charName  -DONE 
- * -Getting profile information -DONE
- */

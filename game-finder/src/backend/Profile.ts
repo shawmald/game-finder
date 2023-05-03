@@ -29,7 +29,8 @@ export class Profile {
     private timezone : string = null as any;
     private blockedProfiles = new Array();
     private friends = new Array();
-    private charSheets : Array<CharSheet> = null as any;
+    //private charSheets : Array<CharSheet> = [];
+    private charSheets = new Array();
     private db : MongoDB;
  
     public constructor(displayName : string, email : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
@@ -122,6 +123,7 @@ export class Profile {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "PFP", this.pfp);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "AvailableTime", this.availableTime);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Timezone", this.timezone);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "CharacterSheets", JSON.stringify(this.charSheets) );
     }
 
 
@@ -129,12 +131,13 @@ export class Profile {
     //For profiles would I have it be something like calling the profile, then looking at the different character sheets
     //and going from that or should I just call the character sheets and have spells modified from that ?
     public createCharSheet(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
     pictures : Array<string>){
 
-        let newSheet = new CharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money, spells,
+        let newSheet = new CharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money,
         skills, pictures);
         this.addCharacterSheet(newSheet);
+        this.updateDB();
     }
 
     public addCharacterSheet(newSheet : CharSheet) {
@@ -142,9 +145,9 @@ export class Profile {
     }
 
     public updateCharSheet(charSheet : CharSheet, charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
     pictures : Array<string>){
-        charSheet.editInformation(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money, spells,
+        charSheet.editInformation(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money,
             skills, pictures);
     }
 
