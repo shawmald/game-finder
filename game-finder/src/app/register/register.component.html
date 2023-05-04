@@ -5,24 +5,36 @@
   <div class="container">
     <h2>GameFinder</h2>
     <h3>Signup</h3>
-    <form *ngIf="!showAdditionalFields">
+    <form *ngIf="!showAdditionalFields" ngNativeValidate>
       <input type="email" id="email" name="email" placeholder="Email" required [(ngModel)]="email">
       <input type="text" id="username" name="username" placeholder="Username" required [(ngModel)]="username">
       <input type="text" id="displayname" name="displayname" placeholder="Display Name" required [(ngModel)]="displayname">
       <input type="password" id="password" name="password" placeholder="Password" required [(ngModel)]="password">
       <button type="submit" (click)="signupStandard()">Sign Up</button>
     </form>
-    <form *ngIf="showAdditionalFields">
-      <input type="text" id="location" name="location" placeholder="Location" required [(ngModel)]="location">
+    <form *ngIf="showAdditionalFields" ngNativeValidate>
+      <br>
+      <label for="location">Enter Location (Optional):</label>
+      <br>
+      <input type="text" id="location" name="location" placeholder="Location" [(ngModel)]="location">
+      <br>
+      <label for="timezone">Select Timezone:</label>
+      <br>
       <select id="timezone" name="timezone" [(ngModel)]="timezone">
-        <option value="">Select Timezone</option>
-        <option value="UTC">UTC</option>
-        <option value="GMT">GMT</option>
-        <option value="PST">PST</option>
+        <option value="" disabled selected>Select Timezone</option>
+        <option *ngFor="let timeZone of timeZones" [value]="timeZone.value">{{ timeZone.label }}</option>
       </select>
-      <input type="text" id="availableTime" name="availableTime" placeholder="Available Time" required [(ngModel)]="availableTime">
+      <br>
+      <label for="preferred-time">Select Available Time:</label>
+      <br>
+      <input type="time" id="start-time" name="start-time" [(ngModel)]="start_time">
+      -
+      <input type="time" id="end-time" name="end-time" [(ngModel)]="end_time">
+      <br>
+      <label for="privacy">Select Profile Privacy:</label>
+      <br>
       <select id="privacy" name="privacy" [(ngModel)]="privacyLevel">
-        <option value="">Select Profile Privacy</option>
+        <option value="" disabled selected>Select Profile Privacy</option>
         <option value="Public">Public</option>
         <option value="Friends Only">Friends Only</option>
         <option value="Private">Private</option>
@@ -32,7 +44,7 @@
     <!--
     <asl-google-signin-button></asl-google-signin-button>
     -->
-      <div class="bottom-links">
+      <div class="bottom-links" *ngIf="!showAdditionalFields">
         <a href="/login">Already have an account? Sign In</a>
       </div>
   </div>

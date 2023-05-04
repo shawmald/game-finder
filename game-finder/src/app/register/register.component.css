@@ -25,7 +25,9 @@ h3 {
 input[type="email"],
 input[type="text"],
 input[type="password"],
+input[type="time"],
 button[type="submit"],
+select,
 .google-btn {
   width: 80%;
   padding: 12px 20px;
@@ -35,10 +37,16 @@ button[type="submit"],
 
 input[type="email"],
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="time"],
+select{
   border: 1px solid lightgray;
   display: inline-block;
   box-sizing: border-box;
+}
+
+input[type="time"] {
+  width: 40%;
 }
 
 button[type="submit"] {

@@ -1,1 +1,65 @@
-<p>settings works!</p>
+<!-- settings.component.html -->
+<h1>Settings</h1>
+
+<div class="settings-container">
+  <h2>Profile Settings</h2>
+
+  <!-- Change username prompt -->
+  <div class="change-username-prompt" (click)="toggleChangeUsername()">
+    Change Username
+  </div>
+
+  <!-- Profile settings form -->
+  <form *ngIf="showChangeUsernameForm" (ngSubmit)="saveProfileSettings()" #profileForm="ngForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
+    </div>
+
+    <button type="button" class="cancel-button" (click)="cancelChangeUsername()">Cancel</button>
+    <button type="submit" [disabled]="!profileForm.valid">Apply</button>
+  </form>
+
+  <!-- Change email prompt -->
+  <div class="change-email-prompt" (click)="toggleChangeEmail()">
+    Change Email
+  </div>
+
+  <form *ngIf="showChangeEmailForm" (ngSubmit)="saveProfileSettings()" #profileForm="ngForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
+    </div>
+
+    <button type="button" class="cancel-button" (click)="cancelChangeEmail()">Cancel</button>
+    <button type="submit" [disabled]="!profileForm.valid">Apply</button>
+  </form>
+
+  <h2>Security Settings</h2>
+
+  <!-- Change password prompt -->
+  <div class="change-password-prompt" (click)="toggleChangePassword()">
+    Change Password
+  </div>
+
+  <!-- Change password form -->
+  <form *ngIf="showChangePasswordForm" (ngSubmit)="changePassword()" #passwordForm="ngForm">
+    <div class="form-group">
+      <label for="currentPassword">Current Password</label>
+      <input type="password" id="currentPassword" name="currentPassword" [(ngModel)]="password.currentPassword" required>
+    </div>
+
+    <div class="form-group">
+      <label for="newPassword">New Password</label>
+      <input type="password" id="newPassword" name="newPassword" [(ngModel)]="password.newPassword" required>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="password.confirmPassword" required>
+    </div>
+
+    <button type="button" class="cancel-button" (click)="cancelChangePassword()">Cancel</button>
+    <button type="submit" [disabled]="!passwordForm.valid || password.newPassword !== password.confirmPassword">Change Password</button>
+  </form>
+</div>

@@ -72,25 +72,7 @@ import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.compon
     SocialLoginModule,
     GoogleSigninButtonModule,
   ],
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '774110471538-alv3m1fu42l95f6314gd52lmi0okenjm.apps.googleusercontent.com'
-            )
-          },
-        ],
-        onError: (err) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
