@@ -72,9 +72,9 @@ export async function startServer() {
     let profile = await profileManagement.accessUser(username);
     profile.setMongoDB(null);
     let JSONConversion = JSON.stringify( profile );
-    console.log( JSONConversion );
+    //console.log( JSONConversion );
     profile.setMongoDB(db);
-    res.send( JSON.stringify(JSONConversion) );
+    res.send( JSONConversion );
   } )
 
 
