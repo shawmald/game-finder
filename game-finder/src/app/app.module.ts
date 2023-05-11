@@ -12,6 +12,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -24,8 +28,8 @@ import { AboutComponent } from './about/about.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
-
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 // import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { MatButtonModule } from '@angular/material/button';
@@ -47,6 +51,7 @@ import { MatCardModule } from '@angular/material/card';
 export class MaterialModule { }
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,8 +65,14 @@ export class MaterialModule { }
     MessagesComponent,
     ProfileComponent,
     SettingsComponent,
+    LoginComponent,
+    RegisterComponent,
+    LogoutComponent,
+    NpcDialogComponent,
+    TagEditDialogComponent,
 
     PageNotFoundComponent //always keep at end
+
   ],
   imports: [
     BrowserModule,
@@ -74,6 +85,7 @@ export class MaterialModule { }
     MatDialogModule,
     MatCheckboxModule,
     MatExpansionModule,
+
     CommonModule,
     MatButtonModule,
     MatToolbarModule,
@@ -85,6 +97,7 @@ export class MaterialModule { }
     MatToolbarModule,
     MatIconModule,
     MatCardModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

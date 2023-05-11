@@ -1,0 +1,27 @@
+.content{
+    padding: 10px;
+}
+
+.button-container{
+    padding: 10px;
+
+}
+
+.number-input{
+    width: 25px;
+    margin-right: 2px;
+}
+
+textarea{
+    width: 95%;
+}
+
+table{
+    width: 90%;
+    margin: 0px auto 0px auto;
+}
+
+td{
+    padding: 0px 1px 0px 1px;
+    text-align: center;
+}
