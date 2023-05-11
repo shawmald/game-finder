@@ -30,7 +30,7 @@ export class CharactersComponent {
       alignment: this.alignment
     };
   
-    this.http.post('https://your-api-endpoint.com/characters', formData).subscribe(response => {
+    this.http.post('http://34.30.183.36:80/characters', formData).subscribe(response => {
       console.log(response);
     });
   }
