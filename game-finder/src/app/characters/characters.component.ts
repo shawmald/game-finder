@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
  * store 5 character objects in an array
  */
 export class CharactersComponent {
+  constructor(private http: HttpClient) { }
+
   characters: Array<Character> = [    //hard code 5 characters for testing
     new Character("Character 1"),
     new Character("Character 2"),
@@ -18,6 +20,21 @@ export class CharactersComponent {
     new Character("Character 4"),
     new Character("Character 5"),
   ];
+  onSubmit() {
+    const formData = {
+      name: this.name,
+      race: this.race,
+      class: this.class,
+      subclass: this.subclass,
+      level: this.level,
+      alignment: this.alignment
+    };
+  
+    this.http.post('https://your-api-endpoint.com/characters', formData).subscribe(response => {
+      console.log(response);
+    });
+  }
+  
 
   
 }
