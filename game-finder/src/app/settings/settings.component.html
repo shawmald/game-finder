@@ -12,12 +12,17 @@
   <!-- Profile settings form -->
   <form *ngIf="showChangeUsernameForm" (ngSubmit)="saveProfileSettings()" #profileForm="ngForm">
     <div class="form-group">
+      <label for="current_username">Current Username:</label>
+      <label id="current_username" name="current_username"> {{current_username}} </label>
+    </div>
+
+    <div class="form-group">
       <label for="username">Username</label>
       <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
     </div>
 
     <button type="button" class="cancel-button" (click)="cancelChangeUsername()">Cancel</button>
-    <button type="submit" [disabled]="!profileForm.valid">Apply</button>
+    <button type="submit" [disabled]="!profileForm.valid">Change Username</button>
   </form>
 
   <!-- Change email prompt -->
@@ -32,24 +37,24 @@
     </div>
 
     <button type="button" class="cancel-button" (click)="cancelChangeEmail()">Cancel</button>
-    <button type="submit" [disabled]="!profileForm.valid">Apply</button>
+    <button type="submit" [disabled]="!profileForm.valid">Change Email</button>
   </form>
 
   <!-- Change Timezone prompt -->
   <div class="change-timezone-prompt" (click)="toggleChangeTimezone()">
-    Change Timezone
+    Change Time Zone
   </div>
 
   <form *ngIf="showChangeTimezoneForm" (ngSubmit)="saveProfileSettings()" #profileForm="ngForm">
     <div class="form-group">
       <label for="timezone">Timezone</label>
       <select id="timezone" name="timezone" [(ngModel)]="user.timezone">
-        <option value="" disabled selected>Select Timezone</option>
+        <option value="" disabled selected>Select Time Zone</option>
         <option *ngFor="let timeZone of timeZones" [value]="timeZone.value">{{ timeZone.label }}</option>
       </select>
-
+      <br>
       <button type="button" class="cancel-button" (click)="cancelChangeTimezone()">Cancel</button>
-      <button type="submit" [disabled]="!profileForm.valid">Apply</button>
+      <button type="submit" [disabled]="user.timezone == null">Change Time Zone</button>
     </div>
   </form>
 
@@ -79,5 +84,26 @@
 
     <button type="button" class="cancel-button" (click)="cancelChangePassword()">Cancel</button>
     <button type="submit" [disabled]="!passwordForm.valid || password.newPassword !== password.confirmPassword">Change Password</button>
+  </form>
+
+  <!-- Change privacy prompt -->
+  <div class="change-privacy-prompt" (click)="toggleChangePrivacy()">
+    Change Profile Privacy
+  </div>
+
+  <!-- Change privacy form -->
+  <form *ngIf="showChangePrivacyForm" (ngSubmit)="changePrivacy()" #privacyForm="ngForm">
+    <div class="form-group">
+      <label for="privacyLevel">Privacy Level</label>
+      <select id="privacyLevel" name="privacyLevel" [(ngModel)]="privacyLevel">
+        <option value="" disabled selected>Select Profile Privacy</option>
+        <option value="Public">Public</option>
+        <option value="Friends Only">Friends Only</option>
+        <option value="Private">Private</option>
+      </select>
+    </div>
+
+    <button type="button" class="cancel-button" (click)="cancelChangePrivacy()">Cancel</button>
+    <button type="submit" [disabled]="privacyLevel == ''">Change Profile Privacy</button>
   </form>
 </div>

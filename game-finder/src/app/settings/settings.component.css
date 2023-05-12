@@ -72,7 +72,8 @@ button[type="submit"]:hover {
 .change-username-prompt,
 .change-email-prompt,
 .change-timezone-prompt,
-.change-password-prompt {
+.change-password-prompt,
+.change-privacy-prompt {
   cursor: pointer;
   color: blue;
   text-decoration: underline;

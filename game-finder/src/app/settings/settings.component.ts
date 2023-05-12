@@ -23,11 +23,14 @@ export class SettingsComponent {
     confirmPassword: ''
   };
 
+  privacyLevel: string = '';
+
   errorMessage!: string;
   showChangeUsernameForm: boolean = false;
   showChangeEmailForm: boolean = false;
   showChangeTimezoneForm: boolean = false;
   showChangePasswordForm: boolean = false;
+  showChangePrivacyForm: boolean = false;
 
   timeZones: { value: string, label: string}[] = [];
 
@@ -40,6 +43,7 @@ export class SettingsComponent {
     this.cancelChangeEmail();
     this.cancelChangeTimezone();
     this.cancelChangePassword();
+    this.cancelChangePrivacy();
   }
 
   cancelChangeUsername() {
@@ -52,6 +56,7 @@ export class SettingsComponent {
     this.cancelChangeUsername();
     this.cancelChangeTimezone();
     this.cancelChangePassword();
+    this.cancelChangePrivacy();
   }
 
   cancelChangeEmail() {
@@ -64,6 +69,7 @@ export class SettingsComponent {
     this.cancelChangeUsername();
     this.cancelChangeEmail();
     this.cancelChangePassword();
+    this.cancelChangePrivacy();
   }
 
   cancelChangeTimezone() {
@@ -75,6 +81,8 @@ export class SettingsComponent {
     this.showChangePasswordForm = !this.showChangePasswordForm;
     this.cancelChangeUsername();
     this.cancelChangeEmail();
+    this.cancelChangeTimezone();
+    this.cancelChangePrivacy();
   }
 
   cancelChangePassword() {
@@ -82,6 +90,18 @@ export class SettingsComponent {
     this.password = {}; // Clear the password form fields
   }
 
+  toggleChangePrivacy() {
+    this.showChangePrivacyForm = !this.showChangePrivacyForm;
+    this.cancelChangeUsername();
+    this.cancelChangeEmail();
+    this.cancelChangeTimezone();
+    this.cancelChangePassword();
+  }
+
+  cancelChangePrivacy() {
+    this.showChangePrivacyForm = false;
+    this.privacyLevel = "";
+  }
   saveProfileSettings() {
     // Logic to save profile settings
     if(this.user.username != null) {
@@ -161,6 +181,11 @@ export class SettingsComponent {
       console.error('Error:',error);
       this.errorMessage = 'Something went wrong, please try again.'
     })
+  }
+
+  changePrivacy() {
+
+
   }
 
   populate_timeZones() {

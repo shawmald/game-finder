@@ -36,6 +36,12 @@ import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { LogoutComponent } from './logout/logout.component';
+import { NpcDialogComponent } from './npc-dialog/npc-dialog.component';
+import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.component';
 
 @NgModule({
   declarations: [],
@@ -85,6 +91,7 @@ export class MaterialModule { }
     MatDialogModule,
     MatCheckboxModule,
     MatExpansionModule,
+    FormsModule,
 
     CommonModule,
     MatButtonModule,

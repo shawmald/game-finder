@@ -7,12 +7,24 @@
 
 /* float button container on the right, add margins of the left and right */
 #button-container{
-    margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
+  padding: 10px;
+  margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
 }
 
 /* add margins to left and right */
-.button{
-    margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0062cc;
 }
 
 /* add margins to the top, right, and bottom */
@@ -25,9 +37,11 @@ input, select{
     display: block;
 }
 
-#tag-container{
-    width: 95%;
-    margin: 0px auto 0px auto;
+#tag-container {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
 }
 
 .tag{
@@ -37,14 +51,33 @@ input, select{
 
     border-radius: 25px;
     background-color: lightgrey;
-    
+
 }
 
 textarea{
-    width: 95%;
-    height: 75px;
-    margin-bottom: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 95%;
+  height: 75px;
+  margin-bottom: 10px;
 }
+
+h2 {
+  font-size: 28px;
+  text-align: center;
+}
+
+img {
+  border: 2px solid #ccc;
+  border-radius: 50%;
+}
+
+.status {
+  font-size: 16px;
+  color: #007bff;
+}
+
 
 /*----------------------------------------------------------------------
     Overwrite style.css

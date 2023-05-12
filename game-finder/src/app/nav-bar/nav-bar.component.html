@@ -13,7 +13,7 @@
 
     <a mat-button class="nav-item" routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
     <a mat-button class="nav-item" routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characteres')">Characters</a>
-  
+
     <!-- Tools dropdown: GM Screen, Dice Roller-->
     <button mat-button class="nav-item" [matMenuTriggerFor]="toolsMenu">Tools</button>
 
@@ -22,11 +22,11 @@
       <button mat-menu-item routerLink="/diceroller" routerLinkActive="selected" (click)="setActiveLink('Dice Roller')">Dice Roller</button>
     </mat-menu>
 
-  
+
     <a mat-button class="nav-item" routerLink="/about" routerLinkActive="selected" (click)="setActiveLink('About')">About</a>
 
   </div>
-  
+
 
 
   <!-- main menu dropdown version (mobile view) -->
@@ -41,12 +41,12 @@
     <mat-menu #mainMenu="matMenu" xPosition="after">
       <a mat-menu-item routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
       <a mat-menu-item routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characters')">Characters</a>
-      
+
       <button mat-menu-item [matMenuTriggerFor]="toolsMenu">Tools</button>
-      
+
       <a mat-menu-item routerLink="/about" routerLinkActive="selected" (click)="setActiveLink('About')">About</a>
     </mat-menu>
-  
+
     <!-- tools submenu: gm screen, dice roller -->
     <mat-menu #toolsMenu="matMenu">
       <a mat-menu-item routerLink="/gmscreen" routerLinkActive="selected" (click)="setActiveLink('GM Screen')">GM Screen</a>
@@ -62,9 +62,12 @@
     <a *ngIf="isLoggedIn != true" class="nav-item" routerLink="/login" routerLinkActive="selected" (click)="setActiveLink('Login')">Login</a>
 
     <!-- messages icon -->
+
+    <!--
     <a *ngIf="isLoggedIn" class="nav-item" routerLink="/messages" routerLinkActive="selected" (click)="setActiveLink('Messages')">
       <mat-icon>forum</mat-icon>
     </a>
+    -->
 
     <!--
       profile dropdown: profile, settings, logout

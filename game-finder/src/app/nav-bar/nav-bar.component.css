@@ -12,7 +12,7 @@
     width: 95%;
     height: 45px;
 
-  
+
     /* sticky navbar *//*
 
     position: fixed;
@@ -115,11 +115,11 @@ nav {
     align-items: center;
     padding: 0 20px;
     height: 70px;
-    background-color: lightblue;
+    background-color: rgb(173, 216, 230);
     color: #fff;
     z-index: 9999;
   }
-  
+
   .nav-item {
     color: #fff;
     font-size: 16px;
@@ -128,57 +128,57 @@ nav {
     text-transform: uppercase;
     text-decoration: none;
   }
-  
+
   .selected {
-    background-color: pink;
+    background-color: rgb(255, 192, 203);
   }
-  
+
   #right-container {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-  
+
   #right-container a {
-    margin-right: 10px;
+    margin-right: 50px;
   }
-  
+
   #right-container .nav-item:last-child {
     margin-right: 0;
   }
-  
+
   #mobile-view {
     display: none;
   }
-  
+
   @media (max-width: 600px) {
     #web-view {
       display: none;
     }
-  
+
     #mobile-view {
       display: flex;
       flex-direction: row;
       align-items: center;
     }
-  
+
     #mobile-view a {
       margin-right: 0;
     }
-  
+
     #mobile-view .nav-item:last-child {
       margin-right: 0;
     }
-  
+
     #mobile-view .nav-item mat-icon {
       margin-right: 5px;
     }
-  
+
     #mobile-view [matMenuTriggerFor="mainMenu"] {
       margin-right: auto;
     }
   }
-  
+
 header {
     margin-top: 70px; /* adjust the value to match the height of the navbar */
   }

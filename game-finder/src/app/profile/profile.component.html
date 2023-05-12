@@ -17,7 +17,7 @@
 
             <!-- display name, if editing replace with input box preloaded with current display name -->
             <h2 *ngIf="!editing">{{ displayName }}</h2>
-            <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}">
+            <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}" [(ngModel)]="displayName">
         </div>
 
         <!--
@@ -57,7 +57,9 @@
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
-            <a *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
+            <a *ngIf="(sameUser) || (!sameUser && emailVis=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
+
+            <!--
             <div class="block-display" *ngIf="editing">
                 <input type="email" placeholder="{{ email }}">
                 <select name="email visibility">
@@ -67,6 +69,7 @@
                     <option value="Private">Private</option>
                 </select>
             </div>
+            -->
 
             <!--
                 display location
@@ -76,12 +79,17 @@
             <p *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')">{{ location }}</p>
             <div class="block-display" *ngIf="editing">
                 <input placeholder="{{ location }}" [(ngModel)]="location">
+
+                <!--
                 <select name="location visibility">
                     <option value="" selected disabled hidden>{{ locationVis }}</option>
                     <option value="Public">Public</option>
                     <option value="Friends Only">Friends Only</option>
                     <option value="Private">Private</option>
                 </select>
+                -->
+
+
             </div>
 
             <!-- status, if editing replace with dropdown preloaded with current value -->
