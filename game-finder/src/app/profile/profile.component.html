@@ -38,7 +38,7 @@
             <button *ngIf="!sameUser" (click)="friend()" class="button" type="button" >friend</button>
             <button *ngIf="!sameUser" (click)="block()" class="button" type="button" >block</button>
         </div>
-        
+
 
     </div>
 
@@ -52,7 +52,7 @@
         <div class="half-col">
             <!-- TODO hide email and location based on privacy settings -->
 
-            <!-- 
+            <!--
                 display email
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
@@ -68,14 +68,14 @@
                 </select>
             </div>
 
-            <!-- 
+            <!--
                 display location
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
             <p *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')">{{ location }}</p>
             <div class="block-display" *ngIf="editing">
-                <input placeholder="{{ location }}">
+                <input placeholder="{{ location }}" [(ngModel)]="location">
                 <select name="location visibility">
                     <option value="" selected disabled hidden>{{ locationVis }}</option>
                     <option value="Public">Public</option>
@@ -87,8 +87,8 @@
             <!-- status, if editing replace with dropdown preloaded with current value -->
             <div>
                 <p style="display: inline;">Status: </p>
-                <p *ngIf="!editing" style="display: inline;">{{ status }}</p>
-                <select *ngIf="editing" name="status" style="display: inline;">
+                <p *ngIf="!editing" style="display: inline;" >{{ status }}</p>
+                <select *ngIf="editing" name="status" style="display: inline;" [(ngModel)]="status">
                     <option value="" selected disabled hidden>{{ status }}</option>
                     <option value="Currently in a Campaign">Currently in a Campaign</option>
                     <option value="Looking for a Campaign">Looking for a Campaign</option>
@@ -97,15 +97,15 @@
 
             Tags
             <!-- question circle, hover for info on tags -->
-            <mat-icon 
+            <mat-icon
                 class="help"
-                matTooltip="add tag explanation" 
+                matTooltip="add tag explanation"
                 matTooltipPosition="after"
                 matTooltipHideDelay="2000"
             >
                 help_outline
             </mat-icon>
-            
+
 
             <!-- edit button, click to open popup where you can edit tags -->
             <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
@@ -124,15 +124,15 @@
         <div class="half-col">
             <!-- profile biography, if editing replace with input box preloaded with current biography -->
             <p *ngIf="!editing">{{ bio }}</p>
-            <textarea *ngIf="editing" class="block-display">{{ bio }}</textarea>
+            <textarea *ngIf="editing" class="block-display" [(ngModel)]="bio">{{ bio }}</textarea>
 
             <!-- timezone, change in settings -->
             {{ timezone }}
 
             <!-- question circle, hover for info on time blocks -->
-            <mat-icon 
+            <mat-icon
                 class="help"
-                matTooltip="add time block explanation" 
+                matTooltip="add time block explanation"
                 matTooltipPosition="after"
                 matTooltipHideDelay="2000"
             >

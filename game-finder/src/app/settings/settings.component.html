@@ -35,6 +35,24 @@
     <button type="submit" [disabled]="!profileForm.valid">Apply</button>
   </form>
 
+  <!-- Change Timezone prompt -->
+  <div class="change-timezone-prompt" (click)="toggleChangeTimezone()">
+    Change Timezone
+  </div>
+
+  <form *ngIf="showChangeTimezoneForm" (ngSubmit)="saveProfileSettings()" #profileForm="ngForm">
+    <div class="form-group">
+      <label for="timezone">Timezone</label>
+      <select id="timezone" name="timezone" [(ngModel)]="user.timezone">
+        <option value="" disabled selected>Select Timezone</option>
+        <option *ngFor="let timeZone of timeZones" [value]="timeZone.value">{{ timeZone.label }}</option>
+      </select>
+
+      <button type="button" class="cancel-button" (click)="cancelChangeTimezone()">Cancel</button>
+      <button type="submit" [disabled]="!profileForm.valid">Apply</button>
+    </div>
+  </form>
+
   <h2>Security Settings</h2>
 
   <!-- Change password prompt -->

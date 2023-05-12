@@ -71,8 +71,7 @@
     </a>
 
     <mat-menu #profileMenu="matMenu" xPosition="before">
-      <button mat-menu-item routerLink="/profile" routerLinkActive="selected" (click)="setActiveLink('Profile')">Profile</button>
-      <!-- <button mat-menu-item routerLink="'/profile/' + currentUser" routerLinkActive="selected" (click)="setActiveLink('Profile')">Profile</button> -->
+      <button mat-menu-item [routerLink]="'/profile/' + currentUser" routerLinkActive="selected" (click)="setActiveLink('Profile')">Profile</button>
       <button mat-menu-item routerLink="/settings" routerLinkActive="selected" (click)="setActiveLink('Settings')">Settings</button>
       <button mat-menu-item routerLink="/logout" routerLinkActive="selected" (click)="setActiveLink('Logout')">Logout</button> <!-- set activelink to 'logout'? routerlinkactive=logout?? -->
     </mat-menu>

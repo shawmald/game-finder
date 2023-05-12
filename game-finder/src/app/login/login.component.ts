@@ -13,6 +13,8 @@ export class LoginComponent {
   user: any;
   errorMessage!: string;
 
+  ip = "http://34.30.183.36:80/";
+
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -27,10 +29,8 @@ export class LoginComponent {
 
   login(username: string, password: string) {
 
-    const ip = "http://34.30.183.36:80/"
-
     // Call API to validate login
-    fetch(ip + "Login?Username=" + username + "&Password=" + password, {
+    fetch(this.ip + "Login?Username=" + username + "&Password=" + password, {
         method: "GET",
     })
     .then((response) => {
