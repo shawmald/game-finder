@@ -57,7 +57,7 @@
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
-            <a *ngIf="(sameUser) || (!sameUser && emailVis=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
+            <a *ngIf="(sameUser) || (!sameUser && privacyLevel=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
 
             <!--
             <div class="block-display" *ngIf="editing">
@@ -76,7 +76,7 @@
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
-            <p *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')">{{ location }}</p>
+            <p *ngIf="(sameUser && !editing) || (!sameUser && privacyLevel=='Public')">{{ location }}</p>
             <div class="block-display" *ngIf="editing">
                 <input placeholder="{{ location }}" [(ngModel)]="location">
 

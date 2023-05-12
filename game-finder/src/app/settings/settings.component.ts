@@ -10,6 +10,9 @@ export class SettingsComponent {
   ip = "http://34.30.183.36:80/";
 
   current_username = sessionStorage.getItem('currentUser');
+  current_email!: string;
+  current_timezone!: string;
+  current_privacy!: string;
 
   user: any = {
     username: '',
@@ -26,7 +29,8 @@ export class SettingsComponent {
   privacyLevel: string = '';
 
   errorMessage!: string;
-  showChangeUsernameForm: boolean = false;
+
+  //showChangeUsernameForm: boolean = false;
   showChangeEmailForm: boolean = false;
   showChangeTimezoneForm: boolean = false;
   showChangePasswordForm: boolean = false;
@@ -35,9 +39,68 @@ export class SettingsComponent {
   timeZones: { value: string, label: string}[] = [];
 
   ngOnInit() {
+
+    // get current email
+    fetch(this.ip + "ReturnProfileVar?Username=" + this.current_username
+      + "&ReqVar=" + "email", {
+        method: "GET",
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then((content) => {
+        this.current_email = content;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Something went wrong, please try again.'
+      });
+
+    // get current timezone
+      fetch(this.ip + "ReturnProfileVar?Username=" + this.current_username
+      + "&ReqVar=" + "timezone", {
+        method: "GET",
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then((content) => {
+        this.current_timezone = content;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Something went wrong, please try again.'
+      });
+
+    // get current privacy
+    fetch(this.ip + "ReturnProfileVar?Username=" + this.current_username
+    + "&ReqVar=" + "privacyLvl", {
+      method: "GET",
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then((content) => {
+      this.current_privacy = content;
+    })
+    .catch((error) => {
+      console.error('Error:',error);
+      this.errorMessage = 'Something went wrong, please try again.'
+    })
+
     this.populate_timeZones();
   }
 
+  /*
   toggleChangeUsername() {
     this.showChangeUsernameForm = !this.showChangeUsernameForm;
     this.cancelChangeEmail();
@@ -50,13 +113,15 @@ export class SettingsComponent {
     this.showChangeUsernameForm = false;
     this.user = {};
   }
+  */
 
   toggleChangeEmail() {
     this.showChangeEmailForm = !this.showChangeEmailForm;
-    this.cancelChangeUsername();
+    //this.cancelChangeUsername();
     this.cancelChangeTimezone();
     this.cancelChangePassword();
     this.cancelChangePrivacy();
+    this.user = {};
   }
 
   cancelChangeEmail() {
@@ -66,10 +131,11 @@ export class SettingsComponent {
 
   toggleChangeTimezone() {
     this.showChangeTimezoneForm = !this.showChangeTimezoneForm;
-    this.cancelChangeUsername();
+    //this.cancelChangeUsername();
     this.cancelChangeEmail();
     this.cancelChangePassword();
     this.cancelChangePrivacy();
+    this.user = {};
   }
 
   cancelChangeTimezone() {
@@ -79,10 +145,11 @@ export class SettingsComponent {
 
   toggleChangePassword() {
     this.showChangePasswordForm = !this.showChangePasswordForm;
-    this.cancelChangeUsername();
+    //this.cancelChangeUsername();
     this.cancelChangeEmail();
     this.cancelChangeTimezone();
     this.cancelChangePrivacy();
+    this.password = {};
   }
 
   cancelChangePassword() {
@@ -92,10 +159,11 @@ export class SettingsComponent {
 
   toggleChangePrivacy() {
     this.showChangePrivacyForm = !this.showChangePrivacyForm;
-    this.cancelChangeUsername();
+    //this.cancelChangeUsername();
     this.cancelChangeEmail();
     this.cancelChangeTimezone();
     this.cancelChangePassword();
+    this.privacyLevel = "";
   }
 
   cancelChangePrivacy() {
@@ -104,6 +172,8 @@ export class SettingsComponent {
   }
   saveProfileSettings() {
     // Logic to save profile settings
+
+    /*
     if(this.user.username != null) {
       console.log("current username:", this.current_username)
       console.log("new username:", this.user.username)
@@ -116,8 +186,11 @@ export class SettingsComponent {
         console.error('Error:', error);
         this.errorMessage = 'Something went wrong, please try again.'
       });
+      this.current_username = this.user.username;
+      sessionStorage.setItem('currentUser', this.current_username as string);
       this.toggleChangeUsername();
     }
+    */
 
     if(this.user.email != null) {
       fetch(this.ip + "SetProfileVar?Username=" + this.current_username
@@ -129,6 +202,7 @@ export class SettingsComponent {
         console.error('Error:', error);
         this.errorMessage = 'Something went wrong, please try again.'
       });
+      this.current_email = this.user.email;
       this.toggleChangeEmail();
     }
 
@@ -142,6 +216,7 @@ export class SettingsComponent {
         console.error('Error:', error);
         this.errorMessage = 'Something went wrong, please try again.'
       });
+      this.current_timezone = this.user.timezone;
       this.toggleChangeTimezone();
     }
   }
@@ -184,8 +259,17 @@ export class SettingsComponent {
   }
 
   changePrivacy() {
-
-
+    fetch(this.ip + "SetProfileVar?Username=" + this.current_username
+    + "&ReqVar=" + "privacyLvl"
+    + "&NewVar=" + this.privacyLevel, {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error);
+      this.errorMessage = 'Something went wrong, please try again.'
+    })
+    this.current_privacy = this.privacyLevel;
+    this.toggleChangePrivacy();
   }
 
   populate_timeZones() {

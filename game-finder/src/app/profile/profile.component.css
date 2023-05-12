@@ -78,6 +78,10 @@ img {
   color: #007bff;
 }
 
+mat-icon {
+  cursor: pointer;
+}
+
 
 /*----------------------------------------------------------------------
     Overwrite style.css

@@ -33,6 +33,7 @@ form {
 }
 
 label {
+  font-size: 24px;
   display: block;
   font-weight: bold;
 }
@@ -74,10 +75,24 @@ button[type="submit"]:hover {
 .change-timezone-prompt,
 .change-password-prompt,
 .change-privacy-prompt {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
   cursor: pointer;
-  color: blue;
-  text-decoration: underline;
+  color: white;
+  font-size: 20px;
+  /*text-decoration: underline; */
   margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.change-username-prompt:hover,
+.change-email-prompt:hover,
+.change-timezone-prompt:hover,
+.change-password-prompt:hover,
+.change-privacy-prompt:hover {
+  background-color: #0062cc;
 }
 
 .cancel-button {
