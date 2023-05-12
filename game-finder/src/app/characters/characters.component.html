@@ -45,7 +45,8 @@
                           <label for="fname">Full Name</label>
                         </div>
                         <div class="col-75">
-                          <input type="text" id="fname" name="name" placeholder="Your characters name..">
+                          <input type="text" id="fname" name="name" placeholder="Your characters name.." required [(ngModel)]="charName" > 
+                          {{ character.name }}
                         </div>
                       </div>
 
@@ -55,7 +56,7 @@
                           <label for="race">Race</label>
                         </div>
                         <div class="col-75">
-                          <select id="race" name="race">
+                          <select id="race" name="race" required [(ngModel)]="race">
                             <option value="dragonborn">Dragonborn</option>
                             <option value="dwarf">Dwarf</option>
                             <option value="elf">Elf</option>
@@ -64,8 +65,9 @@
                             <option value="halfling">Halfling</option>
                             <option value="half-orc">Half-Orc</option>
                             <option value="human">Human</option>
-                            <option value="tiefling">Tiefling</option>
+                            <option value="tiefling">Tiefling</option> 
                           </select>
+                          {{character.race}}
                         </div>
                       </div>
                       
@@ -75,7 +77,7 @@
                           <label for="class">Class</label>
                         </div>
                         <div class="col-75">
-                          <select id="class" name="class">
+                          <select id="class" name="class" required [(ngModel)]="charClass">
                             <option value="barbarian">Barbarian</option>
                             <option value="bard">Bard</option>
                             <option value="cleric">Cleric</option>
@@ -87,7 +89,7 @@
                             <option value="rogue">Rogue</option>
                             <option value="sorcerer">Sorcerer</option>
                             <option value="warlock">Warlock</option>
-                            <option value="wizard">Wizard</option>
+                            <option value="wizard">Wizard</option> 
                           </select>
                         </div>
                       </div>
@@ -99,7 +101,7 @@
                           <label for="subclass">Subclass</label>
                         </div>
                         <div class="col-75">
-                          <input type="text" id="subclass" name="subclass" placeholder="Your subclass..">
+                          <input type="text" id="subclass" name="subclass" placeholder="Your subclass.." required [(ngModel)]="charSubClass">
                         </div>
                       </div>
 
@@ -107,7 +109,7 @@
                       <div class="col-25">
                         <label for="level">Level</label>
                       </div>
-                      <input type="number" id="level" name="level" min="1" max="20">
+                      <input type="number" id="level" name="level" min="1" max="20" required [(ngModel)]="lvl">
 
 
                       <!-- penter alignment -->
@@ -116,27 +118,27 @@
                           <label for="alignment">Alignment</label>
                         </div>
                         <div class="col-75">
-                          <select id="alignment" name="alignment">
-                            <option value="LG">Lawful Good</option>
-                            <option value="TG">True Good</option>
-                            <option value="CG">Chaotic Good</option>
-                            <option value="LN">Lawful Neutral</option>
-                            <option value="TN">True Neutral</option>
-                            <option value="CN">Chaotic Neutral</option>
-                            <option value="LE">Lawful Evil</option>
-                            <option value="TE">True Evil</option>
-                            <option value="CE">Chaotic Evil</option>
-                          </select>
+                          <select id="alignment" name="alignment" required [(ngModel)]="allignment">
+                            <option value="Lawful Good">Lawful Good</option>
+                            <option value="True Good">True Good</option>
+                            <option value="Chaotic Good">Chaotic Good</option>
+                            <option value="Lawful Neutral">Lawful Neutral</option>
+                            <option value="True Neutral">True Neutral</option>
+                            <option value="Chaotic Neutral">Chaotic Neutral</option>
+                            <option value="Lawful Evil">Lawful Evil</option>
+                            <option value="True Evil">True Evil</option>
+                            <option value="Chaotic Evil">Chaotic Evil</option> 
+                          </select > 
                         </div>
                       </div>
                       
                       <!-- 
                         Im thinking of also adding a XP thing here that can do 
                         addition and change the level depending on the status here
+                        <input type="submit" value="Submit">
                        -->
 
-                     
-                      <input type="submit" value="Submit">
+                      <input type = "submit" (click) = "characterCreationStandard()">
         
                     </form>
                   </div>
@@ -157,44 +159,48 @@
                       <!-- Strength modifier -->
                       <div class = "wrapper">
                         <label for="STR">Strength Modifier</label>
-                        <input type="number" id="STR" name="str" min="-5" max="5" placeholder="str modifier">
-                        <input type="number" id="STR" name="str" min="-10" max="20" placeholder="str">
+                        <input type="number" id="STR" name="str" min="-5" max="5" placeholder="str modifier" required [(ngModel)]="strMod"> {{ character.strMod }}
+                        <input type="number" id="STR" name="str" min="-10" max="20" placeholder="str" required [(ngModel)]="str"> {{ character.str }}
                       </div>
 
                       <!-- Dex modifier -->
                       <div class = "wrapper">
                         <label for="DEX">Dexterity Modifier</label>
-                        <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier">
-                        <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex">
+                        <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier" required [(ngModel)]="dexMod"> {{ character.dexMod }}
+                        <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex" required [(ngModel)]="dex"> {{ character.dex }}
                       </div>
 
                       <!-- Con modifier -->
                       <div class = "wrapper">
                         <label for="CON">Constitution Modifier</label>
-                        <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier">
-                        <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con">
+                        <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier" required [(ngModel)]="conMod"> {{ character.conMod }}
+                        <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con" required [(ngModel)]="con"> {{ character.con }}
                       </div>
 
                       <!-- Int modifier -->
                       <div class = "wrapper">
                         <label for="INT">Intelligence Modifier</label>
-                        <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier">
-                        <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int">
+                        <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier" required [(ngModel)]="intMod"> {{ character.intMod }}
+                        <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int" required [(ngModel)]="int"> {{ character.int }}
                       </div>
 
                       <!-- Wis modifier -->
                       <div class = "wrapper">
                         <label for="WIS">Wisdom Modifier</label>
-                        <input type="number" id="WIS" name="wis" min="-5" max="5" placeholder="wis modifier">
-                        <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis">
+                        <input type="number" id="WIS" name="wis" min="-5" max="5" placeholder="wis modifier" required [(ngModel)]="wisMod"> {{ character.wisMod }}
+                        <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis" required [(ngModel)]="wis"> {{ character.wis }}
                       </div>
 
                       <!-- Cha modifier -->
                       <div class = "wrapper">
                         <label for="CHA">Charisma Modifier</label>
-                        <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier">
-                        <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha">
+                        <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier" required [(ngModel)]="chaMod"> {{ character.chaMod }}
+                        <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha" required [(ngModel)]="cha"> {{ character.cha }}
                       </div>
+
+                      <form action="/form/submit" method="post">
+                        <input type="submit" (click) = "updatePanel2(character.position)">
+                      </form>
 
 
                   </div>
@@ -297,33 +303,36 @@
                     <!-- Armour Class modifier -->
                     <div class = "wrapper">
                       <label for="AC">Armour Class</label>
-                      <input type="number" id="AC" name="ac" min="0" max="60" placeholder="AC">
+                      <input type="number" id="AC" name="ac" min="0" max="60" placeholder="AC" required [(ngModel)]="armor"> {{ character.armor }}
                     </div>
 
                     <!-- Dex modifier -->
                     <div class = "wrapper" >
                       <label for="initiative">Initiative</label>
-                      <input type="number" id="initiative" name="initiative" min="-5" max="10" placeholder="= DEX">
+                      <input type="number" id="initiative" name="initiative" min="-5" max="10" placeholder="= DEX" required [(ngModel)]="init"> {{ character.init }}
                     </div>
 
                     <!-- speed -->
                     <div class = "wrapper">
                       <label for="speed">Speed</label>
-                      <input type="number" id="speed" name="speed" min="0" max="60" placeholder="speed">
+                      <input type="number" id="speed" name="speed" min="0" max="60" placeholder="speed" required [(ngModel)]="spd"> {{ character.spd }}
                     </div>
 
                     <!-- HP current -->
                     <div class = "wrapper">
                       <label for="currentHP">Current Hit Points</label>
-                      <input type="number" id="currentHP" name="currentHP" min="0" max="500" placeholder="Current HP">
+                      <input type="number" id="currentHP" name="currentHP" min="0" max="500" placeholder="Current HP" required [(ngModel)]="chp"> {{ character.chp }}
                     </div>
 
                     <!-- total hp -->
                     <div class = "wrapper">
                       <label for="totalHP">Total Hit Points</label>
-                      <input type="number" id="totalHP" name="totalHP" min="0" max="500" placeholder="total HP">
+                      <input type="number" id="totalHP" name="totalHP" min="0" max="500" placeholder="total HP" required [(ngModel)]="thp"> {{ character.thp }}
                     </div>
 
+                    <form action="/form/submit" method="post">
+                      <input type="submit" (click) = "updatePanel4( character.position )">
+                    </form>
 
                     <!-- Inputs -->
                   </div>
@@ -375,19 +384,19 @@
             <!-- money -->
             <div class="sickly">
               <div>
-                <label for="gp">Gold</label>
+                <label for="gold">Gold</label> {{ character.gold }}
               </div>
               <div>
-                <label for="sp">Silver</label>
+                <label for="silver">Silver</label> {{ character.silver }}
               </div>
               <div>
-                <label for="ep">Electrum</label>
+                <label for="electrum">Electrum</label> {{ character.electrum }}
               </div>
 
               <!-- get math to calculate total ? -->
-              <input type="number" id="gp" name="gp" min="1" max="99999">
-              <input type="number" id="sp" name="sp" min="1" max="99999">
-              <input type="number" id="ep" name="ep" min="1" max="99999">
+              <input type="number" id="gp" name="gp" min="1" max="99999" required [(ngModel)]="gold">
+              <input type="number" id="sp" name="sp" min="1" max="99999" required [(ngModel)]="silver">
+              <input type="number" id="ep" name="ep" min="1" max="99999" required [(ngModel)]="electrum">
             </div>
 
 
@@ -396,7 +405,7 @@
               <br>
               <textarea id="text" name="text" rows="15" cols="50"></textarea>
               <br/>
-              <input type="submit" value="Submit">
+              <input type="submit" value="Submit" (select) = "updatePanel6( character.position )">
             </form>
 
           </body>
