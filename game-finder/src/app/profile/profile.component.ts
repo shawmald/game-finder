@@ -46,6 +46,8 @@ export class ProfileComponent {
   ip = "http://34.30.183.36:80/";
 
   //hard coded tags for testing, edit later
+  tags: Map<string,boolean> = new Map<string,boolean>();
+  /*
   tags: Map<string,boolean> = new Map<string,boolean>([
     ["in-person", true],
     ["online", true],
@@ -61,6 +63,7 @@ export class ProfileComponent {
     ["episodic", true],
 
   ]);
+  */
 
   bio: string = "about me";
   timezone: string = "";

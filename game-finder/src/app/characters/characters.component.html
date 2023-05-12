@@ -7,12 +7,12 @@
 
 <h1>Characters</h1>
 
-<!-- 
+<!--
     external accordion: contains an expansion-panel for each character
     only let one (character) panel be open at a time
 -->
 <mat-accordion multi="false">
-    
+
     <!--
         Character panel
     -->
@@ -23,7 +23,7 @@
             {{ character.name }}
         </mat-expansion-panel-header>
 
-        <!-- 
+        <!--
             internal accordion: contains panels nested inside (character)
             let multiple be open at once
         -->
@@ -34,8 +34,8 @@
                 <mat-expansion-panel-header>
                     Basics
                 </mat-expansion-panel-header>
-            
-                    
+
+
                   <div class="container">
                     <form action="/action_page.php">
 
@@ -45,7 +45,7 @@
                           <label for="fname">Full Name</label>
                         </div>
                         <div class="col-75">
-                          <input type="text" id="fname" name="name" placeholder="Your characters name.." required [(ngModel)]="charName" > 
+                          <input type="text" id="fname" name="name" placeholder="Your characters name.." required [(ngModel)]="charName" >
                           {{ character.name }}
                         </div>
                       </div>
@@ -65,12 +65,12 @@
                             <option value="halfling">Halfling</option>
                             <option value="half-orc">Half-Orc</option>
                             <option value="human">Human</option>
-                            <option value="tiefling">Tiefling</option> 
+                            <option value="tiefling">Tiefling</option>
                           </select>
                           {{character.race}}
                         </div>
                       </div>
-                      
+
                       <!-- Class is drop down, no artificers here :/ -->
                       <div class="row">
                         <div class="col-25">
@@ -89,11 +89,11 @@
                             <option value="rogue">Rogue</option>
                             <option value="sorcerer">Sorcerer</option>
                             <option value="warlock">Warlock</option>
-                            <option value="wizard">Wizard</option> 
+                            <option value="wizard">Wizard</option>
                           </select>
                         </div>
                       </div>
-                      
+
 
                       <!-- Subclass is self entered -->
                       <div class="row">
@@ -127,30 +127,30 @@
                             <option value="Chaotic Neutral">Chaotic Neutral</option>
                             <option value="Lawful Evil">Lawful Evil</option>
                             <option value="True Evil">True Evil</option>
-                            <option value="Chaotic Evil">Chaotic Evil</option> 
-                          </select > 
+                            <option value="Chaotic Evil">Chaotic Evil</option>
+                          </select >
                         </div>
                       </div>
-                      
-                      <!-- 
-                        Im thinking of also adding a XP thing here that can do 
+
+                      <!--
+                        Im thinking of also adding a XP thing here that can do
                         addition and change the level depending on the status here
                         <input type="submit" value="Submit">
                        -->
 
                       <input type = "submit" (click) = "characterCreationStandard()">
-        
+
                     </form>
                   </div>
-            
+
             </mat-expansion-panel>
-        
+
             <!-- panel 2 -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     Ability Scores
                 </mat-expansion-panel-header>
-            
+
                 <form action="/action_page.php">
                   <div class="container">
 
@@ -213,8 +213,8 @@
               <mat-expansion-panel-header>
                   Proficiencies
               </mat-expansion-panel-header>
-          
-               
+
+
               <body>
 
                 <!-- enter proficiency bonus, max twenty, min 1 -->
@@ -284,7 +284,7 @@
                 </form>
 
               </body>
-      
+
           </mat-expansion-panel>
 
           <!-- panel 4 -->
@@ -292,8 +292,8 @@
             <mat-expansion-panel-header>
                 Combat Stats
             </mat-expansion-panel-header>
-        
-             
+
+
             <body>
               <div class="container">
                 <form action="/action_page.php">
@@ -340,7 +340,7 @@
                 </form>
               </div>
             </body>
-    
+
         </mat-expansion-panel>
 
 
@@ -349,8 +349,8 @@
             <mat-expansion-panel-header>
                 Features
             </mat-expansion-panel-header>
-        
-              
+
+
             <body>
               <form action="/form/submit" method="post">
                 <label for="text">Class Features:</label>
@@ -368,7 +368,7 @@
                 <input type="submit" value="Submit">
               </form>
             </body>
-    
+
         </mat-expansion-panel>
 
         <!-- panel 6 -->
@@ -376,8 +376,8 @@
           <mat-expansion-panel-header>
               Equipment and Money
           </mat-expansion-panel-header>
-      
-            
+
+
           <body>
 
 
@@ -409,10 +409,11 @@
             </form>
 
           </body>
-  
+
       </mat-expansion-panel>
 
 
+      <!--
       <mat-expansion-panel>
         <mat-expansion-panel-header>
             Spells and Pictures
@@ -425,6 +426,7 @@
 
           </body>
       </mat-expansion-panel>
+      -->
 
 
       </mat-accordion>
@@ -432,7 +434,7 @@
     </mat-expansion-panel>
 
 
-    
+
 
 </mat-accordion>
 

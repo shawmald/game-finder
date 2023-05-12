@@ -278,6 +278,16 @@ export class RegisterComponent {
     this.errorMessage = 'Something went wrong, please try again';
    });
 
+   fetch(ip + "SetProfileVar?Username=" + this.username
+   + "&ReqVar=" + "aboutMe"
+   + "&NewVar=" + "About Me", {
+    method: "GET",
+   })
+   .catch((error) => {
+    console.error('Error:', error);
+    this.errorMessage = 'Something went wrong, please try again';
+   });
+
    this.router.navigate(['/about'])
    .then(() => {
     window.location.reload();
