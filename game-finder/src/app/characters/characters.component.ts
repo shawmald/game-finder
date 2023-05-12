@@ -28,21 +28,20 @@ export class CharactersComponent {
   }
 
   ip = "http://34.30.183.36:80/"
-  //username = sessionStorage.getItem('currentUser') as string;
   username! : string;
   length! : number;
 
 
-  charName! : string; //Done
-  race! : string; //Done
-  charClass! : string;  //Done
-  charSubClass! : string; //Done
-  lvl! : string;  //Done
-  allignment! : string; //Done
+  charName! : string; 
+  race! : string;
+  charClass! : string;  
+  charSubClass! : string; 
+  lvl! : string;  
+  allignment! : string; 
 
   //Segment 2
-  stats = new Array();     //[str, dexterity, constitution, intelligence, wisdom, charisma]
-  statModifiers = new Array();
+  stats : Array<number> = [];     //[str, dexterity, constitution, intelligence, wisdom, charisma]
+  statModifiers : Array<number> = [];
 
   str! : number;
   strMod! : number;
@@ -61,7 +60,7 @@ export class CharactersComponent {
   //Proficiencies
 
   //Segment 4
-  combatStats = new Array();  //[Armour Class, Initiative, Speed, Current HP, Total HP]
+  combatStats : Array<number> = [];  //[Armour Class, Initiative, Speed, Current HP, Total HP]
   armor! : number;
   init! : number;
   spd! : number;
@@ -73,7 +72,7 @@ export class CharactersComponent {
   background! : string;
 
   //Segment 6
-  money = new Array();    //[Gold, silver, electrum]
+  money : Array<number> = [];    //[Gold, silver, electrum]
   gold! : number;
   silver! : number;
   electrum! : number;
@@ -83,14 +82,12 @@ export class CharactersComponent {
   spells = new Array();
   pictures = new Array();
 
-  //Should be called ngOnInit
-  ngOnInit() {
+  async ngOnInit() {
 
-    //this.characters[0].name = "Testing";
 
     this.username = sessionStorage.getItem('currentUser') as string;
 
-    fetch(this.ip + "ReturnCharacterSheetLength?Username=" + this.username, {
+    await fetch(this.ip + "ReturnCharacterSheetLength?Username=" + this.username, {
       method: "GET",
     })
     .then( (response) => {
@@ -100,12 +97,16 @@ export class CharactersComponent {
       return response.text();
     })
     .then( (content) => {
-      var data = content;
-      this.length = Number.parseInt(data);
+      this.length = Number.parseInt(content);
     })
+    .catch((error) => {
+      // Handle any errors that occur during the fetch request
+      console.error(error);
+    });
 
-    for(var i = 0; i < this.length; i++){
-      fetch(this.ip + "ReturnCharacterSheetInfo?Username=" + this.username + "&CharacterPos" + i, {
+
+    for(var i = 0; i < this.length; i++) {
+      await fetch(this.ip + "ReturnCharacterSheetInfo?Username=" + this.username + "&CharacterPos=" + String(i), {
         method: "GET",
     })
     .then(response => {
@@ -117,17 +118,47 @@ export class CharactersComponent {
     })
     .then(data => {
         var content = JSON.parse(data);
-        //const placeholder = new Character(i, data.charName);
-        console.log(content.charName); // Print the value to the console
         this.characters[i].name = content.charName;
         this.characters[i].race = content.race;
-        this.characters[0].name = "Testing";
-        //this.characters[i] = placeholder;
+        this.characters[i].charClass = content.charClass;
+        this.characters[i].charSubClass = content.charSubclass;
+        this.characters[i].lvl = content.lvl;
+        this.characters[i].allignment = content.allignment;
+        this.characters[i].stats = content.stats.split(',');  //DONE
+        this.characters[i].str = this.characters[i].stats[0];
+        this.characters[i].dex = this.characters[i].stats[1];
+        this.characters[i].con = this.characters[i].stats[2];
+        this.characters[i].int = this.characters[i].stats[3];
+        this.characters[i].wis = this.characters[i].stats[4];
+        this.characters[i].cha = this.characters[i].stats[5];
+        this.characters[i].statModifiers = content.statModifiers.split(',');  //DONE
+        this.characters[i].strMod = this.characters[i].statModifiers[0];
+        this.characters[i].dexMod = this.characters[i].statModifiers[1];
+        this.characters[i].conMod = this.characters[i].statModifiers[2];
+        this.characters[i].intMod = this.characters[i].statModifiers[3];
+        this.characters[i].wisMod = this.characters[i].statModifiers[4];
+        this.characters[i].chaMod = this.characters[i].statModifiers[5];
+        this.characters[i].combatStats = content.combatStats.split(',');  //DONE
+        this.characters[i].armor = this.characters[i].combatStats[0];
+        this.characters[i].init = this.characters[i].combatStats[1];
+        this.characters[i].spd = this.characters[i].combatStats[2];
+        this.characters[i].chp = this.characters[i].combatStats[3];
+        this.characters[i].thp = this.characters[i].combatStats[4];
+        this.characters[i].classFeatures = content.classFeatures;
+        this.characters[i].background = content.background;
+        this.characters[i].money = content.money.split(',');  //DONE
+        this.characters[i].gold = this.characters[i].money[0];
+        this.characters[i].silver = this.characters[i].money[1];
+        this.characters[i].electrum = this.characters[i].money[2];
+
+        this.characters[i].equipment = content.equipment;
+        //Skip spells for now
+        //Skip pictures for now
     })
     .catch(error => {
         // Handle any errors that occur during the fetch request
         console.error(error);
-    })
+    });
     
     }
 
@@ -150,7 +181,7 @@ export class CharactersComponent {
     this.characterCreation(this.charName, this.race, this.charClass, this.charSubClass, this.lvl, this.allignment);
   }
 
-  updatePanel2() {  //Done
+  updatePanel2(position : number) {  //Done
     this.stats.push(this.str);
     this.stats.push(this.dex);
     this.stats.push(this.con);
@@ -158,7 +189,8 @@ export class CharactersComponent {
     this.stats.push(this.wis);
     this.stats.push(this.cha);
 
-    fetch(this.ip + "AddCharacterSheet?Username=" + this.username + "&stats=" + this.stats,{
+    fetch(this.ip + "SetCharacterSheetVar?Username=" + this.username + "&CharacterPos=" + position + "&ReqVar=" + "stats" +
+    "&NewVar=" + this.stats,{
       method: "GET",
     })
 
@@ -169,45 +201,49 @@ export class CharactersComponent {
     this.statModifiers.push(this.wisMod);
     this.statModifiers.push(this.chaMod);
 
-    fetch(this.ip + "AddCharacterSheet?Username=" + this.username + "&statsModifiers=" + this.statModifiers,{
+    fetch(this.ip + "SetCharacterSheetVar?Username=" + this.username + "&CharacterPos=" + position + "&ReqVar=" + "statModifiers" +
+    "&NewVar=" + this.statModifiers,{
       method: "GET",
     })
   }
 
-  updatePanel3() {
+  updatePanel3(position : number) {
 
   }
 
-  updatePanel4() {  //Done
+  updatePanel4(position : number) {  //Done
     this.combatStats.push(this.armor);
     this.combatStats.push(this.init);
     this.combatStats.push(this.spd);
     this.combatStats.push(this.chp);
     this.combatStats.push(this.thp);
-    fetch(this.ip + "AddCharacterSheet?Username=" + this.username + "&combatStats=" + this.combatStats,{
+    fetch(this.ip + "SetCharacterSheetVar?Username=" + this.username + "&CharacterPos=" + position + "&ReqVar=" + "combatStats" +
+    "&NewVar=" + this.combatStats,{
       method: "GET",
     })
   }
 
-  updatePanel5() {
-    fetch(this.ip + "AddCharacterSheet?Username=" + this.username + "&classFeatures=" + this.classFeatures,{
+  updatePanel5(position : number) {
+    fetch(this.ip + "SetCharacterSheetVar?Username=" + this.username + "&classFeatures=" + this.classFeatures,{
       method: "GET",
     })
-    fetch(this.ip + "AddCharacterSheet?Username=" + this.username + "&background=" + this.background,{
+    fetch(this.ip + "SetCharacterSheetVar?Username==" + this.username + "&background=" + this.background,{
       method: "GET",
     })
   }
 
-  updatePanel6() {  //Done
+  updatePanel6(position : number) {  //Done
     this.money.push(this.gold);
     this.money.push(this.silver);
     this.money.push(this.electrum);
 
-    fetch(this.ip + "AddCharacterSheet?Username=" + this.username + "&money=" + this.money,{
+    fetch(this.ip + "SetCharacterSheetVar?Username=" + this.username + "&CharacterPos=" + position + "&ReqVar=" + "money" +
+    "&NewVar=" + this.money,{
       method: "GET",
     })
 
-    fetch(this.ip + "AddCharacterSheet?Username=" + this.username + "&equipment=" + this.equipment,{
+    fetch(this.ip + "SetCharacterSheetVar?Username=" + this.username + "&CharacterPos=" + position + "&ReqVar=" + "equipment" +
+    "&NewVar=" + this.equipment,{
       method: "GET",
     })
   }
@@ -233,26 +269,47 @@ export class Character {
     allignment! : string;
 
     //Segment 2
-    stats = new Array();     //[str, dexterity, constitution, intelligence, wisdom, charisma]
-    statModifiers = new Array();
+  stats : Array<number> = [];     //[str, dexterity, constitution, intelligence, wisdom, charisma]
+  statModifiers : Array<number> = [];
 
-    //Segment 3
-    //Proficiencies
+  str! : number;
+  strMod! : number;
+  dex! : number;
+  dexMod! : number;
+  con! : number;
+  conMod! : number;
+  int! : number;
+  intMod! : number;
+  wis! : number;
+  wisMod! : number;
+  cha! : number;
+  chaMod! : number;
 
-    //Segment 4
-    combatStats = new Array();  //[Armour Class, Initiative, Speed, Current HP, Total HP]
+  //Segment 3
+  //Proficiencies
 
-    //Segment 5
-    classFeatures! : string;
-    background! : string;
+  //Segment 4
+  combatStats : Array<number> = [];  //[Armour Class, Initiative, Speed, Current HP, Total HP]
+  armor! : number;
+  init! : number;
+  spd! : number;
+  chp! : number;
+  thp! : number;
 
-    //Segment 6
-    money = new Array();    //[Gold, silver, electrum]
-    equipment! : string;
+  //Segment 5
+  classFeatures! : string;
+  background! : string;
 
-    //Segment 7
-    spells = new Array();
-    pictures = new Array();
+  //Segment 6
+  money : Array<number> = [];    //[Gold, silver, electrum]
+  gold! : number;
+  silver! : number;
+  electrum! : number;
+  equipment! : string;
+
+  //Segment 7
+  spells = new Array();
+  pictures = new Array();
 
 
   constructor(position : number, name : string){

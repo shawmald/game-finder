@@ -159,47 +159,47 @@
                       <!-- Strength modifier -->
                       <div class = "wrapper">
                         <label for="STR">Strength Modifier</label>
-                        <input type="number" id="STR" name="str" min="-5" max="5" placeholder="str modifier" required [(ngModel)]="strMod">
-                        <input type="number" id="STR" name="str" min="-10" max="20" placeholder="str" required [(ngModel)]="str">
+                        <input type="number" id="STR" name="str" min="-5" max="5" placeholder="str modifier" required [(ngModel)]="strMod"> {{ character.strMod }}
+                        <input type="number" id="STR" name="str" min="-10" max="20" placeholder="str" required [(ngModel)]="str"> {{ character.str }}
                       </div>
 
                       <!-- Dex modifier -->
                       <div class = "wrapper">
                         <label for="DEX">Dexterity Modifier</label>
-                        <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier" required [(ngModel)]="dexMod">
-                        <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex" required [(ngModel)]="dex">
+                        <input type="number" id="DEX" name="dex" min="-5" max="5" placeholder="dex modifier" required [(ngModel)]="dexMod"> {{ character.dexMod }}
+                        <input type="number" id="DEX" name="dex" min="-10" max="20" placeholder="dex" required [(ngModel)]="dex"> {{ character.dex }}
                       </div>
 
                       <!-- Con modifier -->
                       <div class = "wrapper">
                         <label for="CON">Constitution Modifier</label>
-                        <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier" required [(ngModel)]="conMod">
-                        <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con" required [(ngModel)]="con">
+                        <input type="number" id="CON" name="con" min="-5" max="5" placeholder="con modifier" required [(ngModel)]="conMod"> {{ character.conMod }}
+                        <input type="number" id="CON" name="con" min="-10" max="20" placeholder="con" required [(ngModel)]="con"> {{ character.con }}
                       </div>
 
                       <!-- Int modifier -->
                       <div class = "wrapper">
                         <label for="INT">Intelligence Modifier</label>
-                        <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier" required [(ngModel)]="intMod">
-                        <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int" required [(ngModel)]="int">
+                        <input type="number" id="INT" name="int" min="-5" max="5" placeholder="int modifier" required [(ngModel)]="intMod"> {{ character.intMod }}
+                        <input type="number" id="INT" name="int" min="-10" max="20" placeholder="int" required [(ngModel)]="int"> {{ character.int }}
                       </div>
 
                       <!-- Wis modifier -->
                       <div class = "wrapper">
                         <label for="WIS">Wisdom Modifier</label>
-                        <input type="number" id="WIS" name="wis" min="-5" max="5" placeholder="wis modifier" required [(ngModel)]="wisMod">
-                        <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis" required [(ngModel)]="wis">
+                        <input type="number" id="WIS" name="wis" min="-5" max="5" placeholder="wis modifier" required [(ngModel)]="wisMod"> {{ character.wisMod }}
+                        <input type="number" id="WIS" name="wis" min="-10" max="20" placeholder="wis" required [(ngModel)]="wis"> {{ character.wis }}
                       </div>
 
                       <!-- Cha modifier -->
                       <div class = "wrapper">
                         <label for="CHA">Charisma Modifier</label>
-                        <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier" required [(ngModel)]="chaMod">
-                        <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha" required [(ngModel)]="cha">
+                        <input type="number" id="CHA" name="cha" min="-5" max="5" placeholder="cha modifier" required [(ngModel)]="chaMod"> {{ character.chaMod }}
+                        <input type="number" id="CHA" name="cha" min="-10" max="20" placeholder="cha" required [(ngModel)]="cha"> {{ character.cha }}
                       </div>
 
                       <form action="/form/submit" method="post">
-                        <input type="submit" (click) = "updatePanel2()">
+                        <input type="submit" (click) = "updatePanel2(character.position)">
                       </form>
 
 
@@ -303,35 +303,35 @@
                     <!-- Armour Class modifier -->
                     <div class = "wrapper">
                       <label for="AC">Armour Class</label>
-                      <input type="number" id="AC" name="ac" min="0" max="60" placeholder="AC" required [(ngModel)]="armor">
+                      <input type="number" id="AC" name="ac" min="0" max="60" placeholder="AC" required [(ngModel)]="armor"> {{ character.armor }}
                     </div>
 
                     <!-- Dex modifier -->
                     <div class = "wrapper" >
                       <label for="initiative">Initiative</label>
-                      <input type="number" id="initiative" name="initiative" min="-5" max="10" placeholder="= DEX" required [(ngModel)]="init">
+                      <input type="number" id="initiative" name="initiative" min="-5" max="10" placeholder="= DEX" required [(ngModel)]="init"> {{ character.init }}
                     </div>
 
                     <!-- speed -->
                     <div class = "wrapper">
                       <label for="speed">Speed</label>
-                      <input type="number" id="speed" name="speed" min="0" max="60" placeholder="speed" required [(ngModel)]="spd">
+                      <input type="number" id="speed" name="speed" min="0" max="60" placeholder="speed" required [(ngModel)]="spd"> {{ character.spd }}
                     </div>
 
                     <!-- HP current -->
                     <div class = "wrapper">
                       <label for="currentHP">Current Hit Points</label>
-                      <input type="number" id="currentHP" name="currentHP" min="0" max="500" placeholder="Current HP" required [(ngModel)]="chp">
+                      <input type="number" id="currentHP" name="currentHP" min="0" max="500" placeholder="Current HP" required [(ngModel)]="chp"> {{ character.chp }}
                     </div>
 
                     <!-- total hp -->
                     <div class = "wrapper">
                       <label for="totalHP">Total Hit Points</label>
-                      <input type="number" id="totalHP" name="totalHP" min="0" max="500" placeholder="total HP" required [(ngModel)]="thp">
+                      <input type="number" id="totalHP" name="totalHP" min="0" max="500" placeholder="total HP" required [(ngModel)]="thp"> {{ character.thp }}
                     </div>
 
                     <form action="/form/submit" method="post">
-                      <input type="submit" (click) = "updatePanel4()">
+                      <input type="submit" (click) = "updatePanel4( character.position )">
                     </form>
 
                     <!-- Inputs -->
@@ -384,13 +384,13 @@
             <!-- money -->
             <div class="sickly">
               <div>
-                <label for="gold">Gold</label>
+                <label for="gold">Gold</label> {{ character.gold }}
               </div>
               <div>
-                <label for="silver">Silver</label>
+                <label for="silver">Silver</label> {{ character.silver }}
               </div>
               <div>
-                <label for="electrum">Electrum</label>
+                <label for="electrum">Electrum</label> {{ character.electrum }}
               </div>
 
               <!-- get math to calculate total ? -->
@@ -405,7 +405,7 @@
               <br>
               <textarea id="text" name="text" rows="15" cols="50"></textarea>
               <br/>
-              <input type="submit" value="Submit" (select) = "updatePanel6()">
+              <input type="submit" value="Submit" (select) = "updatePanel6( character.position )">
             </form>
 
           </body>
