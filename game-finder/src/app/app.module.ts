@@ -12,9 +12,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
-import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+// import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+// import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+// import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

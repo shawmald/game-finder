@@ -1,25 +1,31 @@
-<div class="content">
-    <div>
-        <h1 style="display: inline;">Dice Roller </h1>
 
-        <!-- question circle, hover for dice roller explanation -->
-        <mat-icon 
-            class="help"
-            matTooltip="Click on a die in the dice bar to add it to the screen. Click on a die in the screen to remove it from the screen" 
-            matTooltipPosition="after"
-            matTooltipHideDelay="2000"
-        >
-            help_outline
-        </mat-icon>
-    </div>
 
-    <!-- iframe of google dice roller -->
-    <iframe 
-        id="diceframe"
-        src="https://g.co/kgs/pGpFsU" 
-        title="Google dice roller"
+<!DOCTYPE html>
+<html>
+    <div class="content">
+        <div>
+            <h1 style="display: inline;">Dice Roller </h1>
+    
+            <!-- question circle, hover for dice roller explanation -->
+            <mat-icon 
+                class="help"
+                matTooltip="Click on a die in the dice bar to add it to the screen. Click on a die in the screen to remove it from the screen" 
+                matTooltipPosition="after"
+                matTooltipHideDelay="2000"
+            >
+                help_outline
+            </mat-icon>
+        </div>
+    
+    
+    
+    </div> 
+    <head>
+        <title>Random Number Generator</title>
+    </head>
+    <body>
+        <button (click)="generateRandomNumber()" id="generateRandomNumber">Generate Random Number</button>
+        <p *ngIf="randomNumber" id="randomNumber">Random Number: {{randomNumber}}</p>
+    </body>
+</html>
 
-        allowfullscreen="false"
-    ></iframe>
-
-</div>  
