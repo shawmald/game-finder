@@ -45,7 +45,7 @@
                     
                     <div><!-- initiative (dex modifier) -->
                         Initiative
-                        {{ npc.calcMod( npc.stats.get('dex') ) }}<!-- dex modifier -->
+                        {{ statTool.calcMod( npc.stats.get('dex') ) }}<!-- dex modifier -->
                     </div>
 
                     <div><!-- speed -->
@@ -58,38 +58,38 @@
                 <div>
                     <div><!-- strength -->
                         Str
-                        {{ statTool.calcMod( data.npc.stats.get('str') ) }}
-                        {{ data.npc.stats.get('str') }}
+                        {{ statTool.calcMod( npc.stats.get('str') ) }}
+                        {{ npc.stats.get('str') }}
                     </div>
 
                     <div><!-- dexterity -->
                         Dex
-                        {{ statTool.calcMod( data.npc.stats.get('dex') ) }}
-                        {{ data.npc.stats.get('dex') }}
+                        {{ statTool.calcMod( npc.stats.get('dex') ) }}
+                        {{ npc.stats.get('dex') }}
                     </div>
 
                     <div><!-- constitution -->
                         Con
-                        {{ statTool.calcMod( data.npc.stats.get('con') ) }}
-                        {{ data.npc.stats.get('con') }}
+                        {{ statTool.calcMod( npc.stats.get('con') ) }}
+                        {{ npc.stats.get('con') }}
                     </div>
 
                     <div><!-- intelligence -->
                         Int
-                        {{ statTool.calcMod( data.npc.stats.get('int') ) }}
-                        {{ data.npc.stats.get('int') }}
+                        {{ statTool.calcMod( npc.stats.get('int') ) }}
+                        {{ npc.stats.get('int') }}
                     </div>
 
                     <div><!-- wisdom -->
                         Wis
-                        {{ statTool.calcMod( data.npc.stats.get('wis') ) }}
-                        {{ data.npc.stats.get('wis') }}
+                        {{ statTool.calcMod( npc.stats.get('wis') ) }}
+                        {{ npc.stats.get('wis') }}
                     </div>
 
                     <div><!-- charisma -->
                         Cha
-                        {{ statTool.calcMod( data.npc.stats.get('cha') ) }}
-                        {{ data.npc.stats.get('cha') }}
+                        {{ statTool.calcMod( npc.stats.get('cha') ) }}
+                        {{ npc.stats.get('cha') }}
                     </div>
                 </div>
                 
