@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./gamefinder.component.css']
 })
 export class GamefinderComponent {
-
+  profileArray = new Array(); //import profile class
 }
