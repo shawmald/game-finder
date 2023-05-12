@@ -16,9 +16,16 @@ import { zipAll } from 'rxjs';
  */
 export class CharactersComponent {
 
-  //characters = new Array();
-  characters: Array<Character> = [new Character(0, "Character 1"), new Character(1, "Character 2"), new Character(2, "Character 3"), 
-  new Character(3, "Character 4")];
+  characters: Character[]; // Declare the property with the correct type
+
+  constructor() {
+    this.characters = [
+      new Character(0, "Character 1"),
+      new Character(1, "Character 2"),
+      new Character(2, "Character 3"),
+      new Character(3, "Character 4")
+    ]; // Initialize the property in the constructor
+  }
 
   ip = "http://34.30.183.36:80/"
   //username = sessionStorage.getItem('currentUser') as string;
@@ -79,6 +86,8 @@ export class CharactersComponent {
   //Should be called ngOnInit
   ngOnInit() {
 
+    //this.characters[0].name = "Testing";
+
     this.username = sessionStorage.getItem('currentUser') as string;
 
     fetch(this.ip + "ReturnCharacterSheetLength?Username=" + this.username, {
@@ -109,8 +118,10 @@ export class CharactersComponent {
     .then(data => {
         var content = JSON.parse(data);
         //const placeholder = new Character(i, data.charName);
+        console.log(content.charName); // Print the value to the console
         this.characters[i].name = content.charName;
         this.characters[i].race = content.race;
+        this.characters[0].name = "Testing";
         //this.characters[i] = placeholder;
     })
     .catch(error => {
@@ -202,7 +213,7 @@ export class CharactersComponent {
   }
 
 
-
+  
 
 }
 
