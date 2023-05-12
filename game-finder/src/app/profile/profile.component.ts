@@ -95,7 +95,8 @@ export class ProfileComponent {
       this.status = data.status;
       //this.tags = data.tags;
       this.bio = data.aboutMe;
-      this.pfp = data.pfp;
+      this.pfp = data.pfp.replace(/ /g, '+');
+      console.log(this.pfp)
       this.availability = data.availableTime;
       this.timezone = data.timezone;
       this.blockedProfiles = data.blockedProfiles;
@@ -123,6 +124,8 @@ export class ProfileComponent {
   cancel() {
     /* TODO reset values if necessary */
     this.editing = false;
+    window.location.reload();
+
   }
 
   /**
@@ -215,6 +218,16 @@ export class ProfileComponent {
       });
     }
 
+    // save PFP
+    fetch(this.ip + "SetProfileVar?Username=" + this.username
+      + "&ReqVar=" + "pfp"
+      + "&NewVar=" + this.pfp, {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
     this.editing = false;
   }
 
@@ -244,6 +257,47 @@ export class ProfileComponent {
 
     return dataURI;
   }
+
+  editPFP(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = image.width;
+        let height = image.height;
+
+        if (width > 128 || height > 128) {
+          if (width > height) {
+            height = Math.round((height * 128) / width);
+            width = 128;
+          } else {
+            width = Math.round((width * 128) / height);
+            height = 128;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        if (ctx != null) {
+          ctx.drawImage(image, 0, 0, width, height);
+        }
+        const base64String = canvas.toDataURL(file.type);
+        this.pfp = base64String;
+
+        event.target.style.display = 'none';
+      };
+
+      image.src = reader.result as string;
+    };
+
+    reader.readAsDataURL(file);
+  }
+
 
   /**
    *
