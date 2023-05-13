@@ -24,8 +24,26 @@
         <title>Random Number Generator</title>
     </head>
     <body>
-        <button (click)="generateRandomNumber()" id="generateRandomNumber">Generate Random Number</button>
-        <p *ngIf="randomNumber" id="randomNumber">Random Number: {{randomNumber}}</p>
+        <label for="range">Size of Dice:</label>
+        <select id="range" name="range" [(ngModel)]="numberRange">
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="20">20</option>
+        </select>
+        
+        
+        <label for="count">Number of Dice:</label>
+        <input type="number" id="count" name="count" [(ngModel)]="numberCount">
+        
+        <button (click)="generateRandomNumbers()">Generate Random Numbers</button>
+        
+        <div *ngIf="randomNumbers">
+          <p *ngFor="let num of randomNumbers">Random Number: {{num}}</p>
+        </div>
+        
     </body>
 </html>
 

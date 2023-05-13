@@ -7,8 +7,16 @@ import { Component } from '@angular/core';
 })
 export class DiceRollerComponent {
   randomNumber!: number;
+  numberCount!: number;
+  numberRange!:number;
+  randomNumbers!: number[];
 
-  generateRandomNumber() {
-    this.randomNumber = Math.floor(Math.random() * 100) + 1;
+  generateRandomNumbers() {
+    this.randomNumbers = [];
+  
+    for (let i = 0; i < this.numberCount; i++) {
+      const number = Math.floor(Math.random() * this.numberRange) + 1;
+      this.randomNumbers.push(number);
+    }
   }
 }
