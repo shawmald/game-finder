@@ -11,6 +11,7 @@
 import { MongoDB } from "./mongoDB";
 import { CharSheet } from "./CharSheet";
 import { Spell } from "./Spell";
+import { DMScreen } from "./DMScreen";
 
 export class Profile {
 
@@ -19,19 +20,19 @@ export class Profile {
     private username;
     private password;
     private privacyLvl;
-    private email;
+    private email : string = "";
     private location : string = null as any;   
     private status : string = null as any;     
     private tags : Array<string> = null as any;   
     private aboutMe : string = null as any;    
     private pfp : string = null as any;   
     private availableTime : string = null as any;  
-    private timezone : string = null as any;
+    private timezone : string = "";
     private blockedProfiles = new Array();
     private friends = new Array();
-    //private charSheets : Array<CharSheet> = [];
     private charSheets = new Array();
     private db : MongoDB;
+    private DMSCreen! : DMScreen;
  
     public constructor(displayName : string, email : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
     public constructor(username : string, password : string, db : MongoDB);    //Constructor for logging in
@@ -45,12 +46,14 @@ export class Profile {
             this.password = arr[3];
             this.db = arr[4];
             this.privacyLvl = "Public";
+            this.DMSCreen = new DMScreen( arr[2], arr[4] );
             this.saveToDB();
         }
         else{
             this.username = arr[0];
             this.password = arr[1];
             this.db = arr[2];
+            this.DMSCreen = new DMScreen( arr[0], arr[2] );
             this.getUserDBInfo();
         }
     }
@@ -74,7 +77,7 @@ export class Profile {
 
         this.displayName = doc.DisplayName;
         this.privacyLvl = doc.PrivacyLevel;
-        this.charSheets = JSON.parse( doc.CharacterSheets );
+        this.charSheets = doc.CharacterSheets;
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
         this.email = doc.Email;
@@ -123,19 +126,16 @@ export class Profile {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "PFP", this.pfp);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "AvailableTime", this.availableTime);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Timezone", this.timezone);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "CharacterSheets", JSON.stringify(this.charSheets) );
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "CharacterSheets", this.charSheets );
     }
 
 
 
     //For profiles would I have it be something like calling the profile, then looking at the different character sheets
     //and going from that or should I just call the character sheets and have spells modified from that ?
-    public createCharSheet(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
-    pictures : Array<string>){
+    public createCharSheet(charName : string){
 
-        let newSheet = new CharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money,
-        skills, pictures);
+        let newSheet = new CharSheet(charName);
         this.addCharacterSheet(newSheet);
         this.updateDB();
     }
@@ -144,11 +144,9 @@ export class Profile {
         this.charSheets.push(newSheet);
     }
 
-    public updateCharSheet(charSheet : CharSheet, charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
-    pictures : Array<string>){
-        charSheet.editInformation(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money,
-            skills, pictures);
+    public updateCharSheet(charSheet : CharSheet, charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string){
+        charSheet.editInformation(charName, race, charClass, charSubClass, lvl, allignment);
+        this.updateDB();
     }
 
     public accessCharacterSheet(pos : number) {
@@ -157,6 +155,30 @@ export class Profile {
         }
         else {
             return "The character sheet at this position is null";
+        }
+    }
+
+    public addFriend(friend : string) {
+        this.friends.push(friend);
+    }
+
+    public removeFriend(friend : string) {
+        //Got code from this https://stackoverflow.com/questions/15292278/how-do-i-remove-an-array-item-in-typescript
+        const index = this.friends.indexOf(friend, 0);
+        if (index > -1) {
+            this.friends.splice(index, 1);
+        }
+
+    }
+
+    public addBlocked(block : string) {
+        this.blockedProfiles.push(block);
+    }
+
+    public removeBlocked(block : string) {
+        const index = this.blockedProfiles.indexOf(block, 0);
+        if (index > -1) {
+            this.blockedProfiles.splice(index, 1);
         }
     }
 

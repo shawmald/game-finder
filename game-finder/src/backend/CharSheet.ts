@@ -11,93 +11,50 @@ import { InfoStorage } from "./InfoStorage";
 
 export class CharSheet {
 
-    public charName;
-    private race;
-    private background;
-    private backstory;
-    private lvl;
-    private charClass;
-    private equipment;  
-    private stats = [1, 1, 1, 1, 1, 1];     //[str, dexterity, constitution, intelligence, wisdom, charisma]
-    private statModifier = [0, 0, 0, 0, 0, 0]
-    //Proficiency bonus
-    private combatStats = [1, 1, 1, 1, 1, 1];   //[Armour class, initiative, speed, current hit pts, total hit pts, charisma ]
-    private money = [0, 0, 0];  //[Gold, Silver, Electrum]
-    private spells : Array<Spell> = [];
-    private skills : Array<string>;
-    private pictures : Array<string>;   //This just stores a 64string picture
+    //Segment 1
+    private charName;
+    private race! : string;
+    private charClass! : string;
+    private charSubclass! : string;
+    private lvl! : string;
+    private allignment! : string;
 
-    //Each skill has a proficiency bonus in a certain stat
+    //Segment 2
+    private stats = new Array();     //[str, dexterity, constitution, intelligence, wisdom, charisma]
+    private statModifiers = new Array();
 
-    //Add recommended racial feature depending on races
-    //Add recommended skills depending on class
+    //Segment 3
+    //Proficiencies
 
-    /**
-     * 
-     * @param charName 
-     * @param race 
-     * @param background 
-     * @param backstory 
-     * @param lvl 
-     * @param charClass 
-     * @param spells 
-     * @param stats 
-     * @param equipment 
-     * @param skills 
-     */
-    constructor(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
-    pictures : Array<string>) {
+    //Segment 4
+    private combatStats = new Array();  //[Armour Class, Initiative, Speed, Current HP, Total HP]
+
+    //Segment 5
+    private classFeatures! : string;
+    private background! : string;
+
+    //Segment 6
+    private money = new Array();    //[Gold, silver, electrum]
+    private equipment! : string;
+
+    //Segment 7
+    private spells = new Array();
+    private pictures = new Array();
+
+    constructor(charName : string) {
         this.charName = charName;
-        this.race = race;
-        this.background = background;
-        this.backstory = backstory;
-        this.lvl = lvl;
-        this.charClass = charClass;
-        this.equipment = equipment;
-        this.stats = stats;
-        this.statModifier = statMods;
-        this.combatStats = combatStats;
-        this.money = money;
-        this.skills = skills; 
-        this.pictures = pictures;
-
     }
 
 
-    /**
-     * 
-     * @param charName 
-     * @param race 
-     * @param background 
-     * @param backstory 
-     * @param lvl 
-     * @param charClass 
-     * @param spells 
-     * @param stats 
-     * @param equipment 
-     * @param inventory 
-     * @param languages 
-     * @param skills 
-     */
-    public editInformation(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
-    pictures : Array<string>) {
+    public editInformation(charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string) {
         this.charName = charName;
         this.race = race;
-        this.background = background;
-        this.backstory = backstory;
-        this.lvl = lvl;
         this.charClass = charClass;
-        this.equipment = equipment;
-        this.stats = stats;
-        this.statModifier = statMods;
-        this.combatStats = combatStats;
-        this.money = money;
-        //this.spells = spells;
-        this.skills = skills; 
-        this.pictures = pictures;
+        this.charSubclass = charSubClass;
+        this.lvl = lvl;
+        this.allignment = allignment;
     }
+
 
 
     //Need to have mongodb be here for a temp amount of time
@@ -116,17 +73,18 @@ export class CharSheet {
      * @param races 
      * @param reqClasses 
      */
-    public createSpell(spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
-    school : Array<string>, components : Array<string>, races : Array<string>, reqClasses : Array<string>, db : MongoDB) {
-        let newSpell = new Spell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses);
+    
+    public createSpell(spellName : string, db : MongoDB) {
+        let newSpell = new Spell(spellName);
         this.addSpell( newSpell );
         this.infoAddSpell( newSpell, db );
     }
 
-    /**
+    /** 
      * Adds the newly created spell from createSpell() to the spell array in this obj.
      * @param newSpell 
      */
+    
     public addSpell( newSpell : Spell) {
         this.spells.push(newSpell); 
     }
@@ -149,6 +107,7 @@ export class CharSheet {
      * 
      * @param spell 
      */
+    
     public infoAddSpell( spell : Spell, db : MongoDB ) {
         let storage = new InfoStorage( db );
         storage.saveSpells( spell );
@@ -165,22 +124,4 @@ export class CharSheet {
         }
     }
 
-    //I could either return everything in a giant array or do something else
-    //I can actually do JSON.stringify() to return all of the information in 1 big array, so that'll be preferred 
-    //Leave this empty for now and probably isn't worth it tbh
-    returnInformation() {
-        const returnArray = new Array();
-        returnArray.push(this.charName);
-        returnArray.push(this.race);
-        returnArray.push(this.background);
-        returnArray.push(this.backstory);
-        returnArray.push(this.lvl);
-        returnArray.push(this.charClass);
-        returnArray.push(this.stats);
-        returnArray.push(this.spells);
-        returnArray.push(this.equipment);
-        returnArray.push(this.skills);
-
-        return returnArray;
-    }
 }

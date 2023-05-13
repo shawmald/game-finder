@@ -5,21 +5,44 @@
  * @Date 20-4-23
  */
 
-
-
-/**
- * TO-ADD
- * NPCs[]   : Name, Race, Size, Speed, Stats modifications, attacks, desc   by friendly / enemy
- * AddNPC()
- * RM  NPC
- * Maybe have the option of map later, they can just import an img into it (OPT)
- */
-
-
+import { MongoDB } from "./mongoDB";
+import { NPC } from "./npc"
 
 export class DMScreen {
+    
+    public username! : string;
+    public NPCList : Array<NPC> = new Array();
+    public db! : MongoDB;
 
-    constructor() {
 
+    constructor(username : string, db : MongoDB) {
+        this.username = username;
+        this.db = db;
+    }
+
+    public addNPC(npcName : string) {
+        this.NPCList.push( new NPC(npcName) );
+        this.saveNPC();
+    }
+
+    public removeNPC(npcPos : number) {
+        if (npcPos > -1) {
+            this.NPCList.splice(npcPos, 1);
+        }
+
+        this.saveNPC();
+    }
+
+    public accessNPC(npcPos : number) {
+        if( this.NPCList[npcPos] != null) {
+            return this.NPCList[npcPos];
+        }
+        else {
+            return "The npc is null and hasn't been created in this position yet"
+        }
+    }
+
+    public saveNPC() {
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "GMScreen", this.NPCList);
     }
 }

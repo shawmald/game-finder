@@ -9,12 +9,12 @@
 import { MongoDB } from "./mongoDB";
 import { Profile } from "./Profile";
 import { InfoStorage } from "./InfoStorage";
+import { DMScreen } from "./DMScreen";
 
 export class ProfileManagement {
 
     private profileList = new Array();
     private db : MongoDB;
-    //private storedInfo : InfoStorage;
 
     /**
      * 

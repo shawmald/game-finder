@@ -9,6 +9,7 @@ import { MongoDB } from "./mongoDB";
 import { Profile } from "./Profile";
 
 import express from "express";
+import cors from 'cors';
 import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunction is needed for this but I'll leave it in for now 
 
 
@@ -16,6 +17,10 @@ import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunc
 
 export async function startServer() {
   const server = express();
+  //server.use(cors); //https://www.twilio.com/blog/add-cors-support-express-typescript-api
+  server.use(cors({
+    allowedHeaders: "*"
+  }))
   const db = new MongoDB("mongodb+srv://gameFinder:ASUq%23%2AAIwq%29@gamefinder.2rj5gki.mongodb.net/?retryWrites=true&w=majority");
   const profileManagement = new ProfileManagement(db);
 
@@ -72,9 +77,50 @@ export async function startServer() {
     let profile = await profileManagement.accessUser(username);
     profile.setMongoDB(null);
     let JSONConversion = JSON.stringify( profile );
-    //console.log( JSONConversion );
     profile.setMongoDB(db);
     res.send( JSONConversion );
+  } )
+
+
+  server.get('/AddFriendOrBlock', async (req: Request, res: Response) => {
+
+    const username = req.query.Username as string;
+    const otherUser = req.query.OtherUser as string;
+    const option = req.query.Option as string;
+    let profile = await profileManagement.accessUser(username);
+
+    if(option == "friend") {
+      profile.addFriend(otherUser);
+      res.send( "The user was friended" );
+    }
+    else if(option == "block") {
+      profile.addBlocked(otherUser);
+      res.send( "The user was blocked" );
+    }
+    else {
+      res.send( "The user was friended or blocked" );
+    }
+  
+  } )
+
+  server.get('/RemoveFriendOrBlock', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    const otherUser = req.query.OtherUser as string;
+    const option = req.query.Option as string;
+    let profile = await profileManagement.accessUser(username);
+
+    if(option == "friend") {
+      profile.removeFriend(otherUser);
+      res.send( "The user was removed from friends" );
+    }
+    else if(option == "block") {
+      profile.removelocked(otherUser);
+      res.send( "The user was blocked" );
+    }
+    else {
+      res.send( "The user was remvoed from blocked" );
+    }
+    res.send( "The user was friended or blocked" );
   } )
 
 
@@ -104,29 +150,53 @@ export async function startServer() {
 
 
   /**
-   * DONE
+   * TO REVISE
    */
   server.get('/AddCharacterSheet', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     const charName = req.query.CharacterName as string;
     const race = req.query.Race as string;
-    const background   = req.query.Background as string;
-    const backstory = req.query.Backstory as string;
-    const lvl = req.query.Lvl as string;
     const charClass = req.query.CharacterClass as string;
-    const equipment = req.query.Equipment as string;
-    const stats = convertStrToNum( req.query.Stats as string ); //Change to Array<number>
-    const statMods =  convertStrToNum( req.query.StatModifiers as string );  //Change to Array<number>
-    const combatStats =  convertStrToNum( req.query.CombatStats as string ); //Change to Array<number>
-    const money =  convertStrToNum( req.query.Money as string ); //Change to Array<number>
-    //const spells = null as any; //This is to add spells later
-    const skills = req.query.Skills as Array<string>;
-    const pictures = req.query.Pictures as Array<string>;
-    profile.createCharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods,
-    combatStats, money, skills, pictures);
+    const charSubClass = req.query.CharacterSubClass as string;
+    const lvl = req.query.Level as string;
+    const allignment = req.query.Allignment as string;
+    
+    profile.createCharSheet(charName, race, charClass, charSubClass, lvl, allignment);
 
     res.send( "Character Sheet should be uploaded to profile" );
+  } )
+
+
+  /**
+   * 
+   */
+  server.get('/ReturnCharacterSheetInfo', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const charPos = req.query.CharacterPos as string;
+    let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
+    //res.status(1).send( JSON.stringify(charSheet) );
+    res.send( JSON.stringify(charSheet) );
+  } )
+
+
+  /**
+   * 
+   */
+  server.get('/ReturnCharacterSheetLength', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    let length = 0;
+    if(profile.charSheets == null) {
+      //Do nothing
+    }
+    else{
+      length = profile.charSheets.length;
+    }
+    console.log( length );
+    
+    res.send( String(length) );
   } )
 
   /**
@@ -139,17 +209,8 @@ export async function startServer() {
     let charSheet = profile.accessCharacterSheet(charName);
 
     const spellName = req.query.SpellName as string;
-    const castingTime = req.query.CastingTime as string;
-    const range = req.query.Range as string;
-    const duration = req.query.Duration as string;
-    const desc = req.query.Description as string;
-    const spellLvl = req.query.SpellLvl as string;
-    const school = req.query.School as Array<string>;
-    const components = req.query.Components as Array<string>;
-    const races  = req.query.Races as Array<string>;
-    const reqClasses = req.query.ReqClasses as Array<String>;
 
-    charSheet.createSpell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses, db);
+    charSheet.createSpell(spellName, db);
 
     res.send( "Spell has been added to character sheet" );
   } )
@@ -181,6 +242,22 @@ export async function startServer() {
 
     res.send( "Character Sheet should be updated" );
   } )
+
+  /**
+   * 
+   */
+  server.get('/SetCharacterSheetVar', async (req: Request, res : Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const charPos = req.query.CharacterPos as string;
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    const reqVar = req.query.ReqVar as string;
+    const newVar = req.query.NewVar as any;
+    charSheet[reqVar] = newVar;
+    profile.updateDB();
+
+    res.send( newVar );
+  } )
   
   /**
    * DONE
@@ -210,7 +287,7 @@ export async function startServer() {
   } )
 
   /**
-   * TO-DO
+   * TO-DO : BUG FIX
    */
   server.get('/RecommendSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
@@ -221,6 +298,46 @@ export async function startServer() {
     
     res.send ( JSON.stringify(recSpells) );
   } )
+
+
+  /**
+   * 
+   * GMSCREEN / NPC WEBSERVER
+   * 
+   */
+
+  server.get('/CreateNPC', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const npcName = req.query.NPCName as string;
+    profile.dmScreen.addNPC(npcName);
+    
+    res.send ( "The NPC was created" );
+  } )
+
+  server.get('/EditNPC', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const npcPos = req.query.NPCPos as string;
+    const reqVar = req.query.ReqVar as string;
+    const newVar = req.query.Newvar as string;
+    let npc = profile.dmScreen.accessNPC( Number.parseInt(npcPos) );
+    npc[reqVar] = newVar;
+    profile.dmScreen.saveNPC();
+
+    res.send ( "NPC was modified" );
+  } )
+
+  server.get('/ReturnNPCs', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    let npcList = profile.dmScreen.npcList;
+
+    res.send ( JSON.stringify(npcList) );
+  } )
+
+
+
 
   server.listen(80);
   
