@@ -32,6 +32,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { NpcDialogComponent } from './npc-dialog/npc-dialog.component';
 import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.component';
 import { SpellsComponent } from './spells/spells.component';
+import { AuthGuard } from './auth.guard';
+import { LoginGuard } from './login.guard';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,10 @@ import { SpellsComponent } from './spells/spells.component';
     MatCardModule
 
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    LoginGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
