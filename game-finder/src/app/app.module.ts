@@ -31,6 +31,7 @@ import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NpcDialogComponent } from './npc-dialog/npc-dialog.component';
 import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.component';
+import { SpellsComponent } from './spells/spells.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.compon
     LogoutComponent,
     NpcDialogComponent,
     TagEditDialogComponent,
+    SpellsComponent,
 
     PageNotFoundComponent //always keep at end
 

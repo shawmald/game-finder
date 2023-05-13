@@ -23,7 +23,8 @@ export class CharactersComponent {
       new Character(0, "Character 1"),
       new Character(1, "Character 2"),
       new Character(2, "Character 3"),
-      new Character(3, "Character 4")
+      new Character(3, "Character 4"),
+      new Character(4, "Character 5")
     ]; // Initialize the property in the constructor
   }
 
