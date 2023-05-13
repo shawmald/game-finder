@@ -38,10 +38,10 @@
         <label for="count">Number of Dice:</label>
         <input type="number" id="count" name="count" [(ngModel)]="numberCount">
         
-        <button (click)="generateRandomNumbers()">Generate Random Numbers</button>
+        <button (click)="generateRandomNumbers()">Roll The Dice!</button>
         
         <div *ngIf="randomNumbers">
-          <p *ngFor="let num of randomNumbers">Random Number: {{num}}</p>
+          <p *ngFor="let num of randomNumbers">Dice Roll: {{num}}</p>
         </div>
         
     </body>
