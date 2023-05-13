@@ -19,10 +19,75 @@
     font-size: 16px;
     margin: 10px;
     cursor: pointer;
-  }
-  
-  #randomNumber {
+}
+
+#randomNumber {
     font-size: 24px;
     font-weight: bold;
     margin: 10px;
-  }
+}
+
+.number-display .number {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 20 20px;
+}
+
+.number-display.d6 {
+    width: 185px;
+    height: 203px;
+    background-image: url('dice.png');
+    /* background-size: 185% 203%; */
+    display: inline-block;
+    background-position: -56px -135px;
+}
+
+.number-display.d4 {
+    /* width: 100px;
+    height: 100px; */
+    background-image: url('dice.png');
+    width: 204px; 
+    height: 197px;
+    display: inline-block;
+    background-position: -49px -440px;
+}
+
+.number-display.d8 {
+    /* width: 100px;
+    height: 100px; */
+    background-image: url('dice.png');
+    width: 185px;
+    height: 221px;
+    display: inline-block;
+    background-position: -60px -735px;
+}
+
+.number-display.d10 {
+    /* width: 100px;
+    height: 100px; */
+    background-image: url('dice.png');
+    width: 254px;
+    height: 276px;
+    display: inline-block;
+    background-position: -20px -1032px;
+}
+
+.number-display.d12 {
+    /* width: 100px;
+    height: 100px; */
+    background-image: url('dice.png');
+    width: 229px ;
+    height: 298px;
+    display: inline-block;
+    background-position: -53px -1394px;
+}
+
+.number-display.d20 {
+    /* width: 100px;
+    height: 100px; */
+    background-image: url('dice.png');
+    width: 163px ;
+    height: 220px;
+    display: inline-block;
+    background-position: -74px -1775px;
+}

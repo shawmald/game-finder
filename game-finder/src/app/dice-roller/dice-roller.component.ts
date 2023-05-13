@@ -19,4 +19,9 @@ export class DiceRollerComponent {
       this.randomNumbers.push(number);
     }
   }
+  updateDie() {
+    const dieContainer = document.querySelector('.die-container') as HTMLElement;
+    dieContainer.classList.add(`d${this.numberRange}`);
+    // dieContainer.style.backgroundPositionX = `${(this.randomNumbers[1] - 1) * -100}px`;
+  }
 }
