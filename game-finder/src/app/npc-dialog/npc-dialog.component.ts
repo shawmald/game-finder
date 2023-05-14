@@ -11,20 +11,17 @@ export class NpcDialogComponent {
   statTool: StatUtil = new StatUtil();
   editing: boolean = false;
   
-  constructor( 
-    public dialogRef: MatDialogRef<NpcDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ){}
+  constructor( public dialogRef: MatDialogRef<NpcDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any){}
   
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+
   edit(){
     this.editing = true;
   }
   
-
   save(): void {
     //do smth
     //this.dialogRef.close();
