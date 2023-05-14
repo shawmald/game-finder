@@ -45,4 +45,8 @@ export class DMScreen {
     public saveNPC() {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "GMScreen", this.NPCList);
     }
+
+    public setMongoDB(variable : any) {
+        this.db = variable;
+    }
 }

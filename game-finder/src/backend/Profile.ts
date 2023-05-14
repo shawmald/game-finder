@@ -198,4 +198,8 @@ export class Profile {
         return this.password;
     }
 
+    public returnDMScreen() {
+        return this.DMSCreen;
+    }
+
 }

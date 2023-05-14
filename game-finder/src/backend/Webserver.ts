@@ -11,6 +11,7 @@ import { Profile } from "./Profile";
 import express from "express";
 import cors from 'cors';
 import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunction is needed for this but I'll leave it in for now 
+import { DMScreen } from "./DMScreen";
 
 
 //https://www.kindacode.com/snippet/node-js-express-typescript-req-query-type/
@@ -75,9 +76,12 @@ export async function startServer() {
   server.get('/ReturnProfileInformation', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
+    let dmScreen = await profile.returnDMScreen();
     profile.setMongoDB(null);
+    dmScreen.setMongoDB(null);
     let JSONConversion = JSON.stringify( profile );
     profile.setMongoDB(db);
+    dmScreen.setMongoDB(db);
     res.send( JSONConversion );
   } )
 
@@ -202,22 +206,6 @@ export async function startServer() {
   /**
    * DONE
    */
-  server.get('/AddSpells', async (req: Request, res: Response) => {
-    const username = req.query.Username as string;
-    let profile = await profileManagement.accessUser(username);
-    const charName = req.query.CharacterName as string;
-    let charSheet = profile.accessCharacterSheet(charName);
-
-    const spellName = req.query.SpellName as string;
-
-    charSheet.createSpell(spellName, db);
-
-    res.send( "Spell has been added to character sheet" );
-  } )
-
-  /**
-   * DONE
-   */
   server.get('/UpdateCharacterSheet', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
@@ -258,9 +246,33 @@ export async function startServer() {
 
     res.send( newVar );
   } )
+
+
+  /**
+   * 
+   * SPELL WEBSERVER
+   * 
+   */
+
+
+  /**
+   * TO-DO BUG FIX
+   */
+  server.get('/AddSpells', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const charName = req.query.CharacterName as string;
+    let charSheet = profile.accessCharacterSheet(charName);
+
+    const spellName = req.query.SpellName as string;
+
+    charSheet.createSpell(spellName, db);
+
+    res.send( "Spell has been added to character sheet" );
+  } )
   
   /**
-   * DONE
+   * TO-DO BUG FIX
    */
   server.get('/UpdateSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
@@ -299,6 +311,24 @@ export async function startServer() {
     res.send ( JSON.stringify(recSpells) );
   } )
 
+  /**
+  * TO-DO : BUG FIX
+  */
+  server.get('/SetSpellVar', async (req: Request, res : Response) => {
+    const username = req.query.Username as string;
+    const charPos = req.query.CharacterPos as string;
+    const reqVar = req.query.ReqVar as string;
+    const newVar = req.query.NewVar as any;
+    const spellPos = req.query.SpellPos as string;
+    let profile = await profileManagement.accessUser(username);
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    let spell = charSheet.accessSpell( Number.parseInt(spellPos) );
+    spell[reqVar] = newVar;
+    profile.updateDB();
+
+    res.send( newVar );
+  } )
+
 
   /**
    * 
@@ -335,8 +365,6 @@ export async function startServer() {
 
     res.send ( JSON.stringify(npcList) );
   } )
-
-
 
 
   server.listen(80);
