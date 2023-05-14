@@ -47,8 +47,8 @@
             <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
 
             <!-- if not the same user: show friend and cancel buttons -->
-            <button *ngIf="!sameUser" (click)="friend()" class="button" type="button" >friend</button>
-            <button *ngIf="!sameUser" (click)="block()" class="button" type="button" >block</button>
+            <button *ngIf="!sameUser && isLoggedIn" (click)="friend()" class="button" type="button" >friend</button>
+            <button *ngIf="!sameUser && isLoggedIn" (click)="block()" class="button" type="button" >block</button>
         </div>
 
 
@@ -115,10 +115,9 @@
                 </select>
             </div>
 
-
+            Tags
             <!-- question circle, hover for info on tags -->
-            <!--
-              Tags
+
             <mat-icon
                 class="help"
                 matTooltip="add tag explanation"
@@ -127,23 +126,18 @@
             >
                 help_outline
             </mat-icon>
-            -->
 
             <!-- edit button, click to open popup where you can edit tags -->
 
-            <!--
             <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
-            -->
 
             <!-- display tags -->
                 <!-- display all true tags -->
-                <!--
                   <div id="tag-container" class="flex-row">
                 <div class="tag" *ngFor="let tag of filterTags( this.tags )">
                     {{ tag }}
                 </div>
             </div>
-            -->
 
         </div>
 

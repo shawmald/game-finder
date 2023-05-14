@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
  */
 export class ProfileComponent {
 
+  isLoggedIn: boolean = false;
   currentUser: string = "";
   username: string = "";
   sameUser: boolean = false;
@@ -74,6 +75,7 @@ export class ProfileComponent {
 
   /* TODO insert oninit stuff when login & backend is implemented */
   ngOnInit(): void {
+    this.isLoggedIn = (sessionStorage.getItem('isLoggedIn') == 'true')
     this.currentUser = sessionStorage.getItem('currentUser') as string;
 
     this.username = this.route.snapshot.paramMap.get('username') as string;

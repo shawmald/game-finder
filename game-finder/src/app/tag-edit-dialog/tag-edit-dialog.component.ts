@@ -7,18 +7,19 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./tag-edit-dialog.component.css']
 })
 export class TagEditDialogComponent {
-  constructor( 
-    public dialogRef: MatDialogRef<TagEditDialogComponent>, 
+  constructor(
+    public dialogRef: MatDialogRef<TagEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){}
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
+
 
   ok(): void {
     //do smth
+    console.log(this.data)
     this.dialogRef.close();
   }
 
