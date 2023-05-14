@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TagEditDialogComponent } from '../tag-edit-dialog/tag-edit-dialog.component';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +10,7 @@ import { zipAll } from 'rxjs';
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.css']
 })
+
 
 /**
  * Characters component class

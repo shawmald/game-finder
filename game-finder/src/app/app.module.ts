@@ -43,6 +43,10 @@ import { LogoutComponent } from './logout/logout.component';
 import { NpcDialogComponent } from './npc-dialog/npc-dialog.component';
 import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.component';
 import { SpellsComponent } from './spells/spells.component';
+// import { SpellListComponent } from './spell-list.component';
+// import { SpellViewComponent } from './spell-view.component';
+// import { ViewSelectorComponent } from './view-selector.component';
+// import { ColumnsComponent } from './columns.component';
 
 @NgModule({
   declarations: [
@@ -111,5 +115,7 @@ export class MaterialModule { }
   ],
   providers: [],
   bootstrap: [AppComponent]
+  
+  
 })
 export class AppModule { }

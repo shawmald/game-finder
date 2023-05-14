@@ -1,1 +1,61 @@
-<p>spells works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <form action="/action_page.php">
+            <p>select class(es)</p>
+            <table class="table">
+                <tr>
+                    <th>Bard</th>
+                    <th>Cleric</th>
+                    <th>Druid</th>
+                    <th>Paladin</th>
+                    <th>Ranger</th>
+                    <th>Sorcerer</th>
+                    <th>Warlock</th>
+                    <th>Wizard</th>
+                </tr>
+                <tr>
+                    <td><input id="bard" name="bard" type="checkbox" value="Class"/></td>
+                    <td><input id="cleric" name="cleric" type="checkbox" value="Class"/></td>
+                    <td><input id="druid" name="druid" type="checkbox" value="Class"/></td>
+                    <td><input id="paladin" name="paladin" type="checkbox" value="Class"/></td>
+                    <td><input id="ranger" name="ranger" type="checkbox" value="Class"/></td>
+                    <td><input id="sorcerer" name="sorcerer" type="checkbox" value="Class"/></td>
+                    <td><input id="warlock" name="warlock" type="checkbox" value="Class" /></td>
+                    <td><input id="wizard" name="wizard" type="checkbox" value="Class"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Level</th>
+                <th>School</th>
+                <th>Casting Time</th>
+                <th>Range</th>
+                <th>Components</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th>Classes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let spell of spells">
+                <td>{{ spell.name }}</td>
+                <td>{{ spell.level }}</td>
+                <td>{{ spell.school }}</td>
+                <td>{{ spell.casting_time }}</td>
+                <td>{{ spell.range }}</td>
+                <td>{{ spell.components }}</td>
+                <td>{{ spell.duration }}</td>
+                <td>{{ spell.description }}</td>
+                <td>{{ spell.classes }}</td>
+              </tr>
+            </tbody>
+          </table>
+          
+      
+    </div>
+  </div>

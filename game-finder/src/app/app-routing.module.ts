@@ -10,6 +10,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
+import { SpellsComponent } from './spells/spells.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';  // keep at end
 import { LogoutComponent } from './logout/logout.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'spells', component: SpellsComponent },
 
   { path: '**', component: PageNotFoundComponent }  //always keep at end
 ];
