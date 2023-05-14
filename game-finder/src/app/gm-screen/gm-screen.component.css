@@ -20,11 +20,16 @@
 
 table{
     width: 90%;
-    margin: 0px auto 0px auto;
+    margin: 0px auto 10px auto;
 }
 
 td{
     padding: 0px 1px 0px 1px;
     text-align: center;
+}
+
+/* edit spacing of headers 3 & 4 for GM Screen only */
+h3, h4{
+    margin: 10px 0px 0px 0px;
 }
 

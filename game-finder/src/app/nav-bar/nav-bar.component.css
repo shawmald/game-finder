@@ -137,14 +137,7 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-  }
-
-  #right-container a {
     margin-right: 50px;
-  }
-
-  #right-container .nav-item:last-child {
-    margin-right: 0;
   }
 
   #mobile-view {

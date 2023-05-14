@@ -11,11 +11,11 @@
   <!-- main menu items: gamefinder, characters, tools, about -->
   <div id="web-view">
 
-    <a mat-button class="nav-item" routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
-    <a mat-button class="nav-item" routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characteres')">Characters</a>
+    <a *ngIf="isLoggedIn" mat-button class="nav-item" routerLink="/gamefinder" routerLinkActive="selected" (click)="setActiveLink('GameFinder')">GameFinder</a>
+    <a *ngIf="isLoggedIn"mat-button class="nav-item" routerLink="/characters" routerLinkActive="selected" (click)="setActiveLink('Characteres')">Characters</a>
 
     <!-- Tools dropdown: GM Screen, Dice Roller-->
-    <button mat-button class="nav-item" [matMenuTriggerFor]="toolsMenu">Tools</button>
+    <button *ngIf="isLoggedIn" mat-button class="nav-item" [matMenuTriggerFor]="toolsMenu">Tools</button>
 
     <mat-menu #toolsMenu="matMenu" xPosition="after">
       <button mat-menu-item routerLink="/gmscreen" routerLinkActive="selected" (click)="setActiveLink('GM Screen')">GM Screen</button>
@@ -58,8 +58,8 @@
   <!-- login & register | messages & profile icons, float right-->
   <div id="right-container">
 
-    <a *ngIf="isLoggedIn != true" class="nav-item" routerLink="/register" routerLinkActive="selected" (click)="setActiveLink('Register')">Register</a>
-    <a *ngIf="isLoggedIn != true" class="nav-item" routerLink="/login" routerLinkActive="selected" (click)="setActiveLink('Login')">Login</a>
+    <a *ngIf="isLoggedIn != true" mat-button class="nav-item" routerLink="/register" routerLinkActive="selected" (click)="setActiveLink('Register')">Register</a>
+    <a *ngIf="isLoggedIn != true" mat-button class="nav-item" routerLink="/login" routerLinkActive="selected" (click)="setActiveLink('Login')">Login</a>
 
     <!-- messages icon -->
 

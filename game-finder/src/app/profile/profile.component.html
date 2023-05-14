@@ -13,7 +13,19 @@
         <!-- pfp & display name -->
         <div>
             <!-- profile picture -->
-            <img [src]="getPFP()" alt="profile picture">
+          <!--
+            <div class="pfp">
+              <label for="pfp-input">
+                -->
+                <img [src]="getPFP()" alt="profile picture">
+                <!--
+                <div class="pfp-hover" *ngIf="editing">
+                  <p>Edit Profile Picture</p>
+                </div>
+              </label>
+              <input *ngIf="editing" id="pfp-input" type="file" (change)="editPFP($event)">
+            </div>
+            -->
 
             <!-- display name, if editing replace with input box preloaded with current display name -->
             <h2 *ngIf="!editing">{{ displayName }}</h2>
@@ -103,8 +115,10 @@
                 </select>
             </div>
 
-            Tags
+
             <!-- question circle, hover for info on tags -->
+            <!--
+              Tags
             <mat-icon
                 class="help"
                 matTooltip="add tag explanation"
@@ -113,18 +127,23 @@
             >
                 help_outline
             </mat-icon>
-
+            -->
 
             <!-- edit button, click to open popup where you can edit tags -->
+
+            <!--
             <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
+            -->
 
             <!-- display tags -->
-            <div id="tag-container" class="flex-row">
                 <!-- display all true tags -->
+                <!--
+                  <div id="tag-container" class="flex-row">
                 <div class="tag" *ngFor="let tag of filterTags( this.tags )">
                     {{ tag }}
                 </div>
             </div>
+            -->
 
         </div>
 
@@ -140,7 +159,7 @@
             <!-- question circle, hover for info on time blocks -->
             <mat-icon
                 class="help"
-                matTooltip="add time block explanation"
+                matTooltip="Time Zone can be edited in profile settings"
                 matTooltipPosition="after"
                 matTooltipHideDelay="2000"
             >
