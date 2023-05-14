@@ -9,27 +9,28 @@ import { AboutComponent } from './about/about.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './login/login.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';  // keep at end
+import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './auth.guard';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'gamefinder', pathMatch: 'full'},
 
-  { path: 'gamefinder', component: GamefinderComponent },
-  { path: 'characters', component: CharactersComponent },
-  { path: 'gmscreen', component: GmScreenComponent },
-  { path: 'diceroller', component: DiceRollerComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'messages', component: MessagesComponent },
-  { path: 'profile', component: ProfileComponent }, //replace when login implemented
-  /*{ path: 'profile/:username', component: ProfileComponent },*/ //causes issues without login
+  { path: 'gamefinder', component: GamefinderComponent, canActivate: [AuthGuard]},
+  { path: 'characters', component: CharactersComponent, canActivate: [AuthGuard]},
+  { path: 'gmscreen', component: GmScreenComponent, canActivate: [AuthGuard]},
+  { path: 'diceroller', component: DiceRollerComponent, canActivate: [AuthGuard]},
+  { path: 'about', component: AboutComponent},
+  { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
+  { path: 'profile/:username', component: ProfileComponent }, //causes issues without login
   { path: 'settings', component: SettingsComponent },
-
-  /*
-  { path: 'login', component: LoginPageComponent, canActivate: [LoginGuard] },
-  { path: 'register', component: RegisterPageComponent, canActivate: [LoginGuard] },
-  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
-  */
+  { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'logout', component: LogoutComponent },
 
   { path: '**', component: PageNotFoundComponent }  //always keep at end
 ];

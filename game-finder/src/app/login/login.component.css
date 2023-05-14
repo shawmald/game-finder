@@ -1,0 +1,68 @@
+body {
+  background-color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 25%;
+  margin: 0 auto;
+  padding-top: 50px;
+  box-shadow: inset 0px 0px 10px lightgray;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  color: gray;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="password"],
+button[type="submit"],
+.google-btn {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 6px;
+}
+
+input[type="text"],
+input[type="password"]
+ {
+  border: 1px solid lightgray;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+.bottom-links {
+  margin-top: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.bottom-links a {
+  text-decoration: none;
+  color: gray;
+}
+
+.bottom-links a:hover {
+  text-decoration: underline;
+}

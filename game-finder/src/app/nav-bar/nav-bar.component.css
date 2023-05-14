@@ -4,30 +4,32 @@
     refs:
         flexbox         https://www.w3schools.com/css/css3_flexbox_container.asp
         media queries   https://www.w3schools.com/css/css3_mediaqueries.asp
-        
+
 */
 
-nav {
+/* nav {
     background-color: lightgray;
     width: 95%;
     height: 45px;
-  
-    /* sticky navbar */
+
+
+    /* sticky navbar *//*
+
     position: fixed;
     top: 0%;
-    z-index: 10;    /* navbar should always be infront */
+    z-index: 10;    /* navbar should always be infront *//*
 }
-  
+
 .nav-item {
     height: 100%;
     padding: 2px;
     margin: 0px 10px 0px 10px;
 }
 
-/* highlight current link/page */
+/* highlight current link/page *//*
 .selected{
-    background-color: pink; /* test color change later*/
-}
+    background-color: pink; /* test color change later*//*
+} */
 
 
 /*
@@ -43,10 +45,9 @@ a, button {
 
 a:hover, button:hover{
     text-decoration: underline;
-    color: plum; 
+    color: plum;
     cursor: pointer;
 }
-
 
 /*
     responsive design
@@ -102,3 +103,76 @@ a:hover, button:hover{
     display: block;
 }
 */
+
+nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 70px;
+    background-color: rgb(173, 216, 230);
+    color: #fff;
+    z-index: 9999;
+  }
+
+  .nav-item {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .selected {
+    background-color: rgb(255, 192, 203);
+  }
+
+  #right-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 50px;
+  }
+
+  #mobile-view {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    #web-view {
+      display: none;
+    }
+
+    #mobile-view {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    #mobile-view a {
+      margin-right: 0;
+    }
+
+    #mobile-view .nav-item:last-child {
+      margin-right: 0;
+    }
+
+    #mobile-view .nav-item mat-icon {
+      margin-right: 5px;
+    }
+
+    #mobile-view [matMenuTriggerFor="mainMenu"] {
+      margin-right: auto;
+    }
+  }
+
+header {
+    margin-top: 70px; /* adjust the value to match the height of the navbar */
+  }
+

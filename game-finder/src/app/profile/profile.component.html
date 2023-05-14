@@ -13,11 +13,23 @@
         <!-- pfp & display name -->
         <div>
             <!-- profile picture -->
-            <img [src]="getPFP()" alt="profile picture">
+          <!--
+            <div class="pfp">
+              <label for="pfp-input">
+                -->
+                <img [src]="getPFP()" alt="profile picture">
+                <!--
+                <div class="pfp-hover" *ngIf="editing">
+                  <p>Edit Profile Picture</p>
+                </div>
+              </label>
+              <input *ngIf="editing" id="pfp-input" type="file" (change)="editPFP($event)">
+            </div>
+            -->
 
             <!-- display name, if editing replace with input box preloaded with current display name -->
             <h2 *ngIf="!editing">{{ displayName }}</h2>
-            <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}">
+            <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}" [(ngModel)]="displayName">
         </div>
 
         <!--
@@ -38,7 +50,7 @@
             <button *ngIf="!sameUser" (click)="friend()" class="button" type="button" >friend</button>
             <button *ngIf="!sameUser" (click)="block()" class="button" type="button" >block</button>
         </div>
-        
+
 
     </div>
 
@@ -52,12 +64,14 @@
         <div class="half-col">
             <!-- TODO hide email and location based on privacy settings -->
 
-            <!-- 
+            <!--
                 display email
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
-            <a *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
+            <a *ngIf="(sameUser) || (!sameUser && privacyLevel=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
+
+            <!--
             <div class="block-display" *ngIf="editing">
                 <input type="email" placeholder="{{ email }}">
                 <select name="email visibility">
@@ -67,56 +81,69 @@
                     <option value="Private">Private</option>
                 </select>
             </div>
+            -->
 
-            <!-- 
+            <!--
                 display location
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
-            <p *ngIf="(sameUser && !editing) || (!sameUser && emailVis=='Public')">{{ location }}</p>
+            <p *ngIf="(sameUser && !editing) || (!sameUser && privacyLevel=='Public')">{{ location }}</p>
             <div class="block-display" *ngIf="editing">
-                <input placeholder="{{ location }}">
+                <input placeholder="{{ location }}" [(ngModel)]="location">
+
+                <!--
                 <select name="location visibility">
                     <option value="" selected disabled hidden>{{ locationVis }}</option>
                     <option value="Public">Public</option>
                     <option value="Friends Only">Friends Only</option>
                     <option value="Private">Private</option>
                 </select>
+                -->
+
+
             </div>
 
             <!-- status, if editing replace with dropdown preloaded with current value -->
             <div>
                 <p style="display: inline;">Status: </p>
-                <p *ngIf="!editing" style="display: inline;">{{ status }}</p>
-                <select *ngIf="editing" name="status" style="display: inline;">
+                <p *ngIf="!editing" style="display: inline;" >{{ status }}</p>
+                <select *ngIf="editing" name="status" style="display: inline;" [(ngModel)]="status">
                     <option value="" selected disabled hidden>{{ status }}</option>
                     <option value="Currently in a Campaign">Currently in a Campaign</option>
                     <option value="Looking for a Campaign">Looking for a Campaign</option>
                 </select>
             </div>
 
-            Tags
+
             <!-- question circle, hover for info on tags -->
-            <mat-icon 
+            <!--
+              Tags
+            <mat-icon
                 class="help"
-                matTooltip="add tag explanation" 
+                matTooltip="add tag explanation"
                 matTooltipPosition="after"
                 matTooltipHideDelay="2000"
             >
                 help_outline
             </mat-icon>
-            
+            -->
 
             <!-- edit button, click to open popup where you can edit tags -->
+
+            <!--
             <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
+            -->
 
             <!-- display tags -->
-            <div id="tag-container" class="flex-row">
                 <!-- display all true tags -->
+                <!--
+                  <div id="tag-container" class="flex-row">
                 <div class="tag" *ngFor="let tag of filterTags( this.tags )">
                     {{ tag }}
                 </div>
             </div>
+            -->
 
         </div>
 
@@ -124,15 +151,15 @@
         <div class="half-col">
             <!-- profile biography, if editing replace with input box preloaded with current biography -->
             <p *ngIf="!editing">{{ bio }}</p>
-            <textarea *ngIf="editing" class="block-display">{{ bio }}</textarea>
+            <textarea *ngIf="editing" class="block-display" [(ngModel)]="bio">{{ bio }}</textarea>
 
             <!-- timezone, change in settings -->
             {{ timezone }}
 
             <!-- question circle, hover for info on time blocks -->
-            <mat-icon 
+            <mat-icon
                 class="help"
-                matTooltip="add time block explanation" 
+                matTooltip="Time Zone can be edited in profile settings"
                 matTooltipPosition="after"
                 matTooltipHideDelay="2000"
             >
