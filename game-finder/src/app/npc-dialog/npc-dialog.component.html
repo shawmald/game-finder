@@ -16,49 +16,80 @@
     <h4 *ngIf="!editing">Lv {{ data.npc.level }} {{ data.npc.class }}</h4>
     <div *ngIf="editing">
         Lv
-        <input class="number-input" placeholder="{{ data.npc.level }}">
+        <input class="number-input" type="number" id="LV" name="lv" min="1" max="20" placeholder="{{ data.npc.level }}">
         <input placeholder="{{ data.npc.class }}">
     </div>
 
     <!-- stats -->
-    <h4>Stats</h4>
-    <div>
-        <div><!-- strength -->
-            Str
-            {{ statTool.calcMod( data.npc.stats.get('str') ) }}
-            {{ data.npc.stats.get('str') }}
-        </div>
+    <p>HP: cHP/mHP</p>
 
-        <div><!-- dexterity -->
-            Dex
-            {{ statTool.calcMod( data.npc.stats.get('dex') ) }}
-            {{ data.npc.stats.get('dex') }}
-        </div>
+    <table>
+        <tr>
+            <td>AC</td>
+            <td>Initiative</td>
+            <td>Speed</td>
+        </tr>
 
-        <div><!-- constitution -->
-            Con
-            {{ statTool.calcMod( data.npc.stats.get('con') ) }}
-            {{ data.npc.stats.get('con') }}
-        </div>
+        <tr>
+            <td>(AC)</td>    <!-- armor class -->
+            <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
+            <td>(spd)</td> <!-- speed -->
+        </tr>
+    </table>
 
-        <div><!-- intelligence -->
-            Int
-            {{ statTool.calcMod( data.npc.stats.get('int') ) }}
-            {{ data.npc.stats.get('int') }}
-        </div>
+    <table>
 
-        <div><!-- wisdom -->
-            Wis
-            {{ statTool.calcMod( data.npc.stats.get('wis') ) }}
-            {{ data.npc.stats.get('wis') }}
-        </div>
+        <!-- stat names -->
+        <tr>
+            <td>Str</td>
+            <td>Dex</td>
+            <td>Con</td>
+            <td>Int</td>
+            <td>Wis</td>
+            <td>Cha</td>
+        </tr>
 
-        <div><!-- charisma -->
-            Cha
-            {{ statTool.calcMod( data.npc.stats.get('cha') ) }}
-            {{ data.npc.stats.get('cha') }}
-        </div>
-    </div>
+        <!-- stat modifiers -->
+        <tr>
+            <td>{{ statTool.calcMod( data.npc.stats.get('str') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('con') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('int') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('wis') ) }}</td>
+            <td>{{ statTool.calcMod( data.npc.stats.get('cha') ) }}</td>
+        </tr>
+
+        <!--
+        <tr *ngIf="editing">
+            <td>{{ statTool.calcMod( document.getElementById('STR').value ) }}</td>
+            <td>{{ statTool.calcMod( document.getElementById('DEX').value ) }}</td>
+            <td>{{ statTool.calcMod( document.getElementById('CON').value ) }}</td>
+            <td>{{ statTool.calcMod( document.getElementById('INT').value ) }}</td>
+            <td>{{ statTool.calcMod( document.getElementById('WIS').value ) }}</td>
+            <td>{{ statTool.calcMod( document.getElementById('CHA').value ) }}</td>
+        </tr>
+        -->
+
+        <!-- stats -->
+        <tr *ngIf="!editing">
+            <td>{{ data.npc.stats.get('str') }}</td>
+            <td>{{ data.npc.stats.get('dex') }}</td>
+            <td>{{ data.npc.stats.get('con') }}</td>
+            <td>{{ data.npc.stats.get('int') }}</td>
+            <td>{{ data.npc.stats.get('wis') }}</td>
+            <td>{{ data.npc.stats.get('cha') }}</td>
+        </tr>
+
+        <tr *ngIf="editing">
+            <td><input class="tableInput" type="number" id="STR" name="str" min="1" max="30" placeholder="{{ data.npc.stats.get('str') }}"></td>
+            <td><input class="tableInput" type="number" id="DEX" name="dex" min="1" max="30" placeholder="{{ data.npc.stats.get('dex') }}"></td>
+            <td><input class="tableInput" type="number" id="CON" name="con" min="1" max="30" placeholder="{{ data.npc.stats.get('con') }}"></td>
+            <td><input class="tableInput" type="number" id="INT" name="int" min="1" max="30" placeholder="{{ data.npc.stats.get('int') }}"></td>
+            <td><input class="tableInput" type="number" id="WIS" name="wis" min="1" max="30" placeholder="{{ data.npc.stats.get('wis') }}"></td>
+            <td><input class="tableInput" type="number" id="CHA" name="cha" min="1" max="30" placeholder="{{ data.npc.stats.get('cha') }}"></td>
+        </tr>
+
+    </table>
     
 
     <h4>Notes</h4>

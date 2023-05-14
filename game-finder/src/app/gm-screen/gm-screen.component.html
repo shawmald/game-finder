@@ -21,6 +21,7 @@
 
     <div class="flex-row container">
         <div *ngFor="let npc of this.npcs">
+            <!-- if null: show empty block -->
             <div *ngIf="npc == null" class="rounded-block empty">
                 <mat-icon class="plus-icon">add</mat-icon>
             </div>
@@ -30,68 +31,55 @@
                 <h4>Lv {{ npc.level }} {{ npc.class }}</h4>
 
                 <!-- stats -->
-                <h4>Stats</h4>
-                <div>
-                    Current HP
-                    Max HP
-                    Hit Dice
-                </div>
+                <p>HP: cHP/mHP</p>
 
-                <div>
-                    <div><!-- armor class -->
-                        AC
-                        (insert armor class)
-                    </div>
-                    
-                    <div><!-- initiative (dex modifier) -->
-                        Initiative
-                        {{ statTool.calcMod( npc.stats.get('dex') ) }}<!-- dex modifier -->
-                    </div>
+                <table>
+                    <tr>
+                        <td>AC</td>
+                        <td>Initiative</td>
+                        <td>Speed</td>
+                    </tr>
 
-                    <div><!-- speed -->
-                        Speed
-                        (insert speed)
-                    </div>
-                    
-                </div>
-                
-                <div>
-                    <div><!-- strength -->
-                        Str
-                        {{ statTool.calcMod( npc.stats.get('str') ) }}
-                        {{ npc.stats.get('str') }}
-                    </div>
+                    <tr>
+                        <td>(AC)</td>    <!-- armor class -->
+                        <td>{{ statTool.calcMod( npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
+                        <td>(spd)</td> <!-- speed -->
+                    </tr>
+                </table>
 
-                    <div><!-- dexterity -->
-                        Dex
-                        {{ statTool.calcMod( npc.stats.get('dex') ) }}
-                        {{ npc.stats.get('dex') }}
-                    </div>
+                <table>
 
-                    <div><!-- constitution -->
-                        Con
-                        {{ statTool.calcMod( npc.stats.get('con') ) }}
-                        {{ npc.stats.get('con') }}
-                    </div>
+                    <!-- stat names -->
+                    <tr>
+                        <td>Str</td>
+                        <td>Dex</td>
+                        <td>Con</td>
+                        <td>Int</td>
+                        <td>Wis</td>
+                        <td>Cha</td>
+                    </tr>
 
-                    <div><!-- intelligence -->
-                        Int
-                        {{ statTool.calcMod( npc.stats.get('int') ) }}
-                        {{ npc.stats.get('int') }}
-                    </div>
+                    <!-- stat modifiers -->
+                    <tr>
+                        <td>{{ statTool.calcMod( npc.stats.get('str') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('dex') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('con') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('int') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('wis') ) }}</td>
+                        <td>{{ statTool.calcMod( npc.stats.get('cha') ) }}</td>
+                    </tr>
 
-                    <div><!-- wisdom -->
-                        Wis
-                        {{ statTool.calcMod( npc.stats.get('wis') ) }}
-                        {{ npc.stats.get('wis') }}
-                    </div>
+                    <!-- stats -->
+                    <tr>
+                        <td>{{ npc.stats.get('str') }}</td>
+                        <td>{{ npc.stats.get('dex') }}</td>
+                        <td>{{ npc.stats.get('con') }}</td>
+                        <td>{{ npc.stats.get('int') }}</td>
+                        <td>{{ npc.stats.get('wis') }}</td>
+                        <td>{{ npc.stats.get('cha') }}</td>
+                    </tr>
 
-                    <div><!-- charisma -->
-                        Cha
-                        {{ statTool.calcMod( npc.stats.get('cha') ) }}
-                        {{ npc.stats.get('cha') }}
-                    </div>
-                </div>
+                </table>
                 
     
             </div>
