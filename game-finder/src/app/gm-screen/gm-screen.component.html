@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <mat-icon *ngIF="this.npcs.length < 12" class="plus-icon" (click)="add()">add_circle</mat-icon>
+        <mat-icon *ngIf="npcs.length < 12" class="plus-icon" (click)="add()">add_circle</mat-icon>
     </div>
 
 </div>  

@@ -12,8 +12,37 @@ import { StatUtil } from 'src/backend/StatUtil';
   styleUrls: ['./gm-screen.component.css']
 })
 export class GmScreenComponent {
+  ip = "http://34.30.183.36:80/";
+  username: string = "";
+
   statTool: StatUtil = new StatUtil();
+  gmScreen: any;
   npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );
+  //npcs: any;
+
+  ngOnInit(): void {
+    this.username = sessionStorage.getItem('currentUser') as string;
+
+    // check for existing user
+    fetch(this.ip + "ReturnProfileInformation?Username=" + this.username, {
+      method: "GET",
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then((content) => {
+      var data = JSON.parse(content)
+      this.gmScreen = data.DMSCreen;
+      this.npcs = data.DMSCreen.NPCList;
+    })
+    .catch(error => {
+      console.error('This User does not exist.', error)
+    })
+
+  }
 
   add( name:string='Name', level:number=1, job:string='Class', cHP:number=50, mHP:number=50, ac:number=12, spd:number=30, str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ): void {
     if( this.npcs.length < 12 ){
@@ -27,6 +56,9 @@ export class GmScreenComponent {
     }
   }
 
+  /*
+    pop-up methods
+  */
   constructor( public dialog: MatDialog ){}
 
   openDialog( npc: NPC ): void {
