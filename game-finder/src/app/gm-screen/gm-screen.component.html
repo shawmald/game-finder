@@ -1,31 +1,23 @@
 <div class="content">
-    <div class="nowrap-row">
-        <div>
-            <h1 style="display: inline;">Game Master Screen </h1>
 
-            <!-- question circle, hover for gm screen explanation -->
-            <mat-icon 
-                class="help"
-                matTooltip="add gm screen description" 
-                matTooltipPosition="after"
-                matTooltipHideDelay="2000"
-            >
-                help_outline
-            </mat-icon>
-        </div>
+    <div>
+        <h1 style="display: inline;">Game Master Screen </h1>
 
-        <div>
-            <mat-icon (click)="add()">add_circle</mat-icon>
-        </div>
+        <!-- question circle, hover for gm screen explanation -->
+        <mat-icon 
+            class="help"
+            matTooltip="add gm screen description" 
+            matTooltipPosition="after"
+            matTooltipHideDelay="2000"
+        >
+            help_outline
+        </mat-icon>
     </div>
 
+    <!-- npc stat blocks -->
     <div class="flex-row container">
         <div *ngFor="let npc of this.npcs">
-            <!-- if null: show empty block -->
-            <div *ngIf="npc == null" class="rounded-block empty">
-                <mat-icon class="plus-icon">add</mat-icon>
-            </div>
-    
+            
             <div *ngIf="npc != null" class="rounded-block" (click)="openDialog(npc)">
                 <h3>{{ npc.name }}</h3>
                 <h4>Lv {{ npc.level }} {{ npc.class }}</h4>
@@ -84,6 +76,8 @@
     
             </div>
         </div>
+
+        <mat-icon *ngIF="this.npcs.length < 12" class="plus-icon" (click)="add()">add_circle</mat-icon>
     </div>
 
 </div>  

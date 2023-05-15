@@ -21,7 +21,13 @@
     </div>
 
     <!-- stats -->
-    <p>HP: cHP/mHP</p>
+    <p *ngIF="!editing">HP: cHP/mHP</p>
+    <p *ngIF="editing">
+        HP: 
+        <input class="number-input" type="number" id="cHP" min="0"> <!-- add placeholder -->
+        /
+        <input class="number-input" type="number" id="mHP" min="0"> <!-- add placeholder -->
+    </p>
 
     <table>
         <tr>
@@ -30,10 +36,16 @@
             <td>Speed</td>
         </tr>
 
-        <tr>
+        <tr *ngIf="!editing">
             <td>(AC)</td>    <!-- armor class -->
             <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
             <td>(spd)</td> <!-- speed -->
+        </tr>
+
+        <tr *ngIf="editing">
+            <td><input class="tableInput" type="number" id="AC" name="ac" min="1" max="30"></td>    <!-- armor class TODO add placeholder -->
+            <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
+            <td><input class="tableInput" type="number" id="SPEED" name="speed" min="1"></td> <!-- speed TODO add placeholder -->
         </tr>
     </table>
 
