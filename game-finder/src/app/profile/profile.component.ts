@@ -25,18 +25,12 @@ export class ProfileComponent {
 
   pfp: string = "";
   displayName: string = "";
-  //displayName: string = "display name";
 
   email: string = "";
-  //email: string = "example@gmail.com";
-  emailVis: string = "Private";                //email visibility: Public, Friends Only, or Private
 
   location: string = "";
-  //location: string = "City, ST";
-  locationVis: string = "Friends Only";        //location visibility: Public, Friends Only, or Private
 
   status: string = "Looking for Campaign";
-  //status: string = "Looking for Campaign";
 
   privacyLevel: string = "";
 
@@ -46,29 +40,11 @@ export class ProfileComponent {
 
   ip = "http://34.30.183.36:80/";
 
-  //hard coded tags for testing, edit later
   tags: Map<string,boolean> = new Map<string,boolean>();
-  /*
-  tags: Map<string,boolean> = new Map<string,boolean>([
-    ["in-person", true],
-    ["online", true],
-
-    ["beginner player", false],
-    ["experienced player", true],
-    ["beginner GM", true],
-    ["experienced GM", false],
-
-    ["short", true],
-    ["long", true],
-    ["sustained", true],
-    ["episodic", true],
-
-  ]);
-  */
+  currentTags!: Map<string,boolean>;
 
   bio: string = "about me";
   timezone: string = "";
-  //timezone: string = "EDT(UTC-4)";
   availability: string = "";
 
   /*characters: Character[] = [];*/
@@ -98,15 +74,14 @@ export class ProfileComponent {
       this.email = data.email;
       this.location = data.location;
       this.status = data.status;
-      //this.tags = data.tags;
+      this.tags = new Map(Object.entries(JSON.parse(data.tags)));
       this.bio = data.aboutMe;
       this.pfp = data.pfp.replace(/ /g, '+');
-      console.log(this.pfp)
       this.availability = data.availableTime;
       this.timezone = data.timezone;
       this.blockedProfiles = data.blockedProfiles;
       this.friendsList = data.friends;
-      console.log(this.tags);
+      console.log(JSON.stringify(Object.fromEntries(this.tags)));
     })
     .catch(error => {
       console.error('This User does not exist.', error)
@@ -121,6 +96,7 @@ export class ProfileComponent {
    */
   edit() {
     this.editing = true;
+    this.currentTags = new Map(this.tags);
   }
 
   /**
@@ -129,8 +105,17 @@ export class ProfileComponent {
   cancel() {
     /* TODO reset values if necessary */
     this.editing = false;
-    window.location.reload();
 
+    // save Tags
+    fetch(this.ip + "SetProfileVar?Username=" + this.username
+    + "&ReqVar=" + "tags"
+    + "&NewVar=" + JSON.stringify(Object.fromEntries(this.currentTags)), {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
+    window.location.reload()
   }
 
   /**
@@ -179,7 +164,7 @@ export class ProfileComponent {
     if(this.tags != null) {
       fetch(this.ip + "SetProfileVar?Username=" + this.username
       + "&ReqVar=" + "tags"
-      + "&NewVar=" + this.tags, {
+      + "&NewVar=" + JSON.stringify(Object.fromEntries(this.tags)), {
         method: "GET",
       })
       .catch((error) => {
