@@ -32,7 +32,7 @@ export class Profile {
     private friends = new Array();
     private charSheets = new Array();
     private db : MongoDB;
-    private DMSCreen! : DMScreen;
+    private DMScreen! : DMScreen;
  
     public constructor(displayName : string, email : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
     public constructor(username : string, password : string, db : MongoDB);    //Constructor for logging in
@@ -46,14 +46,13 @@ export class Profile {
             this.password = arr[3];
             this.db = arr[4];
             this.privacyLvl = "Public";
-            this.DMSCreen = new DMScreen( arr[2], arr[4] );
+            this.DMScreen = new DMScreen( arr[2], new Array() );
             this.saveToDB();
         }
         else{
             this.username = arr[0];
             this.password = arr[1];
             this.db = arr[2];
-            this.DMSCreen = new DMScreen( arr[0], arr[2] );
             this.getUserDBInfo();
         }
     }
@@ -88,6 +87,7 @@ export class Profile {
         this.pfp = doc.PFP;
         this.availableTime = doc.AvailableTime;
         this.timezone = doc.Timezone;
+        this.DMScreen = doc.DMScreen;   //Testing
     }
 
 
@@ -127,6 +127,7 @@ export class Profile {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "AvailableTime", this.availableTime);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Timezone", this.timezone);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "CharacterSheets", this.charSheets );
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "DMScreen", this.DMScreen );
     }
 
 
@@ -196,10 +197,6 @@ export class Profile {
 
     public returnPassword() {
         return this.password;
-    }
-
-    public returnDMScreen() {
-        return this.DMSCreen;
     }
 
 }
