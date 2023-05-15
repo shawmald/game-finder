@@ -164,13 +164,8 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     const charName = req.query.CharacterName as string;
-    const race = req.query.Race as string;
-    const charClass = req.query.CharacterClass as string;
-    const charSubClass = req.query.CharacterSubClass as string;
-    const lvl = req.query.Level as string;
-    const allignment = req.query.Allignment as string;
     
-    profile.createCharSheet(charName, race, charClass, charSubClass, lvl, allignment);
+    profile.createCharSheet(charName);
 
     res.send( "Character Sheet should be uploaded to profile" );
   } )
@@ -184,7 +179,7 @@ export async function startServer() {
     let profile = await profileManagement.accessUser(username);
     const charPos = req.query.CharacterPos as string;
     let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
-    //res.status(1).send( JSON.stringify(charSheet) );
+    
     res.send( JSON.stringify(charSheet) );
   } )
 
@@ -403,7 +398,7 @@ export async function startServer() {
   } )
 
 
-  server.listen(3000);
+  server.listen(80);
   
 }
 
