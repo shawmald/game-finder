@@ -23,7 +23,7 @@ export class Profile {
     private email : string = "";
     private location : string = null as any;   
     private status : string = null as any;     
-    private tags : Array<string> = null as any;   
+    private tags! : Map<string, boolean>;  
     private aboutMe : string = null as any;    
     private pfp : string = null as any;   
     private availableTime : string = null as any;  
@@ -93,7 +93,7 @@ export class Profile {
 
 
     public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, 
-    friends : Array<string>, location : string, status : string, tags : Array<string>, aboutMe : string, pfp : string, availableTime : string,
+    friends : Array<string>, location : string, status : string, tags : Map<string, boolean>, aboutMe : string, pfp : string, availableTime : string,
     timezone : string) {
         this.displayName = displayName;
         this.email = email;
