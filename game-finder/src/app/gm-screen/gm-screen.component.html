@@ -23,7 +23,7 @@
                 <h4>Lv {{ npc.level }} {{ npc.class }}</h4>
 
                 <!-- stats -->
-                <p>HP: cHP/mHP</p>
+                <p>HP: {{ npc.stats.get('cHP') }}/{{ npc.stats.get('mHP') }}</p>
 
                 <table>
                     <tr>
@@ -33,9 +33,9 @@
                     </tr>
 
                     <tr>
-                        <td>(AC)</td>    <!-- armor class -->
+                        <td>{{ npc.stats.get('ac') }}</td>    <!-- armor class -->
                         <td>{{ statTool.calcMod( npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
-                        <td>(spd)</td> <!-- speed -->
+                        <td>{{ npc.stats.get('spd') }}</td> <!-- speed -->
                     </tr>
                 </table>
 

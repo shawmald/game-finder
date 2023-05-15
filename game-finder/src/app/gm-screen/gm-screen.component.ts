@@ -15,9 +15,9 @@ export class GmScreenComponent {
   statTool: StatUtil = new StatUtil();
   npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );
 
-  add( name:string='Name', level:number=1, job:string='Class', str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ): void {
+  add( name:string='Name', level:number=1, job:string='Class', cHP:number=50, mHP:number=50, ac:number=12, spd:number=30, str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ): void {
     if( this.npcs.length < 12 ){
-      this.npcs.push( new NPC( name, level, job, str, dex, con, int, wis, cha, notes) );
+      this.npcs.push( new NPC( name, level, job, cHP, mHP, ac, spd, str, dex, con, int, wis, cha, notes) );
     }
   }
 
@@ -67,12 +67,16 @@ export class NPC {
    * @param cha   (number) default = 10
    * @param notes (string) default = 'notes'
    */
-  constructor( name:string='Name', level:number=1, job:string='Class', str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ){
+  constructor( name:string='Name', level:number=1, job:string='Class', cHP:number=50, mHP:number=50, ac:number=12, spd:number=30, str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ){
     this.name = name;
     this.level = level;
     this.class = job;
     
     this.stats = new Map<string,number>();
+    this.stats.set("cHP", cHP);
+    this.stats.set("mHP", mHP);
+    this.stats.set("ac", ac);
+    this.stats.set("spd", spd);
     this.stats.set("str", str);
     this.stats.set("dex", dex);
     this.stats.set("con", con);

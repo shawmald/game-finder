@@ -12,7 +12,7 @@
             <button mat-button *ngIf="editing" (click)="cancel()">Cancel</button>
         </div>
     </div>
-    
+
     <h4 *ngIf="!editing">Lv {{ data.npc.level }} {{ data.npc.class }}</h4>
     <div *ngIf="editing">
         Lv
@@ -21,12 +21,12 @@
     </div>
 
     <!-- stats -->
-    <p *ngIF="!editing">HP: cHP/mHP</p>
-    <p *ngIF="editing">
+    <p *ngIf="!editing">HP: {{ data.npc.stats.get('cHP') }}/{{ data.npc.stats.get('mHP') }}</p>
+    <p *ngIf="editing">
         HP: 
-        <input class="number-input" type="number" id="cHP" min="0"> <!-- add placeholder -->
+        <input class="number-input" type="number" id="cHP" min="0" placeholder="{{ data.npc.stats.get('cHP') }}">
         /
-        <input class="number-input" type="number" id="mHP" min="0"> <!-- add placeholder -->
+        <input class="number-input" type="number" id="mHP" min="1" placeholder="{{ data.npc.stats.get('mHP') }}">
     </p>
 
     <table>
@@ -37,15 +37,15 @@
         </tr>
 
         <tr *ngIf="!editing">
-            <td>(AC)</td>    <!-- armor class -->
+            <td>{{ data.npc.stats.get('ac') }}</td>    <!-- armor class -->
             <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
-            <td>(spd)</td> <!-- speed -->
+            <td>{{ data.npc.stats.get('spd') }}</td> <!-- speed -->
         </tr>
 
         <tr *ngIf="editing">
-            <td><input class="tableInput" type="number" id="AC" name="ac" min="1" max="30"></td>    <!-- armor class TODO add placeholder -->
+            <td><input class="tableInput" type="number" id="AC" name="ac" min="1" max="30" placeholder="{{ data.npc.stats.get('ac') }}"></td>    <!-- armor class -->
             <td>{{ statTool.calcMod( data.npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
-            <td><input class="tableInput" type="number" id="SPEED" name="speed" min="1"></td> <!-- speed TODO add placeholder -->
+            <td><input class="tableInput" type="number" id="SPEED" name="speed" min="1" placeholder="{{ data.npc.stats.get('spd') }}"></td> <!-- speed -->
         </tr>
     </table>
 
