@@ -60,7 +60,7 @@ export async function startServer() {
     const friends = req.query.Friends as Array<string>;
     const location = req.query.Location as string;
     const status = req.query.Status as string;
-    const tags = req.query.Tags as Array<string>;
+    const tags = req.query.Tags as any;
     const aboutMe = req.query.AboutMe as string;
     const pfp = req.query.PFP as string;
     const availableTime = req.query.AvailableTime as string; 
@@ -311,6 +311,21 @@ export async function startServer() {
     res.send ( JSON.stringify(recSpells) );
   } )
 
+
+  /**
+   * TO-DO : BUG FIX
+   */
+  server.get('/ReturnSpells', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    const charPos = req.query.CharacterPos as string;
+    const spellPos = req.query.SpellPos as string;
+    let profile = await profileManagement.accessUser(username);
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    let spell = charSheet.accessSpell( Number.parseInt(spellPos) );
+    
+    res.send ( JSON.stringify(spell) );
+  } )
+
   /**
   * TO-DO : BUG FIX
   */
@@ -327,6 +342,21 @@ export async function startServer() {
     profile.updateDB();
 
     res.send( newVar );
+  } )
+
+  /**
+   * TO-DO : BUG FIX
+   */
+  server.get('/GetSpellVar', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    const charPos = req.query.CharacterPos as string;
+    const reqVar = req.query.ReqVar as string;
+    const spellPos = req.query.SpellPos as string;
+    let profile = await profileManagement.accessUser(username);
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    let spell = charSheet.accessSpell( Number.parseInt(spellPos) );
+    
+    res.send ( spell[reqVar] );
   } )
 
 
