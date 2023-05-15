@@ -12,8 +12,8 @@ export class StatUtil{
     /**
      * Calculate a stat's modifier given the stat.
      * 
-     * @param stat (number)
-     * @returns (number)
+     * @param stat (number)     stat
+     * @returns (number)        stat modifier
      */
     public calcMod( stat: number | undefined ): number;
     public calcMod( stat: number ): number {
@@ -37,6 +37,16 @@ export class StatUtil{
         }
 
         return output;
+    }
+
+    /**
+     * Calculate a character's proficiency bonus given their level
+     * 
+     * @param lvl (number)  Character Level
+     * @returns   (number)  Proficiency Bonus
+     */
+    public calcProficiencyBonus( lvl:number ): number {
+        return 2 + ( (1/4) * (lvl-1) );
     }
     
 }
