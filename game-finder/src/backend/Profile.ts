@@ -32,7 +32,7 @@ export class Profile {
     private friends = new Array();
     private charSheets = new Array();
     private db : MongoDB;
-    private DMScreen! : DMScreen;
+    private dmScreen! : DMScreen;
  
     public constructor(displayName : string, email : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
     public constructor(username : string, password : string, db : MongoDB);    //Constructor for logging in
@@ -46,7 +46,7 @@ export class Profile {
             this.password = arr[3];
             this.db = arr[4];
             this.privacyLvl = "Public";
-            this.DMScreen = new DMScreen( arr[2], new Array() );
+            this.dmScreen = new DMScreen( arr[2], new Array() );
             this.saveToDB();
         }
         else{
@@ -64,7 +64,7 @@ export class Profile {
         collection.insertOne( {"Username" : this.username, "Password" : this.password, "PrivacyLevel" : this.privacyLvl, 
         "CharacterSheets" : this.charSheets, "DisplayName" : this.displayName, "BlockedProfiles" : this.blockedProfiles,
         "Friends" : this.friends, "Email" : this.email, "Location" : this.location, "Status" : this.status, "Tags" : this.tags,
-        "AboutMe" : this.aboutMe, "PFP" : this.pfp, "AvailableTime" : this.availableTime, "Timezone" : this.timezone} );
+        "AboutMe" : this.aboutMe, "PFP" : this.pfp, "AvailableTime" : this.availableTime, "Timezone" : this.timezone, "DMScreen" : this.dmScreen} );
     }
 
     /**
@@ -87,7 +87,11 @@ export class Profile {
         this.pfp = doc.PFP;
         this.availableTime = doc.AvailableTime;
         this.timezone = doc.Timezone;
-        this.DMScreen = doc.DMScreen;   //Testing
+        let dummyDMScreen = doc.DMScreen;
+        if(dummyDMScreen != null) {
+            this.dmScreen = new DMScreen( this.username, dummyDMScreen.NPCList );
+        }
+        //this.dmScreen = new DMScreen( this.username, dummyDMScreen.NPCList);
     }
 
 
@@ -127,7 +131,7 @@ export class Profile {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "AvailableTime", this.availableTime);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Timezone", this.timezone);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "CharacterSheets", this.charSheets );
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "DMScreen", this.DMScreen );
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "DMScreen", this.dmScreen );
     }
 
 
