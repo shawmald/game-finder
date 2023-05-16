@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class SpellsComponent  implements OnInit {
   spells: any[] = [];
   selectedClasses: string[] = [];
+  ip = "http://34.30.183.36:80/";
 
   constructor(private http: HttpClient) { }
 
