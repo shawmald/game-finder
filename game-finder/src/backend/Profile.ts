@@ -25,7 +25,7 @@ export class Profile {
     private status : string = null as any;     
     private tags! : Map<string, boolean>;  
     private aboutMe! : string;    
-    private pfp! : string;   
+    private pfp! : BinaryData;   
     private availableTime : string = null as any;  
     private timezone : string = "";
     private blockedProfiles = new Array();
@@ -111,7 +111,7 @@ export class Profile {
 
 
     public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, 
-    friends : Array<string>, location : string, status : string, tags : Map<string, boolean>, aboutMe : string, pfp : string, availableTime : string,
+    friends : Array<string>, location : string, status : string, tags : Map<string, boolean>, aboutMe : string, pfp : BinaryData, availableTime : string,
     timezone : string) {
         this.displayName = displayName;
         this.email = email;
@@ -189,7 +189,6 @@ export class Profile {
         if (index > -1) {
             this.friends.splice(index, 1);
         }
-
     }
 
     public addBlocked(block : string) {
