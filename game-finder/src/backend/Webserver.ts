@@ -92,16 +92,16 @@ export async function startServer() {
 
     if(option == "friend") {
       if(profile.friends.indexOf(otherUser) > -1 ) {
-        res.send( "The user is in friend list" );
+        res.send( true );
       }
     }
     else if(option == "block") {
       if(profile.blockedProfiles.indexOf(otherUser) > -1 ) {
-        res.send( "The user is in blocked list" );
+        res.send( true );
       }
     }
     else {
-      res.send( "The user isn't in friends or blocked users." );
+      res.send( false );
     }
   
   } )
