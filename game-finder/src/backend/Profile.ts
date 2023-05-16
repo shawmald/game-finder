@@ -24,8 +24,8 @@ export class Profile {
     private location : string = null as any;   
     private status : string = null as any;     
     private tags! : Map<string, boolean>;  
-    private aboutMe : string = null as any;    
-    private pfp : string = null as any;   
+    private aboutMe! : string;    
+    private pfp! : string;   
     private availableTime : string = null as any;  
     private timezone : string = "";
     private blockedProfiles = new Array();
@@ -76,7 +76,7 @@ export class Profile {
 
         this.displayName = doc.DisplayName;
         this.privacyLvl = doc.PrivacyLevel;
-        this.charSheets = doc.CharacterSheets;
+        //this.charSheets = doc.CharacterSheets;  //Need to eventually change this so it makes a class instead of remaining an obj for fields.
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
         this.email = doc.Email;
@@ -87,6 +87,20 @@ export class Profile {
         this.pfp = doc.PFP;
         this.availableTime = doc.AvailableTime;
         this.timezone = doc.Timezone;
+
+
+        let dummyCharacterSheets = doc.CharacterSheets;
+        if(dummyCharacterSheets != null) {
+            for(var i = 0; i < dummyCharacterSheets.length; i++) {
+                let newCharSheet = new CharSheet( dummyCharacterSheets.charName );
+                newCharSheet.editInformation( dummyCharacterSheets.charName, dummyCharacterSheets.race, dummyCharacterSheets.charClass, 
+                dummyCharacterSheets.charSubclass, dummyCharacterSheets.lvl, dummyCharacterSheets.allignment, dummyCharacterSheets.stats, 
+                dummyCharacterSheets.statModifiers, dummyCharacterSheets.combatStats, dummyCharacterSheets.classFeatures, dummyCharacterSheets.background,
+                dummyCharacterSheets.money, dummyCharacterSheets.equipment, dummyCharacterSheets.spells);
+                this.charSheets.push(newCharSheet);
+            }
+        }
+
         let dummyDMScreen = doc.DMScreen;
         if(dummyDMScreen != null) {
             this.dmScreen = new DMScreen( this.username, dummyDMScreen.NPCList );
@@ -149,8 +163,10 @@ export class Profile {
         this.charSheets.push(newSheet);
     }
 
-    public updateCharSheet(charSheet : CharSheet, charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string){
-        charSheet.editInformation(charName, race, charClass, charSubClass, lvl, allignment);
+    public updateCharSheet(charSheet : CharSheet, charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string,
+        stats : any, statModifiers : any, combatStats : any, classFeatures : string, background : string, money : any, equipment : string, spells : any){
+        charSheet.editInformation(charName, race, charClass, charSubClass, lvl, allignment, stats, statModifiers, combatStats, classFeatures, background,
+        money, equipment, spells);
         this.updateDB();
     }
 

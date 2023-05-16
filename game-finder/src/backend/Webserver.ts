@@ -143,7 +143,6 @@ export async function startServer() {
     const username = req.query.Username as string;
     const reqVar = req.query.ReqVar as string;
     const newVar = req.query.NewVar as any;
-    console.log(typeof newVar)
     let profile = await profileManagement.accessUser(username);
     profile[reqVar] = newVar;
     profile.updateDB();

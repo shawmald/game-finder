@@ -46,13 +46,27 @@ export class CharSheet {
     }
 
 
-    public editInformation(charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string) {
+    public editInformation(charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string, stats : any, statModifiers : any, combatStats : any,
+        classFeatures : string, background : string, money : any, equipment : string, spells : any) {
         this.charName = charName;
         this.race = race;
         this.charClass = charClass;
         this.charSubclass = charSubClass;
         this.lvl = lvl;
         this.allignment = allignment;
+
+        this.stats = stats;
+        this.statModifiers = statModifiers;
+        
+        this.combatStats = combatStats;
+
+        this.classFeatures = classFeatures;
+        this.background = background;
+
+        this.money = money;
+        this.equipment = equipment;
+
+        this.spells = spells;
     }
 
 
