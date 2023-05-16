@@ -83,6 +83,30 @@ export async function startServer() {
   } )
 
 
+  server.get('/CheckFriendOrBlock', async (req: Request, res: Response) => {
+
+    const username = req.query.Username as string;
+    const otherUser = req.query.OtherUser as string;
+    const option = req.query.Option as string;
+    let profile = await profileManagement.accessUser(username);
+
+    if(option == "friend") {
+      if(profile.friends.indexOf(otherUser) > -1 ) {
+        res.send( "The user is in friend list" );
+      }
+    }
+    else if(option == "block") {
+      if(profile.blockedProfiles.indexOf(otherUser) > -1 ) {
+        res.send( "The user is in blocked list" );
+      }
+    }
+    else {
+      res.send( "The user isn't in friends or blocked users." );
+    }
+  
+  } )
+
+
   server.get('/AddFriendOrBlock', async (req: Request, res: Response) => {
 
     const username = req.query.Username as string;
@@ -112,16 +136,16 @@ export async function startServer() {
 
     if(option == "friend") {
       profile.removeFriend(otherUser);
-      res.send( "The user was removed from friends" );
+      res.send( "The user was unfriended" );
     }
     else if(option == "block") {
       profile.removelocked(otherUser);
-      res.send( "The user was blocked" );
+      res.send( "The user was unblocked" );
     }
     else {
       res.send( "The user was remvoed from blocked" );
     }
-    res.send( "The user was friended or blocked" );
+
   } )
 
 
