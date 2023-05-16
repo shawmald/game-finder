@@ -52,12 +52,14 @@ export async function startServer() {
    */
   server.get('/CheckUser', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
-    if( profileManagement.profileList.indexOf(username) > -1 ) {
+    let usernameList = profileManagement.returnProfileUsernames();
+    if( usernameList.indexOf(username) > -1 ) {
       res.send(true);
     }
     else {
       res.send(false);
     }
+
   } )
 
   /**

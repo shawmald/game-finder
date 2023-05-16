@@ -99,5 +99,16 @@ export class ProfileManagement {
         }
     }
 
+    public returnProfileUsernames() {
+
+        let usernameList = new Array();
+
+        for(var i = 0; i < this.profileList.length; i++) {
+            usernameList.push( this.profileList[i].username );
+        }   
+
+        return usernameList;
+    }
+
 
 }
