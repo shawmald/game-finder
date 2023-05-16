@@ -139,7 +139,7 @@ export async function startServer() {
       res.send( "The user was unfriended" );
     }
     else if(option == "block") {
-      profile.removelocked(otherUser);
+      profile.removeBlocked(otherUser);
       res.send( "The user was unblocked" );
     }
     else {
