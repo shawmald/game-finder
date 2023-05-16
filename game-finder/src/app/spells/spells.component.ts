@@ -8,27 +8,21 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class SpellsComponent  implements OnInit {
-  spells: any[] = [];
-  selectedClasses: string[] = [];
   ip = "http://34.30.183.36:80/";
-
-  constructor(private http: HttpClient) { }
+  spells: any[] = [];
 
   ngOnInit() {
-    this.fetchSpells();
+    this.fetchSpells(); // Call the function to fetch spells when the component initializes
   }
 
   fetchSpells() {
-    // Make an HTTP request to the backend API to retrieve the filtered spells based on selected classes
-    const selectedClassesQuery = this.selectedClasses.join(',');
-    const url = `http://34.30.183.36:80/spells?classes=${selectedClassesQuery}`;
-    this.http.get<any[]>(url)
-      .subscribe(data => {
-        this.spells = data;
+    fetch('http://34.30.183.36:80/spells/RecommendSpells')
+      .then(response => response.json()) // Parse the response as JSON
+      .then(data => {
+        this.spells = data; // Assign the fetched spells to the component property
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
-  }
-
-  onClassSelectionChange() {
-    this.fetchSpells();
   }
 }
