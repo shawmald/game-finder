@@ -50,6 +50,19 @@ export async function startServer() {
   /**
    * DONE
    */
+  server.get('/CheckUser', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    if( profileManagement.profileList.indexOf(username) > -1 ) {
+      res.send(true);
+    }
+    else {
+      res.send(false);
+    }
+  } )
+
+  /**
+   * DONE
+   */
   server.get('/UpdateProfileInformation', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     const updateProfile = await profileManagement.accessUser(username);

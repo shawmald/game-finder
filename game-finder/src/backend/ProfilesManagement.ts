@@ -13,7 +13,7 @@ import { DMScreen } from "./DMScreen";
 
 export class ProfileManagement {
 
-    private profileList = new Array();
+    public profileList = new Array();
     private db : MongoDB;
 
     /**
