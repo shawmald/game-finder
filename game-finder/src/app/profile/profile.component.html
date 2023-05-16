@@ -2,7 +2,7 @@
     profile component HTML
 -->
 
-<div class="contents">
+<div class="contents" *ngIf="!currentUserIsBlocked && userExists">
     <!-- <form id="profile-update" name="profile-update" action="" method="" ></form> -->   <!-- for input?? -->
 
     <!--
@@ -47,8 +47,10 @@
             <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
 
             <!-- if not the same user: show friend and cancel buttons -->
-            <button *ngIf="!sameUser && isLoggedIn" (click)="friend()" class="button" type="button" >friend</button>
-            <button *ngIf="!sameUser && isLoggedIn" (click)="block()" class="button" type="button" >block</button>
+            <button *ngIf="!sameUser && isLoggedIn && !isFriend" (click)="friend()" class="button" type="button" >Add Friend</button>
+            <button *ngIf="!sameUser && isLoggedIn && isFriend" (click)="unfriend()" class="button" type="button" >Remove Friend</button>
+            <button *ngIf="!sameUser && isLoggedIn && !isBlocked" (click)="block()" class="button" type="button" >Block User</button>
+            <button *ngIf="!sameUser && isLoggedIn && isBlocked" (click)="unblock()" class="button" type="button" >Unblock User</button>
         </div>
 
 
@@ -69,7 +71,7 @@
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
-            <a *ngIf="(sameUser) || (!sameUser && privacyLevel=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
+            <a *ngIf="(sameUser) || (!sameUser && privacyLevel=='Public') || (!sameUser && privacyLevel=='Friends Only' && isFriend)" href="mailto: {{ email }}"> {{ email }}</a>
 
             <!--
             <div class="block-display" *ngIf="editing">
@@ -173,4 +175,12 @@
     <div>
         <!-- display characters in row (for each?)-->
     </div>
+</div>
+
+<div *ngIf="currentUserIsBlocked">
+  This user has blocked you.
+</div>
+
+<div *ngIf="!userExists">
+  This user does not exist.
 </div>

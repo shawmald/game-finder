@@ -47,6 +47,14 @@ export class ProfileComponent {
   timezone: string = "";
   availability: string = "";
 
+  isFriend: boolean = false;
+  isBlocked: boolean = false;
+
+  currentUserIsFriend: boolean = false;
+  currentUserIsBlocked: boolean = false;
+
+  userExists!: boolean;
+
   /*characters: Character[] = [];*/
 
   /* TODO insert oninit stuff when login & backend is implemented */
@@ -57,7 +65,7 @@ export class ProfileComponent {
     this.username = this.route.snapshot.paramMap.get('username') as string;
 
     // check for existing user
-    fetch(this.ip + "ReturnProfileInformation?Username=" + this.username, {
+    fetch(this.ip + "CheckUser?Username=" + this.username, {
       method: "GET",
     })
     .then((response) => {
@@ -67,28 +75,128 @@ export class ProfileComponent {
       return response.text();
     })
     .then((content) => {
-      var data = JSON.parse(content)
-      this.username = data.username;
-      this.displayName = data.displayName;
-      this.privacyLevel = data.privacyLvl;
-      this.email = data.email;
-      this.location = data.location;
-      this.status = data.status;
-      this.tags = new Map(Object.entries(JSON.parse(data.tags)));
-      this.bio = data.aboutMe;
-      this.pfp = data.pfp.replace(/ /g, '+');
-      this.availability = data.availableTime;
-      this.timezone = data.timezone;
-      this.blockedProfiles = data.blockedProfiles;
-      this.friendsList = data.friends;
-      console.log(JSON.stringify(Object.fromEntries(this.tags)));
+      this.userExists = JSON.parse(content) as boolean;
     })
     .catch(error => {
-      console.error('This User does not exist.', error)
+      console.error('Something went wrong, please try again.', error)
+    })
+    .then(() => {
+      if(this.userExists) {
+        fetch(this.ip + "ReturnProfileInformation?Username=" + this.username, {
+          method: "GET",
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then((content) => {
+          var data = JSON.parse(content)
+          this.username = data.username;
+          this.displayName = data.displayName;
+          this.privacyLevel = data.privacyLvl;
+          this.email = data.email;
+          this.location = data.location;
+          this.status = data.status;
+          this.tags = new Map(Object.entries(JSON.parse(data.tags)));
+          this.bio = data.aboutMe;
+          this.pfp = data.pfp.replace(/ /g, '+');
+          this.availability = data.availableTime;
+          this.timezone = data.timezone;
+          this.blockedProfiles = data.blockedProfiles;
+          this.friendsList = data.friends;
+          console.log(JSON.stringify(Object.fromEntries(this.tags)));
+        })
+        .catch(error => {
+          console.error('This User does not exist.', error)
+        })
+
+        // Check if currentUser is Friend of username
+        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
+        + "&OtherUser=" + this.currentUser
+        + "&Option=" + "friend", {
+          method: "GET",
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then((content) => {
+          console.log(content)
+          this.currentUserIsFriend = JSON.parse(content) as boolean
+        })
+        .catch(error => {
+          console.error('This User does not exist.', error)
+        })
+
+        // Check if currentUser is Blocked from username
+        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
+        + "&OtherUser=" + this.currentUser
+        + "&Option=" + "block", {
+          method: "GET",
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then((content) => {
+          console.log(content)
+          this.currentUserIsBlocked = JSON.parse(content) as boolean
+        })
+        .catch(error => {
+          console.error('This User does not exist.', error)
+        })
+
+        // Check if username is Friend of currentUser
+        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
+        + "&OtherUser=" + this.username
+        + "&Option=" + "friend", {
+          method: "GET",
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then((content) => {
+          console.log(content)
+          this.isFriend = JSON.parse(content) as boolean
+        })
+        .catch(error => {
+          console.error('This User does not exist.', error)
+        })
+
+        // Check if username is blocked from currentUser
+        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
+        + "&OtherUser=" + this.username
+        + "&Option=" + "block", {
+          method: "GET",
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then((content) => {
+          console.log(content)
+          this.isBlocked = JSON.parse(content) as boolean
+        })
+        .catch(error => {
+          console.error('This User does not exist.', error)
+        })
+
+        this.sameUser = (this.currentUser == this.username);
+      }
     })
 
-    this.sameUser = (this.currentUser == this.username);
-  }
+}
 
   /**
    * switch to editing mode,
@@ -226,6 +334,46 @@ export class ProfileComponent {
    */
   friend() {
     /* TODO send friend request */
+
+    if(this.isBlocked) {
+      fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+      + "&OtherUser=" + this.username
+      + "&Option=" + "block", {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:',error)
+      })
+    }
+
+    fetch(this.ip + "AddFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "friend", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
+  }
+
+  unfriend() {
+
+    fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "friend", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
   }
 
   /**
@@ -233,6 +381,57 @@ export class ProfileComponent {
    */
   block() {
     /* TODO block user */
+
+    if(this.isFriend) {
+      //remove username as friend of currentUser
+      fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+      + "&OtherUser=" + this.username
+      + "&Option=" + "friend", {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:',error)
+      })
+
+      //remove currentUser as friend of username
+      fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.username
+      + "&OtherUser=" + this.currentUser
+      + "&Option=" + "friend", {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:',error)
+      })
+    }
+
+    fetch(this.ip + "AddFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "block", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
+  }
+
+  unblock() {
+
+    fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "block", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
   }
 
 
@@ -287,7 +486,6 @@ export class ProfileComponent {
 
     reader.readAsDataURL(file);
   }
-
 
   /**
    *
