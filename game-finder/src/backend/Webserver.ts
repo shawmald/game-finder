@@ -342,10 +342,17 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     const charPos = Number.parseInt( req.query.CharacterPosition as string );
+
+
     let charSheet = profile.accessCharacterSheet(charPos);
-    let recSpells = charSheet.spellRecommendation();
+    if( charSheet != null ) {
+      let recSpells = charSheet.spellRecommendation();
+      res.send ( JSON.stringify(recSpells) );
+    }
+    else{
+      res.send( "The character sheet doesn't have a class so this won't work.")
+    }
     
-    res.send ( JSON.stringify(recSpells) );
   } )
 
 
