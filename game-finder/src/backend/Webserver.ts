@@ -317,20 +317,19 @@ export async function startServer() {
     const charPos = Number.parseInt( req.query.CharacterName as string );
     let charSheet = profile.accessCharacterSheet(charPos);
 
-    const spellPos = Number.parseInt( req.query.SpellPos as string);
+    const spellPos = Number.parseInt( req.query.SpellPosition as string);
     const spellName = req.query.SpellName as string;
-    const castingTime = req.query.CastingTime as string;
-    const range = req.query.Range as string;
+    const level = req.query.Level as string;
     const duration = req.query.Duration as string;
-    const desc = req.query.Description as string;
-    const spellLvl = req.query.SpellLvl as string;
-    const school = req.query.School as Array<string>;
-    const components = req.query.Components as Array<string>;
-    const races  = req.query.Races as Array<string>;
-    const reqClasses = req.query.ReqClasses as Array<String>;
+    const school = req.query.School as string;
+    const range = req.query.Range as string;
+    const components = req.query.Components as string;
+    const classes = req.query.Classes as Array<string>;
+    const text = req.query.Text as string;
+    const castingTime = req.query.CastingTime as string;
 
     let spell = charSheet.accessSpell( spellPos );
-    charSheet.updateSpell( spell, spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses );
+    charSheet.updateSpell( spell, spellName, level, duration, school, range, components, classes, text, castingTime);
 
     res.send( "Spell has been updated" );
   } )
@@ -342,12 +341,11 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     const charPos = Number.parseInt( req.query.CharacterPosition as string );
-
-
     let charSheet = profile.accessCharacterSheet(charPos);
+
     if( charSheet != null ) {
-      let recSpells = charSheet.spellRecommendation();
-      res.send ( JSON.stringify(recSpells) );
+      let recSpells = await charSheet.spellRecommendation( db );
+      res.send( JSON.stringify(recSpells) );
     }
     else{
       res.send( "The character sheet doesn't have a class so this won't work.")

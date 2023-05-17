@@ -27,8 +27,22 @@ export class InfoStorage {
     public async returnSpells() {
         const collection = this.db.returnCollection( "StoredInfo", "Spells" );
         const spellArr = new Array();
-        await collection.find().forEach( function(myDoc: { Spell : string; } ) { spellArr.push( JSON.parse(myDoc.Spell) ) } );
-        return spellArr;
+        const returnSpellArr = new Array();
+
+        await collection.find().forEach( function(myDoc: { Spell : string; } ) { spellArr.push( myDoc.Spell ) } );
+
+        //console.log( spellArr );
+
+        for(var i = 0; i < spellArr.length; i++) {
+            let newSpell = new Spell( spellArr[i].Name );
+            newSpell.editInformation( spellArr[i].Name, spellArr[i].Level, spellArr[i].Duration, spellArr[i].School, spellArr[i].Range, spellArr[i].Components,
+            spellArr[i].Classes, spellArr[i].Text, spellArr[i].CastingTime)
+            returnSpellArr.push( newSpell );
+        }
+
+        //console.log( returnSpellArr );
+
+        return returnSpellArr;
     }
 
 }

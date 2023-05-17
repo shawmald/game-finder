@@ -103,7 +103,7 @@ export class Profile {
                 this.charSheets.push(newCharSheet);
             }
 
-            console.log( this.charSheets );
+            //console.log( this.charSheets );
         }
 
         //console.log( this.charSheets );
@@ -178,6 +178,7 @@ export class Profile {
     }
 
     public accessCharacterSheet(pos : number) {
+        
         if(this.charSheets[pos] != null) {
             return this.charSheets[pos];
         }

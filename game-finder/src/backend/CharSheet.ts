@@ -103,9 +103,9 @@ export class CharSheet {
         this.spells.push(newSpell); 
     }
 
-    public updateSpell(spell : Spell, spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
-    school : Array<string>, components : Array<string>, races : Array<string>, reqClasses : Array<string> ) {
-        spell.editInformation( spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses );
+    public updateSpell(spell : Spell, spellName : string, level : string, duration : string, school : string, range : string, components : string, 
+    classes : Array<string>, text : string, castingTime : string) {
+        spell.editInformation( spellName, level, duration, school, range, components, classes, text, castingTime);
     }
 
     public accessSpell(spellPos : number) {
@@ -131,11 +131,21 @@ export class CharSheet {
         let spellStorage = new InfoStorage(db);
         const recSpells = new Array();
         const allSpells = await spellStorage.returnSpells();
+
+        //console.log( allSpells ); //This works
+        
         for(var i = 0; i < allSpells.length; i++) {
-            if( allSpells[i] == this.race ) {
-                recSpells.push( allSpells[i] );
+            for(var j = 0; j < allSpells[i].classes.length; j++) {
+                if( allSpells[i].classes[j] == this.charClass ) {
+                    recSpells.push( allSpells[i] );
+                }
+
             }
         }
+
+        //console.log( recSpells );
+
+        return recSpells;
     }
 
 }
