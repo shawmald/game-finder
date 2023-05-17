@@ -302,8 +302,8 @@ export async function startServer() {
     let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
 
     const spellName = req.query.SpellName as string;
-
     charSheet.createSpell(spellName, db);
+    profile.updateDB();
 
     res.send( "Spell has been added to character sheet" );
   } )

@@ -91,7 +91,7 @@ export class CharSheet {
     public createSpell(spellName : string, db : MongoDB) {
         let newSpell = new Spell(spellName);
         this.addSpell( newSpell );
-        this.infoAddSpell( newSpell, db );
+        //this.infoAddSpell( newSpell, db );
     }
 
     /** 
