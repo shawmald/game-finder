@@ -298,8 +298,8 @@ export async function startServer() {
   server.get('/AddSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
-    const charName = req.query.CharacterName as string;
-    let charSheet = profile.accessCharacterSheet(charName);
+    const charPos = req.query.CharacterPosition as string;
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
 
     const spellName = req.query.SpellName as string;
 
@@ -443,7 +443,7 @@ export async function startServer() {
   } )
 
 
-  server.listen(80);
+  server.listen(3000);
   
 }
 

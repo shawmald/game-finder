@@ -9,9 +9,6 @@
 import { MongoDB } from "./mongoDB";
 import { Spell } from "./Spell";
 
-//Honestly I think this was for storing all of the different stuff needed in MongoDB
-//But I'll leave this here for now and not work on it until its needed which will probably be needed as
-//soon as I get the server up & running
 
 export class InfoStorage {
 
@@ -24,9 +21,6 @@ export class InfoStorage {
 
     public saveSpells(spell : Spell) {
         const collection = this.db.returnCollection( "StoredInfo", "Spells" );
-        //collection.insertOne( {"Spell Name" : spell.spellName, "Casting Time" : spell.castingTime, "Range" : spell.range, "Duration" : spell.duration,
-        //"Description" : spell.desc, "Spell Level" : spell.spellLvl, "School" : spell.school, "Components" : spell.components, "Races" : spell.races,
-        //"Required Classes" : spell.reqClasses } );
         collection.insertOne( { "Spell" : JSON.stringify(spell) } );
     }
 

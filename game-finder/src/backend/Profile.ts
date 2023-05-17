@@ -90,16 +90,23 @@ export class Profile {
 
 
         let dummyCharacterSheets = doc.CharacterSheets;
-        if(dummyCharacterSheets != null) {
+        if(dummyCharacterSheets != null && this.username == "TestingOne") {
+            this.charSheets = new Array();
             for(var i = 0; i < dummyCharacterSheets.length; i++) {
-                let newCharSheet = new CharSheet( dummyCharacterSheets.charName );
-                newCharSheet.editInformation( dummyCharacterSheets.charName, dummyCharacterSheets.race, dummyCharacterSheets.charClass, 
-                dummyCharacterSheets.charSubclass, dummyCharacterSheets.lvl, dummyCharacterSheets.allignment, dummyCharacterSheets.stats, 
-                dummyCharacterSheets.statModifiers, dummyCharacterSheets.combatStats, dummyCharacterSheets.classFeatures, dummyCharacterSheets.background,
-                dummyCharacterSheets.money, dummyCharacterSheets.equipment, dummyCharacterSheets.spells);
+                let newCharSheet = new CharSheet( dummyCharacterSheets[i].charName );
+                //console.log( newCharSheet );
+                newCharSheet.editInformation( dummyCharacterSheets[i].charName, dummyCharacterSheets[i].race, dummyCharacterSheets[i].charClass, 
+                dummyCharacterSheets[i].charSubclass, dummyCharacterSheets[i].lvl, dummyCharacterSheets[i].allignment, dummyCharacterSheets[i].stats, 
+                dummyCharacterSheets[i].statModifiers, dummyCharacterSheets[i].combatStats, dummyCharacterSheets[i].classFeatures, 
+                dummyCharacterSheets[i].background, dummyCharacterSheets[i].money, dummyCharacterSheets[i].equipment, dummyCharacterSheets[i].spells);
+                //console.log( newCharSheet );
                 this.charSheets.push(newCharSheet);
             }
+
+            console.log( this.charSheets );
         }
+
+        //console.log( this.charSheets );
 
         let dummyDMScreen = doc.DMScreen;
         if(dummyDMScreen != null) {
