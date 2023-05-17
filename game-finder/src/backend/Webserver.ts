@@ -341,7 +341,7 @@ export async function startServer() {
   server.get('/RecommendSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
-    const charPos = Number.parseInt( req.query.CharacterName as string );
+    const charPos = Number.parseInt( req.query.CharacterPosition as string );
     let charSheet = profile.accessCharacterSheet(charPos);
     let recSpells = charSheet.spellRecommendation();
     
