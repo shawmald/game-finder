@@ -16,15 +16,15 @@ export class GmScreenComponent {
   username: string = "";
 
   statTool: StatUtil = new StatUtil();
-  gmScreen: any;
-  npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );
-  //npcs: any;
+  //gmScreen: any;
+  //npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );
+  npcs: Array<any> = new Array<any>();
 
   ngOnInit(): void {
     this.username = sessionStorage.getItem('currentUser') as string;
 
-    // check for existing user
-    fetch(this.ip + "ReturnProfileInformation?Username=" + this.username, {
+    // get NPCList 
+    fetch(this.ip + "ReturnNPCs?Username=" + this.username, {
       method: "GET",
     })
     .then((response) => {
@@ -33,10 +33,17 @@ export class GmScreenComponent {
       }
       return response.text();
     })
+    //get info from profile
     .then((content) => {
       var data = JSON.parse(content)
-      this.gmScreen = data.DMSCreen;
-      this.npcs = data.DMSCreen.NPCList;
+      //this.gmScreen = data.DMScreen;
+      this.npcs = data;
+      
+      /*
+      for(let i=0; i<data.length; i++){
+        this.npcs.push( data[i] );
+      }
+      */
     })
     .catch(error => {
       console.error('This User does not exist.', error)
@@ -44,10 +51,29 @@ export class GmScreenComponent {
 
   }
 
+  /*
   add( name:string='Name', level:number=1, job:string='Class', cHP:number=50, mHP:number=50, ac:number=12, spd:number=30, str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ): void {
     if( this.npcs.length < 12 ){
       this.npcs.push( new NPC( name, level, job, cHP, mHP, ac, spd, str, dex, con, int, wis, cha, notes) );
     }
+  }
+  */
+
+  add(): void {
+    fetch(this.ip + "CreateNPC?Username=" + this.username, {
+      method: "GET",
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .catch(error => {
+      console.error('error', error)
+    })
+
+    this.openDialog( this.npcs[this.npcs.length-1] );   //open pop-up of new NPC
   }
 
   remove( index:number ): void {
