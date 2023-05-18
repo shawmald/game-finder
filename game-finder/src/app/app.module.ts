@@ -55,9 +55,9 @@ import { FriendlistComponent } from './friendlist/friendlist.component';
     NpcDialogComponent,
     TagEditDialogComponent,
     SpellsComponent,
+    FriendlistComponent,
 
-    PageNotFoundComponent,
-      FriendlistComponent //always keep at end
+    PageNotFoundComponent, //always keep at end
 
   ],
   imports: [
