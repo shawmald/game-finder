@@ -49,7 +49,7 @@ export class Profile {
     private timezone : string = "";
     private blockedProfiles = new Array();
     private friends = new Array();
-    private charSheets = new Array();
+    public charSheets = new Array();
     private db : MongoDB;
     private dmScreen! : DMScreen;
  
@@ -127,7 +127,7 @@ export class Profile {
             //console.log( this.charSheets );
         }
 
-        console.log( this.charSheets );
+        //console.log( this.charSheets );
 
         let dummyDMScreen = doc.DMScreen;
         if(dummyDMScreen != null) {
