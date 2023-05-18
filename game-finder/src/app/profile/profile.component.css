@@ -94,7 +94,7 @@ mat-icon {
 
 .pfp {
   position: relative;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   overflow: hidden;
   margin-bottom: 30px;
 }
@@ -128,6 +128,10 @@ mat-icon {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+::file-selector-button {
+  display: none;
 }
 
 

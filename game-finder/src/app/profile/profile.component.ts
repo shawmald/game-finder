@@ -113,86 +113,87 @@ export class ProfileComponent {
           console.error('This User does not exist.', error)
         })
 
-        // Check if currentUser is Friend of username
-        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
-        + "&OtherUser=" + this.currentUser
-        + "&Option=" + "friend", {
-          method: "GET",
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then((content) => {
-          console.log(content)
-          this.currentUserIsFriend = JSON.parse(content) as boolean
-        })
-        .catch(error => {
-          console.error('This User does not exist.', error)
-        })
+        if(this.currentUser != this.username) {
+          // Check if currentUser is Friend of username
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
+          + "&OtherUser=" + this.currentUser
+          + "&Option=" + "friend", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            console.log(content)
+            this.currentUserIsFriend = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
 
-        // Check if currentUser is Blocked from username
-        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
-        + "&OtherUser=" + this.currentUser
-        + "&Option=" + "block", {
-          method: "GET",
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then((content) => {
-          console.log(content)
-          this.currentUserIsBlocked = JSON.parse(content) as boolean
-        })
-        .catch(error => {
-          console.error('This User does not exist.', error)
-        })
+          // Check if currentUser is Blocked from username
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
+          + "&OtherUser=" + this.currentUser
+          + "&Option=" + "block", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            console.log(content)
+            this.currentUserIsBlocked = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
 
-        // Check if username is Friend of currentUser
-        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
-        + "&OtherUser=" + this.username
-        + "&Option=" + "friend", {
-          method: "GET",
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then((content) => {
-          console.log(content)
-          this.isFriend = JSON.parse(content) as boolean
-        })
-        .catch(error => {
-          console.error('This User does not exist.', error)
-        })
+          // Check if username is Friend of currentUser
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
+          + "&OtherUser=" + this.username
+          + "&Option=" + "friend", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            console.log(content)
+            this.isFriend = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
 
-        // Check if username is blocked from currentUser
-        fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
-        + "&OtherUser=" + this.username
-        + "&Option=" + "block", {
-          method: "GET",
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then((content) => {
-          console.log(content)
-          this.isBlocked = JSON.parse(content) as boolean
-        })
-        .catch(error => {
-          console.error('This User does not exist.', error)
-        })
-
+          // Check if username is blocked from currentUser
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
+          + "&OtherUser=" + this.username
+          + "&Option=" + "block", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            console.log(content)
+            this.isBlocked = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
+        }
         this.sameUser = (this.currentUser == this.username);
       }
     })
@@ -479,6 +480,8 @@ export class ProfileComponent {
         const base64String = canvas.toDataURL(file.type);
         this.pfp = base64String;
 
+        console.log(base64String)
+
         event.target.style.display = 'none';
       };
 
@@ -489,7 +492,7 @@ export class ProfileComponent {
   }
 
   editPFPBinary(event: any) {
-    var file = event.files[0]
+    var file = event.target.files[0]
     var reader = new FileReader();
     reader.onloadend = function() {
       console.log('Encoded Base64 String:', reader.result);

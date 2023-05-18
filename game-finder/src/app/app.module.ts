@@ -34,6 +34,7 @@ import { TagEditDialogComponent } from './tag-edit-dialog/tag-edit-dialog.compon
 import { SpellsComponent } from './spells/spells.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
+import { FriendlistComponent } from './friendlist/friendlist.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { LoginGuard } from './login.guard';
     TagEditDialogComponent,
     SpellsComponent,
 
-    PageNotFoundComponent //always keep at end
+    PageNotFoundComponent,
+      FriendlistComponent //always keep at end
 
   ],
   imports: [

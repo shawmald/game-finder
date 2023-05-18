@@ -13,8 +13,8 @@
         <!-- pfp & display name -->
         <div>
             <!-- profile picture -->
-          <!--
             <div class="pfp">
+              <!--
               <label for="pfp-input">
                 -->
                 <img [src]="getPFP()" alt="profile picture">
@@ -23,9 +23,9 @@
                   <p>Edit Profile Picture</p>
                 </div>
               </label>
-              <input *ngIf="editing" id="pfp-input" type="file" (change)="editPFP($event)">
+              <input style="display: none;" *ngIf="editing" id="pfp-input" type="file" accept=".jpg, .png" (change)="editPFP($event)">
+              -->
             </div>
-            -->
 
             <!-- display name, if editing replace with input box preloaded with current display name -->
             <h2 *ngIf="!editing">{{ displayName }}</h2>
