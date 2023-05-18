@@ -17,7 +17,7 @@ export class GmScreenComponent {
 
   statTool: StatUtil = new StatUtil();
   //gmScreen: any;
-  //npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );
+  //npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );   //
   npcs: Array<any> = new Array<any>();
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class GmScreenComponent {
     .then((content) => {
       var data = JSON.parse(content)
       //this.gmScreen = data.DMScreen;
-      this.npcs = data;
+      this.npcs = data;   //ReturnNPCs should return the NPCList from the user's DMScreen
       
       /*
       for(let i=0; i<data.length; i++){
@@ -78,7 +78,7 @@ export class GmScreenComponent {
       console.error('error', error)
     })
 
-    this.openDialog( this.npcs[this.npcs.length-1] );   //open pop-up of new NPC
+    //this.openDialog( this.npcs[this.npcs.length-1] );   //open pop-up of new NPC
   }
 
   remove( index:number ): void {
@@ -92,7 +92,7 @@ export class GmScreenComponent {
   */
   constructor( public dialog: MatDialog ){}
 
-  openDialog( npc: NPC ): void {
+  openDialog( npc:any ): void {
     const dialogRef = this.dialog.open( NpcDialogComponent, {
       width: "550px",
       data: {
@@ -108,7 +108,7 @@ export class GmScreenComponent {
 
 }
 
-
+/*
 export class NPC {
   name: string;
   level: number;
@@ -116,20 +116,6 @@ export class NPC {
   stats: Map<string,number>;
   notes: string;
 
-  /**
-   * Create a new NPC. Default values used if nothing is provided
-   * 
-   * @param name  (string) default = 'Name'
-   * @param level (number) default = 1
-   * @param job   (string) default = 'Class'
-   * @param str   (number) default = 10
-   * @param dex   (number) default = 10
-   * @param con   (number) default = 10
-   * @param int   (number) default = 10
-   * @param wis   (number) default = 10
-   * @param cha   (number) default = 10
-   * @param notes (string) default = 'notes'
-   */
   constructor( name:string='Name', level:number=1, job:string='Class', cHP:number=50, mHP:number=50, ac:number=12, spd:number=30, str:number=10, dex:number=10, con:number=10, int:number=10, wis:number=10, cha:number=10, notes:string='notes' ){
     this.name = name;
     this.level = level;
@@ -151,3 +137,4 @@ export class NPC {
   }
 
 }
+*/
