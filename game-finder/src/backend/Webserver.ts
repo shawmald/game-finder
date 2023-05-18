@@ -398,11 +398,11 @@ export async function startServer() {
         res.send( JSON.stringify(recSpells) );
       }
       else{
-        res.send( "The character sheet doesn't have a class so this won't work.")
+        //Do Nothing : The character sheet is null and didn't work.
       }
     }
     else{
-      res.send( "Profile is null. Please be logged into an account" );
+      //Do Nothing : Profile is null and didn't work
     }
 
     
