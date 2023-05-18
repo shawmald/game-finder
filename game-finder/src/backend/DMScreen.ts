@@ -30,11 +30,11 @@ export class DMScreen {
     }
 
     /**
-     * This makes a new NPC with the name given and adds it to the array
+     * This makes a new NPC with default values and adds it to the array
      * @param npcName 
      */
-    public addNPC(npcName : string) {
-        this.NPCList.push( new NPC(npcName) );
+    public addNPC() {
+        this.NPCList.push( new NPC() );
     }
 
     /**
