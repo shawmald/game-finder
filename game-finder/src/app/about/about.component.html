@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="margin-bottom: 160px;">
     <mat-toolbar>
         <mat-toolbar-row>
           <span>Welcome to Gamefinder, the premier online community for Dungeons and Dragons players!</span>
@@ -7,21 +7,106 @@
       </mat-toolbar>
 
       <div class="container">
-        <mat-card>
-          <mat-card-title>If you're new to the world of D&D, allow us to give you a brief overview. </mat-card-title>
-          <mat-card-content>
-            <p>Dungeons and Dragons is a tabletop roleplaying game that has been captivating players for over 40 years. It's a game of imagination, where players create unique characters and embark on epic adventures in a fantasy world. One player, known as the Dungeon Master (DM), creates the story and plays the role of all the non-player characters, while the other players control their own characters and make decisions that shape the course of the story.</p>
-          </mat-card-content>
-        </mat-card>
 
         <mat-card>
-          <mat-card-title>Gamefinder</mat-card-title>
           <mat-card-content>
             <p>Dungeons and Dragons is a game that's meant to be played with others, and that's where Gamefinder comes in. Our website is designed to help players connect with each other, no matter where they are in the world. With our easy-to-use platform, you can search for other players, join existing games, or even create your own.</p>
             <p>Gamefinder is more than just a place to find other players, though. We've built in a range of tools to make your D&D experience even better. Create up to five different characters, complete with their own spell sheets. Use our built-in dice roller to keep the game fair and fun. And if you're a Dungeon Master, you'll love our suite of tools designed specifically to help you run your games more smoothly.</p>
             <p>So whether you're a seasoned D&D veteran or just getting started, Gamefinder is the perfect place to find the people and tools you need to take your game to the next level. Sign up today and join the adventure!</p>
           </mat-card-content>
         </mat-card>
+
       </div>
+
+      <br>
+
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <span>If you're new to the world of D&D, allow us to give you a brief overview:</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <div class="container">
+
+        <mat-card>
+          <mat-card-content>
+            <p>Dungeons and Dragons is a tabletop roleplaying game that has been captivating players for over 40 years. It's a game of imagination, where players create unique characters and embark on epic adventures in a fantasy world. One player, known as the Dungeon Master (DM), creates the story and plays the role of all the non-player characters, while the other players control their own characters and make decisions that shape the course of the story.</p>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+      <br>
+
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <span>A few other Table-Top RPGs:</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+
+          <mat-expansion-panel-header style="font-size: 18px;">
+            Pathfinder
+          </mat-expansion-panel-header>
+
+          <div class="container">
+            <mat-card>
+              <mat-card-content>
+                <p><a (click)="openSite('https://paizo.com/pathfinder')">Pathfinder</a> is often considered as a spiritual successor to the third edition of Dungeons & Dragons (D&D 3.5) because it was created as a modified version of that edition. However, Pathfinder evolved into its own independent RPG system with unique rules and content.</p>
+                <p>Here are a few key points on how Pathfinder relates to D&D while being independent:</p>
+                <p>1. Ruleset: Pathfinder builds upon the rules foundation of D&D 3.5 but introduces significant modifications and enhancements. It addresses some of the criticisms and imbalances found in the earlier edition while maintaining a similar gameplay experience.</p>
+                <p>2. Compatibility: Pathfinder is designed to be highly compatible with D&D 3.5 materials. Players familiar with D&D 3.5 can often use their existing books, adventures, and characters with minimal conversion when playing Pathfinder.</p>
+                <p>3. Setting: Pathfinder features its own original campaign setting called Golarion. This setting provides a rich and diverse world with its own lore, deities, nations, and adventure locations. However, Pathfinder rules can be adapted to other settings, just like D&D rules can be used in various campaign worlds.</p>
+                <p>4. Character Options: Pathfinder offers an extensive array of character options, including classes, races, feats, spells, and equipment. The game provides a wide range of choices to customize and develop your character, allowing for unique playstyles and character concepts.</p>
+                <p>5. Adventure Paths: Pathfinder is known for its Adventure Paths, which are pre-written campaign storylines that span multiple adventures. These Adventure Paths offer detailed narratives and quests, allowing the game master and players to embark on epic and immersive journeys.</p>
+                <br>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header style="font-size: 18px;">
+            Call of Cthulhu
+          </mat-expansion-panel-header>
+
+          <div class="container">
+            <mat-card>
+              <mat-card-content>
+                <p><a (click)="openSite('https://www.chaosium.com/call-of-cthulhu-rpg/')">Call of Cthulhu</a> is a tabletop role-playing game based on the works of renowned author H.P. Lovecraft and his Cthulhu Mythos. It is distinct from both Dungeons & Dragons and Pathfinder in terms of setting, themes, and gameplay mechanics.</p>
+                <p>1. Setting and Themes: Call of Cthulhu is set in the 1920s or other time periods and revolves around the cosmic horror genre. It immerses players in a world where ancient and malevolent entities, known as the Great Old Ones, lurk in the shadows, and forbidden knowledge drives individuals to madness. The game is characterized by its dark and foreboding atmosphere, dealing with themes of existential dread, investigation, and the fragility of the human mind.</p>
+                <p>2. Rules System: Call of Cthulhu employs its own unique rules system. It utilizes percentile-based mechanics, where players' actions are resolved by rolling percentile dice (typically two ten-sided dice) and comparing the result to their skill values. The system emphasizes investigation, sanity management, and the potential consequences of encountering otherworldly beings.</p>
+                <p>3. Investigative Gameplay: Call of Cthulhu focuses on investigative gameplay, with players assuming the roles of investigators who delve into mysteries, uncover ancient secrets, and confront eldritch horrors. It places a strong emphasis on problem-solving, gathering clues, and piecing together the larger puzzle to uncover the truth while trying to maintain their sanity in the face of unimaginable horrors.</p>
+                <p>4. Sanity Mechanic: One of the unique aspects of Call of Cthulhu is its sanity mechanic. As players explore the mysteries of the Cthulhu Mythos and encounter supernatural entities or witness unspeakable horrors, their characters' sanity may gradually erode. Sanity loss can lead to temporary or even permanent mental trauma, affecting their ability to function effectively and potentially driving them to insanity.</p>
+                <p>5. Lovecraftian Lore: Call of Cthulhu draws heavily from the literary works of H.P. Lovecraft and his contemporaries. It incorporates the cosmic horror and mythos created by Lovecraft, featuring a pantheon of ancient gods, forbidden tomes, cults, and the lurking horrors that await those who delve too deeply into forbidden knowledge.</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header style="font-size: 18px;">
+            Shadowrun
+          </mat-expansion-panel-header>
+
+          <div class="container">
+            <mat-card>
+              <mat-card-content>
+                <p><a (click)="openSite('https://www.catalystgamelabs.com/brands/shadowrun')">Shadowrun</a> is a tabletop role-playing game that combines cyberpunk, fantasy, and noir elements. It offers a unique world where magic and technology intersect, allowing players to immerse themselves in the life of shadowrunners operating in a dystopian future.</p>
+                <p>1. Setting and Themes: Shadowrun combines elements of cyberpunk, fantasy, and noir genres. The game is set in a near-future dystopian world where advanced technology coexists with magic and mythical creatures. Players assume the roles of shadowrunners, mercenaries operating in the shadows of corporate-dominated megacities. The game explores themes of corporate espionage, criminal underworld, and the clash between high-tech and ancient mystical forces.</p>
+                <p>2. Rules System: Shadowrun uses its own unique rules system. It combines traditional role-playing mechanics with elements of tactical combat, hacking, and spellcasting. The system incorporates a wide range of skills, attributes, and character archetypes, allowing players to create diverse characters with specialized abilities.</p>
+                <p>3. Character Creation: In Shadowrun, players can create characters with different races (including humans, elves, dwarves, and orks), each with their own unique attributes and abilities. Characters can specialize in combat, hacking, spellcasting, or a combination of various skills, offering flexibility and customization.</p>
+                <p>4. Shadowrunning: Shadowrun focuses on the gritty world of shadowrunning, where players take on dangerous missions and tasks for various clients, including corporations, criminal syndicates, and even mysterious individuals. These missions can involve espionage, theft, extraction, or sabotage, and often require a combination of stealth, combat, and cunning to succeed.</p>
+                <p>5. Magic and Technology: One of the defining aspects of Shadowrun is the juxtaposition of magic and technology. Characters can utilize advanced cybernetic enhancements and hacking skills, while also wielding powerful spells and abilities as magicians or shamans. The game offers a unique blend of these elements, allowing for creative approaches to challenges.</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
 
 </html>

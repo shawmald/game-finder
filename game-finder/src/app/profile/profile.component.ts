@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TagEditDialogComponent } from '../tag-edit-dialog/tag-edit-dialog.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -62,7 +62,11 @@ export class ProfileComponent {
     this.isLoggedIn = (sessionStorage.getItem('isLoggedIn') == 'true')
     this.currentUser = sessionStorage.getItem('currentUser') as string;
 
-    this.username = this.route.snapshot.paramMap.get('username') as string;
+    //this.username = this.route.snapshot.paramMap.get('username') as string;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.route.params.subscribe( params => {
+      this.username = params['username'];
+    })
 
     // check for existing user
     fetch(this.ip + "CheckUser?Username=" + this.username, {
@@ -76,9 +80,6 @@ export class ProfileComponent {
     })
     .then((content) => {
       this.userExists = JSON.parse(content) as boolean;
-    })
-    .catch(error => {
-      console.error('Something went wrong, please try again.', error)
     })
     .then(() => {
       if(this.userExists) {
@@ -487,6 +488,19 @@ export class ProfileComponent {
     reader.readAsDataURL(file);
   }
 
+  editPFPBinary(event: any) {
+    var file = event.files[0]
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      console.log('Encoded Base64 String:', reader.result);
+
+      var data = (<string>reader.result).split(',')[1];
+      var binaryBlob = atob(data)
+      console.log('Encoded Binary String:', binaryBlob);
+    }
+    reader.readAsDataURL(file);
+  }
+
   /**
    *
    * @param map (Map<string,boolean)
@@ -506,7 +520,7 @@ export class ProfileComponent {
     return filtered;
   }
 
-  constructor( public dialog: MatDialog, private route: ActivatedRoute ){}
+  constructor( public dialog: MatDialog, private route: ActivatedRoute, private router: Router ){}
 
   openDialog(): void {
     const dialogRef = this.dialog.open( TagEditDialogComponent, {

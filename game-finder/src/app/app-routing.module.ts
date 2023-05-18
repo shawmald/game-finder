@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
   { path: 'profile/:username', component: ProfileComponent }, //causes issues without login
-  { path: 'settings', component: SettingsComponent },
+  { path: 'settings', component: SettingsComponent,  canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'logout', component: LogoutComponent },
