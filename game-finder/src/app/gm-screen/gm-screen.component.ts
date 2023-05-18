@@ -59,7 +59,12 @@ export class GmScreenComponent {
   }
   */
 
+  /**
+   * creates a new NPC with default values
+   * TODO fix
+   */
   add(): void {
+    //make server call to create new NPC
     fetch(this.ip + "CreateNPC?Username=" + this.username, {
       method: "GET",
     })
