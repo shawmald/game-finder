@@ -465,14 +465,15 @@ export async function startServer() {
    */
 
   /**
-   * This API creates an NPC given the Profile username and NPC name.
+   * This API creates a default NPC given the Profile username.
    */
   server.get('/CreateNPC', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
-    const npcName = req.query.NPCName as string;
+    //const npcName = req.query.NPCName as string;
     let dmScreen = profile.dmScreen;
-    dmScreen.addNPC(npcName);
+    //dmScreen.addNPC(npcName);
+    dmScreen.addNPC();    //create default NPC
     profile.updateDB();
     
     res.send ( "The NPC was created" );
@@ -485,6 +486,7 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
     const npcPos = req.query.NPCPos as string;
+    
     const reqVar = req.query.ReqVar as string;
     const newVar = req.query.Newvar as any;
     let npc = profile.dmScreen.accessNPC( Number.parseInt(npcPos) );
