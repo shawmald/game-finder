@@ -115,7 +115,8 @@ export class CharactersComponent {
             throw new Error('Network response was not ok');
         }
         //return response.json(); // Parse response as JSON
-        return response.text();
+        return response.text(); 
+        
     })
     .then(data => {
         var content = JSON.parse(data);

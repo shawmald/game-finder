@@ -10,19 +10,23 @@ import { HttpClient } from '@angular/common/http';
 export class SpellsComponent  implements OnInit {
   ip = "http://34.30.183.36:80/";
   spells: any[] = [];
+  name!: string;
+  username!:string;
+  charPos!: number;
 
   ngOnInit() {
-    this.fetchSpells(); // Call the function to fetch spells when the component initializes
-  }
+    fetch('http://34.30.183.36:80/RecommendSpells?Username='+this.username+'&CharPosition='+this.charPos,{method:"GET",})
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+      this.spells = data; // Assign the fetched spells to the component property
 
-  fetchSpells() {
-    fetch('http://34.30.183.36:80/spells/RecommendSpells')
-      .then(response => response.json()) // Parse the response as JSON
-      .then(data => {
-        this.spells = data; // Assign the fetched spells to the component property
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
+      console.log("it works");
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  } 
+
+
+
 }
