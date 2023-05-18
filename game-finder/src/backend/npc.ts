@@ -1,5 +1,6 @@
 /**
- * 
+ * This is the basic information for all of the different fields that're needed for NPC.
+ * The ability to manage these NPCs are in DMScreen.
  * @author: Andrew Skevington-Olivera
  * @date: 13-5-23
  */

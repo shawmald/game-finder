@@ -1,7 +1,27 @@
 /**
- * This is profile where it has two constructors, one for logging in and one for signing in. The signing in constructor
- * makes a new document in MongoDB and also creates a new object to put into Array<Profile> for ProfilesManagement, and 
- * logging in just creates a new profile object with all of the stored information in MongoDB.
+ * The Profile class represents a user profile and provides various functionalities related to profile management.
+ * It has two constructors, one for signing up and one for logging in. The signing up constructor creates a new document in MongoDB
+ * and adds a new object to the Array<Profile> in ProfilesManagement. The logging in constructor retrieves the stored profile information
+ * from MongoDB and creates a new profile object.
+ * The Profile class provides the following functions:
+ * 
+ * saveToDB(): Saves a newly created profile from the signing up constructor to MongoDB.
+ * getUserDBInfo(): Retrieves the profile's information from the database by finding a document that matches the username during the initialization of 
+ * ProfileManagement.
+ * editInformation(): Edits multiple variables of the profile at once instead of modifying them individually.
+ * updateDB(): Updates the database document containing the profile's information with any changes made to it.
+ * createCharSheet(): Creates a character sheet and adds it to the charSheets array.
+ * updateCharSheet(): Updates multiple variables of a character sheet at once instead of modifying them individually.
+ * accessCharacterSheet(): Returns a character sheet given its position in the charSheets array. If the character sheet doesn't exist,
+ * it returns a string indicating that it doesn't exist.
+ * addFriend(): Adds a friend's username to the Friends array.
+ * removeFriend(): Removes a friend's username from the Friends array.
+ * addBlocked(): Adds a blocked user's username to the blockedProfiles array.
+ * removeBlocked(): Removes a blocked user's username from the blockedProfiles array.
+ * setMongoDB(): Allows setting MongoDB to null to enable the conversion of an object to a JSON object. It can be set back to the database later.
+ * returnDisplayName(): Returns the display name associated with the profile.
+ * returnUsername(): Returns the username of the profile.
+ * returnPassword(): Returns the password of the profile.
  * @Author Andrew Skevington-Olivera
  * @Date 19-4-23
  */
@@ -10,7 +30,6 @@
 
 import { MongoDB } from "./mongoDB";
 import { CharSheet } from "./CharSheet";
-import { Spell } from "./Spell";
 import { DMScreen } from "./DMScreen";
 
 export class Profile {
@@ -57,8 +76,9 @@ export class Profile {
         }
     }
 
-
-
+    /**
+     * This saves a profile created with the signIn constructor to MongoDB as a document.
+     */
     async saveToDB(){
         let collection = this.db.returnCollection("ProfilesDB", "Profiles");
         collection.insertOne( {"Username" : this.username, "Password" : this.password, "PrivacyLevel" : this.privacyLvl, 
@@ -68,7 +88,8 @@ export class Profile {
     }
 
     /**
-     * 
+     * This returns all of the information from the Profile's document when using the login constructor and sets it to the variables
+     * that're inside of this class and converts the characterSheets into CharSheet Objects.
      */
     public async getUserDBInfo() {
         let collection = this.db.returnCollection("ProfilesDB", "Profiles");
@@ -106,7 +127,7 @@ export class Profile {
             //console.log( this.charSheets );
         }
 
-        //console.log( this.charSheets );
+        console.log( this.charSheets );
 
         let dummyDMScreen = doc.DMScreen;
         if(dummyDMScreen != null) {
@@ -116,7 +137,22 @@ export class Profile {
     }
 
 
-
+    /**
+     * Edit all of the variables at once inside of the class instead of doing them individually.
+     * @param displayName 
+     * @param email 
+     * @param password 
+     * @param privacyLvl 
+     * @param blockedProfiles 
+     * @param friends 
+     * @param location 
+     * @param status 
+     * @param tags 
+     * @param aboutMe 
+     * @param pfp 
+     * @param availableTime 
+     * @param timezone 
+     */
     public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, 
     friends : Array<string>, location : string, status : string, tags : Map<string, boolean>, aboutMe : string, pfp : BinaryData, availableTime : string,
     timezone : string) {
@@ -137,6 +173,9 @@ export class Profile {
         this.updateDB();
     }
 
+    /**
+     * This updates the MongoDB document pertaining to this profile of any new changes that were made to it.
+     */
     public updateDB() {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Email", this.email);
@@ -157,19 +196,35 @@ export class Profile {
 
 
 
-    //For profiles would I have it be something like calling the profile, then looking at the different character sheets
-    //and going from that or should I just call the character sheets and have spells modified from that ?
+    /**
+     * Creates a new CharSheet object given a charName and appends it to the CharSheets array.
+     * @param charName 
+     */
     public createCharSheet(charName : string){
 
         let newSheet = new CharSheet(charName);
-        this.addCharacterSheet(newSheet);
+        this.charSheets.push(newSheet);
         this.updateDB();
     }
 
-    public addCharacterSheet(newSheet : CharSheet) {
-        this.charSheets.push(newSheet);
-    }
-
+    /**
+     * Given the character sheet, it allows for all of the variables to be modified at once rather than doing modifying them individually.
+     * @param charSheet 
+     * @param charName 
+     * @param race 
+     * @param charClass 
+     * @param charSubClass 
+     * @param lvl 
+     * @param allignment 
+     * @param stats 
+     * @param statModifiers 
+     * @param combatStats 
+     * @param classFeatures 
+     * @param background 
+     * @param money 
+     * @param equipment 
+     * @param spells 
+     */
     public updateCharSheet(charSheet : CharSheet, charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string,
         stats : any, statModifiers : any, combatStats : any, classFeatures : string, background : string, money : any, equipment : string, spells : any){
         charSheet.editInformation(charName, race, charClass, charSubClass, lvl, allignment, stats, statModifiers, combatStats, classFeatures, background,
@@ -177,8 +232,14 @@ export class Profile {
         this.updateDB();
     }
 
+    /**
+     * Given a position, this function looks through charSheet array and sees if there's any CharSheet obj at that position. If there is a CharSheet obj
+     * at that position, then this returns it, and if there isn't then it returns a string statement saying there wasn't a CharSheet Obj at that posiiton.
+     * @param pos 
+     * @returns CharSheet obj in charSheet Array Pos or String saying it doesn't exist.
+     */
     public accessCharacterSheet(pos : number) {
-        
+
         if(this.charSheets[pos] != null) {
             return this.charSheets[pos];
         }
@@ -187,22 +248,37 @@ export class Profile {
         }
     }
 
+    /**
+     * Adds another user's username to the friends array.
+     * @param friend 
+     */
     public addFriend(friend : string) {
         this.friends.push(friend);
     }
 
+    /**
+     * Removes another user's username from the friends array.
+     * @param friend 
+     */
     public removeFriend(friend : string) {
-        //Got code from this https://stackoverflow.com/questions/15292278/how-do-i-remove-an-array-item-in-typescript
         const index = this.friends.indexOf(friend, 0);
         if (index > -1) {
             this.friends.splice(index, 1);
         }
     }
 
+    /**
+     * Adds another user's username to the blockedProfiles array.
+     * @param block 
+     */
     public addBlocked(block : string) {
         this.blockedProfiles.push(block);
     }
 
+    /**
+     * Removes another user's username from the blockedProfiles array.
+     * @param block 
+     */
     public removeBlocked(block : string) {
         const index = this.blockedProfiles.indexOf(block, 0);
         if (index > -1) {
@@ -210,18 +286,35 @@ export class Profile {
         }
     }
 
+    /**
+     * Allows for the modification of the db variable. This was mostly done because whenever the Profile Obj would try to be converted
+     * into a JSON obj, the db variable would be an open circular object, so it wouldn't allow for JSON.stringify() to work.
+     * @param mongo 
+     */
     public setMongoDB(mongo : MongoDB) {
         this.db = mongo;
     }
 
+    /**
+     * This returns the variable displayName.
+     * @returns variable displayName
+     */
     public returnDisplayName() {
         return this.displayName;
     }
 
+    /**
+     * This returns the variable username.
+     * @returns variable username.
+     */
     public returnUsername() {
         return this.username;
     }
 
+    /**
+     * This returns the variable password.
+     * @returns variable password.
+     */
     public returnPassword() {
         return this.password;
     }

@@ -1,6 +1,8 @@
 /**
- * This is for the spells that the CharacterSheet can have and it has all of the different parts of a spell that's
- * required to make one for DnD.
+ * The Spell class contains the basic information for spells and provides functionality for editing spell information.
+ * Most of the data manipulation related to spells is handled in the CharSheet class, which has the necessary functions for this purpose.
+ * The Spells class includes the following function:
+ * editInformation(): Allows for easy modification of all the data stored in the class.
  * @Author Andrew Skevington-Olivera
  * @Date 19-4-23
  */
@@ -28,7 +30,16 @@ export class Spell {
     }
 
     /**
-     * Gets all of the information that the frontend can send to here and it'll modify the current spell class information
+     * Allows for all of the information to be changed at once instead of changing them one field at a time.
+     * @param spellName 
+     * @param level 
+     * @param duration 
+     * @param school 
+     * @param range 
+     * @param components 
+     * @param classes 
+     * @param text 
+     * @param castingTime 
      */
     editInformation(spellName : string, level : string, duration : string, school : string, range : string, components : string, 
     classes : Array<string>, text : string, castingTime : string) {

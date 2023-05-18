@@ -1,7 +1,9 @@
 /**
- * I don't even know what this was created for tbh
- * I think it was just storing all of the different races, equipment, classes, spells, etc for the 
- * user to access whenever they wanted to ???
+ * The InfoStorage class is responsible for managing spell retrieval from the database to the character sheet.
+ * It retrieves all the spells saved in the database and sends them to the character sheet as an array of spell objects.
+ * The InfoStorage class provides the following functionalities:
+ * saveSpells(): Saves new spells to the database for future use.
+ * returnSpells(): Retrieves all the spells currently stored in the database as an array of spell objects.
  * @Author Andrew Skevington-Olivera
  * @Date 20-4-23
  */
@@ -18,12 +20,20 @@ export class InfoStorage {
         this.db = db;
     }
 
-
+    /**
+     * Saves any new spells to the database.
+     * @param spell 
+     */
     public saveSpells(spell : Spell) {
         const collection = this.db.returnCollection( "StoredInfo", "Spells" );
         collection.insertOne( { "Spell" : JSON.stringify(spell) } );
     }
 
+    /**
+     * This gets all of the different spells information in the database and converts them to a Spell object, to be
+     * put into an array and then returned.
+     * @returns all spells being saved in database in an array
+     */
     public async returnSpells() {
         const collection = this.db.returnCollection( "StoredInfo", "Spells" );
         const spellArr = new Array();
