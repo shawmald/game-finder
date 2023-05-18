@@ -256,11 +256,17 @@ export async function startServer() {
    */
   server.get('/ReturnCharacterSheetInfo', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
-    let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
     const charPos = req.query.CharacterPos as string;
-    let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
-    
-    res.send( JSON.stringify(charSheet) );
+    let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
+
+    if( profile != null ) {
+      let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
+      res.send( JSON.stringify(charSheet) );
+    }
+    else{ 
+      res.send( "Profile is null. Please be logged into an account" );
+    }
+
   } )
 
 
@@ -382,17 +388,24 @@ export async function startServer() {
    */
   server.get('/RecommendSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
-    let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
     const charPos = Number.parseInt( req.query.CharacterPosition as string );
-    let charSheet = profile.accessCharacterSheet(charPos);
-
-    if( charSheet != null ) {
-      let recSpells = await charSheet.spellRecommendation( db );
-      res.send( JSON.stringify(recSpells) );
+    let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
+    
+    if( profile != null ) { //Checks if webserver is null
+      let charSheet = profile.accessCharacterSheet(charPos);
+      if( charSheet != null ) { //Checks if charSheet is null
+        let recSpells = await charSheet.spellRecommendation( db );
+        res.send( JSON.stringify(recSpells) );
+      }
+      else{
+        res.send( "The character sheet doesn't have a class so this won't work.")
+      }
     }
     else{
-      res.send( "The character sheet doesn't have a class so this won't work.")
+      res.send( "Profile is null. Please be logged into an account" );
     }
+
+    
     
   } )
 
