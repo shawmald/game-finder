@@ -4,11 +4,11 @@
     <div>
         <h3>Mode</h3>
 
-        <mat-checkbox [checked]="data.tags.get('in-person')">
+        <mat-checkbox [checked]="data.tags.get('in-person')" (change)="toggleTag('in-person')">
             in-person
         </mat-checkbox>
 
-        <mat-checkbox [checked]="data.tags.get('online')">
+        <mat-checkbox [checked]="data.tags.get('online')" (change)="toggleTag('online')">
             online
         </mat-checkbox>
     </div>
@@ -16,19 +16,19 @@
     <div>
         <h3>Role</h3>
 
-        <mat-checkbox [checked]="data.tags.get('beginner player')">
+        <mat-checkbox [checked]="data.tags.get('beginner player')" (change)="toggleTag('beginner player')">
             beginner player
         </mat-checkbox>
 
-        <mat-checkbox [checked]="data.tags.get('experienced player')">
+        <mat-checkbox [checked]="data.tags.get('experienced player')" (change)="toggleTag('experienced player')">
             experienced player
         </mat-checkbox>
 
-        <mat-checkbox [checked]="data.tags.get('beginner GM')">
+        <mat-checkbox [checked]="data.tags.get('beginner GM')" (change)="toggleTag('beginner GM')">
             beginner GM
         </mat-checkbox>
 
-        <mat-checkbox [checked]="data.tags.get('experienced GM')">
+        <mat-checkbox [checked]="data.tags.get('experienced GM')" (change)="toggleTag('experienced GM')">
             experienced GM
         </mat-checkbox>
 
@@ -37,24 +37,26 @@
     <div>
         <h3>Campaign Type</h3>
 
-        <mat-checkbox [checked]="data.tags.get('short')">
+        <mat-checkbox [checked]="data.tags.get('short')" (change)="toggleTag('short')">
             short
         </mat-checkbox>
 
-        <mat-checkbox [checked]="data.tags.get('long')">
+        <mat-checkbox [checked]="data.tags.get('long')" (change)="toggleTag('long')">
             long
         </mat-checkbox>
 
-        <mat-checkbox [checked]="data.tags.get('episodic')">
+        <mat-checkbox [checked]="data.tags.get('episodic')" (change)="toggleTag('episodic')">
             episodic
         </mat-checkbox>
     </div>
 
+    <!--
     <div>
         <h3>Genre</h3>
 
-        
+
     </div>
+    -->
 
 </div>
 

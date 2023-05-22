@@ -66,5 +66,9 @@ export class LoginComponent {
   loginStandard() {
     this.login(this.username, this.password);
   }
+
+  guestLogin() {
+    this.login("Guest", "GuestPassword1234")
+  }
 }
 

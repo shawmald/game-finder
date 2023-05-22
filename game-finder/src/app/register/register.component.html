@@ -13,6 +13,8 @@
       <button type="submit" (click)="signupStandard()">Sign Up</button>
     </form>
     <form *ngIf="showAdditionalFields" ngNativeValidate>
+      <h2>GameFinder</h2>
+      <h3>Start setting up your profile!</h3>
       <br>
       <label for="location">Enter Location (Optional):</label>
       <br>
@@ -41,11 +43,11 @@
       </select>
       <button type="submit" (click)="completeRegistration()">Complete Registration</button>
     </form>
-    <!--
-    <asl-google-signin-button></asl-google-signin-button>
-    -->
       <div class="bottom-links" *ngIf="!showAdditionalFields">
         <a href="/login">Already have an account? Sign In</a>
+      </div>
+      <div class="bottom-links" *ngIf="showAdditionalFields">
+        <a href="/gamefinder">Skip setting up profile for now</a>
       </div>
   </div>
 </body>
