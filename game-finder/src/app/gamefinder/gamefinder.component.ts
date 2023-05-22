@@ -27,12 +27,13 @@ export class GamefinderComponent {
     .then((content) => {
       let usernameArray: Array<String> = content.split(", ");
       //this.usernameArray = content.split(", ");
-      usernameArray.pop()
+      usernameArray.pop();
 
       //for each username:
       usernameArray.forEach((username) => {
 
         //check if current user is blocked
+        
         let blocked: boolean = false;
         fetch( this.ip + "CheckFriendOrBlock?Username=" + username + "&OtherUser=" + this.currentUser + "&Option=block", {
         })
@@ -47,6 +48,7 @@ export class GamefinderComponent {
             blocked = true;
           }
         });
+        
 
         //if not blocked, add info
         if(!blocked){
@@ -62,7 +64,7 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            newUser.displayName = content
+            newUser.displayName = content;
           });
 
 
@@ -76,7 +78,7 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            newUser.location = content
+            newUser.location = content;
           });
 
 
@@ -90,7 +92,7 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            newUser.status = content
+            newUser.status = content;
           });
           
 
@@ -104,7 +106,15 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            //newUser.tags = content    //convert string to map<string,boolean>
+            let tagArr: Array<String> = content.split(", ");    //convert string into an array of tags, split by ,
+
+            tagArr.forEach((element) => {
+              let tag: Array<String> = element.split(":");      //split individual tags into tag name and boolean
+              if(tag[1] == "true"){                             //if tag is true then add to user's tag array
+                newUser.tags.push(tag[0]);
+              }
+            })
+            
           });
           
 
@@ -118,11 +128,12 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            newUser.timezone = content
+            newUser.timezone = content;
           });
 
 
           this.userArray.push(newUser);
+          this.profiles.push(newUser);
           
         }
 
@@ -137,7 +148,7 @@ export class User {
 
   status: string = "";
   location: string = "";
-  tags!: Map<string, boolean>;
+  tags: Array<String> = [];
   timezone: string = "";
 
 
