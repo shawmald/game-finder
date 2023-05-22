@@ -1,3 +1,8 @@
+/*
+ * Login Component Typescript
+ * Author: Shawn Nash
+ */
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,28 +13,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  username!: string;
-  password!: string;
-  user: any;
-  errorMessage!: string;
+  username!: string; // The username entered by the user
+  password!: string; // The password entered by the user
+  errorMessage!: string; // Error message to display in case of login failure
 
-  ip = "http://34.30.183.36:80/";
+  ip = "http://34.30.183.36:80/"; // IP address of the server
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
-    /**
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.login(this.user.email, this.user.id);
-      //console.log(this.user);
-    })
-    */
-  }
-
+  // Function to handle the login process
   login(username: string, password: string) {
 
-    // Call API to validate login
+    // Call the API to validate the login
     fetch(this.ip + "Login?Username=" + username + "&Password=" + password, {
         method: "GET",
     })
@@ -41,32 +36,38 @@ export class LoginComponent {
       return response.text();
     })
     .then((content) => {
-        // If login is successful, redirect to dashboard page
-        // Otherwise, display error message
+        // If login is successful, redirect to the dashboard page
+        // Otherwise, display an error message
         if (content === "true") {
-          // Redirect to dashboard page
+          // Store the current user in the sessionStorage
           sessionStorage.setItem('currentUser', username);
           sessionStorage.setItem('isLoggedIn', 'true')
+
+          // Redirect to the dashboard page and reload the window
           this.router.navigate(['/gamefinder'])
           .then(() => {
             window.location.reload();
           })
         } else {
+          // Display an error message for invalid username or password
           this.errorMessage = 'Invalid username or password';
           alert(this.errorMessage)
         }
     })
     .catch((error) => {
       console.error('Error:', error);
+      // Display a generic error message in case of an error
       this.errorMessage = 'Something went wrong, please try again';
       alert(this.errorMessage);
     });
   }
 
+  // Function to initiate the standard login process
   loginStandard() {
     this.login(this.username, this.password);
   }
 
+  // Function to initiate the guest login process
   guestLogin() {
     this.login("Guest", "GuestPassword1234")
   }

@@ -1,3 +1,8 @@
+/*
+ * Settings Component Typescript
+ * Author: Shawn Nash
+ */
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -30,7 +35,6 @@ export class SettingsComponent {
 
   errorMessage!: string;
 
-  //showChangeUsernameForm: boolean = false;
   showChangeEmailForm: boolean = false;
   showChangeTimezoneForm: boolean = false;
   showChangePasswordForm: boolean = false;
@@ -100,98 +104,72 @@ export class SettingsComponent {
     this.populate_timeZones();
   }
 
-  /*
-  toggleChangeUsername() {
-    this.showChangeUsernameForm = !this.showChangeUsernameForm;
-    this.cancelChangeEmail();
-    this.cancelChangeTimezone();
-    this.cancelChangePassword();
-    this.cancelChangePrivacy();
-  }
-
-  cancelChangeUsername() {
-    this.showChangeUsernameForm = false;
-    this.user = {};
-  }
-  */
-
+  // Open or Close Change Email Prompt
   toggleChangeEmail() {
     this.showChangeEmailForm = !this.showChangeEmailForm;
-    //this.cancelChangeUsername();
     this.cancelChangeTimezone();
     this.cancelChangePassword();
     this.cancelChangePrivacy();
     this.user = {};
   }
 
+
+  // Close and Clear Change Email Prompt
   cancelChangeEmail() {
     this.showChangeEmailForm = false;
     this.user = {};
   }
 
+  // Open or Close Change Time Zone Prompt
   toggleChangeTimezone() {
     this.showChangeTimezoneForm = !this.showChangeTimezoneForm;
-    //this.cancelChangeUsername();
     this.cancelChangeEmail();
     this.cancelChangePassword();
     this.cancelChangePrivacy();
     this.user = {};
   }
 
+  // Close and Clear Change Time Zone Prompt
   cancelChangeTimezone() {
     this.showChangeTimezoneForm = false;
     this.user = {};
   }
 
+  // Open or Close Change Password Prompt
   toggleChangePassword() {
     this.showChangePasswordForm = !this.showChangePasswordForm;
-    //this.cancelChangeUsername();
     this.cancelChangeEmail();
     this.cancelChangeTimezone();
     this.cancelChangePrivacy();
     this.password = {};
   }
 
+  // Close and Clear Change Password Prompt
   cancelChangePassword() {
     this.showChangePasswordForm = false;
     this.password = {}; // Clear the password form fields
   }
 
+  // Open or Close Change Privacy Prompt
   toggleChangePrivacy() {
     this.showChangePrivacyForm = !this.showChangePrivacyForm;
-    //this.cancelChangeUsername();
     this.cancelChangeEmail();
     this.cancelChangeTimezone();
     this.cancelChangePassword();
     this.privacyLevel = "";
   }
 
+  // Close and Clear Change Privacy Prompt
   cancelChangePrivacy() {
     this.showChangePrivacyForm = false;
     this.privacyLevel = "";
   }
+
+  // Save email, time zone
   saveProfileSettings() {
     // Logic to save profile settings
 
-    /*
-    if(this.user.username != null) {
-      console.log("current username:", this.current_username)
-      console.log("new username:", this.user.username)
-      fetch(this.ip + "SetProfileVar?Username=" + this.current_username
-      + "&ReqVar=" + "username"
-      + "&NewVar=" + this.user.username, {
-        method: "GET",
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        this.errorMessage = 'Something went wrong, please try again.'
-      });
-      this.current_username = this.user.username;
-      sessionStorage.setItem('currentUser', this.current_username as string);
-      this.toggleChangeUsername();
-    }
-    */
-
+    // Server request to change email
     if(this.user.email != null) {
       fetch(this.ip + "SetProfileVar?Username=" + this.current_username
       + "&ReqVar=" + "email"
@@ -206,6 +184,7 @@ export class SettingsComponent {
       this.toggleChangeEmail();
     }
 
+    // Server request to change time zone
     if(this.user.timezone != null) {
       fetch(this.ip + "SetProfileVar?Username=" + this.current_username
       + "&ReqVar=" + "timezone"
@@ -221,6 +200,7 @@ export class SettingsComponent {
     }
   }
 
+  // Change Account Password
   changePassword() {
     // Logic to change password
     // check if current password is correct
@@ -258,7 +238,9 @@ export class SettingsComponent {
     })
   }
 
+  // Change Account Privacy
   changePrivacy() {
+    // Server request to change Account Privacy
     fetch(this.ip + "SetProfileVar?Username=" + this.current_username
     + "&ReqVar=" + "privacyLvl"
     + "&NewVar=" + this.privacyLevel, {
@@ -272,6 +254,7 @@ export class SettingsComponent {
     this.toggleChangePrivacy();
   }
 
+  // Populate Time Zones for changing Account Time Zone
   populate_timeZones() {
     this.timeZones =
     [

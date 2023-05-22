@@ -1,3 +1,8 @@
+/*
+ * Logout Component Typescript
+ * Author: Shawn Nash
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,10 +16,13 @@ export class LogoutComponent implements OnInit{
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-      sessionStorage.clear()
-      this.router.navigate(['/login'])
-      .then(() => {
-        window.location.reload();
-      })
+    // Clear the sessionStorage
+    sessionStorage.clear()
+
+    // Navigate to the login page and reload the window
+    this.router.navigate(['/login'])
+    .then(() => {
+      window.location.reload();
+    })
   }
 }

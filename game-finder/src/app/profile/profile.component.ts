@@ -1,4 +1,7 @@
-/* profile component typescript */
+/*
+ * Profile Component Typescript
+ * Author: Shawn Nash
+ */
 
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,66 +15,66 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 /**
- * profile
+ * Profile Component
+ * Displays user profile information and allows editing.
  */
 export class ProfileComponent {
 
-  isLoggedIn: boolean = false;
-  currentUser: string = "";
-  username: string = "";
-  sameUser: boolean = false;
+  // User Authentication and Basic Information
+  isLoggedIn: boolean = false; // Flag to check if user is logged in
+  currentUser: string = "";    // Current user's username
+  username: string = "";       // Profile username being viewed
+  sameUser: boolean = false;  // Flag to check if current user is viewing own profile
 
-  editing: boolean = false;
+  // Edit Mode Flag
+  editing: boolean = false; // Flag to indicate if the profile is in edit mode
 
-  pfp: string = "";
-  displayName: string = "";
+  // Profile Details
+  pfp: string = "";                         // Profile picture encoded data
+  displayName: string = "";                 // Display name
+  email: string = "";                        // Email address
+  location: string = "";                     // Location
+  status: string = "Looking for Campaign"; // Current status
+  privacyLevel: string = "";                // Privacy level
+  blockedProfiles: string[] = [];            // List of blocked profiles
+  friendsList: string[] = [];                // List of friends
+  bio: string = "about me";                // Biography or 'About Me'
+  timezone: string = "";                   // Timezone
+  availability: string = "";                 // Availability
 
-  email: string = "";
-
-  location: string = "";
-
-  status: string = "Looking for Campaign";
-
-  privacyLevel: string = "";
-
-  blockedProfiles: string[] = [];
-
-  friendsList: string[] = [];
-
+  // IP address of the server
   ip = "http://34.30.183.36:80/";
 
-  tags: Map<string,boolean> = new Map<string,boolean>();
-  currentTags!: Map<string,boolean>;
+  // Tags
+  tags: Map<string,boolean> = new Map<string,boolean>(); // Map of tags with boolean values
+  currentTags!: Map<string,boolean>;                     // Temporary copy of tags during editing
 
-  bio: string = "about me";
-  timezone: string = "";
-  availability: string = "";
+  // Availability Time Range
+  start_time: string = ""; // Start time for availability
+  end_time: string = "";  // End time for availability
 
-  start_time: string = "";
-  end_time: string = "";
+  // Friend and Block Status
+  isFriend: boolean = false;               // Flag to indicate if the profile is a friend
+  isBlocked: boolean = false;              // Flag to indicate if the profile is blocked
+  currentUserIsFriend: boolean = false;  // Flag to indicate if the current user is a friend
+  currentUserIsBlocked: boolean = false; // Flag to indicate if the current user is blocked by the profile user
 
-  isFriend: boolean = false;
-  isBlocked: boolean = false;
+  userExists!: boolean; // Flag to indicate if the profile user exists
 
-  currentUserIsFriend: boolean = false;
-  currentUserIsBlocked: boolean = false;
-
-  userExists!: boolean;
-
-  /*characters: Character[] = [];*/
-
-  /* TODO insert oninit stuff when login & backend is implemented */
   ngOnInit(): void {
+    // Check if user is logged in
     this.isLoggedIn = (sessionStorage.getItem('isLoggedIn') == 'true')
+
+    // Get the current user
     this.currentUser = sessionStorage.getItem('currentUser') as string;
 
-    //this.username = this.route.snapshot.paramMap.get('username') as string;
+    // Set the profile username from the route parameters
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.route.params.subscribe( params => {
       this.username = params['username'];
     })
 
-    // check for existing user
+    // Check if the user exists
     fetch(this.ip + "CheckUser?Username=" + this.username, {
       method: "GET",
     })
@@ -86,6 +89,7 @@ export class ProfileComponent {
     })
     .then(() => {
       if(this.userExists) {
+        // Get the profile information
         fetch(this.ip + "ReturnProfileInformation?Username=" + this.username, {
           method: "GET",
         })
@@ -96,6 +100,7 @@ export class ProfileComponent {
           return response.text();
         })
         .then((content) => {
+          // Parse and Set the profile information
           var data = JSON.parse(content)
           this.username = data.username;
           this.displayName = data.displayName;
@@ -192,6 +197,8 @@ export class ProfileComponent {
             console.error('This User does not exist.', error)
           })
         }
+
+        // Check if the current user is viewing their own profile
         this.sameUser = (this.currentUser == this.username);
       }
     })
@@ -211,7 +218,6 @@ export class ProfileComponent {
    * stop editing, values remain unchanged
    */
   cancel() {
-    /* TODO reset values if necessary */
     this.editing = false;
 
     // save Tags
@@ -230,7 +236,6 @@ export class ProfileComponent {
    * stop editing, save new values and update in database
    */
   save() {
-    /* TODO save new values, update in database */
 
     // save Display Name
     if(this.displayName != "") {
@@ -346,7 +351,6 @@ export class ProfileComponent {
    * sends a friend request to a user
    */
   friend() {
-    /* TODO send friend request */
 
     if(this.isBlocked) {
       fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
@@ -393,7 +397,6 @@ export class ProfileComponent {
    * blocks a user
    */
   block() {
-    /* TODO block user */
 
     if(this.isFriend) {
       //remove username as friend of currentUser
@@ -417,6 +420,7 @@ export class ProfileComponent {
       })
     }
 
+    // block
     fetch(this.ip + "AddFriendOrBlock?Username=" + this.currentUser
     + "&OtherUser=" + this.username
     + "&Option=" + "block", {
@@ -431,8 +435,10 @@ export class ProfileComponent {
     })
   }
 
+  // Function to unblock a user
   unblock() {
 
+    // Server request to unblock a user
     fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
     + "&OtherUser=" + this.username
     + "&Option=" + "block", {
@@ -460,6 +466,9 @@ export class ProfileComponent {
     return dataURI;
   }
 
+  /*
+   * Code to edit the pfp; NON-FUNCTIONAL
+   */
   editPFP(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -500,6 +509,10 @@ export class ProfileComponent {
     reader.readAsDataURL(file);
   }
 
+
+  /*
+   * Function to test of method of pfp storage; NON-FUNCTIONAL
+   */
   editPFPBinary(event: any) {
     var file = event.target.files[0]
     var reader = new FileReader();
@@ -534,6 +547,7 @@ export class ProfileComponent {
 
   constructor( public dialog: MatDialog, private route: ActivatedRoute, private router: Router ){}
 
+  // Opens the prompt to select profile tags
   openDialog(): void {
     const dialogRef = this.dialog.open( TagEditDialogComponent, {
       width: "350px",

@@ -1,3 +1,8 @@
+/*
+ * About Component Typescript
+ * Author: Shawn Nash
+ */
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +12,7 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
 
+  // used to open a new tab to the given website without taking the user away from GameFinder
   openSite(url: string) {
     window.open(url, "_blank");
   }

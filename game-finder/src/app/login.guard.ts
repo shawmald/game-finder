@@ -1,3 +1,8 @@
+/*
+ * Login Guard Typescript
+ * Author: Shawn Nash
+ */
+
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,6 +14,7 @@ export class LoginGuard implements CanActivate {
 
   constructor(private router: Router) {}
 
+  // Used to keep users from accessing certain pages once they're logged in
   canActivate(): boolean {
 
     if(sessionStorage.getItem('isLoggedIn') != 'true') {
