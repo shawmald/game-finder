@@ -9,12 +9,10 @@ export class GamefinderComponent {
   ip = "http://34.30.183.36:80/";
   currentUser: string = '';
 
-  //usernameArray: Array<String> = [];
-
-  userArray: Array<User> = [];        //all users
+  userArray: Array<User> = [];        //all users, shouldn't change
 
   columndefs = ['name', 'tags', 'availability', 'location'];
-  profiles: Array<User> = [];         //filtered users
+  profiles: Array<User> = [];         //filtered users, updates depending on filters
 
   ngOnInit(): void {
     this.currentUser = sessionStorage.getItem('currentUser') as string;
