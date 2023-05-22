@@ -5,7 +5,7 @@
         https://v5.material.angular.io/components/table/overview
 -->
 <h1>GameFinder</h1>
-<mat-table [dataSource]="profileArray">
+<mat-table [dataSource]="userArray">
     <!-- display name column -->
     <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
@@ -15,12 +15,19 @@
     <!-- TODO tags column -->
     <ng-container matColumnDef="tags">
         <mat-header-cell *matHeaderCellDef>Tags</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.tags }}</mat-cell>    <!-- display all true tags -->
+        <mat-cell *matCellDef="let element">{{ element.tags }}</mat-cell> 
     </ng-container>
 
-    <!-- TODO availability column --><!--
+    <!-- TODO availability column -->
     <ng-container matColumnDef="tags">
         <mat-header-cell *matHeaderCellDef>Availability</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.availability }}</mat-cell>   --><!-- display availibility match as a percentage --><!--
-    </ng-container>-->
+        <mat-cell *matCellDef="let element">{{ element.availability }}</mat-cell>   <!-- display availibility match as a percentage -->
+    </ng-container>
+
+    <!-- location column -->
+    <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.location }}</mat-cell>   <!-- display availibility match as a percentage -->
+    </ng-container>
+
 </mat-table>
