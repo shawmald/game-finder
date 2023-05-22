@@ -13,7 +13,7 @@ export class GamefinderComponent {
 
   userArray: Array<User> = [];        //all users
 
-  displayedColumns = ['name', 'tags', 'availability', 'location'];
+  columndefs = ['name', 'tags', 'availability', 'location'];
   profiles: Array<User> = [];         //filtered users
 
   ngOnInit(): void {
