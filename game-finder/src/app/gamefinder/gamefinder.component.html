@@ -48,6 +48,13 @@
     <div *ngFor="let user of profiles" class="profile-card">
         <h4><a routerLink="/profile/{{user.username}}">{{ user.displayName }}</a></h4>
         <p>{{user.status}}</p>
+
+        <div id="tag-container" class="flex-row">
+            <div class="tag" *ngFor="let tag of user.tags">
+                {{ tag }}
+            </div>
+        </div>
+
         <p>{{user.availability}}</p>
         <p>{{user.location}}</p>
     </div>
