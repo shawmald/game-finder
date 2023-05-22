@@ -17,7 +17,7 @@ export class GamefinderComponent {
   ngOnInit(): void {
     this.currentUser = sessionStorage.getItem('currentUser') as string;
 
-    fetch( this.ip + "GetAllUserNames")
+    fetch( this.ip + "ReturnAllUserNames")
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
