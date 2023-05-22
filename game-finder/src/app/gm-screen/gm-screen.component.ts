@@ -17,7 +17,7 @@ export class GmScreenComponent {
 
   statTool: StatUtil = new StatUtil();
   //gmScreen: any;
-  //npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC(), new NPC() );   //
+  //npcs: NPC[] = Array<NPC>( new NPC(), new NPC(), new NPC() );   //
   npcs: Array<any> = new Array<any>();
 
   ngOnInit(): void {
@@ -64,7 +64,9 @@ export class GmScreenComponent {
    * TODO fix
    */
   add(): void {
+    //this.npcs.push( new NPC() );
     //make server call to create new NPC
+    
     fetch(this.ip + "CreateNPC?Username=" + this.username, {
       method: "GET",
     })
@@ -77,8 +79,9 @@ export class GmScreenComponent {
     .catch(error => {
       console.error('error', error)
     })
-
+    
     //this.openDialog( this.npcs[this.npcs.length-1] );   //open pop-up of new NPC
+    
   }
 
   remove( index:number ): void {
@@ -96,7 +99,7 @@ export class GmScreenComponent {
     const dialogRef = this.dialog.open( NpcDialogComponent, {
       width: "550px",
       data: {
-        npc: npc
+        npc: npc,
       } 
     });
 
@@ -108,7 +111,7 @@ export class GmScreenComponent {
 
 }
 
-/*
+
 export class NPC {
   name: string;
   level: number;
@@ -137,4 +140,3 @@ export class NPC {
   }
 
 }
-*/

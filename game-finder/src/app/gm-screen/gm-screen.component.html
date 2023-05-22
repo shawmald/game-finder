@@ -21,7 +21,7 @@
             <!-- <div *ngIf="npc != null" class="rounded-block" (click)="openDialog(npc)"> -->
             <div class="rounded-block" (click)="openDialog(npc)">
                 <h3>{{ npc.name }}</h3>
-                <h4>Lv {{ npc.level }} {{ npc.class }}</h4>
+                <h4>Lv {{ npc.lvl }} {{ npc.class }}</h4>
 
                 <!-- stats -->
                 <p>HP: {{ npc.stats.get('cHP') }}/{{ npc.stats.get('mHP') }}</p>
