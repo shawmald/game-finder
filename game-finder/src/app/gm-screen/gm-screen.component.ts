@@ -99,19 +99,20 @@ export class GmScreenComponent {
     const dialogRef = this.dialog.open( NpcDialogComponent, {
       width: "550px",
       data: {
-        npc: npc,
+        npc: npc
       } 
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log( "The dialog was closed" );
-      //this.?? = result;
+      let i: number = this.npcs.indexOf(npc);
+      this.npcs[i] = result;
     })
   }
 
 }
 
-
+/*
 export class NPC {
   name: string;
   level: number;
@@ -140,3 +141,4 @@ export class NPC {
   }
 
 }
+*/
