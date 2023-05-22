@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TagEditDialogComponent } from '../tag-edit-dialog/tag-edit-dialog.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
  */
 export class ProfileComponent {
 
+  isLoggedIn: boolean = false;
   currentUser: string = "";
   username: string = "";
   sameUser: boolean = false;
@@ -24,18 +25,12 @@ export class ProfileComponent {
 
   pfp: string = "";
   displayName: string = "";
-  //displayName: string = "display name";
 
   email: string = "";
-  //email: string = "example@gmail.com";
-  emailVis: string = "Private";                //email visibility: Public, Friends Only, or Private
 
   location: string = "";
-  //location: string = "City, ST";
-  locationVis: string = "Friends Only";        //location visibility: Public, Friends Only, or Private
 
   status: string = "Looking for Campaign";
-  //status: string = "Looking for Campaign";
 
   privacyLevel: string = "";
 
@@ -45,41 +40,39 @@ export class ProfileComponent {
 
   ip = "http://34.30.183.36:80/";
 
-  //hard coded tags for testing, edit later
   tags: Map<string,boolean> = new Map<string,boolean>();
-  /*
-  tags: Map<string,boolean> = new Map<string,boolean>([
-    ["in-person", true],
-    ["online", true],
-
-    ["beginner player", false],
-    ["experienced player", true],
-    ["beginner GM", true],
-    ["experienced GM", false],
-
-    ["short", true],
-    ["long", true],
-    ["sustained", true],
-    ["episodic", true],
-
-  ]);
-  */
+  currentTags!: Map<string,boolean>;
 
   bio: string = "about me";
   timezone: string = "";
-  //timezone: string = "EDT(UTC-4)";
   availability: string = "";
+
+  start_time: string = "";
+  end_time: string = "";
+
+  isFriend: boolean = false;
+  isBlocked: boolean = false;
+
+  currentUserIsFriend: boolean = false;
+  currentUserIsBlocked: boolean = false;
+
+  userExists!: boolean;
 
   /*characters: Character[] = [];*/
 
   /* TODO insert oninit stuff when login & backend is implemented */
   ngOnInit(): void {
+    this.isLoggedIn = (sessionStorage.getItem('isLoggedIn') == 'true')
     this.currentUser = sessionStorage.getItem('currentUser') as string;
 
-    this.username = this.route.snapshot.paramMap.get('username') as string;
+    //this.username = this.route.snapshot.paramMap.get('username') as string;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.route.params.subscribe( params => {
+      this.username = params['username'];
+    })
 
     // check for existing user
-    fetch(this.ip + "ReturnProfileInformation?Username=" + this.username, {
+    fetch(this.ip + "CheckUser?Username=" + this.username, {
       method: "GET",
     })
     .then((response) => {
@@ -89,29 +82,121 @@ export class ProfileComponent {
       return response.text();
     })
     .then((content) => {
-      var data = JSON.parse(content)
-      this.username = data.username;
-      this.displayName = data.displayName;
-      this.privacyLevel = data.privacyLvl;
-      this.email = data.email;
-      this.location = data.location;
-      this.status = data.status;
-      //this.tags = data.tags;
-      this.bio = data.aboutMe;
-      this.pfp = data.pfp.replace(/ /g, '+');
-      console.log(this.pfp)
-      this.availability = data.availableTime;
-      this.timezone = data.timezone;
-      this.blockedProfiles = data.blockedProfiles;
-      this.friendsList = data.friends;
-      console.log(this.tags);
+      this.userExists = JSON.parse(content) as boolean;
     })
-    .catch(error => {
-      console.error('This User does not exist.', error)
+    .then(() => {
+      if(this.userExists) {
+        fetch(this.ip + "ReturnProfileInformation?Username=" + this.username, {
+          method: "GET",
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then((content) => {
+          var data = JSON.parse(content)
+          this.username = data.username;
+          this.displayName = data.displayName;
+          this.privacyLevel = data.privacyLvl;
+          this.email = data.email;
+          this.location = data.location;
+          this.status = data.status;
+          this.tags = new Map(Object.entries(JSON.parse(data.tags)));
+          this.bio = data.aboutMe;
+          this.pfp = data.pfp.replace(/ /g, '+');
+          this.availability = data.availableTime;
+          this.timezone = data.timezone;
+          this.blockedProfiles = data.blockedProfiles;
+          this.friendsList = data.friends;
+        })
+        .catch(error => {
+          console.error('This User does not exist.', error)
+        })
+
+        if(this.currentUser != this.username) {
+          // Check if currentUser is Friend of username
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
+          + "&OtherUser=" + this.currentUser
+          + "&Option=" + "friend", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            this.currentUserIsFriend = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
+
+          // Check if currentUser is Blocked from username
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.username
+          + "&OtherUser=" + this.currentUser
+          + "&Option=" + "block", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            this.currentUserIsBlocked = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
+
+          // Check if username is Friend of currentUser
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
+          + "&OtherUser=" + this.username
+          + "&Option=" + "friend", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            this.isFriend = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
+
+          // Check if username is blocked from currentUser
+          fetch(this.ip + "CheckFriendOrBlock?Username=" + this.currentUser
+          + "&OtherUser=" + this.username
+          + "&Option=" + "block", {
+            method: "GET",
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            this.isBlocked = JSON.parse(content) as boolean
+          })
+          .catch(error => {
+            console.error('This User does not exist.', error)
+          })
+        }
+        this.sameUser = (this.currentUser == this.username);
+      }
     })
 
-    this.sameUser = (this.currentUser == this.username);
-  }
+}
 
   /**
    * switch to editing mode,
@@ -119,6 +204,7 @@ export class ProfileComponent {
    */
   edit() {
     this.editing = true;
+    this.currentTags = new Map(this.tags);
   }
 
   /**
@@ -127,8 +213,17 @@ export class ProfileComponent {
   cancel() {
     /* TODO reset values if necessary */
     this.editing = false;
-    window.location.reload();
 
+    // save Tags
+    fetch(this.ip + "SetProfileVar?Username=" + this.username
+    + "&ReqVar=" + "tags"
+    + "&NewVar=" + JSON.stringify(Object.fromEntries(this.currentTags)), {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
+    window.location.reload()
   }
 
   /**
@@ -147,6 +242,19 @@ export class ProfileComponent {
       .catch((error) => {
         console.error('Error:', error);
       })
+    }
+
+    // save Availability
+    this.availability = this.start_time + "-" + this.end_time;
+    if(this.availability != "") {
+      fetch(this.ip + "SetProfileVar?Username=" + this.username
+      + "&ReqVar=" + "availableTime"
+      + "&NewVar=" + this.availability, {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     }
 
     // save Location
@@ -177,7 +285,7 @@ export class ProfileComponent {
     if(this.tags != null) {
       fetch(this.ip + "SetProfileVar?Username=" + this.username
       + "&ReqVar=" + "tags"
-      + "&NewVar=" + this.tags, {
+      + "&NewVar=" + JSON.stringify(Object.fromEntries(this.tags)), {
         method: "GET",
       })
       .catch((error) => {
@@ -239,6 +347,46 @@ export class ProfileComponent {
    */
   friend() {
     /* TODO send friend request */
+
+    if(this.isBlocked) {
+      fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+      + "&OtherUser=" + this.username
+      + "&Option=" + "block", {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:',error)
+      })
+    }
+
+    fetch(this.ip + "AddFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "friend", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
+  }
+
+  unfriend() {
+
+    fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "friend", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
   }
 
   /**
@@ -246,6 +394,57 @@ export class ProfileComponent {
    */
   block() {
     /* TODO block user */
+
+    if(this.isFriend) {
+      //remove username as friend of currentUser
+      fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+      + "&OtherUser=" + this.username
+      + "&Option=" + "friend", {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:',error)
+      })
+
+      //remove currentUser as friend of username
+      fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.username
+      + "&OtherUser=" + this.currentUser
+      + "&Option=" + "friend", {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:',error)
+      })
+    }
+
+    fetch(this.ip + "AddFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "block", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
+  }
+
+  unblock() {
+
+    fetch(this.ip + "RemoveFriendOrBlock?Username=" + this.currentUser
+    + "&OtherUser=" + this.username
+    + "&Option=" + "block", {
+      method: "GET",
+    })
+    .catch((error) => {
+      console.error('Error:',error)
+    })
+
+    .then(() => {
+      window.location.reload()
+    })
   }
 
 
@@ -301,6 +500,18 @@ export class ProfileComponent {
     reader.readAsDataURL(file);
   }
 
+  editPFPBinary(event: any) {
+    var file = event.target.files[0]
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      //console.log('Encoded Base64 String:', reader.result);
+
+      var data = (<string>reader.result).split(',')[1];
+      var binaryBlob = atob(data)
+      //console.log('Encoded Binary String:', binaryBlob);
+    }
+    reader.readAsDataURL(file);
+  }
 
   /**
    *
@@ -321,7 +532,7 @@ export class ProfileComponent {
     return filtered;
   }
 
-  constructor( public dialog: MatDialog, private route: ActivatedRoute ){}
+  constructor( public dialog: MatDialog, private route: ActivatedRoute, private router: Router ){}
 
   openDialog(): void {
     const dialogRef = this.dialog.open( TagEditDialogComponent, {

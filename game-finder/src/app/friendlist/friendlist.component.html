@@ -1,0 +1,19 @@
+<div class="friend-list-container" *ngIf="currentUser != ''">
+  <h2>Friends</h2>
+  <ul *ngIf="!isFriendsEmpty">
+    <li *ngFor="let friend of friends">
+      <a [routerLink]="['/profile', friend]">{{ friend }}</a>
+      <button (click)="unfriend(friend)">Unfriend</button>
+    </li>
+  </ul>
+  <p *ngIf="isFriendsEmpty">You currently have no users on your friends list.</p>
+
+  <h2>Blocked Users</h2>
+  <ul *ngIf="!isBlockedEmpty">
+    <li *ngFor="let blockedUser of blocked">
+      <a [routerLink]="['/profile', blockedUser]">{{ blockedUser }}</a>
+      <button (click)="unblock(blockedUser)">Unblock</button>
+    </li>
+  </ul>
+  <p *ngIf="isBlockedEmpty">You currently have no users on your blocked list.</p>
+</div>

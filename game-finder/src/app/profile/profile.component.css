@@ -1,17 +1,86 @@
-/*
-    profile component CSS
+.profile-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-    refs:
-        rounded corners     https://www.w3schools.com/css/css3_borders.asp
-*/
+.profile-header {
+  text-align: center;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.display-name {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.username {
+  font-size: 18px;
+  color: gray;
+}
+
+.email, .location, .status {
+  margin: 5px 0;
+}
+
+.profile-details {
+  margin-top: 20px;
+}
+
+.profile-section {
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: inset 0px 0px 5px lightgray;
+}
+
+.profile-section h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+.profile-section p {
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.about-me, .available-time, .time-zone {
+  margin: 5px 0;
+}
+
+.tags li {
+  display: inline-block;
+  background-color: lightgray;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+input, select, textarea {
+  width: 60%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+  display: inline-block;
+}
 
 /* float button container on the right, add margins of the left and right */
 #button-container{
+  float: right;
   padding: 10px;
   margin: 0% 2.5% 0% 2.5%; /* top right bottom left */
 }
 
-/* add margins to left and right */
 .button {
   background-color: #007bff;
   color: #fff;
@@ -27,99 +96,22 @@
   background-color: #0062cc;
 }
 
-/* add margins to the top, right, and bottom */
-input, select{
-    margin: 2.5% 2.5% 2% 0%;
-}
-
-/* make input display as a block (appears in own line) */
-.block-display{
-    display: block;
-}
-
-#tag-container {
-  margin: 20px 0;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-}
-
-.tag{
-    font-size: small;
-    padding: 5px;
-    margin: 5px 5px 0px 0px;
-
-    border-radius: 25px;
-    background-color: lightgrey;
-
-}
-
-textarea{
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  width: 95%;
-  height: 75px;
-  margin-bottom: 10px;
-}
-
-h2 {
-  font-size: 28px;
-  text-align: center;
-}
-
-img {
-  border: 2px solid #ccc;
-  border-radius: 50%;
-}
-
-.status {
-  font-size: 16px;
-  color: #007bff;
-}
-
-mat-icon {
+.icon:hover {
   cursor: pointer;
 }
 
-.pfp {
-  position: relative;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 30px;
-}
-
-.pfp-hover {
-  position: absolute;
-  top: 0;
-  left: 0;
+.profile-section input,
+.profile-section textarea {
   width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
 }
 
-.pfp:hover .pfp-hover {
-  opacity: 1;
+.profile-section input[type="time"] {
+  width: 49%
 }
 
-.pfp-hover p {
-  font-size: 14px;
-  color: #333;
-  text-align: center;
-  margin: 0;
+.profile-section .time-divider {
+  margin-left: 0px;
 }
-
-.pfp img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 
 /*----------------------------------------------------------------------
     Overwrite style.css
