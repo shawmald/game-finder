@@ -46,7 +46,7 @@
 
 <div class="profiles-container">
     <div *ngFor="let user of profiles" class="profile-card">
-        <h4 routerLink="profile/{{user.username}}">{{ user.displayName }}</h4>
+        <h4><a routerLink="/profile/{{user.username}}">{{ user.displayName }}</a></h4>
         <p>{{user.status}}</p>
         <p>{{user.availability}}</p>
         <p>{{user.location}}</p>
