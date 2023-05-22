@@ -21,6 +21,7 @@
 
     <div class="flex-row container">
         <div *ngFor="let npc of this.npcs">
+            <!-- if null: show empty block -->
             <div *ngIf="npc == null" class="rounded-block empty">
                 <mat-icon class="plus-icon">add</mat-icon>
             </div>
@@ -30,7 +31,22 @@
                 <h4>Lv {{ npc.level }} {{ npc.class }}</h4>
 
                 <!-- stats -->
-                <h4>Stats</h4>
+                <p>HP: cHP/mHP</p>
+
+                <table>
+                    <tr>
+                        <td>AC</td>
+                        <td>Initiative</td>
+                        <td>Speed</td>
+                    </tr>
+
+                    <tr>
+                        <td>(AC)</td>    <!-- armor class -->
+                        <td>{{ statTool.calcMod( npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
+                        <td>(spd)</td> <!-- speed -->
+                    </tr>
+                </table>
+
                 <table>
 
                     <!-- stat names -->

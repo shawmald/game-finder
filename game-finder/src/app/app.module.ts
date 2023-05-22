@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatTableModule} from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -77,7 +78,8 @@ import { FriendlistComponent } from './friendlist/friendlist.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ],
   exports: [
     MatButtonModule,

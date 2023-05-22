@@ -1,0 +1,27 @@
+.profiles-container{
+    width: 90%;
+    margin: 0px auto 0px auto;
+}
+
+.profile-card{
+    background-color: lightblue;
+    border-radius: 25px;
+    padding: 5px 5px 5px 5px;
+    margin: 2.5px 2.5px 2.5px 2.5px;
+}
+
+#tag-container {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .tag{
+      font-size: small;
+      padding: 5px;
+      margin: 5px 5px 0px 0px;
+  
+      border-radius: 25px;
+      background-color: lightgrey;
+  
+  }
