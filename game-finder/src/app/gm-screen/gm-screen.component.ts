@@ -81,7 +81,7 @@ export class GmScreenComponent {
     })
     
     //this.openDialog( this.npcs[this.npcs.length-1] );   //open pop-up of new NPC
-    
+    location.reload();
   }
 
   remove( index:number ): void {
