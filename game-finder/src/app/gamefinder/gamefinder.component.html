@@ -5,11 +5,14 @@
         https://v5.material.angular.io/components/table/overview
 -->
 <h1>GameFinder</h1>
-<mat-table [dataSource]="userArray">
+<p>
+    (testing)
+</p>
+<mat-table [dataSource]="profiles">
     <!-- display name column -->
     <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let element" routerLink="'/profile/' + element.username">{{ element.displayName }}</mat-cell>    <!-- get display name from profile, link to user's profile -->
+        <mat-cell *matCellDef="let element" routerLink="'/profile/' + {{element.username}}">{{ element.displayName }}</mat-cell>    <!-- get display name from profile, link to user's profile -->
     </ng-container>
 
     <!-- tags column -->
@@ -32,11 +35,10 @@
 
 </mat-table>
 
-<!--
+
 <div>
     <div *ngFor="let user in profiles">
-        <h4>{{ user.displayName }}</h4>
+        <h4 routerLink="'/profile/' + {{user.username}}">{{ user.displayName }}</h4>
     </div>
 
 </div>
--->
