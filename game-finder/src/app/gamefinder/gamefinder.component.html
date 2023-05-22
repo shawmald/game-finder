@@ -37,7 +37,7 @@
 
 
 <div>
-    <div *ngFor="let user in profiles">
+    <div *ngFor="let user of profiles">
         <h4 routerLink="'/profile/' + {{user.username}}">{{ user.displayName }}</h4>
     </div>
 

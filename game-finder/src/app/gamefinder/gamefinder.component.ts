@@ -12,6 +12,8 @@ export class GamefinderComponent {
   //usernameArray: Array<String> = [];
 
   userArray: Array<User> = [];        //all users
+
+  displayedColumns = ['name', 'tags', 'availability', 'location'];
   profiles: Array<User> = [];         //filtered users
 
   ngOnInit(): void {
@@ -130,10 +132,11 @@ export class GamefinderComponent {
           .then((content) => {
             newUser.timezone = content;
           });
-
+          
 
           this.userArray.push(newUser);
           this.profiles.push(newUser);
+     
           
         }
 
