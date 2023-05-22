@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-friendlist',
@@ -11,6 +12,9 @@ export class FriendlistComponent {
 
   friends!: string[];
   blocked!: string[];
+
+  isFriendsEmpty: boolean = false;
+  isBlockedEmpty: boolean = false;
 
   ip = "http://34.30.183.36:80/";
 
@@ -31,6 +35,9 @@ export class FriendlistComponent {
     })
     .then((content) => {
       this.friends = JSON.parse(content);
+      if(Object.keys(this.friends).length === 0) {
+        this.isFriendsEmpty = true;
+      }
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -48,11 +55,9 @@ export class FriendlistComponent {
       return response.text();
     })
     .then((content) => {
-      console.log(content)
       this.blocked = JSON.parse(content);
-      console.log(this.blocked)
-      for(var friend in this.blocked) {
-      console.log(this.blocked[friend])
+      if(Object.keys(this.friends).length === 0) {
+        this.isBlockedEmpty = true;
       }
     })
     .catch((error) => {

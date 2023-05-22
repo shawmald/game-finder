@@ -1,180 +1,97 @@
-<!--
-    profile component HTML
--->
+<div id="button-container" class="nowrap-row">
 
-<div class="contents" *ngIf="!currentUserIsBlocked && userExists">
-    <!-- <form id="profile-update" name="profile-update" action="" method="" ></form> -->   <!-- for input?? -->
+  <!-- edit symbol, click to enter editing mode -->
+  <mat-icon class="icon" *ngIf="sameUser && !editing" (click)="edit()">edit</mat-icon>
 
-    <!--
-        contains pfp & (if user's page) edit symbol
-        row display
-    -->
-    <div class="nowrap-row">
-        <!-- pfp & display name -->
-        <div>
-            <!-- profile picture -->
-            <div class="pfp">
-              <!--
-              <label for="pfp-input">
-                -->
-                <img [src]="getPFP()" alt="profile picture">
-                <!--
-                <div class="pfp-hover" *ngIf="editing">
-                  <p>Edit Profile Picture</p>
-                </div>
-              </label>
-              <input style="display: none;" *ngIf="editing" id="pfp-input" type="file" accept=".jpg, .png" (change)="editPFP($event)">
-              -->
-            </div>
+  <!-- if editing: replace edit symbol with save and cancel buttons -->
+  <button *ngIf="editing" (click)="save()" class="button" type="button" >save</button>
+  <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
 
-            <!-- display name, if editing replace with input box preloaded with current display name -->
-            <h2 *ngIf="!editing">{{ displayName }}</h2>
-            <input *ngIf="editing" class="block-input" placeholder="{{ displayName }}" [(ngModel)]="displayName">
-        </div>
+  <!-- if not the same user: show friend and cancel buttons -->
+  <button *ngIf="!sameUser && isLoggedIn && !isFriend" (click)="friend()" class="button" type="button" >Add Friend</button>
+  <button *ngIf="!sameUser && isLoggedIn && isFriend" (click)="unfriend()" class="button" type="button" >Remove Friend</button>
+  <button *ngIf="!sameUser && isLoggedIn && !isBlocked" (click)="block()" class="button" type="button" >Block User</button>
+  <button *ngIf="!sameUser && isLoggedIn && isBlocked" (click)="unblock()" class="button" type="button" >Unblock User</button>
+</div>
 
-        <!--
-                if same user & editing: show edit icon
-            if same user & not editing: show save and cancel buttons
-                     if different user: show friend & block buttons
-        -->
-        <div id="button-container" class="nowrap-row">
+<div class="profile-container" *ngIf="!currentUserIsBlocked && userExists">
 
-            <!-- edit symbol, click to enter editing mode -->
-            <mat-icon class="icon" *ngIf="sameUser && !editing" (click)="edit()">edit</mat-icon>
+  <div class="profile-header">
+      <img [src]="getPFP()" alt="Profile Picture" class="profile-picture">
+      <br>
+      <p style="display: inline;" *ngIf="editing">Display Name: </p>
+      <h1 *ngIf="!editing" class="display-name">{{ displayName }}</h1>
+      <input *ngIf="editing" type="text" [(ngModel)]="displayName" class="edit-input">
 
-            <!-- if editing: replace edit symbol with save and cancel buttons -->
-            <button *ngIf="editing" (click)="save()" class="button" type="button" >save</button>
-            <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
+      <p *ngIf="!editing" class="username">@{{ username }}</p>
+      <a class="email" *ngIf="(!editing && sameUser) || (!editing && !sameUser && privacyLevel=='Public') || (!editing && !sameUser && privacyLevel=='Friends Only' && isFriend)" href="mailto: {{ email }}">{{ email }}</a>
+      <br>
+      <p style="display: inline;" *ngIf="editing">Location: </p>
+      <p class="location" *ngIf="(!editing && sameUser) || (!editing && !sameUser && privacyLevel=='Public') || (!editing && !sameUser && privacyLevel=='Friends Only' && isFriend)">{{ location }}</p>
+      <input *ngIf="editing" type="text" [(ngModel)]="location" class="edit-input">
+      <br>
+      <label style="display: inline;">Status: </label>
+      <p *ngIf="!editing" style="display: inline;" id="status">{{ status }}</p>
+      <select *ngIf="editing" name="status" style="display: inline;" [(ngModel)]="status">
+          <option value="" selected disabled hidden>{{ status }}</option>
+          <option value="Currently in a Campaign">Currently in a Campaign</option>
+          <option value="Looking for a Campaign">Looking for a Campaign</option>
+      </select>
 
-            <!-- if not the same user: show friend and cancel buttons -->
-            <button *ngIf="!sameUser && isLoggedIn && !isFriend" (click)="friend()" class="button" type="button" >Add Friend</button>
-            <button *ngIf="!sameUser && isLoggedIn && isFriend" (click)="unfriend()" class="button" type="button" >Remove Friend</button>
-            <button *ngIf="!sameUser && isLoggedIn && !isBlocked" (click)="block()" class="button" type="button" >Block User</button>
-            <button *ngIf="!sameUser && isLoggedIn && isBlocked" (click)="unblock()" class="button" type="button" >Unblock User</button>
-        </div>
+  </div>
 
+  <div class="profile-details">
+
+    <div class="profile-section">
+      <h2>About Me</h2>
+      <p *ngIf="!editing" class="about-me">{{ bio }}</p>
+      <textarea *ngIf="editing" [(ngModel)]="bio" class="edit-input"></textarea>
+    </div>
+
+    <div class="profile-section">
+      <h2>Availability</h2>
+
+      <p *ngIf="!editing" class="available-time">{{ availability }}</p>
+      <input type="time" id="start-time" name="start-time" [(ngModel)]="start_time" *ngIf="editing">
+      <p class="time-divider" style="display: inline;" *ngIf="editing">-</p>
+      <input type="time" id="end-time" name="end-time" [(ngModel)]="end_time" *ngIf="editing">
+
+      <p *ngIf="!editing" class="time-zone">{{ timezone }}
+
+        <mat-icon *ngIf="!editing"
+              class="help"
+              matTooltip="Time Zone can be edited in profile settings"
+              matTooltipPosition="after"
+              matTooltipHideDelay="2000"
+          >
+              help_outline
+          </mat-icon>
+      </p>
 
     </div>
 
-    <!--
-        contains profile info
-        row display, split between tags & biography
-        column display in mobile
-    -->
-    <div class="flex-row">
-        <!-- email, location, status, & tags -->
-        <div class="half-col">
-            <!-- TODO hide email and location based on privacy settings -->
+    <div class="profile-section">
+      <h2>Tags
+        <mat-icon
+          class="help"
+          matTooltip="Tags are used as descriptors to help others know what kind of player you are."
+          matTooltipPosition="after"
+          matTooltipHideDelay="2000"
+      >
+          help_outline
+      </mat-icon>
 
-            <!--
-                display email
-                if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
-                always visible if on own page
-            -->
-            <a *ngIf="(sameUser) || (!sameUser && privacyLevel=='Public') || (!sameUser && privacyLevel=='Friends Only' && isFriend)" href="mailto: {{ email }}"> {{ email }}</a>
+      <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
+      </h2>
 
-            <!--
-            <div class="block-display" *ngIf="editing">
-                <input type="email" placeholder="{{ email }}">
-                <select name="email visibility">
-                    <option value="" selected disabled hidden>{{ emailVis }}</option>
-                    <option value="Public">Public</option>
-                    <option value="Friends Only">Friends Only</option>
-                    <option value="Private">Private</option>
-                </select>
-            </div>
-            -->
-
-            <!--
-                display location
-                if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
-                always visible if on own page
-            -->
-            <p *ngIf="(sameUser && !editing) || (!sameUser && privacyLevel=='Public')">{{ location }}</p>
-            <div class="block-display" *ngIf="editing">
-                <input placeholder="{{ location }}" [(ngModel)]="location">
-
-                <!--
-                <select name="location visibility">
-                    <option value="" selected disabled hidden>{{ locationVis }}</option>
-                    <option value="Public">Public</option>
-                    <option value="Friends Only">Friends Only</option>
-                    <option value="Private">Private</option>
-                </select>
-                -->
-
-
-            </div>
-
-            <!-- status, if editing replace with dropdown preloaded with current value -->
-            <div>
-                <p style="display: inline;">Status: </p>
-                <p *ngIf="!editing" style="display: inline;" >{{ status }}</p>
-                <select *ngIf="editing" name="status" style="display: inline;" [(ngModel)]="status">
-                    <option value="" selected disabled hidden>{{ status }}</option>
-                    <option value="Currently in a Campaign">Currently in a Campaign</option>
-                    <option value="Looking for a Campaign">Looking for a Campaign</option>
-                </select>
-            </div>
-
-            Tags
-            <!-- question circle, hover for info on tags -->
-
-            <mat-icon
-                class="help"
-                matTooltip="add tag explanation"
-                matTooltipPosition="after"
-                matTooltipHideDelay="2000"
-            >
-                help_outline
-            </mat-icon>
-
-            <!-- edit button, click to open popup where you can edit tags -->
-
-            <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
-
-            <!-- display tags -->
-                <!-- display all true tags -->
-                  <div id="tag-container" class="flex-row">
-                <div class="tag" *ngFor="let tag of filterTags( this.tags )">
-                    {{ tag }}
-                </div>
-            </div>
-
-        </div>
-
-        <!-- biography & availability -->
-        <div class="half-col">
-            <!-- profile biography, if editing replace with input box preloaded with current biography -->
-            <p *ngIf="!editing">{{ bio }}</p>
-            <textarea *ngIf="editing" class="block-display" [(ngModel)]="bio">{{ bio }}</textarea>
-
-            <!-- timezone, change in settings -->
-            {{ timezone }}
-
-            <!-- question circle, hover for info on time blocks -->
-            <mat-icon
-                class="help"
-                matTooltip="Time Zone can be edited in profile settings"
-                matTooltipPosition="after"
-                matTooltipHideDelay="2000"
-            >
-                help_outline
-            </mat-icon>
-
-            <!-- TODO display availability (as table?) -->
-        </div>
-
+      <ul class="tags">
+        <li *ngFor="let tag of filterTags(this.tags)">{{ tag }}</li>
+      </ul>
     </div>
 
-    <!--
-        character links
-        row display
-        column display in mobile
-    -->
-    <div>
-        <!-- display characters in row (for each?)-->
-    </div>
+  </div>
+
+
 </div>
 
 <div *ngIf="currentUserIsBlocked">

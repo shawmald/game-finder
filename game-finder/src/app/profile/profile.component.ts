@@ -47,6 +47,9 @@ export class ProfileComponent {
   timezone: string = "";
   availability: string = "";
 
+  start_time: string = "";
+  end_time: string = "";
+
   isFriend: boolean = false;
   isBlocked: boolean = false;
 
@@ -107,7 +110,6 @@ export class ProfileComponent {
           this.timezone = data.timezone;
           this.blockedProfiles = data.blockedProfiles;
           this.friendsList = data.friends;
-          console.log(JSON.stringify(Object.fromEntries(this.tags)));
         })
         .catch(error => {
           console.error('This User does not exist.', error)
@@ -127,7 +129,6 @@ export class ProfileComponent {
             return response.text();
           })
           .then((content) => {
-            console.log(content)
             this.currentUserIsFriend = JSON.parse(content) as boolean
           })
           .catch(error => {
@@ -147,7 +148,6 @@ export class ProfileComponent {
             return response.text();
           })
           .then((content) => {
-            console.log(content)
             this.currentUserIsBlocked = JSON.parse(content) as boolean
           })
           .catch(error => {
@@ -167,7 +167,6 @@ export class ProfileComponent {
             return response.text();
           })
           .then((content) => {
-            console.log(content)
             this.isFriend = JSON.parse(content) as boolean
           })
           .catch(error => {
@@ -187,7 +186,6 @@ export class ProfileComponent {
             return response.text();
           })
           .then((content) => {
-            console.log(content)
             this.isBlocked = JSON.parse(content) as boolean
           })
           .catch(error => {
@@ -244,6 +242,19 @@ export class ProfileComponent {
       .catch((error) => {
         console.error('Error:', error);
       })
+    }
+
+    // save Availability
+    this.availability = this.start_time + "-" + this.end_time;
+    if(this.availability != "") {
+      fetch(this.ip + "SetProfileVar?Username=" + this.username
+      + "&ReqVar=" + "availableTime"
+      + "&NewVar=" + this.availability, {
+        method: "GET",
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     }
 
     // save Location
@@ -480,8 +491,6 @@ export class ProfileComponent {
         const base64String = canvas.toDataURL(file.type);
         this.pfp = base64String;
 
-        console.log(base64String)
-
         event.target.style.display = 'none';
       };
 
@@ -495,11 +504,11 @@ export class ProfileComponent {
     var file = event.target.files[0]
     var reader = new FileReader();
     reader.onloadend = function() {
-      console.log('Encoded Base64 String:', reader.result);
+      //console.log('Encoded Base64 String:', reader.result);
 
       var data = (<string>reader.result).split(',')[1];
       var binaryBlob = atob(data)
-      console.log('Encoded Binary String:', binaryBlob);
+      //console.log('Encoded Binary String:', binaryBlob);
     }
     reader.readAsDataURL(file);
   }
