@@ -529,7 +529,7 @@ export async function startServer() {
   } )
 
   //The port that the webserver has
-  server.listen(3000);
+  server.listen(80);
 
 }
 

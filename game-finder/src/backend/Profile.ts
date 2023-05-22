@@ -97,7 +97,6 @@ export class Profile {
 
         this.displayName = doc.DisplayName;
         this.privacyLvl = doc.PrivacyLevel;
-        //this.charSheets = doc.CharacterSheets;  //Need to eventually change this so it makes a class instead of remaining an obj for fields.
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
         this.email = doc.Email;
@@ -115,25 +114,18 @@ export class Profile {
             this.charSheets = new Array();
             for(var i = 0; i < dummyCharacterSheets.length; i++) {
                 let newCharSheet = new CharSheet( dummyCharacterSheets[i].charName );
-                //console.log( newCharSheet );
                 newCharSheet.editInformation( dummyCharacterSheets[i].charName, dummyCharacterSheets[i].race, dummyCharacterSheets[i].charClass, 
                 dummyCharacterSheets[i].charSubclass, dummyCharacterSheets[i].lvl, dummyCharacterSheets[i].allignment, dummyCharacterSheets[i].stats, 
                 dummyCharacterSheets[i].statModifiers, dummyCharacterSheets[i].combatStats, dummyCharacterSheets[i].classFeatures, 
                 dummyCharacterSheets[i].background, dummyCharacterSheets[i].money, dummyCharacterSheets[i].equipment, dummyCharacterSheets[i].spells);
-                //console.log( newCharSheet );
                 this.charSheets.push(newCharSheet);
             }
-
-            //console.log( this.charSheets );
         }
-
-        //console.log( this.charSheets );
 
         let dummyDMScreen = doc.DMScreen;
         if(dummyDMScreen != null) {
             this.dmScreen = new DMScreen( this.username, dummyDMScreen.NPCList );
         }
-        //this.dmScreen = new DMScreen( this.username, dummyDMScreen.NPCList);
     }
 
 
