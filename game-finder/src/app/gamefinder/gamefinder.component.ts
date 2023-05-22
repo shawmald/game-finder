@@ -9,10 +9,8 @@ export class GamefinderComponent {
   ip = "http://34.30.183.36:80/";
   currentUser: string = '';
 
-  userArray: Array<User> = [];        //all users, shouldn't change
-
   columndefs = ['name', 'tags', 'availability', 'location'];
-  profiles: Array<User> = [];         //filtered users, updates depending on filters
+  profiles: Array<User> = [];
 
   ngOnInit(): void {
     this.currentUser = sessionStorage.getItem('currentUser') as string;
@@ -33,7 +31,7 @@ export class GamefinderComponent {
       usernameArray.forEach((username) => {
 
         //check if current user is blocked
-        
+        /*
         let blocked: boolean = false;
         fetch( this.ip + "CheckFriendOrBlock?Username=" + username + "&OtherUser=" + this.currentUser + "&Option=block", {
         })
@@ -52,6 +50,7 @@ export class GamefinderComponent {
 
         //if not blocked, add info
         if(!blocked){
+          */
           var newUser = new User( username );
 
           // fetch displayName
@@ -138,14 +137,13 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            let tagArr: Array<String> = content.split(", ");    //convert string into an array of tags, split by ,
+            let map: Map<String,number> = JSON.parse(content);    //convert string into an array of tags, split by ,
 
-            tagArr.forEach((element) => {
-              let tag: Array<String> = element.split(":");      //split individual tags into tag name and boolean
-              if(tag[1] == "true"){                             //if tag is true then add to user's tag array
-                newUser.tags.push(tag[0]);
+            for( let tag in map.keys() ){
+              if(map.get(tag)){
+                newUser.tags.push(tag);
               }
-            })
+            }
             
           });
           
@@ -160,15 +158,13 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            newUser.availability = content;
+            newUser.availability = JSON.parse(content);
           });
           
-
-          this.userArray.push(newUser);
           this.profiles.push(newUser);
      
           
-        }
+        //}
 
       })
     });
