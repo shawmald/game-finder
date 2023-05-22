@@ -92,7 +92,14 @@ export async function startServer() {
     else {
       res.send(false);
     }
+  } )
 
+  /**
+   * This returns all of the profile usernames in the profileList array from ProfileManangement.
+   */
+  server.get('/ReturnAllUsernames', async (req: Request, res: Response) => {
+    let usernameList = profileManagement.returnProfileUsernames();
+    res.send( usernameList );
   } )
 
   /**
@@ -277,12 +284,16 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
     let length = 0;
-    if(profile.charSheets == null) {
-      //Do nothing
+
+    if(profile != null ) { 
+      if(profile.charSheets != null) {
+        length = profile.charSheets.length;
+      }
+      else{
+        //Do Nothing
+      }
     }
-    else{
-      length = profile.charSheets.length;
-    }
+    
     console.log( length );
     
     res.send( String(length) );
@@ -385,6 +396,7 @@ export async function startServer() {
 
   /**
    * This returns recommended spells as a JSON Obj if they match the character sheet's class.
+   * This should no longer crash even if the user isn't logged in.
    */
   server.get('/RecommendSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
@@ -412,6 +424,8 @@ export async function startServer() {
 
   /**
    * This returns all of the spells that're in the character sheet.
+   * This has the possibility of crashing and if it does, then I should proceed to add a character sheet check first
+   * then add a profile check later.
    */
   server.get('/ReturnSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
@@ -426,6 +440,8 @@ export async function startServer() {
 
   /**
   * This API sets one of the spell variables given character sheet position, and spell position.
+  * This has the possibility of crashing and if it does, then I should proceed to add a character sheet check first
+  * then add a profile check later.
   */
   server.get('/SetSpellVar', async (req: Request, res : Response) => {
     const username = req.query.Username as string;
