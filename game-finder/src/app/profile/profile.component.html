@@ -2,7 +2,7 @@
     profile component HTML
 -->
 
-<div class="contents">
+<div class="contents" *ngIf="!currentUserIsBlocked && userExists">
     <!-- <form id="profile-update" name="profile-update" action="" method="" ></form> -->   <!-- for input?? -->
 
     <!--
@@ -13,8 +13,8 @@
         <!-- pfp & display name -->
         <div>
             <!-- profile picture -->
-          <!--
             <div class="pfp">
+              <!--
               <label for="pfp-input">
                 -->
                 <img [src]="getPFP()" alt="profile picture">
@@ -23,9 +23,9 @@
                   <p>Edit Profile Picture</p>
                 </div>
               </label>
-              <input *ngIf="editing" id="pfp-input" type="file" (change)="editPFP($event)">
+              <input style="display: none;" *ngIf="editing" id="pfp-input" type="file" accept=".jpg, .png" (change)="editPFP($event)">
+              -->
             </div>
-            -->
 
             <!-- display name, if editing replace with input box preloaded with current display name -->
             <h2 *ngIf="!editing">{{ displayName }}</h2>
@@ -47,8 +47,10 @@
             <button *ngIf="editing" (click)="cancel()" class="button" type="button" >cancel</button>
 
             <!-- if not the same user: show friend and cancel buttons -->
-            <button *ngIf="!sameUser" (click)="friend()" class="button" type="button" >friend</button>
-            <button *ngIf="!sameUser" (click)="block()" class="button" type="button" >block</button>
+            <button *ngIf="!sameUser && isLoggedIn && !isFriend" (click)="friend()" class="button" type="button" >Add Friend</button>
+            <button *ngIf="!sameUser && isLoggedIn && isFriend" (click)="unfriend()" class="button" type="button" >Remove Friend</button>
+            <button *ngIf="!sameUser && isLoggedIn && !isBlocked" (click)="block()" class="button" type="button" >Block User</button>
+            <button *ngIf="!sameUser && isLoggedIn && isBlocked" (click)="unblock()" class="button" type="button" >Unblock User</button>
         </div>
 
 
@@ -69,7 +71,7 @@
                 if editing, replace with input box and a dropdown (for privacy settings) preloaded with current values
                 always visible if on own page
             -->
-            <a *ngIf="(sameUser) || (!sameUser && privacyLevel=='Public')" href="mailto: {{ email }}"> {{ email }}</a>
+            <a *ngIf="(sameUser) || (!sameUser && privacyLevel=='Public') || (!sameUser && privacyLevel=='Friends Only' && isFriend)" href="mailto: {{ email }}"> {{ email }}</a>
 
             <!--
             <div class="block-display" *ngIf="editing">
@@ -115,10 +117,9 @@
                 </select>
             </div>
 
-
+            Tags
             <!-- question circle, hover for info on tags -->
-            <!--
-              Tags
+
             <mat-icon
                 class="help"
                 matTooltip="add tag explanation"
@@ -127,23 +128,18 @@
             >
                 help_outline
             </mat-icon>
-            -->
 
             <!-- edit button, click to open popup where you can edit tags -->
 
-            <!--
             <mat-icon class="icon" *ngIf="editing" (click)="openDialog()">edit</mat-icon>
-            -->
 
             <!-- display tags -->
                 <!-- display all true tags -->
-                <!--
                   <div id="tag-container" class="flex-row">
                 <div class="tag" *ngFor="let tag of filterTags( this.tags )">
                     {{ tag }}
                 </div>
             </div>
-            -->
 
         </div>
 
@@ -179,4 +175,12 @@
     <div>
         <!-- display characters in row (for each?)-->
     </div>
+</div>
+
+<div *ngIf="currentUserIsBlocked">
+  This user has blocked you.
+</div>
+
+<div *ngIf="!userExists">
+  This user does not exist.
 </div>

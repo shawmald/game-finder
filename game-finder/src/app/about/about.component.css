@@ -1,3 +1,13 @@
+a {
+  font-style:oblique;
+  color:rgb(134, 0, 211);
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 @use '@angular/material' as mat;
 
 @include mat.core();

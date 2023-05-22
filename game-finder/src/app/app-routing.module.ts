@@ -15,7 +15,11 @@ import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
+
 import { SpellsComponent } from './spells/spells.component';
+
+import { FriendlistComponent } from './friendlist/friendlist.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'gamefinder', pathMatch: 'full'},
@@ -27,7 +31,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
   { path: 'profile/:username', component: ProfileComponent }, //causes issues without login
-  { path: 'settings', component: SettingsComponent },
+  { path: 'friends', component: FriendlistComponent },
+  { path: 'settings', component: SettingsComponent,  canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'logout', component: LogoutComponent },

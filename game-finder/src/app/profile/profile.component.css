@@ -5,6 +5,13 @@
         rounded corners     https://www.w3schools.com/css/css3_borders.asp
 */
 
+.contents{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 /* float button container on the right, add margins of the left and right */
 #button-container{
   padding: 10px;
@@ -71,6 +78,9 @@ h2 {
 img {
   border: 2px solid #ccc;
   border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .status {
@@ -84,7 +94,7 @@ mat-icon {
 
 .pfp {
   position: relative;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   overflow: hidden;
   margin-bottom: 30px;
 }
@@ -118,6 +128,10 @@ mat-icon {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+::file-selector-button {
+  display: none;
 }
 
 

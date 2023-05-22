@@ -1,0 +1,35 @@
+.friend-list-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-left: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0062cc;
+}
