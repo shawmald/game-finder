@@ -1,1 +1,62 @@
-<p>gamefinder works!</p>
+<!-- 
+    GameFinder HTML component
+    
+    refs:
+        https://v5.material.angular.io/components/table/overview
+-->
+<h1>GameFinder</h1>
+<p>
+    
+</p>
+<!--
+<div>
+    <mat-table [dataSource]="profiles" class="mat-elevation-z8">
+        
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element" routerLink="'/profile/' + {{element.username}}">{{ element.displayName }}</mat-cell>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="tags">
+            <mat-header-cell *matHeaderCellDef>Tags</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.tags }}</mat-cell> 
+        </ng-container>
+
+        
+        <ng-container matColumnDef="availability">
+            <mat-header-cell *matHeaderCellDef>Availability</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.availability }}</mat-cell>   
+        </ng-container>
+
+        
+        <ng-container matColumnDef="location">
+            <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.location }}</mat-cell>   
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columndefs"></mat-header-row>
+        <mat-row *matRowDef="let row; columns:columndefs"></mat-row>
+
+    </mat-table>
+
+    --><!--<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5,10,20]" [showFirstLastButtons]="true"></mat-paginator>--><!--
+</div>
+-->
+
+<div class="profiles-container">
+    <div *ngFor="let user of profiles" class="profile-card">
+        <h4><a routerLink="/profile/{{user.username}}">{{ user.displayName }}</a></h4>
+        <p>{{user.status}}</p>
+
+        <div id="tag-container" class="flex-row">
+            <div class="tag" *ngFor="let tag of user.tags">
+                {{ tag }}
+            </div>
+        </div>
+
+        <p>{{user.availability}}</p>
+        <p>{{user.location}}</p>
+    </div>
+
+</div>

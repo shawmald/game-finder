@@ -16,15 +16,18 @@
 
     <!-- npc stat blocks -->
     <div class="flex-row container">
+
         <div *ngFor="let npc of npcs">
             
             <!-- <div *ngIf="npc != null" class="rounded-block" (click)="openDialog(npc)"> -->
             <div class="rounded-block" (click)="openDialog(npc)">
+
                 <h3>{{ npc.name }}</h3>
                 <h4>Lv {{ npc.lvl }} {{ npc.class }}</h4>
 
                 <!-- stats -->
                 <p>HP: {{ npc.stats.get('cHP') }}/{{ npc.stats.get('mHP') }}</p>
+
 
                 <table>
                     <tr>
@@ -34,9 +37,11 @@
                     </tr>
 
                     <tr>
+
                         <td>{{ npc.stats.get('ac') }}</td>    <!-- armor class -->
                         <td>{{ statTool.calcMod( npc.stats.get('dex') ) }}</td> <!-- dex modifier -->
                         <td>{{ npc.stats.get('spd') }}</td> <!-- speed -->
+
                     </tr>
                 </table>
 

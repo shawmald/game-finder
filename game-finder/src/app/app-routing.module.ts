@@ -10,13 +10,16 @@ import { MessagesComponent } from './messages/messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
-
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';  // keep at end
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
+
+import { SpellsComponent } from './spells/spells.component';
+
 import { FriendlistComponent } from './friendlist/friendlist.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'gamefinder', pathMatch: 'full'},
@@ -33,6 +36,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'logout', component: LogoutComponent },
+  { path: 'spells', component: SpellsComponent, canActivate: [AuthGuard]},  //authguard necessary?
 
   { path: '**', component: PageNotFoundComponent }  //always keep at end
 ];

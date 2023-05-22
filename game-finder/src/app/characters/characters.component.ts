@@ -18,7 +18,8 @@ export class CharactersComponent {
 
   characters: Character[]; // Declare the property with the correct type
 
-  constructor() {
+  // constructor() {
+  constructor() { 
     this.characters = [
       new Character(0, "Character 1"),
       new Character(1, "Character 2"),
@@ -115,7 +116,8 @@ export class CharactersComponent {
             throw new Error('Network response was not ok');
         }
         //return response.json(); // Parse response as JSON
-        return response.text();
+        return response.text(); 
+        
     })
     .then(data => {
         var content = JSON.parse(data);
@@ -155,6 +157,7 @@ export class CharactersComponent {
         this.characters[i].equipment = content.equipment;
         //Skip spells for now
         //Skip pictures for now
+        
     })
     .catch(error => {
         // Handle any errors that occur during the fetch request
@@ -180,6 +183,7 @@ export class CharactersComponent {
 
   characterCreationStandard() {
     this.characterCreation(this.charName, this.race, this.charClass, this.charSubClass, this.lvl, this.allignment);
+    window.location.reload();
   }
 
   updatePanel2(position : number) {  //Done
@@ -206,6 +210,8 @@ export class CharactersComponent {
     "&NewVar=" + this.statModifiers,{
       method: "GET",
     })
+    window.location.reload();
+    
   }
 
   updatePanel3(position : number) {
@@ -222,6 +228,7 @@ export class CharactersComponent {
     "&NewVar=" + this.combatStats,{
       method: "GET",
     })
+    window.location.reload();
   }
 
   updatePanel5(position : number) {
@@ -231,6 +238,7 @@ export class CharactersComponent {
     fetch(this.ip + "SetCharacterSheetVar?Username==" + this.username + "&background=" + this.background,{
       method: "GET",
     })
+    window.location.reload();
   }
 
   updatePanel6(position : number) {  //Done
@@ -247,6 +255,7 @@ export class CharactersComponent {
     "&NewVar=" + this.equipment,{
       method: "GET",
     })
+    window.location.reload();
   }
 
 
@@ -317,6 +326,8 @@ export class Character {
     this.position = position;
     this.name = name;
   }
+
+  
 
   
 }
