@@ -25,9 +25,9 @@ export class GamefinderComponent {
       return response.text();
     })
     .then((content) => {
-      let usernameArray: Array<String> = content.split(", ");
+      let usernameArray: Array<String> = JSON.parse(content);
       //this.usernameArray = content.split(", ");
-      usernameArray.pop();
+      //usernameArray.pop();
 
       //for each username:
       usernameArray.forEach((username) => {
@@ -67,9 +67,9 @@ export class GamefinderComponent {
             newUser.displayName = content;
           });
 
-
-          // fetch location
-          fetch( this.ip + "ReturnProfileVar?Username=" + username + "&ReqVar=location", {
+          // fetch privacy level
+          let privacy: string = "Public";
+          fetch( this.ip + "ReturnProfileVar?Username=" + username + "&ReqVar=privacyLvl", {
           })
           .then((response) => {
             if (!response.ok) {
@@ -78,9 +78,41 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            newUser.location = content;
+            privacy = content;
           });
 
+          //check is current user is in friendlist
+          let friend: boolean = false;
+          fetch( this.ip + "CheckFriendOrBlock?Username=" + username + "&OtherUser=" + this.currentUser + "&Option=friend", {
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then((content) => {
+            if(content == 'true'){
+              friend = true;
+            }
+          });
+
+          if( (privacy === "Public") || (privacy === "Friend Olny" && friend) ){
+
+            // fetch location
+            fetch( this.ip + "ReturnProfileVar?Username=" + username + "&ReqVar=location", {
+            })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.text();
+            })
+            .then((content) => {
+              newUser.location = content;
+            });
+
+          }
 
           // fetch status
           fetch( this.ip + "ReturnProfileVar?Username=" + username + "&ReqVar=status", {
@@ -119,7 +151,7 @@ export class GamefinderComponent {
           
 
           // fetch timezone
-          fetch( this.ip + "ReturnProfileVar?Username=" + username + "&ReqVar=timezone", {
+          fetch( this.ip + "ReturnProfileVar?Username=" + username + "&ReqVar=availability", {
           })
           .then((response) => {
             if (!response.ok) {
@@ -128,7 +160,7 @@ export class GamefinderComponent {
             return response.text();
           })
           .then((content) => {
-            newUser.timezone = content;
+            newUser.availability = content;
           });
           
 
@@ -150,7 +182,7 @@ export class User {
   status: string = "";
   location: string = "";
   tags: Array<String> = [];
-  timezone: string = "";
+  availability: string = "";
 
 
   constructor( username:String ) {
